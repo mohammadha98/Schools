@@ -8,4 +8,9 @@
     <ProjectReference Include="..\Schools.Infra.IoC\Schools.Infra.IoC.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controller\" />
+    <Folder Include="Views\" />
+  </ItemGroup>
+
 </Project>

@@ -19,6 +19,7 @@ namespace Schools.Infra.IoC
 
 
             //From Infra Data Layer
+
             service.AddScoped<ITestRepository, TestRepository>();
 
 

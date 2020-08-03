@@ -8,6 +8,6 @@ namespace Schools.Application.Interfaces
 {
    public interface ITestService
     {
-        List<TestVM> GetTests();
+        TestVM GetTests();
     }
 }
