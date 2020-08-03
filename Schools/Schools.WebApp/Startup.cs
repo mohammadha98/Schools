@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Schools.Infra.IoC;
 
 namespace Schools.WebApp
 {
@@ -21,7 +22,7 @@ namespace Schools.WebApp
 
 
 
-                       
+            RegisterServices(services);        
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,6 +42,12 @@ namespace Schools.WebApp
                     await context.Response.WriteAsync("Hello World!");
                 });
             });
+        }
+
+
+        public static void RegisterServices(IServiceCollection services)
+        {
+            DependencyContainer.RegisterServices(services);
         }
     }
 }

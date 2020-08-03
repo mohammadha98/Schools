@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.1",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "Schools.Application/1.0.0": {
+        "dependencies": {
+          "Schools.Domain": "1.0.0"
+        },
+        "runtime": {
+          "Schools.Application.dll": {}
+        }
+      },
+      "Schools.Domain/1.0.0": {
+        "runtime": {
+          "Schools.Domain.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Schools.Application/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Schools.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

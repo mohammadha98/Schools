@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Schools.Infra.IoC\Schools.Infra.IoC.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -6,3 +6,10 @@ F:\Project\Schools\Schools\Schools.Infra.Data\obj\Debug\netcoreapp3.1\Schools.In
 F:\Project\Schools\Schools\Schools.Infra.Data\bin\Debug\netcoreapp3.1\Schools.Infra.Data.runtimeconfig.json
 F:\Project\Schools\Schools\Schools.Infra.Data\bin\Debug\netcoreapp3.1\Schools.Infra.Data.runtimeconfig.dev.json
 F:\Project\Schools\Schools\Schools.Infra.Data\obj\Debug\netcoreapp3.1\Schools.Infra.Data.genruntimeconfig.cache
+F:\Project\Schools\Schools\Schools.Infra.Data\bin\Debug\netcoreapp3.1\Schools.Infra.Data.pdb
+F:\Project\Schools\Schools\Schools.Infra.Data\bin\Debug\netcoreapp3.1\Schools.Domain.dll
+F:\Project\Schools\Schools\Schools.Infra.Data\bin\Debug\netcoreapp3.1\Schools.Domain.pdb
+F:\Project\Schools\Schools\Schools.Infra.Data\obj\Debug\netcoreapp3.1\Schools.Infra.Data.csproj.CoreCompileInputs.cache
+F:\Project\Schools\Schools\Schools.Infra.Data\obj\Debug\netcoreapp3.1\Schools.Infra.Data.csproj.CopyComplete
+F:\Project\Schools\Schools\Schools.Infra.Data\obj\Debug\netcoreapp3.1\Schools.Infra.Data.dll
+F:\Project\Schools\Schools\Schools.Infra.Data\obj\Debug\netcoreapp3.1\Schools.Infra.Data.pdb
