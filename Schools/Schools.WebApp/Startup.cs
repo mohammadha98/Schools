@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Schools.Infra.Data.Context;
 using Schools.Infra.IoC;
 
 namespace Schools.WebApp
@@ -18,11 +20,18 @@ namespace Schools.WebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddDbContext<SchoolsDbContext>(options=>
+            {
+                options.UseSqlServer("Data Source=.;Initial Catalog=Schools_DB;Integrated Security=true");
+            });
 
+            #region DependencyInjection
+            //Dependency Injection In ./Infra.IoC/DependencyContainer.Cs
 
+            RegisterServices(services);
 
-
-            RegisterServices(services);        
+            //Please Inject Your Dependencies in DependencyContainer.Cs
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -32,6 +41,12 @@ namespace Schools.WebApp
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseExceptionHandler("Home/Error");
+            }
+
+            app.UseStaticFiles();
 
             app.UseRouting();
 
@@ -44,6 +59,7 @@ namespace Schools.WebApp
             });
         }
 
+        //this Method send Dependency injection from DependencyConrainer.cs to StartUp.cs
 
         public static void RegisterServices(IServiceCollection services)
         {

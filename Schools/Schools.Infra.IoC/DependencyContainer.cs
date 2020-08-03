@@ -23,6 +23,8 @@ namespace Schools.Infra.IoC
             service.AddScoped<ITestRepository, TestRepository>();
 
 
+
+
         }
     }
 }

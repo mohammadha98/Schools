@@ -10,8 +10,6 @@ F:\Project\Schools\Schools\Schools.WebApp\bin\Debug\netcoreapp3.1\Schools.WebApp
 F:\Project\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Schools.WebApp.csprojAssemblyReference.cache
 F:\Project\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Schools.WebApp.AssemblyInfoInputs.cache
 F:\Project\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Schools.WebApp.AssemblyInfo.cs
-F:\Project\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Schools.WebApp.csproj.CoreCompileInputs.cache
-F:\Project\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Schools.WebApp.MvcApplicationPartsAssemblyInfo.cache
 F:\Project\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Schools.WebApp.RazorTargetAssemblyInfo.cache
 F:\Project\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\staticwebassets\Schools.WebApp.StaticWebAssets.Manifest.cache
 F:\Project\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\staticwebassets\Schools.WebApp.StaticWebAssets.xml
@@ -59,3 +57,8 @@ F:\Project\Schools\Schools\Schools.WebApp\bin\Debug\netcoreapp3.1\Schools.Applic
 F:\Project\Schools\Schools\Schools.WebApp\bin\Debug\netcoreapp3.1\Schools.Domain.pdb
 F:\Project\Schools\Schools\Schools.WebApp\bin\Debug\netcoreapp3.1\Schools.Infra.Data.pdb
 F:\Project\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Schools.WebApp.csproj.CopyComplete
+F:\Project\Schools\Schools\Schools.WebApp\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Relational.Design.dll
+F:\Project\Schools\Schools\Schools.WebApp\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.SqlServer.Design.dll
+F:\Project\Schools\Schools\Schools.WebApp\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
+F:\Project\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Schools.WebApp.csproj.CoreCompileInputs.cache
+F:\Project\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Schools.WebApp.MvcApplicationPartsAssemblyInfo.cache
