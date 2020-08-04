@@ -22,7 +22,12 @@ namespace Schools.Infra.Data.Repository
             return _context.Tests.ToList();
         }
 
-        public void Test2()
+        public void SepehrisCool()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void test()
         {
             throw new NotImplementedException();
         }

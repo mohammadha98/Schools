@@ -33,11 +33,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\Project\\Schools\\Schools\\Schools.Application\\Schools.Application.csproj",
+      "projectUniqueName": "C:\\Users\\Mohammad\\Source\\Repos\\Schools\\Schools\\Schools.Application\\Schools.Application.csproj",
       "projectName": "Schools.Application",
-      "projectPath": "F:\\Project\\Schools\\Schools\\Schools.Application\\Schools.Application.csproj",
+      "projectPath": "C:\\Users\\Mohammad\\Source\\Repos\\Schools\\Schools\\Schools.Application\\Schools.Application.csproj",
       "packagesPath": "C:\\Users\\Mohammad\\.nuget\\packages\\",
-      "outputPath": "F:\\Project\\Schools\\Schools\\Schools.Application\\obj\\",
+      "outputPath": "C:\\Users\\Mohammad\\Source\\Repos\\Schools\\Schools\\Schools.Application\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -56,8 +56,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "F:\\Project\\Schools\\Schools\\Schools.Domain\\Schools.Domain.csproj": {
-              "projectPath": "F:\\Project\\Schools\\Schools\\Schools.Domain\\Schools.Domain.csproj"
+            "C:\\Users\\Mohammad\\Source\\Repos\\Schools\\Schools\\Schools.Domain\\Schools.Domain.csproj": {
+              "projectPath": "C:\\Users\\Mohammad\\Source\\Repos\\Schools\\Schools\\Schools.Domain\\Schools.Domain.csproj"
             }
           }
         }

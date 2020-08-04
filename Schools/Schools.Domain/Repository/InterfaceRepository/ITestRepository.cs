@@ -11,12 +11,12 @@ namespace Schools.Domain.Interfaces
         List<Test> GetTests();
 
 
-
+        void SepehrisCool();
 
         string TestGitHubPullAction();
 
 
-        void Test2();
+        void test();
 
     }
 }
