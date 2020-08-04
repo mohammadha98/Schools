@@ -10,5 +10,10 @@ namespace Schools.Domain.Interfaces
 
         List<Test> GetTests();
 
+
+
+
+        string TestGitHubPullAction();
+
     }
 }

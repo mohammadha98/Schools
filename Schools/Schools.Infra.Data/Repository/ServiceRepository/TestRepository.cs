@@ -21,5 +21,10 @@ namespace Schools.Infra.Data.Repository
         {
             return _context.Tests.ToList();
         }
+
+        public string TestGitHubPullAction()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
