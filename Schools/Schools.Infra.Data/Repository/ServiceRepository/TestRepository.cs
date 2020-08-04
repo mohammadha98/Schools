@@ -22,6 +22,11 @@ namespace Schools.Infra.Data.Repository
             return _context.Tests.ToList();
         }
 
+        public void SepehrisCool()
+        {
+            throw new NotImplementedException();
+        }
+
         public string TestGitHubPullAction()
         {
             throw new NotImplementedException();
