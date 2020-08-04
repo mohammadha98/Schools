@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "F:\\Project\\Schools\\Schools\\Schools.Infra.Data\\Schools.Infra.Data.csproj": {}
+    "C:\\Users\\Mohammad\\Source\\Repos\\Schools\\Schools\\Schools.Infra.Data\\Schools.Infra.Data.csproj": {}
   },
   "projects": {
-    "F:\\Project\\Schools\\Schools\\Schools.Domain\\Schools.Domain.csproj": {
+    "C:\\Users\\Mohammad\\Source\\Repos\\Schools\\Schools\\Schools.Domain\\Schools.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\Project\\Schools\\Schools\\Schools.Domain\\Schools.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\Mohammad\\Source\\Repos\\Schools\\Schools\\Schools.Domain\\Schools.Domain.csproj",
         "projectName": "Schools.Domain",
-        "projectPath": "F:\\Project\\Schools\\Schools\\Schools.Domain\\Schools.Domain.csproj",
+        "projectPath": "C:\\Users\\Mohammad\\Source\\Repos\\Schools\\Schools\\Schools.Domain\\Schools.Domain.csproj",
         "packagesPath": "C:\\Users\\Mohammad\\.nuget\\packages\\",
-        "outputPath": "F:\\Project\\Schools\\Schools\\Schools.Domain\\obj\\",
+        "outputPath": "C:\\Users\\Mohammad\\Source\\Repos\\Schools\\Schools\\Schools.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -59,14 +59,14 @@
         }
       }
     },
-    "F:\\Project\\Schools\\Schools\\Schools.Infra.Data\\Schools.Infra.Data.csproj": {
+    "C:\\Users\\Mohammad\\Source\\Repos\\Schools\\Schools\\Schools.Infra.Data\\Schools.Infra.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\Project\\Schools\\Schools\\Schools.Infra.Data\\Schools.Infra.Data.csproj",
+        "projectUniqueName": "C:\\Users\\Mohammad\\Source\\Repos\\Schools\\Schools\\Schools.Infra.Data\\Schools.Infra.Data.csproj",
         "projectName": "Schools.Infra.Data",
-        "projectPath": "F:\\Project\\Schools\\Schools\\Schools.Infra.Data\\Schools.Infra.Data.csproj",
+        "projectPath": "C:\\Users\\Mohammad\\Source\\Repos\\Schools\\Schools\\Schools.Infra.Data\\Schools.Infra.Data.csproj",
         "packagesPath": "C:\\Users\\Mohammad\\.nuget\\packages\\",
-        "outputPath": "F:\\Project\\Schools\\Schools\\Schools.Infra.Data\\obj\\",
+        "outputPath": "C:\\Users\\Mohammad\\Source\\Repos\\Schools\\Schools\\Schools.Infra.Data\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -85,8 +85,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "F:\\Project\\Schools\\Schools\\Schools.Domain\\Schools.Domain.csproj": {
-                "projectPath": "F:\\Project\\Schools\\Schools\\Schools.Domain\\Schools.Domain.csproj"
+              "C:\\Users\\Mohammad\\Source\\Repos\\Schools\\Schools\\Schools.Domain\\Schools.Domain.csproj": {
+                "projectPath": "C:\\Users\\Mohammad\\Source\\Repos\\Schools\\Schools\\Schools.Domain\\Schools.Domain.csproj"
               }
             }
           }

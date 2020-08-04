@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "eRdDFZp2xm5A92tur6AiloSXulWDBkEp8tMGv/coBm6N/rTqyHhiIBb9oriEJKj25497hwD4kutCcksLoe9A7g==",
+  "dgSpecHash": "m1DFm5BQaEb+2e5BCkw03lYNcOj9Hlb3QhQVuxtoEFIaxeNGnMBzt2TUt+F1Von1ZqH0a8i9+8Zcz1Fj+MzsRg==",
   "success": true,
-  "projectFilePath": "F:\\Project\\Schools\\Schools\\Schools.Infra.IoC\\Schools.Infra.IoC.csproj",
+  "projectFilePath": "C:\\Users\\Mohammad\\Source\\Repos\\Schools\\Schools\\Schools.Infra.IoC\\Schools.Infra.IoC.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Mohammad\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\Mohammad\\.nuget\\packages\\microsoft.bcl.hashcode\\1.1.0\\microsoft.bcl.hashcode.1.1.0.nupkg.sha512",
