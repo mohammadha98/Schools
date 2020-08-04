@@ -6900,11 +6900,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\Project\\Schools\\Schools\\Schools.WebApp\\Schools.WebApp.csproj",
+      "projectUniqueName": "C:\\Users\\Mohammad\\Source\\Repos\\Schools\\Schools\\Schools.WebApp\\Schools.WebApp.csproj",
       "projectName": "Schools.WebApp",
-      "projectPath": "F:\\Project\\Schools\\Schools\\Schools.WebApp\\Schools.WebApp.csproj",
+      "projectPath": "C:\\Users\\Mohammad\\Source\\Repos\\Schools\\Schools\\Schools.WebApp\\Schools.WebApp.csproj",
       "packagesPath": "C:\\Users\\Mohammad\\.nuget\\packages\\",
-      "outputPath": "F:\\Project\\Schools\\Schools\\Schools.WebApp\\obj\\",
+      "outputPath": "C:\\Users\\Mohammad\\Source\\Repos\\Schools\\Schools\\Schools.WebApp\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -6923,8 +6923,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "F:\\Project\\Schools\\Schools\\Schools.Infra.IoC\\Schools.Infra.IoC.csproj": {
-              "projectPath": "F:\\Project\\Schools\\Schools\\Schools.Infra.IoC\\Schools.Infra.IoC.csproj"
+            "C:\\Users\\Mohammad\\Source\\Repos\\Schools\\Schools\\Schools.Infra.IoC\\Schools.Infra.IoC.csproj": {
+              "projectPath": "C:\\Users\\Mohammad\\Source\\Repos\\Schools\\Schools\\Schools.Infra.IoC\\Schools.Infra.IoC.csproj"
             }
           }
         }

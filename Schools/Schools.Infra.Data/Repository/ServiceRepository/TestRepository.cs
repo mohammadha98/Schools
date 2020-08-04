@@ -27,6 +27,11 @@ namespace Schools.Infra.Data.Repository
             throw new NotImplementedException();
         }
 
+        public void test()
+        {
+            throw new NotImplementedException();
+        }
+
         public string TestGitHubPullAction()
         {
             throw new NotImplementedException();
