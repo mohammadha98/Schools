@@ -15,5 +15,8 @@ namespace Schools.Domain.Interfaces
 
         string TestGitHubPullAction();
 
+
+        void Test2();
+
     }
 }
