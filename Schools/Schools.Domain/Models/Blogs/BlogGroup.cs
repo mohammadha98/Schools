@@ -14,6 +14,8 @@ namespace Schools.Domain.Models
         [MaxLength(200)]
         public string GroupName { get; set; }
 
+        #region navigation property
         public List<Blog> Blog { get; set; }
+        #endregion
     }
 }

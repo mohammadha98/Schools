@@ -38,10 +38,12 @@ namespace Schools.Domain.Models
         [Display(Name ="بازدید")]
         public int BlogVisit { get; set; }
 
-        [Display(Name = "تاریخ")]
         public DateTime CreateDate { get; set; }
 
+
+        #region navigarionProperty
         public BlogGroup BlogGroup { get; set; }
         public List<BlogComment> BlogComment { get; set; }
+        #endregion
     }
 }
