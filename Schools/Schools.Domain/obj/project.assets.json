@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Mohammad\\Source\\Repos\\Schools\\Schools\\Schools.Domain\\Schools.Domain.csproj",
+      "projectUniqueName": "F:\\Project\\AllSchools\\Schools\\Schools.Domain\\Schools.Domain.csproj",
       "projectName": "Schools.Domain",
-      "projectPath": "C:\\Users\\Mohammad\\Source\\Repos\\Schools\\Schools\\Schools.Domain\\Schools.Domain.csproj",
+      "projectPath": "F:\\Project\\AllSchools\\Schools\\Schools.Domain\\Schools.Domain.csproj",
       "packagesPath": "C:\\Users\\Mohammad\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Mohammad\\Source\\Repos\\Schools\\Schools\\Schools.Domain\\obj\\",
+      "outputPath": "F:\\Project\\AllSchools\\Schools\\Schools.Domain\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

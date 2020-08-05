@@ -6894,23 +6894,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ali\\.nuget\\packages\\": {},
+    "C:\\Users\\Mohammad\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.WebApp\\Schools.WebApp.csproj",
+      "projectUniqueName": "F:\\Project\\AllSchools\\Schools\\Schools.WebApp\\Schools.WebApp.csproj",
       "projectName": "Schools.WebApp",
-      "projectPath": "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.WebApp\\Schools.WebApp.csproj",
-      "packagesPath": "C:\\Users\\ali\\.nuget\\packages\\",
-      "outputPath": "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.WebApp\\obj\\",
+      "projectPath": "F:\\Project\\AllSchools\\Schools\\Schools.WebApp\\Schools.WebApp.csproj",
+      "packagesPath": "C:\\Users\\Mohammad\\.nuget\\packages\\",
+      "outputPath": "F:\\Project\\AllSchools\\Schools\\Schools.WebApp\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\ali\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Mohammad\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -6923,8 +6923,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.Infra.IoC\\Schools.Infra.IoC.csproj": {
-              "projectPath": "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.Infra.IoC\\Schools.Infra.IoC.csproj"
+            "F:\\Project\\AllSchools\\Schools\\Schools.Infra.IoC\\Schools.Infra.IoC.csproj": {
+              "projectPath": "F:\\Project\\AllSchools\\Schools\\Schools.Infra.IoC\\Schools.Infra.IoC.csproj"
             }
           }
         }

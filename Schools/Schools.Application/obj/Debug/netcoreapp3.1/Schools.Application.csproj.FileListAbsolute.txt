@@ -22,3 +22,15 @@ D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.Application\obj\Debug\netcor
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.Application\obj\Debug\netcoreapp3.1\Schools.Application.csproj.CopyComplete
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.Application\obj\Debug\netcoreapp3.1\Schools.Application.dll
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.Application\obj\Debug\netcoreapp3.1\Schools.Application.pdb
+F:\Project\AllSchools\Schools\Schools.Application\bin\Debug\netcoreapp3.1\Schools.Application.deps.json
+F:\Project\AllSchools\Schools\Schools.Application\bin\Debug\netcoreapp3.1\Schools.Application.dll
+F:\Project\AllSchools\Schools\Schools.Application\bin\Debug\netcoreapp3.1\Schools.Application.pdb
+F:\Project\AllSchools\Schools\Schools.Application\bin\Debug\netcoreapp3.1\Schools.Domain.dll
+F:\Project\AllSchools\Schools\Schools.Application\bin\Debug\netcoreapp3.1\Schools.Domain.pdb
+F:\Project\AllSchools\Schools\Schools.Application\obj\Debug\netcoreapp3.1\Schools.Application.csprojAssemblyReference.cache
+F:\Project\AllSchools\Schools\Schools.Application\obj\Debug\netcoreapp3.1\Schools.Application.AssemblyInfoInputs.cache
+F:\Project\AllSchools\Schools\Schools.Application\obj\Debug\netcoreapp3.1\Schools.Application.AssemblyInfo.cs
+F:\Project\AllSchools\Schools\Schools.Application\obj\Debug\netcoreapp3.1\Schools.Application.csproj.CoreCompileInputs.cache
+F:\Project\AllSchools\Schools\Schools.Application\obj\Debug\netcoreapp3.1\Schools.Application.csproj.CopyComplete
+F:\Project\AllSchools\Schools\Schools.Application\obj\Debug\netcoreapp3.1\Schools.Application.dll
+F:\Project\AllSchools\Schools\Schools.Application\obj\Debug\netcoreapp3.1\Schools.Application.pdb

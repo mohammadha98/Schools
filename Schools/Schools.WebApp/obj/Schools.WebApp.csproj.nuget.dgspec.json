@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.WebApp\\Schools.WebApp.csproj": {}
+    "F:\\Project\\AllSchools\\Schools\\Schools.WebApp\\Schools.WebApp.csproj": {}
   },
   "projects": {
-    "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.Application\\Schools.Application.csproj": {
+    "F:\\Project\\AllSchools\\Schools\\Schools.Application\\Schools.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.Application\\Schools.Application.csproj",
+        "projectUniqueName": "F:\\Project\\AllSchools\\Schools\\Schools.Application\\Schools.Application.csproj",
         "projectName": "Schools.Application",
-        "projectPath": "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.Application\\Schools.Application.csproj",
-        "packagesPath": "C:\\Users\\ali\\.nuget\\packages\\",
-        "outputPath": "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.Application\\obj\\",
+        "projectPath": "F:\\Project\\AllSchools\\Schools\\Schools.Application\\Schools.Application.csproj",
+        "packagesPath": "C:\\Users\\Mohammad\\.nuget\\packages\\",
+        "outputPath": "F:\\Project\\AllSchools\\Schools\\Schools.Application\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\ali\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Mohammad\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -30,8 +30,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.Domain\\Schools.Domain.csproj": {
-                "projectPath": "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.Domain\\Schools.Domain.csproj"
+              "F:\\Project\\AllSchools\\Schools\\Schools.Domain\\Schools.Domain.csproj": {
+                "projectPath": "F:\\Project\\AllSchools\\Schools\\Schools.Domain\\Schools.Domain.csproj"
               }
             }
           }
@@ -63,20 +63,20 @@
         }
       }
     },
-    "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.Domain\\Schools.Domain.csproj": {
+    "F:\\Project\\AllSchools\\Schools\\Schools.Domain\\Schools.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.Domain\\Schools.Domain.csproj",
+        "projectUniqueName": "F:\\Project\\AllSchools\\Schools\\Schools.Domain\\Schools.Domain.csproj",
         "projectName": "Schools.Domain",
-        "projectPath": "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.Domain\\Schools.Domain.csproj",
-        "packagesPath": "C:\\Users\\ali\\.nuget\\packages\\",
-        "outputPath": "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.Domain\\obj\\",
+        "projectPath": "F:\\Project\\AllSchools\\Schools\\Schools.Domain\\Schools.Domain.csproj",
+        "packagesPath": "C:\\Users\\Mohammad\\.nuget\\packages\\",
+        "outputPath": "F:\\Project\\AllSchools\\Schools\\Schools.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\ali\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Mohammad\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -118,20 +118,20 @@
         }
       }
     },
-    "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.Infra.Data\\Schools.Infra.Data.csproj": {
+    "F:\\Project\\AllSchools\\Schools\\Schools.Infra.Data\\Schools.Infra.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.Infra.Data\\Schools.Infra.Data.csproj",
+        "projectUniqueName": "F:\\Project\\AllSchools\\Schools\\Schools.Infra.Data\\Schools.Infra.Data.csproj",
         "projectName": "Schools.Infra.Data",
-        "projectPath": "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.Infra.Data\\Schools.Infra.Data.csproj",
-        "packagesPath": "C:\\Users\\ali\\.nuget\\packages\\",
-        "outputPath": "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.Infra.Data\\obj\\",
+        "projectPath": "F:\\Project\\AllSchools\\Schools\\Schools.Infra.Data\\Schools.Infra.Data.csproj",
+        "packagesPath": "C:\\Users\\Mohammad\\.nuget\\packages\\",
+        "outputPath": "F:\\Project\\AllSchools\\Schools\\Schools.Infra.Data\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\ali\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Mohammad\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -144,8 +144,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.Domain\\Schools.Domain.csproj": {
-                "projectPath": "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.Domain\\Schools.Domain.csproj"
+              "F:\\Project\\AllSchools\\Schools\\Schools.Domain\\Schools.Domain.csproj": {
+                "projectPath": "F:\\Project\\AllSchools\\Schools\\Schools.Domain\\Schools.Domain.csproj"
               }
             }
           }
@@ -193,20 +193,20 @@
         }
       }
     },
-    "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.Infra.IoC\\Schools.Infra.IoC.csproj": {
+    "F:\\Project\\AllSchools\\Schools\\Schools.Infra.IoC\\Schools.Infra.IoC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.Infra.IoC\\Schools.Infra.IoC.csproj",
+        "projectUniqueName": "F:\\Project\\AllSchools\\Schools\\Schools.Infra.IoC\\Schools.Infra.IoC.csproj",
         "projectName": "Schools.Infra.IoC",
-        "projectPath": "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.Infra.IoC\\Schools.Infra.IoC.csproj",
-        "packagesPath": "C:\\Users\\ali\\.nuget\\packages\\",
-        "outputPath": "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.Infra.IoC\\obj\\",
+        "projectPath": "F:\\Project\\AllSchools\\Schools\\Schools.Infra.IoC\\Schools.Infra.IoC.csproj",
+        "packagesPath": "C:\\Users\\Mohammad\\.nuget\\packages\\",
+        "outputPath": "F:\\Project\\AllSchools\\Schools\\Schools.Infra.IoC\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\ali\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Mohammad\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -219,11 +219,11 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.Application\\Schools.Application.csproj": {
-                "projectPath": "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.Application\\Schools.Application.csproj"
+              "F:\\Project\\AllSchools\\Schools\\Schools.Application\\Schools.Application.csproj": {
+                "projectPath": "F:\\Project\\AllSchools\\Schools\\Schools.Application\\Schools.Application.csproj"
               },
-              "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.Infra.Data\\Schools.Infra.Data.csproj": {
-                "projectPath": "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.Infra.Data\\Schools.Infra.Data.csproj"
+              "F:\\Project\\AllSchools\\Schools\\Schools.Infra.Data\\Schools.Infra.Data.csproj": {
+                "projectPath": "F:\\Project\\AllSchools\\Schools\\Schools.Infra.Data\\Schools.Infra.Data.csproj"
               }
             }
           }
@@ -261,20 +261,20 @@
         }
       }
     },
-    "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.WebApp\\Schools.WebApp.csproj": {
+    "F:\\Project\\AllSchools\\Schools\\Schools.WebApp\\Schools.WebApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.WebApp\\Schools.WebApp.csproj",
+        "projectUniqueName": "F:\\Project\\AllSchools\\Schools\\Schools.WebApp\\Schools.WebApp.csproj",
         "projectName": "Schools.WebApp",
-        "projectPath": "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.WebApp\\Schools.WebApp.csproj",
-        "packagesPath": "C:\\Users\\ali\\.nuget\\packages\\",
-        "outputPath": "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.WebApp\\obj\\",
+        "projectPath": "F:\\Project\\AllSchools\\Schools\\Schools.WebApp\\Schools.WebApp.csproj",
+        "packagesPath": "C:\\Users\\Mohammad\\.nuget\\packages\\",
+        "outputPath": "F:\\Project\\AllSchools\\Schools\\Schools.WebApp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\ali\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Mohammad\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -287,8 +287,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.Infra.IoC\\Schools.Infra.IoC.csproj": {
-                "projectPath": "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.Infra.IoC\\Schools.Infra.IoC.csproj"
+              "F:\\Project\\AllSchools\\Schools\\Schools.Infra.IoC\\Schools.Infra.IoC.csproj": {
+                "projectPath": "F:\\Project\\AllSchools\\Schools\\Schools.Infra.IoC\\Schools.Infra.IoC.csproj"
               }
             }
           }
