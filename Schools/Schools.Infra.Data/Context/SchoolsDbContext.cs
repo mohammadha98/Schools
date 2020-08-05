@@ -16,7 +16,7 @@ namespace Schools.Infra.Data.Context
         }
 
 
-
+        //test
         public virtual DbSet<Test> Tests { get; set; }
     }
 }

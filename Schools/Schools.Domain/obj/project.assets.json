@@ -8,23 +8,23 @@
     ".NETCoreApp,Version=v3.1": []
   },
   "packageFolders": {
-    "C:\\Users\\ali\\.nuget\\packages\\": {},
+    "C:\\Users\\Mohammad\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.Domain\\Schools.Domain.csproj",
+      "projectUniqueName": "C:\\Users\\Mohammad\\Source\\Repos\\Schools\\Schools\\Schools.Domain\\Schools.Domain.csproj",
       "projectName": "Schools.Domain",
-      "projectPath": "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.Domain\\Schools.Domain.csproj",
-      "packagesPath": "C:\\Users\\ali\\.nuget\\packages\\",
-      "outputPath": "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.Domain\\obj\\",
+      "projectPath": "C:\\Users\\Mohammad\\Source\\Repos\\Schools\\Schools\\Schools.Domain\\Schools.Domain.csproj",
+      "packagesPath": "C:\\Users\\Mohammad\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Mohammad\\Source\\Repos\\Schools\\Schools\\Schools.Domain\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\ali\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Mohammad\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
