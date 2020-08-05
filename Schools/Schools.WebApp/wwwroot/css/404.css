@@ -1,0 +1,16 @@
+.top-layer{
+  padding: 40px 0 15px;
+  border-bottom: 3px solid #dee7ec
+}
+.notfound {
+    padding: 55px 0
+}
+.notfound img{
+    width: 450px;
+    display: block;
+    margin: 0 auto
+}
+.notfound p{
+    text-align: center;
+    font-size: 15px
+}

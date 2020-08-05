@@ -1,0 +1,110 @@
+.top-layer{
+  padding: 40px 0 15px;
+  border-bottom: 3px solid #dee7ec
+}
+.contact-layer{
+   padding: 50px 0
+}
+.contact-layer header{
+   border-right: 1px solid #e7f0f4;
+   margin-bottom: 30px;
+}
+.contact-layer > h2{
+  padding-right: 20px;
+  width: auto;
+  line-height: 35px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #2986e8;
+  position: relative;
+  top: -4px;
+  margin-bottom: 20px
+}
+.contact-layer > h2:before {
+    height: 25px;
+    width: 4px;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    background-color: #2d8bef;
+    position: absolute;
+    right: 0;
+    top: 5px;
+    content: '';
+}
+.form-layer-style{
+   border-top: 2px solid #e4ecef;
+   padding-top: 20px
+}
+.form-layer-style > h2{
+   width: auto;
+   display: table;
+   padding: 0 30px;
+   font-size: 16px;
+   font-weight: bold;
+   line-height: 35px;
+   margin: -40px auto 40px;
+   background-color: #fff;
+   color: #56707c
+}
+.form-layer-style button{
+   min-width: 100%
+}
+.contact-info-layer{
+   padding: 50px 0 30px;
+}
+.contact-info-layer section{
+   padding: 27px 30px 20px;
+   position: relative;
+   border-radius: 4px;
+   -moz-border-radius: 4px;
+   -webkit-border-radius: 4px;
+   margin-bottom: 30px;
+   min-height: 160px
+}
+.contact-info-layer section h2{
+   font-size: 15px;
+   word-spacing: -1px;
+   line-height: 20px;
+   color: #2986e8
+}
+.contact-info-layer section h2 i{
+   font-size: 30px;
+   line-height: 15px;
+   margin-left: 10px;
+   color: #2986e8;
+   position: relative;
+   top: 4px;
+}
+.contact-info-layer section h2 i.icon-destination{
+   font-size: 32px;
+}
+.contact-info-layer section ul {
+   padding: 20px 0 0
+}
+.contact-info-layer section ul li {
+   line-height: 28px;
+   word-spacing: -1px
+}
+.contact-info-layer section ul li a {
+   font-size: 16px;
+   letter-spacing: 0.5px;
+   color: #353b41
+}
+.contact-info-layer section p{
+   padding: 20px 0 0 ;
+   line-height: 28px;
+}
+.description p {
+    font-size: 14px;
+    line-height: 28px;
+    text-align: justify;
+    word-spacing: -1px;
+    color:#58768e
+}
+
+@media screen and (max-width : 767px){
+    .contact-layer{
+        padding-top: 30px
+    }
+}

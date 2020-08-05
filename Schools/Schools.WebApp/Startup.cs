@@ -20,6 +20,7 @@ namespace Schools.WebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddRazorPages();
             services.AddDbContext<SchoolsDbContext>(options=>
             {
                 options.UseSqlServer("Data Source=.;Initial Catalog=Schools_DB;Integrated Security=true");
@@ -43,7 +44,7 @@ namespace Schools.WebApp
             }
             else
             {
-                app.UseExceptionHandler("Home/Error");
+                app.UseExceptionHandler("/Error");
             }
 
             app.UseStaticFiles();
@@ -52,10 +53,8 @@ namespace Schools.WebApp
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
+                endpoints.MapRazorPages();
+            
             });
         }
 

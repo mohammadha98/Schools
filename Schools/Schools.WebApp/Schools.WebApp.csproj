@@ -5,12 +5,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Schools.Infra.IoC\Schools.Infra.IoC.csproj" />
+    <Compile Remove="Controller\**" />
+    <Compile Remove="Views\**" />
+    <Content Remove="Controller\**" />
+    <Content Remove="Views\**" />
+    <EmbeddedResource Remove="Controller\**" />
+    <EmbeddedResource Remove="Views\**" />
+    <None Remove="Controller\**" />
+    <None Remove="Views\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controller\" />
-    <Folder Include="Views\" />
+    <ProjectReference Include="..\Schools.Infra.IoC\Schools.Infra.IoC.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,6 +28,35 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\css\fonts\icon.svg" />
+    <None Include="wwwroot\css\fonts\IRANSansWeb%28FaNum%29.woff2" />
+    <None Include="wwwroot\css\fonts\IRANSansWeb.woff2" />
+    <None Include="wwwroot\css\fonts\Material-icon.svg" />
+    <None Include="wwwroot\css\fonts\Material-icon.woff2" />
+    <None Include="wwwroot\images\404.svg" />
+    <None Include="wwwroot\images\500.svg" />
+    <None Include="wwwroot\images\about.svg" />
+    <None Include="wwwroot\images\land-img-left.svg" />
+    <None Include="wwwroot\images\land-img.svg" />
+    <None Include="wwwroot\images\logo.svg" />
+    <None Include="wwwroot\js\account.js" />
+    <None Include="wwwroot\js\bootstrap.min.js" />
+    <None Include="wwwroot\js\calendar.js" />
+    <None Include="wwwroot\js\home.js" />
+    <None Include="wwwroot\js\intro.js" />
+    <None Include="wwwroot\js\jquery.Bootstrap-PersianDateTimePicker.js" />
+    <None Include="wwwroot\js\jquery.min.js" />
+    <None Include="wwwroot\js\jquery.slimscroll.js" />
+    <None Include="wwwroot\js\lightslider.js" />
+    <None Include="wwwroot\js\modernizr.js" />
+    <None Include="wwwroot\js\owl.carousel.js" />
+    <None Include="wwwroot\js\profile.js" />
+    <None Include="wwwroot\js\public.js" />
+    <None Include="wwwroot\js\raty.js" />
+    <None Include="wwwroot\js\timer.js" />
   </ItemGroup>
 
 </Project>

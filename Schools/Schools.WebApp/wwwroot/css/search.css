@@ -1,0 +1,172 @@
+.search-option form:after,.search-option .search-row:after{display: block; clear: both; content: ''; visibility: hidden; height: 0; line-height: 0}
+
+
+.search-page{
+	padding-top: 35px;
+	padding-bottom: 35px
+}
+.top-layer{
+  padding: 40px 0 15px;
+  border-bottom: 3px solid #dee7ec
+}
+
+.search-page .search-option{
+  width: 100%;
+  background-color: #fff;
+  padding: 25px 26px 28px;
+  margin-bottom: 35px;
+  position: relative
+}
+.search-page .search-option form select,
+.search-page .search-option form input{
+  width: 32%;
+  background-color: #fff;
+  padding: 0 12px 0 0;
+  font-size: 14px;
+  word-spacing: -2px;
+  line-height: 40px;
+  height: 40px;
+  border: 1px solid #dee7ec;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  float: right;
+  margin-left: 2%;
+  margin-bottom: 18px
+}
+.search-page .search-option form select:nth-child(3),
+.search-page .search-option form input:nth-child(6){
+	margin-left: 0
+}
+.search-page .search-option .multi-radio-in-row{
+	width: 60%;
+	float: right;
+	padding-top: 5px
+}
+.search-page .search-option form button{
+  width: 200px;
+  float: left;
+  background-color: #55cb54;
+  color: #fff;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  font-size: 14px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 40px;
+  height: 40px;
+  border:0;
+  margin-top: 10px
+}
+
+.search-page .search-option form button i{
+  font-size: 21px;
+  position: relative;
+  top: 5px;
+  margin-right: 7px
+}
+.search-page .search-option form button:hover{
+  background-color: #3abd39
+}
+.search-page .search-option > span{
+	width: auto;
+	line-height: 35px;
+	font-size: 15px;
+	font-weight: bold;
+	color: #2986e8;
+	position: absolute;
+	top: 22px;
+  left: 32px;
+}
+.search-page .search-option > h2{
+	padding-right: 20px;
+	width: auto;
+	line-height: 35px;
+	font-size: 16px;
+	font-weight: bold;
+	color: #2986e8;
+	position: relative;
+	top: -4px;
+	margin-bottom: 20px
+}
+.search-page .search-option > h2:before{
+   height: 25px;
+  width: 4px;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  background-color: #2d8bef;
+  position: absolute;
+  right: 0;
+  top: 5px;
+  content: '';
+}
+.search-page .section-item{
+  margin-bottom: 25px
+}
+.pagination-layer{
+	margin-bottom: 15px
+}
+
+
+@media screen and (max-width : 1199px){
+	.section-item h2 a{
+		font-size: 13px;
+	}
+}
+@media screen and (max-width : 991px){
+	.search-page .search-option .multi-radio-in-row{
+		width: 100%;
+		float: none
+	}
+	.search-page .search-option form select, .search-page .search-option form input{
+		font-size: 13px
+	}
+}
+@media screen and (max-width : 600px){
+	.search-page .search-option form select, 
+	.search-page .search-option form input,
+	.search-page .search-option form select:nth-child(3),
+	.search-page .search-option form input:nth-child(6){
+		width: 48%;
+		margin-left: 4%
+	}
+	.search-page .search-option form select:nth-child(2n), 
+	.search-page .search-option form input:nth-child(2n){
+		margin-left: 0
+	}
+	.search-page .search-option > span{
+		display: none
+	}
+}
+@media screen and (max-width : 480px){
+	.search-page .search-option form button{
+		width: 100%;
+		float: none
+	}
+	.search-page .section-item-col{
+		width: 100%;
+		float: none
+	}
+	.section-item h2{
+		padding-bottom: 5px
+	}
+}
+@media screen and (max-width : 440px){
+	.search-page .search-option form select:nth-child(3),
+	.search-page .search-option form input:nth-child(6),
+	.search-page .search-option form select, 
+	.search-page .search-option form input,
+	.search-page .search-option form select:nth-child(2n), 
+	.search-page .search-option form input:nth-child(2n){
+		width: 100%;
+		margin-left: 0;
+		float: none;
+		margin-bottom: 12px
+	}
+	.search-page .search-option{
+		padding: 20px 22px 24px
+	}
+}

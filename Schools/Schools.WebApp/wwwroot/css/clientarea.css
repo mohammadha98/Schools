@@ -1,0 +1,344 @@
+.step-two .timer:after,.radio-layer:after{display: block; clear: both; content: ''; visibility: hidden; height: 0; line-height: 0}
+
+.step-two .refresh-code i,.step-two .refresh-code,.radio-layer label:before{-webkit-transition : all 0.2s linear 0s; -moz-transition : all 0.2s linear 0s; -ms-transition : all 0.2s linear 0s; -o-transition : all 0.2s linear 0s; transition : all 0.2s linear 0s}
+
+
+.top-layer{
+  padding: 40px 0 10px;
+}
+.page-title h1 a{
+  margin-top: 30px
+}
+.clientarea-layer{
+  background: url('../images/pattern.png') #fff repeat;
+  padding: 70px 0
+}
+.clientarea-layer .content{
+  width: 600px;
+  background-color: #fff;
+  padding: 35px 45px;
+  margin: 0 auto
+}
+.clientarea-layer .content h2{
+  width: 100%;
+  font-size: 16px;
+  line-height: 25px;
+  margin-bottom: 20px;
+  position: relative;
+  font-weight: bold
+}
+.clientarea-layer .content ul li {
+  line-height: 25px;
+  padding: 5px 13px 5px 0;
+  position: relative;
+  word-spacing: -1px;
+  color: #58768e;
+  text-align: justify;
+}
+.clientarea-layer .content ul li:before{
+  position: absolute;
+  right: 0;
+  top: 15px;
+  width: 5px;
+  height: 5px;
+  border-radius: 15px;
+  -moz-border-radius: 15px;
+  -webkit-border-radius: 15px;
+  background-color: #21b75c;
+  content: ''
+}
+.clientarea-layer .content ul li a{
+  color: #3bb73a
+}
+.clientarea-layer .content form{
+  width: 100%;
+  margin-top: 30px
+}
+.clientarea-layer .content form .left-corner{
+  width: 95%;
+  height: 55px;
+  line-height: 55px;
+  padding: 0 25px;
+  font-size: 14px;
+  border:2px solid #dee7ec;
+  -webkit-border-top-right-radius: 50px;
+  -webkit-border-bottom-right-radius: 50px;
+  -moz-border-radius-topright: 50px;
+  -moz-border-radius-bottomright: 50px;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+  border-left: 0;
+  background-color: #fff;
+  color: #58768e;
+}
+.clientarea-layer .content form .right-corner{
+  width: 95%;
+  height: 55px;
+  line-height: 55px;
+  font-size: 14px;
+  border:2px solid #dee7ec;
+  -webkit-border-top-left-radius: 50px;
+  -webkit-border-bottom-left-radius: 50px;
+  -moz-border-radius-topleft: 50px;
+  -moz-border-radius-bottomleft: 50px;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+  border-right: 0;
+  margin: -2px 0;
+  position: relative;
+  left: -25px;
+  background-color: #fff;
+  color: #58768e;
+}
+.clientarea-layer .content form button:hover{
+  color: #2986e8
+}
+.clientarea-layer .content .detail{
+  padding: 20px 2px 5px 0
+}
+.clientarea-layer .content .detail > a{
+  line-height: 25px;
+  font-size: 14px;
+  color: #58768e;
+  display: block;
+  margin-bottom: 8px
+}
+.clientarea-layer .content .detail > a:hover{
+  color: #3bb73a
+}
+.clientarea-layer .content .detail > a i{
+  font-size: 19px;
+  margin-left: 5px;
+  position: relative;
+  color: #adc1cc
+}
+.clientarea-layer .content .detail > a i.zmdi-lock{
+  font-size: 16px;
+  top: 2px;
+}
+.clientarea-layer .content .detail > a i.zmdi-account{
+  font-size: 21px;
+  top: 3px;
+}
+.clientarea-layer .content .checkbox{
+    width: 100%;
+    position: relative;
+    height: 35px;
+    padding: 10px 5px 10px 0;
+    color: #58768e;
+}
+.clientarea-layer .content .checkbox input{
+    visibility: hidden;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.clientarea-layer .content .checkbox label{
+    display: block;
+    width: 100%;
+    font-size: 14px;
+    line-height: 20px;
+}
+.clientarea-layer .content .checkbox label:before{
+    width: 17px;
+    height: 17px;
+    border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border:1px solid #d2d6e1;
+    content: '';
+    right: 0;
+    top: 12px;
+    position: absolute;
+    padding-left: 1px
+}
+.clientarea-layer .content .checkbox input:checked + label:before{
+    content: '\f26b';
+    font-family: 'material';
+    color: #3bb73a;
+    line-height: 15px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 15px
+}
+.clientarea-layer .content .other-login{
+    width: 100%;
+    border-top: 1px solid #dee7ec;
+    margin-top: 45px;
+    padding-top: 30px;
+    position: relative;
+    text-align: center;
+}
+.clientarea-layer .content .other-login header h3{
+    width: auto;
+    margin: -42px auto 45px;
+    display: table;
+    background-color: #fff;
+    padding: 0 15px;
+    font-size: 15px;
+    font-weight: bold;
+}
+.clientarea-layer .content .other-login a{
+    display: inline-table;
+    margin: 0 8px 15px;
+    width: 45px;
+    height: 45px;
+    border-radius: 100%;
+    -moz-border-radius: 100%;
+    -webkit-border-radius: 100%;
+    text-align: center;
+    font-size: 26px;
+    color: #a3b9ca;
+}
+.clientarea-layer .content .other-login a:hover{
+    color: #7788a1;
+}
+
+.clientarea-layer .content .other-login a i{
+    position: relative;
+    top: 7px
+}
+.step-two{
+  padding: 5px 0 30px
+}
+.step-two .refresh-code{
+  width: 160px;
+  display: inline-table;
+  float: right;
+  line-height: 35px;
+  padding: 0;
+  font-size: 14px;
+  background-color: #fff;
+  color: #2986e8;
+  border:0;
+  text-align: right;
+}
+.step-two .refresh-code:hover{
+  color: #3bb73a
+}
+.step-two .refresh-code i{
+  font-size: 21px;
+  position: relative;
+  top: 3px;
+  margin-left: 5px
+}
+.step-two .timer{
+  line-height: 35px;
+  float: right;
+  color: #2986e8;
+  width: 60px;
+  display: inline-table;
+  padding-top: 4px
+}
+.step-two .timer span{
+  width: 25px;
+  height: 25px;
+  line-height: 25px;
+  float: left;
+  margin-right: 5px;
+  position: relative;
+}
+.step-two .timer span.days,
+.step-two .timer span.hours{
+  display: none
+}
+.step-two .timer span.minutes:before{
+  position: absolute;
+  right: -11px;
+  content: ':';
+  top: -1px;
+  line-height: 25px;
+  font-size: 18px;
+}
+.step-two form{
+  margin-top: 25px;
+}
+.step-two .refresh-code[disabled="disabled"]{
+  color: #adc1cc
+}
+
+.radio-layer {
+  margin: 15px 0
+}
+.radio-layer .radio-row{
+  display: inline-table;
+  float: right;
+  margin-left: 25px;
+  position: relative;
+}
+.radio-layer label{
+  line-height: 25px;
+  height: 25px;
+  position: relative;
+  font-size: 14px;
+  color: #353b41;
+  padding-right: 25px
+}
+.radio-layer label:before{
+  position: absolute;
+  right: 0;
+  top: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 100%;
+  -moz-border-radius: 100%;
+  -webkit-border-radius: 100%;
+  border:2px solid #dee7ec;
+  background-color: #fff;
+  line-height: 18px;
+  text-align: center;
+  content: ''
+}
+.radio-layer label:hover:before{
+  background-color: #dee7ec
+}
+.radio-layer label:hover{
+  cursor: pointer;
+}
+.radio-layer input:checked + label:before{
+  background-color: #55cb54;
+  border:2px solid #88de87;
+}
+.radio-layer label{
+  cursor: pointer;
+}
+.radio-layer .radio-row input{
+  visibility: hidden;
+  position: absolute;
+  right: 0;
+  top: 0
+}
+
+
+
+@media screen and (max-width : 700px){
+  .clientarea-layer .content{
+    width: 90%
+  }
+  .clientarea-layer{
+    padding: 45px 0
+  }
+}
+@media screen and (max-width : 500px){
+  .clientarea-layer .content{
+    width: 95%;
+    padding: 25px
+  }
+  .clientarea-layer{
+    padding: 35px 0
+  }
+}
+@media screen and (max-width : 380px){
+  .clientarea-layer .content{
+    padding: 20px 15px 20px 25px
+  }
+  .clientarea-layer .content h2,.clientarea-layer .content ul{
+    display: none
+  }
+  .clientarea-layer .content form{
+    margin-top: 15px
+  }
+  .clientarea-layer .content .other-login{
+    margin-top: 35px
+  }
+}

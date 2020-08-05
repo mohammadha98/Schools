@@ -1,0 +1,831 @@
+@font-face {
+  font-family: 'IRANSans';
+  font-style: normal;
+  font-weight: normal;
+  src: url('fonts/IRANSansWeb.eot');
+  src: url('fonts/IRANSansWeb.eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
+     url('fonts/IRANSansWeb.woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
+     url('fonts/IRANSansWeb.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+     url('fonts/IRANSansWeb.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'IRANSans';
+  font-style: normal;
+  font-weight: normal;
+  src: url('fonts/IRANSansWeb(FaNum).eot');
+  src: url('fonts/IRANSansWeb(FaNum).eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
+     url('fonts/IRANSansWeb(FaNum).woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
+     url('fonts/IRANSansWeb(FaNum).woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+     url('fonts/IRANSansWeb(FaNum).ttf') format('truetype');
+}
+body{
+  margin: 0;
+  padding: 0;
+  font-family: 'IRANSans',tahoma;
+  color: #353b41;
+  font-size: 14px;
+  word-spacing: -1px;
+}
+html,body{
+  overflow-x: hidden !important;
+}
+/***********Default setting************/
+
+a:link,a:hover{text-decoration: none; outline: 0 !important}
+a:active{color:#54c3ed}
+i,span,label,a{display: inline-block; font-weight: normal;}
+ul{list-style: none !important; list-style-type: none !important; margin: 0; padding: 0}
+h1,h2,h3,h4,h5,h6{  font-size: 15px; margin: 0; padding: 0}
+img{max-width: 100%}
+
+/********** Transition ************/
+a,i,input[type="submit"], form button,.main-menu .responsive-menu{ outline: medium none;  text-decoration: none; -webkit-transition : all 0.2s linear 0s; -moz-transition : all 0.2s linear 0s; -ms-transition : all 0.2s linear 0s; -o-transition : all 0.2s linear 0s; transition : all 0.2s linear 0s}
+
+/*********** clearFix ************/
+footer nav ul:after,.top-bar:after,.top-bar .left-side:after,.main-menu:after,.content:after,.content .right-col:after,
+.content .left-col .list .select-options ul:after,.description-layer:after,.search-layer form:after,
+.main-menu .responsive-menu:after{display: block; clear: both; content: ''; visibility: hidden; height: 0; line-height: 0}
+
+
+.main-content{
+  position: relative;
+  width: 100%;
+  background: url('../images/intro/bg.png') no-repeat top center;
+  background-size: cover;
+}
+.main-content:before{
+  position: absolute;
+  content: '';
+  right: 0;
+  top: 0;
+  width: 100%;
+  height: 4px;
+  background: url('../images/bar.jpg') repeat-x;
+}
+.top-bar{
+  padding: 40px 0 20px
+}
+.top-bar .socials{
+  width: auto;
+  float: right;
+  display: inline-table;
+}
+.top-bar .socials a{
+  color: #98aeba;
+  padding-left: 15px;
+  line-height: 20px
+}
+.top-bar .socials a i{
+  font-size: 21px;
+  position: relative;
+}
+.top-bar .socials a i.icon-aparat{
+  font-size: 26px;
+  top: 1px;
+  right: -4px
+}
+.top-bar .left-side{
+  width: auto;
+  float: left;
+  display: inline-table;
+}
+.top-bar .left-side span{
+  width: auto;
+  float: left;
+  display: inline-table;
+  margin-right: 15px;
+  padding-right: 15px;
+  padding-left: 25px;
+  position: relative;
+}
+.top-bar .left-side span:first-child{
+  border-right: 1px solid #bed1dc;
+}
+.top-bar .left-side span a{
+  line-height: 20px;
+  font-size: 14px;
+  color: #353b41
+}
+.top-bar .left-side span a:hover,
+.top-bar .socials a:hover{
+  color: #2d8bef
+}
+.top-bar .left-side span i{
+  font-size: 21px;
+  position: absolute;
+  top: 1px;
+  left: 0;
+  padding-right: 8px;
+  color: #98aeba
+}
+.main-menu{
+  box-shadow: 0 0 8px #b1c6d5;
+  background-color: #fff;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  padding: 10px 20px
+}
+.main-menu .logo{
+  width: 65px;
+  display: inline-table;
+  float: right;
+  margin-left: 15px;
+}
+.main-menu .logo img{
+  width: 100%
+}
+.main-menu nav{
+  width: auto;
+  display: inline-table;
+  float: right;
+  padding: 13px 5px 0;
+  position: relative;
+}
+.main-menu .responsive-menu{
+  width: 38px;
+  height: 38px;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  color: #fff;
+  float: left;
+  background-color: #55cb54;
+  text-align: center;
+  margin-top: 6px;
+  margin-right: 10px;
+  display: none
+}
+.main-menu .responsive-menu:hover{
+  cursor: pointer;
+  background-color: #3abd39
+}
+.main-menu .responsive-menu i{
+  font-size: 21px;
+  line-height: 29px;
+  position: relative;
+  top: 5px;
+}
+.main-menu nav ul li{
+  display: inline-table;
+  float: right;
+}
+.main-menu nav ul li a{
+  display: block;
+  font-size: 14px;
+  line-height: 25px;
+  color: #353b41;
+  padding-left: 20px;
+  font-weight: bold
+}
+.main-menu nav ul li a:hover{
+  color: #2d8bef
+}
+.main-menu .submit-request{
+  color: #fff;
+  background-color: #2d8bef;
+  font-size: 14px;
+  padding: 0 20px;
+  line-height: 38px;
+  float: left;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  margin-top: 6px
+}
+.main-menu .submit-request:hover{
+  background-color: #1479e4
+}
+.content{
+  padding: 80px 0
+}
+.content .right-col{
+  width: 48%;
+  float: right;
+  position: relative;
+}
+.content .left-col{
+  width: 42%;
+  float: left;
+  position: relative;
+}
+
+.content .left-col .desc{
+  margin-bottom: 45px;
+}
+.content .left-col .desc p{
+  line-height: 30px;
+  text-align: justify;
+  font-size: 14px;
+  font-weight: bold;
+  color: #353b41
+}
+.content .left-col .desc p span{
+  color: #2d8bef
+}
+.content .left-col .desc p a{
+  color: #3bb73a
+}
+.content .left-col .list label{
+  width: 100%;
+  display: block;
+  line-height: 25px;
+  padding-bottom: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #353b41
+}
+.content .left-col .list label i{
+  font-size: 21px;
+  position: relative;
+  top: 2px;
+  padding-left: 5px;
+  color: #adc1cc
+}
+.content .left-col .list{
+  width: 100%;
+  position: relative;
+  margin-bottom: 30px
+}
+.content .left-col .list .select-options{
+  position: relative;
+  width: 100%;
+  height: 45px;
+}
+.content .left-col .list .select-options .item-title{
+  position: relative;
+  width: 100%;
+  border: 1px solid #dee7ec;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  padding: 0 15px;
+  height: 45px;
+  line-height: 45px;
+  background-color: #fff;
+  z-index: 0 !important
+}
+.content .left-col .list .select-options .item-title:hover{
+  cursor: pointer;
+}
+.content .left-col .list .select-options .item-title:before{
+  position: absolute;
+  content: '\f2f9';
+  font-size: 18px;
+  left: 15px;
+  top: 0;
+  color: #adc1cc;
+  font-family: 'material'
+}
+.content .left-col .list .select-options .item-title.active{
+  color: #3bb73a
+}
+.content .left-col .list .select-options ul{
+  position: absolute;
+  top: 43px;
+  background-color: #fff;
+  padding: 10px 12px;
+  border:1px solid #dee7ec;
+  right: 0;
+  width: 100%;
+  z-index: 100 !important;
+  display: none;
+  -webkit-border-bottom-right-radius: 4px;
+  -webkit-border-bottom-left-radius: 4px;
+  -moz-border-radius-bottomright: 4px;
+  -moz-border-radius-bottomleft: 4px;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  border-top: 0
+}
+.content .left-col .list .select-options ul li{
+  width: 50%;
+  float: right;
+  padding: 3px
+}
+.content .left-col .list .select-options ul li a{
+  display: block;
+  line-height: 18px;
+  font-size: 13px;
+  color: #353b41
+}
+.content .left-col .list .select-options ul li a:hover{
+  color: #2d8bef
+}
+
+.description-layer{
+  width: 100%;
+  border:1px solid #dee7ec;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  padding: 38px 32px 32px;
+  position: relative;
+  margin-top: 60px;
+  display: none
+}
+.description-layer > span{
+  background-color: #fff;
+  padding: 0 12px;
+  font-weight: bold;
+  position: absolute;
+}
+
+.description-layer > span.item-title{
+  color: #3bb73a;
+  right: 18px;
+  font-size: 18px;
+  top: -15px;
+}
+.description-layer > span.item-count{
+  color: #353b41;
+  left: 18px;
+  font-size: 13px;
+  top: -12px;
+}
+.description-layer > span.item-count i{
+  font-style: normal;
+  font-size: 14px
+}
+.description-layer .view-btn{
+  color: #fff;
+  background-color: #2d8bef;
+  font-size: 14px;
+  padding: 0 15px;
+  line-height: 42px;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  float: right;
+  width: auto;
+  display: inline-table;
+  font-weight: bold
+}
+.description-layer .view-btn:hover{
+  background-color: #1479e4
+}
+.description-layer .submit-btn{
+  color: #fff;
+  background-color: #55cb54;
+  font-size: 14px;
+  padding: 0 15px;
+  line-height: 42px;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  width: auto;
+  float: left;
+  display: inline-table;
+  font-weight: bold
+}
+.description-layer .submit-btn:hover{
+  background-color: #3cc03b
+}
+
+#IranMap .show-title{
+    display: none;
+    position: absolute;
+    background-color: #333;
+    color: #fff;
+    margin: 0 !important;
+    padding: 0 5px;
+    text-align: center;
+    line-height: 26px;
+    border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    opacity: 0.8;
+}
+
+#IranMap .map{
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+#IranMap .map svg{
+    width: 100%
+}
+#IranMap .map .border path, #IranMap .map .island path{
+    fill: #fff;
+}
+#IranMap .map .sea path, #IranMap .map .lake path{
+    fill: #6caed8;
+}
+#IranMap .map .province path:hover, #IranMap .map .province path.hover, #IranMap .map .island path.hover{
+    fill: #393939 !important;
+    cursor: pointer;
+}
+#IranMap .map .island path:hover, #IranMap .map .island path.hover{
+    fill: #d92d2d !important;
+    cursor: pointer;
+}
+#IranMap .map .province .alborz{
+    fill: #b81515
+}
+#IranMap .map .province .tehran{
+    fill: #fff
+}
+#IranMap .map .province .ardabil{
+    fill: #2f98c8
+}
+#IranMap .map .province .azerbaijan-east{
+    fill: #669acc
+}
+#IranMap .map .province .azerbaijan-west{
+    fill: #0099ff
+}
+#IranMap .map .province .bushehr{
+    fill: #9acc99
+}
+#IranMap .map .province .chahar-mahaal-bakhtiari{
+    fill: #669acc
+}
+#IranMap .map .province .fars{
+    fill: #ffff67
+}
+#IranMap .map .province .gilan{
+    fill: #03cbcd
+}
+#IranMap .map .province .golestan{
+    fill: #67cc66
+}
+#IranMap .map .province .hamadan{
+    fill: #658fae
+}
+#IranMap .map .province .hormozgan{
+    fill: #a6a764
+}
+#IranMap .map .province .ilam{
+    fill: #e1e193
+}
+#IranMap .map .province .isfahan{
+    fill: #ffcc9c
+}
+#IranMap .map .province .kerman{
+    fill: #ffa043
+}
+
+#IranMap .map .province .kermanshah{
+    fill: #3498cc
+}
+
+#IranMap .map .province .khorasan-north{
+    fill: #aeae68
+}
+
+#IranMap .map .province .khorasan-razavi{
+    fill: #d0a077
+}
+
+#IranMap .map .province .khorasan-south{
+    fill: #d77b1e
+}
+
+#IranMap .map .province .khuzestan{
+    fill: #b3b210
+}
+
+#IranMap .map .province .kohgiluyeh-boyer-ahmad{
+    fill: #ff736f
+}
+
+#IranMap .map .province .kurdistan{
+    fill: #6599ff
+}
+
+#IranMap .map .province .lorestan{
+    fill: #2fabaa
+}
+
+#IranMap .map .province .markazi{
+    fill: #a6bc8b
+}
+
+#IranMap .map .province .mazandaran{
+    fill: #76d4de
+}
+#IranMap .map .province .qazvin{
+    fill: #bec172
+}
+#IranMap .map .province .qom{
+    fill: #fa9f02
+}
+#IranMap .map .province .semnan{
+    fill: #cdcc00
+}
+#IranMap .map .province .sistan-baluchestan{
+    fill: #ffcc33
+}
+#IranMap .map .province .yazd{
+    fill: #ffcc67
+}
+#IranMap .map .province .zanjan{
+    fill: #86cba1
+}
+
+#IranMap .list{
+    display: block;
+    float: right;
+    width: 50%;
+}
+#IranMap .list ul{
+    padding: 0;
+}
+#IranMap .list>ul{
+    margin-left: 10px;
+}
+#IranMap .list li{
+    list-style: none;
+}
+#IranMap .list span{
+    background: #242424;
+    color: #ecf0f1;
+    display: block;
+    margin: 0 2px;
+    padding: 0 8px;
+    line-height: 26px;
+    margin-top: 10px;
+    margin-bottom: 2px;
+}
+#IranMap .list li ul li{
+    display: block;
+    float: right;
+    width: 33.33333333333333%;
+}
+#IranMap .list li ul li a{
+    background: #34495e;
+    color: #ecf0f1;
+    display: block;
+    padding: 0 8px;
+    line-height: 26px;
+    margin: 2px 2px;
+    text-decoration: none;
+}
+#IranMap .list li ul li a:hover, #IranMap .list li ul li a.hover{
+    background: #c33a2c;
+}
+#IranMap .list ul:before, #IranMap .list ul:after{
+    display: table;
+    content: " ";
+}
+#IranMap .list ul, #IranMap .list ul:after{
+    clear: both;
+}
+
+#IranMap .city{
+    clear: both;
+    padding: 10px 0;
+}
+
+footer{
+  width: 100%;
+  padding: 18px 0;
+  background-color: #f2f6f8;
+}
+footer nav{
+  width: auto;
+  display: inline-table;
+  float: right;
+}
+footer nav ul li{
+  display: inline-table;
+  float: right;
+}
+footer nav ul li a{
+  display: block;
+  font-size: 13px;
+  line-height: 25px;
+  color: #495561;
+  padding-left: 20px
+}
+footer nav ul li a:hover,
+footer p a:hover{
+  color: #2d8bef
+}
+footer p{
+  width: auto;
+  display: inline-table;
+  float: left;
+  text-align: right;
+  font-size: 13px;
+  line-height: 25px;
+  color: #495561;
+  margin-bottom: 0
+}
+footer p a{
+  color: #394653
+}
+
+.search-layer{
+  width: 100%;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  margin-top: 25px;
+  box-shadow: 0 0 8px #b1c6d5;
+  -moz-box-shadow: 0 0 8px #b1c6d5;
+  -webkit-box-shadow: 0 0 8px #b1c6d5;
+  display: none;
+  position: relative;
+}
+.search-layer .close-layer{
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  border-radius: 100%;
+  -moz-border-radius: 100%;
+  -webkit-border-radius: 100%;
+  box-shadow: 0 0 8px #b1c6d5;
+  -moz-box-shadow: 0 0 8px #b1c6d5;
+  -webkit-box-shadow: 0 0 8px #b1c6d5;
+  position: absolute;
+  line-height: 23px;
+  text-align: center;
+  font-size: 12px;
+  top: -8px;
+  left: -8px;
+  color: #adc1cc
+}
+.search-layer .close-layer:hover{
+  color: #353b41
+}
+
+.search-layer form select,
+.search-layer form input{
+  width: 19.5%;
+  background-color: #fff;
+  padding: 0 12px 0 0;
+  font-size: 14px;
+  word-spacing: -2px;
+  line-height: 40px;
+  height: 40px;
+  border: 1px solid #dee7ec;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  float: right;
+  margin-left: 2%
+}
+.search-layer form button{
+  width: 14%;
+  float: left;
+  background-color: #55cb54;
+  color: #fff;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  font-size: 14px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 40px;
+  height: 40px;
+  border:0;
+}
+
+.search-layer form button i{
+  font-size: 21px;
+  position: relative;
+  top: 5px;
+  margin-right: 7px
+}
+.search-layer form button:hover{
+  background-color: #3abd39
+}
+
+@media screen and (max-width : 1199px){
+  .content .left-col{
+    width: 48%
+  }
+  .description-layer{
+    padding: 30px 25px 25px
+  }
+  .description-layer .view-btn{
+    padding: 0 14px;
+    font-size: 13px
+  }
+}
+
+@media screen and (max-width : 991px){
+  .content{
+    padding: 40px 0 80px
+  }
+  .content .right-col{
+    display: none
+  }
+  .content .left-col{
+    width: 100%;
+    float: none
+  }
+  footer nav{
+    padding-bottom: 10px;
+  }
+  .main-menu nav{
+    padding: 0;
+    float: left;
+  }
+  .main-menu .responsive-menu{
+    display: block;
+  }
+  .main-menu nav ul{
+    position: absolute;
+    top: 61px;
+    left: 0;
+    background-color: #fff;
+    border:1px solid #dee7ec;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    padding: 12px 15px;
+    min-width: 230px;
+    z-index: 10;
+    display: none
+  }
+  .main-menu nav ul li {
+    float: none;
+    width: 100%;
+    padding: 3px 0
+  }
+  .main-menu nav ul li a{
+    display: block;
+    line-height: 25px;
+  }
+}
+
+@media screen and (max-width : 730px){
+  .search-layer form select, .search-layer form input{
+    width: 49%;
+    float: right;
+    margin-bottom: 15px
+  }
+  .search-layer form select:nth-child(2n),
+  .search-layer form input:nth-child(2n){
+    margin-left: 0
+  }
+  .search-layer form button{
+    float: none;
+    width: 100%
+  }
+}
+@media screen and (max-width : 480px){
+  .description-layer{
+    padding: 30px 20px 20px
+  }
+  .content .left-col .desc{
+    margin-bottom: 30px
+  }
+  .content .left-col .desc p{
+    font-weight: normal;
+  }
+  .description-layer{
+    margin-top: 50px
+  }
+  .search-layer form select, .search-layer form input{
+    width: 100%;
+    float: none;
+    margin-left: 0
+  }
+}
+
+@media screen and (max-width : 470px){
+  .description-layer .view-btn,
+  .description-layer .submit-btn{
+    float: none;
+    width: 100%;
+    margin-bottom: 10px;
+    text-align: center
+  }
+  .content .left-col .list .select-options ul li{
+    padding: 5px 3px
+  }
+  .description-layer{
+    padding: 30px 20px 10px
+  }
+  .top-bar{
+    padding: 30px 0 10px
+  }
+  .top-bar .socials{
+    display: none;
+  }
+  .top-bar .left-side{
+    float: left;
+    padding-bottom: 15px
+  }
+}
+
+@media screen and (max-width : 380px){
+  .main-menu .logo{
+    width: 55px;
+    position: relative;
+    top: 3px
+  }
+  .main-menu{
+    padding: 10px 10px 15px
+  }
+  .main-menu nav ul {
+    top: 59px;
+    left: -10px
+  }
+}
