@@ -4940,23 +4940,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Mohammad\\.nuget\\packages\\": {},
+    "C:\\Users\\ali\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\Project\\Schools\\Schools\\Schools.Infra.Data\\Schools.Infra.Data.csproj",
+      "projectUniqueName": "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.Infra.Data\\Schools.Infra.Data.csproj",
       "projectName": "Schools.Infra.Data",
-      "projectPath": "F:\\Project\\Schools\\Schools\\Schools.Infra.Data\\Schools.Infra.Data.csproj",
-      "packagesPath": "C:\\Users\\Mohammad\\.nuget\\packages\\",
-      "outputPath": "F:\\Project\\Schools\\Schools\\Schools.Infra.Data\\obj\\",
+      "projectPath": "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.Infra.Data\\Schools.Infra.Data.csproj",
+      "packagesPath": "C:\\Users\\ali\\.nuget\\packages\\",
+      "outputPath": "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.Infra.Data\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Mohammad\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ali\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -4969,8 +4969,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "F:\\Project\\Schools\\Schools\\Schools.Domain\\Schools.Domain.csproj": {
-              "projectPath": "F:\\Project\\Schools\\Schools\\Schools.Domain\\Schools.Domain.csproj"
+            "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.Domain\\Schools.Domain.csproj": {
+              "projectPath": "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.Domain\\Schools.Domain.csproj"
             }
           }
         }
