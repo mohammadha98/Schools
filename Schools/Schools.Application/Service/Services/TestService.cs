@@ -22,10 +22,7 @@ namespace Schools.Application.Services
 
         public TestVM GetTests()
         {
-            return new TestVM
-            {
-                AllTest = _testRepository.GetTests()
-            };
+            return null;
         }
     }
 }

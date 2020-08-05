@@ -17,10 +17,6 @@ namespace Schools.Infra.Data.Repository
             this._context = context;
         }
 
-        public List<Test> GetTests()
-        {
-            return _context.Tests.ToList();
-        }
 
         public void SepehrisCool()
         {

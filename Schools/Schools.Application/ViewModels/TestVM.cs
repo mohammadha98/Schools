@@ -9,6 +9,6 @@ namespace Schools.Application.ViewModels
     {
 
 
-        public IEnumerable<Test> AllTest { get; set; }
+    
     }
 }

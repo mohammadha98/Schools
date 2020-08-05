@@ -8,8 +8,6 @@ namespace Schools.Domain.Interfaces
    public interface ITestRepository
     {
 
-        List<Test> GetTests();
-
 
         void SepehrisCool();
 

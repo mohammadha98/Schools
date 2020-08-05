@@ -34,3 +34,14 @@ F:\Project\AllSchools\Schools\Schools.Application\obj\Debug\netcoreapp3.1\School
 F:\Project\AllSchools\Schools\Schools.Application\obj\Debug\netcoreapp3.1\Schools.Application.csproj.CopyComplete
 F:\Project\AllSchools\Schools\Schools.Application\obj\Debug\netcoreapp3.1\Schools.Application.dll
 F:\Project\AllSchools\Schools\Schools.Application\obj\Debug\netcoreapp3.1\Schools.Application.pdb
+C:\Users\mohammad\source\repos\schools\Schools\Schools.Application\obj\Debug\netcoreapp3.1\Schools.Application.csprojAssemblyReference.cache
+C:\Users\mohammad\source\repos\schools\Schools\Schools.Application\obj\Debug\netcoreapp3.1\Schools.Application.AssemblyInfoInputs.cache
+C:\Users\mohammad\source\repos\schools\Schools\Schools.Application\obj\Debug\netcoreapp3.1\Schools.Application.AssemblyInfo.cs
+C:\Users\mohammad\source\repos\schools\Schools\Schools.Application\bin\Debug\netcoreapp3.1\Schools.Application.deps.json
+C:\Users\mohammad\source\repos\schools\Schools\Schools.Application\bin\Debug\netcoreapp3.1\Schools.Application.dll
+C:\Users\mohammad\source\repos\schools\Schools\Schools.Application\bin\Debug\netcoreapp3.1\Schools.Application.pdb
+C:\Users\mohammad\source\repos\schools\Schools\Schools.Application\bin\Debug\netcoreapp3.1\Schools.Domain.dll
+C:\Users\mohammad\source\repos\schools\Schools\Schools.Application\bin\Debug\netcoreapp3.1\Schools.Domain.pdb
+C:\Users\mohammad\source\repos\schools\Schools\Schools.Application\obj\Debug\netcoreapp3.1\Schools.Application.csproj.CopyComplete
+C:\Users\mohammad\source\repos\schools\Schools\Schools.Application\obj\Debug\netcoreapp3.1\Schools.Application.dll
+C:\Users\mohammad\source\repos\schools\Schools\Schools.Application\obj\Debug\netcoreapp3.1\Schools.Application.pdb
