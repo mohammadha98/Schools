@@ -44,6 +44,7 @@ namespace Schools.Domain.Models.Blogs
         #region navigarionProperty
         public BlogGroup BlogGroup { get; set; }
         public List<BlogComment> BlogComment { get; set; }
+        public BlogType BlogType { get; set; }
         #endregion
     }
 }
