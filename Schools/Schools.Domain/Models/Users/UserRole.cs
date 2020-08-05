@@ -20,7 +20,7 @@ namespace Schools.Domain.Models.Users
 
         #region Relations
 
-        public virtual Users User { get; set; }
+        public virtual User User { get; set; }
         public virtual Role Role { get; set; }
 
         #endregion

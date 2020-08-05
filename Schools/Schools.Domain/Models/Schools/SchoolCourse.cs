@@ -11,6 +11,7 @@ namespace Schools.Domain.Models.Schools
         public string CourseTitle { get; set; }
         [Required]
         public string CourseDescription { get; set; }
+        [Required]
         public int SchoolId { get; set; }
         public bool IsDelete { get; set; }
         public bool IsActive { get; set; }

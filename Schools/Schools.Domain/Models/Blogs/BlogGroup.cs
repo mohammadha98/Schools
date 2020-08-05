@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace Schools.Domain.Models
+namespace Schools.Domain.Models.Blogs
 {
     public class BlogGroup
     {
         [Key]
-        public int GroupID { get; set; }
+        public int GroupId { get; set; }
         [Display(Name ="عنوان گروه")]
         [Required(ErrorMessage ="لطفا {0} را وارد کنید")]
         [MaxLength(200)]

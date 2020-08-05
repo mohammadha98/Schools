@@ -1,11 +1,12 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Schools.Application.Interfaces;
-using Schools.Application.Services;
 using Schools.Domain.Interfaces;
 using Schools.Infra.Data.Repository;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Schools.Application.Services;
+using Schools.Infra.Data.Repository.ServiceRepository;
 
 namespace Schools.Infra.IoC
 {

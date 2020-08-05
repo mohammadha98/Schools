@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace Schools.Domain.Models
+namespace Schools.Domain.Models.Blogs
 {
     public class BlogComment
     {
         [Key]
-        public int CommentID { get; set; }
-        public int BlogID { get; set; }
+        public int CommentId { get; set; }
+        public int BlogId { get; set; }
 
         [Display(Name ="نام و نام خانودگی")]
         [Required(ErrorMessage ="لطفا {0} را وارد کنید")]

@@ -5,10 +5,10 @@ using System.Text;
 
 namespace Schools.Domain.Models.Users
 {
-    public class Users
+    public class User
     {
 
-        public Users()
+        public User()
         {
 
         }

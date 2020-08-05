@@ -4,15 +4,15 @@ using System.ComponentModel.DataAnnotations;
 using System.Dynamic;
 using System.Text;
 
-namespace Schools.Domain.Models
+namespace Schools.Domain.Models.Blogs
 {
     public class Blog
     {
         [Key]
-        public int BlogID { get; set; }
+        public int BlogId { get; set; }
 
         [Display(Name ="گروه دسته بندی")]
-        public int GroupID { get; set; }
+        public int GroupId { get; set; }
 
         [Display(Name = "عنوان بلاگ")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]

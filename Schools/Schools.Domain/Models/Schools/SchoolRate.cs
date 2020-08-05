@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Schools.Domain.Models.Users;
 
 namespace Schools.Domain.Models.Schools
 {
@@ -17,6 +18,8 @@ namespace Schools.Domain.Models.Schools
 
 
         #region Relations
+        [ForeignKey("UserId")]
+        public User User { get; set; }
         [ForeignKey("SchoolId")]
         public School School { get; set; }
 

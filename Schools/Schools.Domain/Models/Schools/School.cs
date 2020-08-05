@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Schools.Domain.Models.Schools.Locations;
 using Schools.Domain.Models.Schools.Teachers;
 using Schools.Domain.Models.Schools.TrainingTypes;
+using Schools.Domain.Models.Users;
 
 namespace Schools.Domain.Models.Schools
 {
@@ -49,6 +50,9 @@ namespace Schools.Domain.Models.Schools
 
 
         #region Relations
+        [ForeignKey("SchoolManager")]
+        public User User { get; set; }
+
         [ForeignKey("ShireId")]
         public Shire Shire { get; set; }
 
