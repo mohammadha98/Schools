@@ -19,7 +19,7 @@ namespace Schools.Domain.Models.Blogs
         public string GroupName { get; set; }
         public bool IsDelete { get; set; }
 
-        #region navigation property
+        #region Relation
         public List<Blog> Blog { get; set; }
         #endregion
     }

@@ -44,7 +44,7 @@ namespace Schools.Domain.Models.Blogs
         public int SecurityCode { get; set; }
         public bool IsDelete { get; set; }
 
-        #region navigationProperty
+        #region Relation
         public Blog Blog { get; set; }
         #endregion
     }

@@ -50,7 +50,7 @@ namespace Schools.Domain.Models.Blogs
         public bool IsDelete { get; set; }
 
 
-        #region navigarionProperty
+        #region Relation
         public BlogGroup BlogGroup { get; set; }
         public List<BlogComment> BlogComment { get; set; }
         public BlogType BlogType { get; set; }
