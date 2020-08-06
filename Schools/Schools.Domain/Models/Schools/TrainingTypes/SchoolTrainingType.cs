@@ -9,6 +9,7 @@ namespace Schools.Domain.Models.Schools.TrainingTypes
         public int STT_ID { get; set; }
         public int SchoolId { get; set; }
         public int TypeId { get; set; }
+        public bool IsDelete { get; set; }
 
         #region Relations
         [ForeignKey("SchoolId")]

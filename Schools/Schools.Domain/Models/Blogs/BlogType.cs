@@ -16,7 +16,7 @@ namespace Schools.Domain.Models.Blogs
         [Key]
         public int TypeId { get; set; }
         public string TypeTitle { get; set; }
-
+        public bool IsDelete { get; set; }
         #region Relation
         public List<Blog> Blogs { get; set; }
         #endregion

@@ -21,6 +21,7 @@ namespace Schools.Domain.Models.Schools
         public int UserId { get; set; }
 
         public bool isLiked { get; set; }
+        public bool IsDelete { get; set; }
 
 
 

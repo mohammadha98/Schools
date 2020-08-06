@@ -11,7 +11,7 @@ namespace Schools.Domain.Models.Schools
         public int? UserId { get; set; }
         public string UserIp { get; set; }
         public int SchoolId { get; set; }
-
+        public bool IsDelete { get; set; }
         #region Relations
         [ForeignKey("UserId")]
         public User User { get; set; }

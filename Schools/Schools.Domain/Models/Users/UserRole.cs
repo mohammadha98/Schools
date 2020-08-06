@@ -16,6 +16,7 @@ namespace Schools.Domain.Models.Users
 
         public int UserId { get; set; }
         public int RoleId { get; set; }
+        public bool IsDelete { get; set; }
 
 
         #region Relations

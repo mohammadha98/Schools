@@ -13,6 +13,7 @@ namespace Schools.Domain.Models.Schools.Locations
         [Required]
         public string AreaTitle { get; set; }
 
+        public bool IsDelete { get; set; }
 
         #region Realtions
 
