@@ -38,6 +38,7 @@ namespace Schools.Domain.Models.Blogs
         [Display(Name = "کد امنیتی")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         public int SecurityCode { get; set; }
+        public bool IsDelete { get; set; }
 
         #region navigationProperty
         public Blog Blog { get; set; }

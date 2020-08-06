@@ -13,6 +13,7 @@ namespace Schools.Domain.Models.Blogs
         [Required(ErrorMessage ="لطفا {0} را وارد کنید")]
         [MaxLength(200)]
         public string GroupName { get; set; }
+        public bool IsDelete { get; set; }
 
         #region navigation property
         public List<Blog> Blog { get; set; }

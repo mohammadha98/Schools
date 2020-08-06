@@ -40,6 +40,8 @@ namespace Schools.Domain.Models.Blogs
 
         public DateTime CreateDate { get; set; }
 
+        public bool IsDelete { get; set; }
+
 
         #region navigarionProperty
         public BlogGroup BlogGroup { get; set; }
