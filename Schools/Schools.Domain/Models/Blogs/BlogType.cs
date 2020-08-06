@@ -7,8 +7,12 @@ namespace Schools.Domain.Models.Blogs
 {
     public class BlogType
     {
+        public BlogType()
+        {
+                
+        }
         //It is filled with seed Data
-        public int TypeID { get; set; }
+        public int TypeId { get; set; }
         public string TypeTitle { get; set; }
 
         #region navigationProperty

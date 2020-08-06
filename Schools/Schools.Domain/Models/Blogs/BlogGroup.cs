@@ -7,6 +7,10 @@ namespace Schools.Domain.Models.Blogs
 {
     public class BlogGroup
     {
+        public BlogGroup()
+        {
+
+        }
         [Key]
         public int GroupId { get; set; }
         [Display(Name ="عنوان گروه")]

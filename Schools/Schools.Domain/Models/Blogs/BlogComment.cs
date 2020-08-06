@@ -7,6 +7,10 @@ namespace Schools.Domain.Models.Blogs
 {
     public class BlogComment
     {
+        public BlogComment()
+        {
+
+        }
         [Key]
         public int CommentId { get; set; }
         public int BlogId { get; set; }

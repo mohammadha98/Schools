@@ -8,11 +8,18 @@ namespace Schools.Domain.Models.Blogs
 {
     public class Blog
     {
+        public Blog()
+        {
+
+        }
         [Key]
         public int BlogId { get; set; }
 
         [Display(Name ="گروه دسته بندی")]
         public int GroupId { get; set; }
+
+        [Display(Name = "نوع بلاگ")]
+        public int TypeId { get; set; }
 
         [Display(Name = "عنوان بلاگ")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
