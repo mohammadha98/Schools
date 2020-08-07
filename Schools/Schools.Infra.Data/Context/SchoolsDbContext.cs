@@ -11,6 +11,8 @@ using Schools.Domain.Models.Schools.Locations;
 using Schools.Domain.Models.Schools.Teachers;
 using Schools.Domain.Models.Schools.TrainingTypes;
 using Schools.Domain.Models.Users;
+using Schools.Domain.Models.Users.Messages;
+using Schools.Domain.Models.Users.Tickets;
 
 namespace Schools.Infra.Data.Context
 {
@@ -65,7 +67,13 @@ namespace Schools.Infra.Data.Context
         public DbSet<User> Users { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<Role> Roles { get; set; }
-
+        public DbSet<UserNotification> UserNotifications { get; set; }
+        public DbSet<UserMessage> UserMessages { get; set; }
+        public DbSet<MessageContent> MessageContents { get; set; }
+        public DbSet<TicketPriority> TicketPriorities { get; set; }
+        public DbSet<TicketMessage> TicketMessages { get; set; }
+        public DbSet<TicketCategory> TicketCategories { get; set; }
+        public DbSet<UserTicket> UserTickets { get; set; }
 
         #endregion
 
@@ -142,7 +150,21 @@ namespace Schools.Infra.Data.Context
                 .HasQueryFilter(u => !u.IsDelete);
             modelBuilder.Entity<Role>()
                 .HasQueryFilter(u => !u.IsDelete);
-            
+            modelBuilder.Entity<UserTicket>()
+                .HasQueryFilter(u => !u.IsDelete);
+            modelBuilder.Entity<TicketPriority>()
+                .HasQueryFilter(u => !u.IsDelete);
+            modelBuilder.Entity<TicketCategory>()
+                .HasQueryFilter(u => !u.IsDelete); 
+            modelBuilder.Entity<TicketMessage>()
+                .HasQueryFilter(u => !u.IsDelete);
+            modelBuilder.Entity<UserMessage>()
+                .HasQueryFilter(u => !u.IsDelete);
+            modelBuilder.Entity<MessageContent>()
+                .HasQueryFilter(u => !u.IsDelete);
+            modelBuilder.Entity<UserNotification>()
+                .HasQueryFilter(u => !u.IsDelete);
+
             #endregion
 
             base.OnModelCreating(modelBuilder);
