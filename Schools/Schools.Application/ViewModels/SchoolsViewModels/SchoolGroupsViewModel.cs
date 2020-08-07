@@ -6,6 +6,9 @@ namespace Schools.Application.ViewModels.SchoolsViewModels
 {
     public class SchoolGroupsViewModel
     {
-        
+        public string GroupTitle { get; set; }
+        public bool IsDelete { get; set; }
+        public string? SubGroup { get; set; }
+
     }
 }
