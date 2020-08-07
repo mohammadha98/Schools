@@ -71,6 +71,7 @@ namespace Schools.Domain.Models.Schools
         public List<SchoolGallery> SchoolGalleries { get; set; }
 
         public List<SchoolComment> SchoolComments { get; set; }
+        public List<SchoolRate> SchoolRates { get; set; }
 
         public List<SchoolTeacher> SchoolTeachers { get; set; }
 

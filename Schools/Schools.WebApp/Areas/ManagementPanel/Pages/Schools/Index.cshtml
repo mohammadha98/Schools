@@ -1,4 +1,5 @@
 ﻿@page
+@using Schools.Application.Utilities.Convertors
 @model Schools.WebApp.Areas.ManagementPanel.Pages.Schools.IndexModel
 @{
     var menuModel = "schools";
@@ -12,8 +13,42 @@
             <section class="col-lg-12 col-md-12">
                 <div class="box box-info">
                     <div class="box-header">
-                        <form class="row">
-                            
+                        <form class="row" id="paginat">
+                            <input type="hidden" name="pageId" asp-for="SchoolModel.CurrentPage" />
+                            <div class="col-lg-4 col-md-4" style="margin-top: 8px">
+                                <p>نام آموزشگاه</p>
+                                <input type="text" asp-for="SchoolModel.SchoolName" class="form-control" placeholder="نام آموزشکاه" name="schoolName" />
+                            </div>
+                            <div class="col-lg-4 col-md-4" style="margin-top: 8px">
+                                <p>گروه</p>
+                                <select class="form-control" asp-for="SchoolModel.GroupId" name="groupId">
+                                    <option value="0">انتخاب کنید</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-4 col-md-4" style="margin-top: 8px">
+                                <p>زیر گروه</p>
+                                <select class="form-control" asp-for="SchoolModel.ParentId" name="subId">
+                                    <option value="0">انتخاب کنید</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-4 col-md-4" style="margin-top: 8px">
+                                <p>استان</p>
+                                <select class="form-control" asp-for="SchoolModel.ShireId" name="shireId">
+                                    <option value="0">انتخاب کنید</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-4 col-md-4" style="margin-top: 8px">
+                                <p>شهر</p>
+                                <select class="form-control" asp-for="SchoolModel.CityId" name="cityId">
+                                    <option value="0">انتخاب کنید</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-4 col-md-4" style="margin-top: 8px">
+                                <p>منطقه</p>
+                                <select class="form-control" asp-for="SchoolModel.AreaId" name="areaId">
+                                    <option value="0">انتخاب کنید</option>
+                                </select>
+                            </div>
                             <div class="col-lg-4 col-md-4" style="margin-top: 8px">
                                 <button type="submit" class="btn btn-block btn-info">فیلتر</button>
 
@@ -29,46 +64,71 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>#</th>
-                                        <th># #</th>
-                                        <th>#</th>
-                                        <th>#</th>
-                                        <th>#</th>
-                                        <th># #</th>
-                                        <th>#</th>
-                                        <td></td>
+                                        <th>نام آموزشگاه</th>
+                                        <th>مدیر آموزشگاه</th>
+                                        <th>استان</th>
+                                        <th>شهر</th>
+                                        <th>منطقه</th>
+                                        <th>تاریخ ثبت</th>
+                                        <td>
+                                         
+                                        </td>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                   
+                                    @foreach (var item in Model.SchoolModel.Schools)
+                                    {
+                                        <tr>
+                                            <td>@item.SchoolId</td>
+                                            <td>@item.SchoolTitle</td>
+                                            <td>@item.User.Name @item.User.Family</td>
+                                            <td>@item.Shire.ShireTitle</td>
+                                            <td>@item.City.CityTitle</td>
+                                            <td>@item.Area.AreaTitle</td>
+                                            <td>@item.RegisterDate.ToShamsi()</td>
+                                            <td>
+                                                <a href="/ManagementPanel/Schools/Teachers" class="btn btn-sm btn-flat btn-primary">مدرسین</a>
+                                                <a href="/ManagementPanel/Schools/Courses" class="btn btn-sm btn-flat btn-info">دوره ها</a>
+                                                <a href="/ManagementPanel/Schools/Detail" class="btn btn-sm btn-flat btn-success">جزییات</a>
+                                                <a class="btn btn-sm btn-danger btn-flat">حذف</a>
+                                            </td>
+                                        </tr>
+                                    }
                                 </tbody>
                             </table>
                         </div>
                         <div class="dataTables_paginate paging_simple_numbers text-center" id="example2_paginate">
-                           
+
+                            @if (Model.SchoolModel.PageCount > 1)
+                            {
                                 <hr class="mt-0">
 
                                 <ul class="pagination">
-                                   
+                                    @if (Model.SchoolModel.CurrentPage > 1 && Model.SchoolModel.StartPage > 1)
+                                    {
                                         <li class="paginate_button previous disabled" id="example2_previous">
                                             <a onclick="ChangePage(1)">1</a>
                                         </li>
 
-                                    
+                                    }
 
-                                  
+                                    @for (var i = Model.SchoolModel.StartPage; i <= Model.SchoolModel.EndPage; i++)
+                                    {
 
-                                        <li class="paginate_button active">
-                                            <a onclick="ChangePage(1)" href="javascript:void(0)">1</a>
+                                        <li class="@((i == Model.SchoolModel.CurrentPage ? "paginate_button active" : "paginate_button"))">
+                                            <a onclick="ChangePage(@i)" href="javascript:void(0)">@i</a>
                                         </li>
-                                  
+                                    }
+                                    @if (Model.SchoolModel.CurrentPage < Model.SchoolModel.PageCount && Model.SchoolModel.EndPage < Model.SchoolModel.PageCount)
+                                    {
                                         <li class="paginate_button next" id="example2_next">
-                                            <a onclick="ChangePage(10)">10</a>
+                                            <a onclick="ChangePage(@Model.SchoolModel.PageCount)">@Model.SchoolModel.PageCount</a>
                                         </li>
 
-                                   
+                                    }
                                 </ul>
-                            
+                            }
+
                         </div>
                     </div>
                 </div>
@@ -76,3 +136,12 @@
         </div>
     </section>
 </div>
+@section Scripts
+{
+    <script>
+        function ChangePage(pageId) {
+            $("#SchoolModel_CurrentPage").val(pageId);
+            $("#paginat").submit();
+        }
+    </script>
+}

@@ -1,6 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Schools",
+    "\\Schools\\Schools.WebApp"
   ],
+  "SelectedNode": "\\Schools\\Schools.sln",
   "PreviewInSolutionExplorer": false
 }
