@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Schools.Domain.Models.Users;
 
@@ -24,6 +25,7 @@ namespace Schools.Domain.Models.Schools.Teachers
         [ForeignKey("SchoolId")]
         public School School { get; set; }
 
+        public List<TeacherRate> TeacherRates { get; set; }
         #endregion
     }
 }

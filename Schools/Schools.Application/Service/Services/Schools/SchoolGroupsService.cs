@@ -1,13 +1,7 @@
 ﻿using Schools.Application.Service.Interfaces;
-using Schools.Domain.Models.Schools;
 using Schools.Domain.Repository.InterfaceRepository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
 
-namespace Schools.Application.Service.Services
+namespace Schools.Application.Service.Services.Schools
 {
     public class SchoolGroupsService : ISchoolGroupsService
     {

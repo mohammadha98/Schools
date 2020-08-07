@@ -1,18 +1,17 @@
-﻿using Schools.Domain.Models.Schools;
-using Schools.Domain.Repository.InterfaceRepository;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using Schools.Domain.Models.Schools;
+using Schools.Domain.Repository.InterfaceRepository;
+using Schools.Infra.Data.Context;
 
-namespace Schools.Infra.Data.Repository.ServiceRepository
+namespace Schools.Infra.Data.Repository.ServiceRepository.Schools
 {
     public class SchoolGroupsRepository : ISchoolGroupsRepository
     {
-        Schools.Infra.Data.Context.SchoolsDbContext _context;
-        public SchoolGroupsRepository(Schools.Infra.Data.Context.SchoolsDbContext context)
+        SchoolsDbContext _context;
+        public SchoolGroupsRepository(SchoolsDbContext context)
         {
-            this._context = context;
+           _context = context;
         }
 
         public void CreateGroup(SchoolGroup schoolGroup)
