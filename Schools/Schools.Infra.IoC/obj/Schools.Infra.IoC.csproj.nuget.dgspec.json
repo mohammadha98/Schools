@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Infra.IoC\\Schools.Infra.IoC.csproj": {}
+    "F:\\Project\\AllSchools\\Schools\\Schools.Infra.IoC\\Schools.Infra.IoC.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Application\\Schools.Application.csproj": {
+    "F:\\Project\\AllSchools\\Schools\\Schools.Application\\Schools.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Application\\Schools.Application.csproj",
+        "projectUniqueName": "F:\\Project\\AllSchools\\Schools\\Schools.Application\\Schools.Application.csproj",
         "projectName": "Schools.Application",
-        "projectPath": "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Application\\Schools.Application.csproj",
-        "packagesPath": "C:\\Users\\mohammad\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Application\\obj\\",
+        "projectPath": "F:\\Project\\AllSchools\\Schools\\Schools.Application\\Schools.Application.csproj",
+        "packagesPath": "C:\\Users\\Mohammad\\.nuget\\packages\\",
+        "outputPath": "F:\\Project\\AllSchools\\Schools\\Schools.Application\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\mohammad\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Mohammad\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -27,8 +30,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Domain\\Schools.Domain.csproj": {
-                "projectPath": "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Domain\\Schools.Domain.csproj"
+              "F:\\Project\\AllSchools\\Schools\\Schools.Domain\\Schools.Domain.csproj": {
+                "projectPath": "F:\\Project\\AllSchools\\Schools\\Schools.Domain\\Schools.Domain.csproj"
               }
             }
           }
@@ -56,21 +59,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Domain\\Schools.Domain.csproj": {
+    "F:\\Project\\AllSchools\\Schools\\Schools.Domain\\Schools.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Domain\\Schools.Domain.csproj",
+        "projectUniqueName": "F:\\Project\\AllSchools\\Schools\\Schools.Domain\\Schools.Domain.csproj",
         "projectName": "Schools.Domain",
-        "projectPath": "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Domain\\Schools.Domain.csproj",
-        "packagesPath": "C:\\Users\\mohammad\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Domain\\obj\\",
+        "projectPath": "F:\\Project\\AllSchools\\Schools\\Schools.Domain\\Schools.Domain.csproj",
+        "packagesPath": "C:\\Users\\Mohammad\\.nuget\\packages\\",
+        "outputPath": "F:\\Project\\AllSchools\\Schools\\Schools.Domain\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\mohammad\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Mohammad\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -108,21 +114,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Infra.Data\\Schools.Infra.Data.csproj": {
+    "F:\\Project\\AllSchools\\Schools\\Schools.Infra.Data\\Schools.Infra.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Infra.Data\\Schools.Infra.Data.csproj",
+        "projectUniqueName": "F:\\Project\\AllSchools\\Schools\\Schools.Infra.Data\\Schools.Infra.Data.csproj",
         "projectName": "Schools.Infra.Data",
-        "projectPath": "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Infra.Data\\Schools.Infra.Data.csproj",
-        "packagesPath": "C:\\Users\\mohammad\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Infra.Data\\obj\\",
+        "projectPath": "F:\\Project\\AllSchools\\Schools\\Schools.Infra.Data\\Schools.Infra.Data.csproj",
+        "packagesPath": "C:\\Users\\Mohammad\\.nuget\\packages\\",
+        "outputPath": "F:\\Project\\AllSchools\\Schools\\Schools.Infra.Data\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\mohammad\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Mohammad\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -135,8 +144,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Domain\\Schools.Domain.csproj": {
-                "projectPath": "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Domain\\Schools.Domain.csproj"
+              "F:\\Project\\AllSchools\\Schools\\Schools.Domain\\Schools.Domain.csproj": {
+                "projectPath": "F:\\Project\\AllSchools\\Schools\\Schools.Domain\\Schools.Domain.csproj"
               }
             }
           }
@@ -180,21 +189,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Infra.IoC\\Schools.Infra.IoC.csproj": {
+    "F:\\Project\\AllSchools\\Schools\\Schools.Infra.IoC\\Schools.Infra.IoC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Infra.IoC\\Schools.Infra.IoC.csproj",
+        "projectUniqueName": "F:\\Project\\AllSchools\\Schools\\Schools.Infra.IoC\\Schools.Infra.IoC.csproj",
         "projectName": "Schools.Infra.IoC",
-        "projectPath": "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Infra.IoC\\Schools.Infra.IoC.csproj",
-        "packagesPath": "C:\\Users\\mohammad\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Infra.IoC\\obj\\",
+        "projectPath": "F:\\Project\\AllSchools\\Schools\\Schools.Infra.IoC\\Schools.Infra.IoC.csproj",
+        "packagesPath": "C:\\Users\\Mohammad\\.nuget\\packages\\",
+        "outputPath": "F:\\Project\\AllSchools\\Schools\\Schools.Infra.IoC\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\mohammad\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Mohammad\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -207,11 +219,11 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Application\\Schools.Application.csproj": {
-                "projectPath": "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Application\\Schools.Application.csproj"
+              "F:\\Project\\AllSchools\\Schools\\Schools.Application\\Schools.Application.csproj": {
+                "projectPath": "F:\\Project\\AllSchools\\Schools\\Schools.Application\\Schools.Application.csproj"
               },
-              "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Infra.Data\\Schools.Infra.Data.csproj": {
-                "projectPath": "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Infra.Data\\Schools.Infra.Data.csproj"
+              "F:\\Project\\AllSchools\\Schools\\Schools.Infra.Data\\Schools.Infra.Data.csproj": {
+                "projectPath": "F:\\Project\\AllSchools\\Schools\\Schools.Infra.Data\\Schools.Infra.Data.csproj"
               }
             }
           }
@@ -245,7 +257,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
         }
       }
     }
