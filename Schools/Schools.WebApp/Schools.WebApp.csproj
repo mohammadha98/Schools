@@ -65,8 +65,4 @@
     <None Include="wwwroot\js\timer.js" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Areas\ManagementPanel\Pages\Schools\Groups\" />
-  </ItemGroup>
-
 </Project>

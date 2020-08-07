@@ -45,3 +45,15 @@ C:\Users\mohammad\Source\Repos\schools\Schools\Schools.Application\obj\Debug\net
 C:\Users\mohammad\Source\Repos\schools\Schools\Schools.Application\obj\Debug\netcoreapp3.1\Schools.Application.csproj.CopyComplete
 C:\Users\mohammad\Source\Repos\schools\Schools\Schools.Application\obj\Debug\netcoreapp3.1\Schools.Application.dll
 C:\Users\mohammad\Source\Repos\schools\Schools\Schools.Application\obj\Debug\netcoreapp3.1\Schools.Application.pdb
+E:\Projects\Repos\Barnamenevisan\Schools\Schools.Application\bin\Debug\netcoreapp3.1\Schools.Application.deps.json
+E:\Projects\Repos\Barnamenevisan\Schools\Schools.Application\bin\Debug\netcoreapp3.1\Schools.Application.dll
+E:\Projects\Repos\Barnamenevisan\Schools\Schools.Application\bin\Debug\netcoreapp3.1\Schools.Application.pdb
+E:\Projects\Repos\Barnamenevisan\Schools\Schools.Application\bin\Debug\netcoreapp3.1\Schools.Domain.dll
+E:\Projects\Repos\Barnamenevisan\Schools\Schools.Application\bin\Debug\netcoreapp3.1\Schools.Domain.pdb
+E:\Projects\Repos\Barnamenevisan\Schools\Schools.Application\obj\Debug\netcoreapp3.1\Schools.Application.csprojAssemblyReference.cache
+E:\Projects\Repos\Barnamenevisan\Schools\Schools.Application\obj\Debug\netcoreapp3.1\Schools.Application.AssemblyInfoInputs.cache
+E:\Projects\Repos\Barnamenevisan\Schools\Schools.Application\obj\Debug\netcoreapp3.1\Schools.Application.AssemblyInfo.cs
+E:\Projects\Repos\Barnamenevisan\Schools\Schools.Application\obj\Debug\netcoreapp3.1\Schools.Application.csproj.CoreCompileInputs.cache
+E:\Projects\Repos\Barnamenevisan\Schools\Schools.Application\obj\Debug\netcoreapp3.1\Schools.Application.csproj.CopyComplete
+E:\Projects\Repos\Barnamenevisan\Schools\Schools.Application\obj\Debug\netcoreapp3.1\Schools.Application.dll
+E:\Projects\Repos\Barnamenevisan\Schools\Schools.Application\obj\Debug\netcoreapp3.1\Schools.Application.pdb

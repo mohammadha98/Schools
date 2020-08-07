@@ -7,6 +7,9 @@ using System.Collections.Generic;
 using System.Text;
 using Schools.Application.Services;
 using Schools.Infra.Data.Repository.ServiceRepository;
+using Schools.Domain.Repository.InterfaceRepository;
+using Schools.Application.Service.Interfaces;
+using Schools.Application.Service.Services;
 
 namespace Schools.Infra.IoC
 {
@@ -24,6 +27,12 @@ namespace Schools.Infra.IoC
             service.AddScoped<ITestRepository, TestRepository>();
 
 
+            #region School 
+
+            service.AddScoped<ISchoolGroupsRepository, SchoolGroupsRepository>();
+            service.AddScoped<ISchoolGroupsService, SchoolGroupsService>();
+
+            #endregion
 
 
         }
