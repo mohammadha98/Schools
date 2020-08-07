@@ -32,11 +32,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\mohammad\\Source\\Repos\\schools\\Schools\\Schools.Application\\Schools.Application.csproj",
+      "projectUniqueName": "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Application\\Schools.Application.csproj",
       "projectName": "Schools.Application",
-      "projectPath": "C:\\Users\\mohammad\\Source\\Repos\\schools\\Schools\\Schools.Application\\Schools.Application.csproj",
+      "projectPath": "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Application\\Schools.Application.csproj",
       "packagesPath": "C:\\Users\\mohammad\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\mohammad\\Source\\Repos\\schools\\Schools\\Schools.Application\\obj\\",
+      "outputPath": "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Application\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\mohammad\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -52,8 +52,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\mohammad\\Source\\Repos\\schools\\Schools\\Schools.Domain\\Schools.Domain.csproj": {
-              "projectPath": "C:\\Users\\mohammad\\Source\\Repos\\schools\\Schools\\Schools.Domain\\Schools.Domain.csproj"
+            "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Domain\\Schools.Domain.csproj": {
+              "projectPath": "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Domain\\Schools.Domain.csproj"
             }
           }
         }
