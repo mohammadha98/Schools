@@ -43,16 +43,3 @@ F:\Project\AllSchools\Schools\Schools.Infra.Data\obj\Debug\netcoreapp3.1\Schools
 F:\Project\AllSchools\Schools\Schools.Infra.Data\obj\Debug\netcoreapp3.1\Schools.Infra.Data.dll
 F:\Project\AllSchools\Schools\Schools.Infra.Data\obj\Debug\netcoreapp3.1\Schools.Infra.Data.pdb
 F:\Project\AllSchools\Schools\Schools.Infra.Data\obj\Debug\netcoreapp3.1\Schools.Infra.Data.genruntimeconfig.cache
-C:\Users\mohammad\source\repos\schools\Schools\Schools.Infra.Data\bin\Debug\netcoreapp3.1\Schools.Infra.Data.deps.json
-C:\Users\mohammad\source\repos\schools\Schools\Schools.Infra.Data\bin\Debug\netcoreapp3.1\Schools.Infra.Data.runtimeconfig.json
-C:\Users\mohammad\source\repos\schools\Schools\Schools.Infra.Data\bin\Debug\netcoreapp3.1\Schools.Infra.Data.runtimeconfig.dev.json
-C:\Users\mohammad\source\repos\schools\Schools\Schools.Infra.Data\bin\Debug\netcoreapp3.1\Schools.Infra.Data.dll
-C:\Users\mohammad\source\repos\schools\Schools\Schools.Infra.Data\bin\Debug\netcoreapp3.1\Schools.Infra.Data.pdb
-C:\Users\mohammad\source\repos\schools\Schools\Schools.Infra.Data\bin\Debug\netcoreapp3.1\Schools.Domain.dll
-C:\Users\mohammad\source\repos\schools\Schools\Schools.Infra.Data\bin\Debug\netcoreapp3.1\Schools.Domain.pdb
-C:\Users\mohammad\source\repos\schools\Schools\Schools.Infra.Data\obj\Debug\netcoreapp3.1\Schools.Infra.Data.csprojAssemblyReference.cache
-C:\Users\mohammad\source\repos\schools\Schools\Schools.Infra.Data\obj\Debug\netcoreapp3.1\Schools.Infra.Data.AssemblyInfoInputs.cache
-C:\Users\mohammad\source\repos\schools\Schools\Schools.Infra.Data\obj\Debug\netcoreapp3.1\Schools.Infra.Data.AssemblyInfo.cs
-C:\Users\mohammad\source\repos\schools\Schools\Schools.Infra.Data\obj\Debug\netcoreapp3.1\Schools.Infra.Data.csproj.CopyComplete
-C:\Users\mohammad\source\repos\schools\Schools\Schools.Infra.Data\obj\Debug\netcoreapp3.1\Schools.Infra.Data.dll
-C:\Users\mohammad\source\repos\schools\Schools\Schools.Infra.Data\obj\Debug\netcoreapp3.1\Schools.Infra.Data.pdb
