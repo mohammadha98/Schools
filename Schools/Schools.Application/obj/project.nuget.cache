@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "hKreaVZEvR0vkQ5r7zWI3F+o/O47+9X4DxYAijvAGWpZOauFXY1I32MK83uSVMDclSPHyM2jm1hysok5WsVe9Q==",
+  "dgSpecHash": "t2pHfMun7qy3nydqngFvAJ6OySHgWaE28kDokxH2j/suzXpp3oDHUb4aulfkiupPJZVP7Dy7+nmiq4TvomfTXA==",
   "success": true,
-  "projectFilePath": "E:\\Projects\\Repos\\Barnamenevisan\\Schools\\Schools.Application\\Schools.Application.csproj",
+  "projectFilePath": "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.Application\\Schools.Application.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
