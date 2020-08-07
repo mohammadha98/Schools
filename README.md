@@ -1,4 +1,1 @@
 # Schools
-
-TODO :
-[X] Test
