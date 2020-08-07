@@ -19,7 +19,6 @@ D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.Domain\obj\Debug\netcoreapp3
 F:\Project\AllSchools\Schools\Schools.Domain\bin\Debug\netcoreapp3.1\Schools.Domain.deps.json
 F:\Project\AllSchools\Schools\Schools.Domain\bin\Debug\netcoreapp3.1\Schools.Domain.dll
 F:\Project\AllSchools\Schools\Schools.Domain\bin\Debug\netcoreapp3.1\Schools.Domain.pdb
-F:\Project\AllSchools\Schools\Schools.Domain\obj\Debug\netcoreapp3.1\Schools.Domain.csprojAssemblyReference.cache
 F:\Project\AllSchools\Schools\Schools.Domain\obj\Debug\netcoreapp3.1\Schools.Domain.AssemblyInfoInputs.cache
 F:\Project\AllSchools\Schools\Schools.Domain\obj\Debug\netcoreapp3.1\Schools.Domain.AssemblyInfo.cs
 F:\Project\AllSchools\Schools\Schools.Domain\obj\Debug\netcoreapp3.1\Schools.Domain.csproj.CoreCompileInputs.cache

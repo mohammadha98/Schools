@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "j40jYH8lbq3cd+tbaKWxjNCtC1BnCIYHGMoYz/M78OkSDOLVWGOeI8QlTFLtxmt/6ETDwtuxd2jM3y3XS9QKPA==",
+  "dgSpecHash": "ZMQw+VeHkFckxkMrOVx+tduKTl6Z2ytWkIY2+nRobY0NGeMSF6V0H0UW3H0d2rTdYv37rcgwby7l8ITkhBxTog==",
   "success": true,
-  "projectFilePath": "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.Domain\\Schools.Domain.csproj",
+  "projectFilePath": "F:\\Project\\AllSchools\\Schools\\Schools.Domain\\Schools.Domain.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
