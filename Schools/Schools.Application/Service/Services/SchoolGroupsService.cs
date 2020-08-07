@@ -18,9 +18,8 @@ namespace Schools.Application.Service.Services
             this._schoolGroupsRepository = schoolGroupsRepository;
         }
 
-        public List<SchoolGroup> GetAllGroupsWithoutNullParentId(List<SchoolGroup> schoolGroups)
-        {
-            return schoolGroups.Where(g => g.ParentId == null).ToList();
-        }
+       
+
+        
     }
 }

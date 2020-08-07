@@ -19,5 +19,10 @@ namespace Schools.Infra.Data.Repository.ServiceRepository
         {
             return _context.SchoolGroups.ToList();
         }
+
+        public SchoolGroup GetSchoolGroupById(int groupId)
+        {
+            return _context.SchoolGroups.Find(groupId);
+        }
     }
 }

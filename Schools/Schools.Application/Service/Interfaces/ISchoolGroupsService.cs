@@ -7,7 +7,6 @@ namespace Schools.Application.Service.Interfaces
 {
     public interface ISchoolGroupsService
     {
-        List<SchoolGroup> GetAllGroupsWithoutNullParentId(List<SchoolGroup> schoolGroups);
         
     }
 }

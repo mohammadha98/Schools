@@ -25,7 +25,7 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.Schools.Groups
         public void OnGet()
         {
             var GetlAllGroups = _schoolGroupsRepository.GetAllGroups();
-            List = _schoolGroupsService.GetAllGroupsWithoutNullParentId(GetlAllGroups);
+            List = GetlAllGroups;
         }
     }
 }

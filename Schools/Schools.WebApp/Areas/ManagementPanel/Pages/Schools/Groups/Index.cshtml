@@ -40,23 +40,31 @@
 
                                 <tbody>
 
-                                    @foreach (var item in Model.List)
+                                    @foreach (var Group in Model.List.Where(g=>g.ParentId == null))
                                     {
                                         <tr>
-                                            <td>@item.GroupId</td>
-                                            <td>@item.GroupTitle</td>
+                                            <td>@Group.GroupId</td>
+                                            <td>@Group.GroupTitle</td>
                                             <td>
-                                                @if (item.ParentId == null)
-                                                {
-                                                    <p class="text-danger">خالی</p>
-                                                }
-                                                else
-                                                {
+                                                <ul>
+                                                    @foreach (var sub in Model.List.Where(g => g.ParentId == Group.GroupId))
+                                                    {
+                                                        <li>
+                                                            <p>
+                                                                @sub.GroupTitle
+                                                                <a class="btn btn-danger btn-sm" href="/Schools/Groups/DeleteGroup/@sub.GroupId"><i class="glyphicon-eye-open"></i></a>
+                                                                <a class="btn btn-warning btn-sm" href="/Schools/Groups/EditGroup/@sub.GroupId"><i class="glyphicon-eye-open"></i></a>
+                                                            </p>
+                                                        </li>
 
-                                                }
+                                                    }
+                                                </ul>
                                             </td>
                                             <td>
                                                 <a class="btn btn-info btn-sm">نمایش آموزشگاه های این گروه</a>
+                                                <a class="btn btn-warning btn-sm">ویرایش</a>
+                                                <a class="btn btn-danger btn-sm">حذف</a>
+
                                             </td>
                                         </tr>
                                     }

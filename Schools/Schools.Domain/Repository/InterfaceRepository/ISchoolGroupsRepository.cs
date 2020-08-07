@@ -8,5 +8,6 @@ namespace Schools.Domain.Repository.InterfaceRepository
     public interface ISchoolGroupsRepository
     {
         List<SchoolGroup> GetAllGroups();
+        SchoolGroup GetSchoolGroupById(int groupId);
     }
 }
