@@ -15,6 +15,12 @@ namespace Schools.Infra.Data.Repository.ServiceRepository
             this._context = context;
         }
 
+        public void CreateGroup(SchoolGroup schoolGroup)
+        {
+            _context.SchoolGroups.Add(schoolGroup);
+            _context.SaveChanges();
+        }
+
         public List<SchoolGroup> GetAllGroups()
         {
             return _context.SchoolGroups.ToList();

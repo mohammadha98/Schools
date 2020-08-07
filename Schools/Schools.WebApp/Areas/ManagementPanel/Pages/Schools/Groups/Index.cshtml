@@ -23,8 +23,7 @@
                             </div>
                         </form>
                         <hr />
-                        <a href="/ManagementPanel/Schools/add" class="btn btn-success btn-flat">افزودن آموزشگاه</a>
-
+                        <a href="/ManagementPanel/Schools/Groups/Add" class="btn btn-success btn-flat">افزودن گروه</a>
                     </div>
                     <div class="box-body">
                         <div class="table-responsive">
@@ -34,6 +33,7 @@
                                         <th>#</th>
                                         <th>عنوان گروه</th>
                                         <th>زیر گروه ها</th>
+                                        <th>آیا این رکورد پاک شده است ؟</th>
                                         <td>عملیات ها</td>
                                     </tr>
                                 </thead>
@@ -59,6 +59,16 @@
 
                                                     }
                                                 </ul>
+                                            </td>
+                                            <td>
+                                                @if (Group.IsDelete == true)
+                                                {
+                                                    <p class="text-success">بله</p>
+                                                }
+                                                else
+                                                {
+                                                    <p class="text-danger">خیر</p>
+                                                }
                                             </td>
                                             <td>
                                                 <a class="btn btn-info btn-sm">نمایش آموزشگاه های این گروه</a>

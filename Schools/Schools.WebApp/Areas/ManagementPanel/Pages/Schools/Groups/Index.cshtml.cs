@@ -24,8 +24,7 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.Schools.Groups
 
         public void OnGet()
         {
-            var GetlAllGroups = _schoolGroupsRepository.GetAllGroups();
-            List = GetlAllGroups;
+            List = _schoolGroupsRepository.GetAllGroups();
         }
     }
 }
