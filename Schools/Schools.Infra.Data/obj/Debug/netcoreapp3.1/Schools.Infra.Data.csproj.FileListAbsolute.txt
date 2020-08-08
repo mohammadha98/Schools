@@ -23,7 +23,6 @@ D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.Infra.Data\bin\Debug\netcore
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.Infra.Data\obj\Debug\netcoreapp3.1\Schools.Infra.Data.csprojAssemblyReference.cache
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.Infra.Data\obj\Debug\netcoreapp3.1\Schools.Infra.Data.AssemblyInfoInputs.cache
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.Infra.Data\obj\Debug\netcoreapp3.1\Schools.Infra.Data.AssemblyInfo.cs
-D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.Infra.Data\obj\Debug\netcoreapp3.1\Schools.Infra.Data.csproj.CoreCompileInputs.cache
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.Infra.Data\obj\Debug\netcoreapp3.1\Schools.Infra.Data.csproj.CopyComplete
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.Infra.Data\obj\Debug\netcoreapp3.1\Schools.Infra.Data.dll
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.Infra.Data\obj\Debug\netcoreapp3.1\Schools.Infra.Data.pdb
@@ -71,3 +70,4 @@ E:\Projects\Repos\Barnamenevisan\Schools\Schools.Infra.Data\obj\Debug\netcoreapp
 E:\Projects\Repos\Barnamenevisan\Schools\Schools.Infra.Data\obj\Debug\netcoreapp3.1\Schools.Infra.Data.dll
 E:\Projects\Repos\Barnamenevisan\Schools\Schools.Infra.Data\obj\Debug\netcoreapp3.1\Schools.Infra.Data.pdb
 E:\Projects\Repos\Barnamenevisan\Schools\Schools.Infra.Data\obj\Debug\netcoreapp3.1\Schools.Infra.Data.genruntimeconfig.cache
+D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.Infra.Data\obj\Debug\netcoreapp3.1\Schools.Infra.Data.csproj.CoreCompileInputs.cache

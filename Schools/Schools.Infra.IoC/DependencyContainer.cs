@@ -5,6 +5,8 @@ using Schools.Application.Service.Interfaces.Schools;
 using Schools.Application.Service.Services.Schools;
 using Schools.Domain.Repository.InterfaceRepository.Schools;
 using Schools.Infra.Data.Repository.ServiceRepository.Schools;
+using Schools.Domain.Repository.InterfaceRepository.BlogRepositories;
+using Schools.Infra.Data.Repository.ServiceRepository.BlogRepositoris;
 
 namespace Schools.Infra.IoC
 {
@@ -32,6 +34,10 @@ namespace Schools.Infra.IoC
 
             #endregion
 
+            #region Blogs
+            service.AddScoped<IBlogRepository, BlogRepository>();
+            service.AddScoped<IBlogGroupsRepository, BlogGroupRepositoy>();
+            #endregion
 
         }
     }
