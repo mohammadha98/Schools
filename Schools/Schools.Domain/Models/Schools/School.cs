@@ -22,9 +22,15 @@ namespace Schools.Domain.Models.Schools
         public int ShireId { get; set; }
         public int CityId { get; set; }
         public int? AreaId { get; set; }
+        [Display(Name = "Meta Description")]
+        [Required(ErrorMessage = "لطفا متا دیسکریپشن را وارد کنید")]
+        public string MetaDescription { get; set; }
         [Display(Name = "نام آموزشگاه")]
         [Required(ErrorMessage = "نام آموزشگاه را وارد کنید")]
         public string SchoolTitle { get; set; }
+        [Display(Name = "کلمات کلیدی")]
+        [Required(ErrorMessage = " کلمات کلیدی را وارد کنید")]
+        public string Tags { get; set; }
         [Display(Name = "توضیح درمورد آموزشگاه")]
         [Required]
         public string Description { get; set; }
@@ -37,6 +43,9 @@ namespace Schools.Domain.Models.Schools
         [Display(Name = " فکس آموزشگاه")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         public string SchoolFax { get; set; }
+        [Display(Name = " عکس کاور آموزشگاه")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        public string ImageName { get; set; }
         [Display(Name = " آدرس آموزشگاه")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         public string SchoolAddress { get; set; }
@@ -47,7 +56,7 @@ namespace Schools.Domain.Models.Schools
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         public DateTime BuildDate { get; set; }
         public bool IsDelete { get; set; }
-
+        public bool IsActive { get; set; }
 
         #region Relations
         [ForeignKey("SchoolManager")]

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Schools.Domain.Repository.InterfaceRepository;
 using Schools.Application.Service.Interfaces;
+using Schools.Application.Service.Interfaces.Schools;
 using Schools.Application.Service.Services.Schools;
 using Schools.Domain.Repository.InterfaceRepository.Schools;
 using Schools.Infra.Data.Repository.ServiceRepository.Schools;
@@ -16,6 +17,7 @@ namespace Schools.Infra.IoC
             #region School
             service.AddScoped<ISchoolService, SchoolService>();
             service.AddScoped<ISchoolRepository, SchoolRepository>();
+            service.AddScoped<ISchoolGalleryRepository, SchoolGalleryRepository>();
             #endregion
 
             //From Infra Data Layer
@@ -26,6 +28,8 @@ namespace Schools.Infra.IoC
             #region Schools
             service.AddScoped<ISchoolGroupsRepository, SchoolGroupsRepository>();
             service.AddScoped<ISchoolGroupsService, SchoolGroupsService>();
+            service.AddScoped<ISchoolGalleryService, SchoolGalleryService>();
+
             #endregion
 
 

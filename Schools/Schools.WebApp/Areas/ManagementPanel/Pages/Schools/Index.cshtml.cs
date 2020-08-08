@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Schools.Application.Service.Interfaces;
+using Schools.Application.Service.Interfaces.Schools;
 using Schools.Application.ViewModels.SchoolsViewModels;
 
 namespace Schools.WebApp.Areas.ManagementPanel.Pages.Schools

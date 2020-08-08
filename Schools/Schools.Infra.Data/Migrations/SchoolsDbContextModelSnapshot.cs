@@ -249,6 +249,13 @@ namespace Schools.Infra.Data.Migrations
                     b.Property<int>("GroupId")
                         .HasColumnType("int");
 
+                    b.Property<string>("ImageName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsDelete")
                         .HasColumnType("bit");
 
@@ -283,6 +290,10 @@ namespace Schools.Infra.Data.Migrations
 
                     b.Property<int?>("SubGroupId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Tags")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("SchoolId");
 
@@ -1040,7 +1051,7 @@ namespace Schools.Infra.Data.Migrations
             modelBuilder.Entity("Schools.Domain.Models.Schools.SchoolRate", b =>
                 {
                     b.HasOne("Schools.Domain.Models.Schools.School", "School")
-                        .WithMany()
+                        .WithMany("SchoolRates")
                         .HasForeignKey("SchoolId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -1083,7 +1094,7 @@ namespace Schools.Infra.Data.Migrations
             modelBuilder.Entity("Schools.Domain.Models.Schools.Teachers.TeacherRate", b =>
                 {
                     b.HasOne("Schools.Domain.Models.Schools.Teachers.SchoolTeacher", "SchoolTeacher")
-                        .WithMany()
+                        .WithMany("TeacherRates")
                         .HasForeignKey("TeacherId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();

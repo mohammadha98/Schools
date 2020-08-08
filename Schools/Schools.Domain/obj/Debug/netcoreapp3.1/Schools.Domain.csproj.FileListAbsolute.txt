@@ -40,3 +40,4 @@ E:\Projects\Repos\Barnamenevisan\Schools\Schools.Domain\obj\Debug\netcoreapp3.1\
 E:\Projects\Repos\Barnamenevisan\Schools\Schools.Domain\obj\Debug\netcoreapp3.1\Schools.Domain.csproj.CoreCompileInputs.cache
 E:\Projects\Repos\Barnamenevisan\Schools\Schools.Domain\obj\Debug\netcoreapp3.1\Schools.Domain.dll
 E:\Projects\Repos\Barnamenevisan\Schools\Schools.Domain\obj\Debug\netcoreapp3.1\Schools.Domain.pdb
+C:\Users\mohammad\source\repos\schools\Schools\Schools.Domain\obj\Debug\netcoreapp3.1\Schools.Domain.csprojAssemblyReference.cache

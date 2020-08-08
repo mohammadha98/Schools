@@ -1,4 +1,205 @@
-﻿@page
+﻿@page "{schoolId}"
 @model Schools.WebApp.Areas.ManagementPanel.Pages.Schools.EditModel
 @{
+    var menuModel = "schools";
 }
+
+@if (Model.School != null)
+{
+    <partial name="_MainMenu" model="menuModel" />
+
+    <div class="content-wrapper">
+        <section class="content">
+            <div class="row">
+                <section class="col-lg-12 col-md-12">
+                    <div class="box box-info">
+                        <div class="box-header">
+                            <h3>افزودن آموزشگاه جدید</h3>
+                        </div>
+                        <div class="box-body">
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                            <form class="row" method="post" enctype="multipart/form-data">
+                                <input type="hidden" asp-for="School.ImageName"/>
+                                <input type="hidden" asp-for="School.IsDelete"/>
+                                <input type="hidden" asp-for="School.RegisterDate"/>
+                                <div class="col-lg-6 col-md-6" style="margin-top: 8px">
+                                    <p>نام آموزشگاه</p>
+                                    <input type="text" asp-for="School.SchoolTitle" class="form-control" placeholder="نام آموزشکاه"/>
+                                </div>
+                                <div class="col-lg-6 col-md-6" style="margin-top: 8px">
+                                    <p>مدیر آموزشگاه (شناسه کاربر را وارد کنید)</p>
+                                    <input type="text" asp-for="School.SchoolManager" class="form-control" placeholder="مدیر آموزشگاه"/>
+                                </div>
+                                <div class="col-lg-12 col-md-12" style="margin-top: 8px">
+                                    <p>Meta Description <span class="counter" style="padding: 2px; border-radius: 50%; font-size: 12px">0</span></p>
+                                    <textarea asp-for="School.MetaDescription" class="form-control" placeholder="+155"></textarea>
+                                </div>
+                                <div class="col-lg-12 col-md-12" style="margin-top: 8px">
+                                    <p>توضیح در مورد آموزشگاه</p>
+                                    <textarea asp-for="School.Description"></textarea>
+                                </div>
+                                <div class="col-lg-6 col-md-6" style="margin-top: 8px">
+                                    <p>شماره تلفن آموزشگاه (با - از هم جدا کنید)</p>
+                                    <input type="text" asp-for="School.SchoolPhone" class="form-control" placeholder="شماره تلفن ها"/>
+                                </div>
+                                <div class="col-lg-6 col-md-6" style="margin-top: 8px">
+                                    <p>ایمیل آموزشگاه</p>
+                                    <input type="email" asp-for="School.SchoolEmail" class="form-control" placeholder="ایمیل"/>
+                                </div>
+                                <div class="col-lg-6 col-md-6" style="margin-top: 8px">
+                                    <p>آدرس آموزشگاه</p>
+                                    <input type="text" asp-for="School.SchoolAddress" class="form-control" placeholder="آدرس آموزشگاه"/>
+                                </div>
+                                <div class="col-lg-6 col-md-6" style="margin-top: 8px">
+                                    <p>فکس آموزشگاه</p>
+                                    <input type="text" class="form-control" asp-for="School.SchoolFax" placeholder="فکس"/>
+                                </div>
+                                <div class="col-lg-4 col-md-4" style="margin-top: 8px">
+                                    <p>استان</p>
+                                    <select class="form-control" asp-for="School.Shire">
+                                        <option value="0">انتخاب کنید</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-4 col-md-4" style="margin-top: 8px">
+                                    <p>شهر</p>
+                                    <select class="form-control" asp-for="School.City">
+                                        <option value="0">انتخاب کنید</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-4 col-md-4" style="margin-top: 8px">
+                                    <p>منطقه</p>
+                                    <select class="form-control" asp-for="School.AreaId">
+                                        <option value="null">انتخاب کنید</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-6 col-md-6" style="margin-top: 8px">
+                                    <p>گروه</p>
+                                    <select class="form-control" asp-for="School.GroupId">
+                                        <option value="0">انتخاب کنید</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-6 col-md-6" style="margin-top: 8px">
+                                    <p>زیر گروه</p>
+                                    <select class="form-control" asp-for="School.SubGroupId">
+                                        <option value="null">انتخاب کنید</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-6 col-md-6" style="margin-top: 8px">
+                                    <p>وضعیت آموزشگاه</p>
+                                    <select class="form-control" asp-for="School.IsActive">
+                                        <option class="text-success" value="true" selected="selected">فعال</option>
+                                        <option class="text-danger" value="true">غیر فعل</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-6 col-md-6" style="margin-top: 8px">
+                                    <p>تاریخ تاسیس آموزشگاه</p>
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        <input type="text" id="tarikh" class="form-control pull-right">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6" style="margin-top: 8px">
+                                    <div class="alert alert-warning alert-dismissible">
+                                        <button type="button" class="close pull-left" data-dismiss="alert" aria-hidden="true">×</button>
+                                        <h4><i class="icon fa fa-warning"></i> توجه</h4>
+                                        در صورت انتخاب عکس عکس های قبلی حذف می شوند
+                                    </div>
+                                    <p>آلبوم عکس</p>
+                                    <input type="file" accept="image/*" multiple="" class="form-control" required="" name="gallery"/>
+                                </div>
+                                <div class="col-lg-6 col-md-6" style="margin-top: 8px">
+                                    <p>عکس پروفایل</p>
+                                    <input type="file" accept="image/*" class="form-control" required="" name="avatar"/>
+                                    <img src="/images/schools/@Model.School.ImageName" style="width: 100%; max-height: 300px" alt="@Model.School.SchoolTitle"/>
+                                </div>
+                                <button class="col-lg-12 btn btn-block btn-success btn-flat" style="margin-top: 12px">ثبت</button>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+    </div>
+}
+@section Scripts
+{
+    <script src="/admin/dist/js/persian-date-0.1.8.min.js"></script>
+    <script src="/admin/dist/js/persian-datepicker-0.4.5.min.js"></script>
+    <script src="/ckeditor5/build/ckeditor.js"></script>
+    <script>
+        function showValue() {
+            console.log($("#tarikh").val());
+        }
+
+        $(document).ready(function () {
+            $('#tarikh').pDatepicker({
+                format: 'YYYY/MM/D',
+            });
+        });
+
+    </script>
+
+    <script>
+
+        ClassicEditor
+            .create(document.querySelector('#School_Description'),
+                {
+                    ckfinder: {
+                        uploadUrl: 'CustomUrl'
+                    },
+                    toolbar: {
+                        items: [
+                            'heading',
+                            '|',
+                            'bold',
+                            'italic',
+                            'link',
+                            'bulletedList',
+                            'numberedList',
+                            'fontSize',
+                            '|',
+                            'indent',
+                            'outdent',
+                            '|',
+                            'blockQuote',
+                            'insertTable',
+                            'undo',
+                            'redo',
+                            'code'
+                        ]
+                    },
+                    language: 'fa',
+                    table: {
+                        contentToolbar: [
+                            'tableColumn',
+                            'tableRow',
+                            'mergeTableCells'
+                        ]
+                    },
+                    licenseKey: '',
+
+                })
+            .then(editor => {
+                window.editor = editor;
+            })
+            .catch(error => {
+                console.error('Oops, something gone wrong!');
+                console.error('Please, report the following error in the https://github.com/ckeditor/ckeditor5 with the build id and the error stack trace:');
+                console.warn('Build id: 1hgh63bxm5nk-t1efehf8ocs2');
+                console.error(error);
+            });
+        $(document).ready(function () {
+            var len = $("#School_MetaDescription").val().length;
+            $(".counter").html(len);
+        });
+
+        $("#School_MetaDescription").keydown(function () {
+            var len = $(this).val().length;
+            $(".counter").html(len);
+        });
+    </script>
+
+}
+

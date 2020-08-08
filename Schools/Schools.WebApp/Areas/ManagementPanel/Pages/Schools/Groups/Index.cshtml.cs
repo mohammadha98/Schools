@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Schools.Application.Service.Interfaces;
+using Schools.Application.Service.Interfaces.Schools;
 using Schools.Domain.Models.Schools;
 using Schools.Domain.Repository.InterfaceRepository;
 

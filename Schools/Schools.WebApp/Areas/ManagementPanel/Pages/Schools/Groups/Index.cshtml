@@ -33,8 +33,7 @@
                                         <th>#</th>
                                         <th>عنوان گروه</th>
                                         <th>زیر گروه ها</th>
-                                        <th>آیا این رکورد پاک شده است ؟</th>
-                                        <td>عملیات ها</td>
+                                        <td>عملیات</td>
                                     </tr>
                                 </thead>
 
@@ -61,17 +60,7 @@
                                                 </ul>
                                             </td>
                                             <td>
-                                                @if (Group.IsDelete == true)
-                                                {
-                                                    <p class="text-success">بله</p>
-                                                }
-                                                else
-                                                {
-                                                    <p class="text-danger">خیر</p>
-                                                }
-                                            </td>
-                                            <td>
-                                                <a class="btn btn-info btn-sm">نمایش آموزشگاه های این گروه</a>
+                                                <a href="/ManageMentPanel/Schools?page=1&GroupId=@Group.GroupId" class="btn btn-info btn-sm">نمایش آموزشگاه های این گروه</a>
                                                 <a class="btn btn-warning btn-sm">ویرایش</a>
                                                 <a class="btn btn-danger btn-sm">حذف</a>
 
