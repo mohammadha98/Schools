@@ -14,6 +14,7 @@ using Schools.Domain.Models.Users;
 using Schools.Domain.Models.Users.Messages;
 using Schools.Domain.Models.Users.Tickets;
 
+
 namespace Schools.Infra.Data.Context
 {
     public class SchoolsDbContext : DbContext

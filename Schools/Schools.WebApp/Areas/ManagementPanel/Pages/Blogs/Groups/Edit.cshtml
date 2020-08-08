@@ -1,0 +1,32 @@
+﻿@page
+@model Schools.WebApp.Areas.ManagementPanel.Pages.Blogs.Groups.EditModel
+@{
+    ViewData["Title"] = "ویرایش";
+    var menuModel = "blogGroups";
+}
+<partial name="_MainMenu" model="menuModel" />
+<!-- form start -->
+<div class="content-wrapper">
+    <section class="content">
+        <div class="row">
+            <section class="col-lg-12 col-md-12">
+
+                <div class="box box-primary">
+                    <form role="form" method="post">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label asp-for="groups.GroupName"></label>
+                                <input asp-for="groups.GroupName" type="text" class="form-control" placeholder="نام">
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-primary">ذخیره</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </section>
+</div>

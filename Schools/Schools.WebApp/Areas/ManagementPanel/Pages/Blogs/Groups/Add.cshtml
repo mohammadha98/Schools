@@ -1,0 +1,38 @@
+﻿@page
+@model Schools.WebApp.Areas.ManagementPanel.Pages.Blogs.Groups.AddModel
+@{
+    ViewData["Title"] = "افزودن گروه";
+    var menuModel = "blogGroups";
+}
+    <partial name="_MainMenu" model="menuModel" />
+
+    <div class="content-wrapper">
+        <section class="content">
+            <div class="row">
+                <section class="col-lg-12 col-md-12">
+
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">افزودن گروه</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <!-- form start -->
+                        <form role="form" method="post">
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label asp-for="groups.GroupName"></label>
+                                    <input asp-for="groups.GroupName" type="text" class="form-control"  placeholder="نام">
+                                </div>
+                            </div>
+                            <!-- /.box-body -->
+
+                            <div class="box-footer">
+                                <button type="submit" class="btn btn-primary">افزودن</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </section>
+            </div>
+        </section>
+    </div>

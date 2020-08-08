@@ -26,6 +26,12 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.BlogRepositoris
             return _context.BlogGroups.Find(groupId);
         }
 
+        public IEnumerable<BlogGroup> GetGroupsByFilter(string parameter)
+        {
+            var list=_context.BlogGroups.Where(c => c.GroupName.Contains(parameter) || c.GroupId.ToString().Contains(parameter)).ToList();
+            return list.Distinct().ToList();
+        }
+
         public void InsertGroup(BlogGroup blogGroup)
         {
             _context.BlogGroups.Add(blogGroup);
