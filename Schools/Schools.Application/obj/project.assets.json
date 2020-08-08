@@ -1012,23 +1012,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ali\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\mohammad\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.Application\\Schools.Application.csproj",
+      "projectUniqueName": "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Application\\Schools.Application.csproj",
       "projectName": "Schools.Application",
-      "projectPath": "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.Application\\Schools.Application.csproj",
-      "packagesPath": "C:\\Users\\ali\\.nuget\\packages\\",
-      "outputPath": "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.Application\\obj\\",
+      "projectPath": "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Application\\Schools.Application.csproj",
+      "packagesPath": "C:\\Users\\mohammad\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Application\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\ali\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\mohammad\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1041,8 +1037,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.Domain\\Schools.Domain.csproj": {
-              "projectPath": "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.Domain\\Schools.Domain.csproj"
+            "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Domain\\Schools.Domain.csproj": {
+              "projectPath": "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Domain\\Schools.Domain.csproj"
             }
           }
         }
@@ -1080,7 +1076,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
       }
     }
   }
