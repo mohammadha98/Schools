@@ -24,9 +24,6 @@ namespace Schools.Infra.IoC
 
             //From Infra Data Layer
 
-
-
-
             #region Schools
             service.AddScoped<ISchoolGroupsRepository, SchoolGroupsRepository>();
             service.AddScoped<ISchoolGroupsService, SchoolGroupsService>();

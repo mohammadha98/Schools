@@ -37,7 +37,6 @@ namespace Schools.Infra.Data.Context
         public DbSet<SchoolComment> SchoolComments { get; set; }
         public DbSet<SchoolCourse> SchoolCourses { get; set; }
         public DbSet<SchoolGroup> SchoolGroups { get; set; }
-        public DbSet<SchoolLike> SchoolLikes { get; set; }
         public DbSet<SchoolVisit> SchoolVisits { get; set; }
         public DbSet<SchoolRate> SchoolRates { get; set; }
         public DbSet<SchoolGallery> SchoolGalleries { get; set; }
@@ -75,6 +74,7 @@ namespace Schools.Infra.Data.Context
         public DbSet<TicketMessage> TicketMessages { get; set; }
         public DbSet<TicketCategory> TicketCategories { get; set; }
         public DbSet<UserTicket> UserTickets { get; set; }
+        public DbSet<UserLike> UserLikes { get; set; }
 
         #endregion
 
@@ -100,8 +100,6 @@ namespace Schools.Infra.Data.Context
             #region Schools
 
             modelBuilder.Entity<School>()
-                .HasQueryFilter(u => !u.IsDelete);
-            modelBuilder.Entity<SchoolLike>()
                 .HasQueryFilter(u => !u.IsDelete);
             modelBuilder.Entity<SchoolGroup>()
                 .HasQueryFilter(u => !u.IsDelete);
@@ -165,7 +163,8 @@ namespace Schools.Infra.Data.Context
                 .HasQueryFilter(u => !u.IsDelete);
             modelBuilder.Entity<UserNotification>()
                 .HasQueryFilter(u => !u.IsDelete);
-
+            modelBuilder.Entity<UserLike>()
+                .HasQueryFilter(u => !u.IsDelete);
             #endregion
 
             base.OnModelCreating(modelBuilder);

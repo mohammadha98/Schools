@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{handler?}"
 @using Schools.Application.Utilities.Convertors
 @model Schools.WebApp.Areas.ManagementPanel.Pages.Schools.IndexModel
 @{
@@ -13,11 +13,12 @@
             <section class="col-lg-12 col-md-12">
                 <div class="box box-info">
                     <div class="box-header">
+                 
                         <form class="row" id="paginat">
-                            <input type="hidden" name="pageId" asp-for="SchoolModel.CurrentPage" />
+                            <input type="hidden" name="pageId" asp-for="SchoolModel.CurrentPage"/>
                             <div class="col-lg-4 col-md-4" style="margin-top: 8px">
                                 <p>نام آموزشگاه</p>
-                                <input type="text" asp-for="SchoolModel.SchoolName" class="form-control" placeholder="نام آموزشکاه" name="schoolName" />
+                                <input type="text" asp-for="SchoolModel.SchoolName" class="form-control" placeholder="نام آموزشکاه" name="schoolName"/>
                             </div>
                             <div class="col-lg-4 col-md-4" style="margin-top: 8px">
                                 <p>گروه</p>
@@ -54,7 +55,7 @@
 
                             </div>
                         </form>
-                        <hr />
+                        <hr/>
                         <a href="/ManagementPanel/Schools/add" class="btn btn-success btn-flat">افزودن آموزشگاه</a>
 
                     </div>
@@ -143,5 +144,7 @@
             $("#SchoolModel_CurrentPage").val(pageId);
             $("#paginat").submit();
         }
+
+  
     </script>
 }
