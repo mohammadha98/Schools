@@ -31,27 +31,17 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.Schools.Groups
             if (!ModelState.IsValid)
                 return Page();
 
-            List<string> SubGroup = new List<string>();
 
-            SchoolGroup schoolGroup = new SchoolGroup();
-            schoolGroup.GroupTitle = schoolGroupsViewModel.GroupTitle;
-            schoolGroup.IsDelete = schoolGroupsViewModel.IsDelete;
-
-            string txt = "";
-            foreach(var text in schoolGroupsViewModel.SubGroup)
+            SchoolGroup schoolGroup = new SchoolGroup()
             {
-                if (!text.Equals("-"))
-                {
-                    txt += text;
-                }
-                else
-                {
-                    SubGroup.Add(txt);
-                }
-            }
-            
+                IsDelete = schoolGroupsViewModel.IsDelete,
+                GroupTitle = schoolGroupsViewModel.GroupTitle,
+                ParentId = null
+            };
 
-            return RedirectToPage();
+            _schoolGroupsRepository.CreateGroup(schoolGroup);
+
+            return RedirectToPage("Index");
         }
     }
 }

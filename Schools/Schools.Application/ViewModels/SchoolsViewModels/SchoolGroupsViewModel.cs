@@ -8,7 +8,6 @@ namespace Schools.Application.ViewModels.SchoolsViewModels
     {
         public string GroupTitle { get; set; }
         public bool IsDelete { get; set; }
-        public string? SubGroup { get; set; }
 
     }
 }
