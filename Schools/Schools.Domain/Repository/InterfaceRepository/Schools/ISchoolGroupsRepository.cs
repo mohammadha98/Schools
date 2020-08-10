@@ -1,7 +1,6 @@
 ﻿using Schools.Domain.Models.Schools;
-using System;
 using System.Collections.Generic;
-using System.Text;
+
 
 namespace Schools.Domain.Repository.InterfaceRepository
 {
