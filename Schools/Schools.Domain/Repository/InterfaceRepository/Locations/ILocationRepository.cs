@@ -17,5 +17,7 @@ namespace Schools.Domain.Repository.InterfaceRepository.Locations
         void EditShire(Shire shire);
         void EditCity(City city);
         void EditArea(Area area);
+        void DeleteShire(Shire shire);
+        void DeleteCity(City city);
     }
 }
