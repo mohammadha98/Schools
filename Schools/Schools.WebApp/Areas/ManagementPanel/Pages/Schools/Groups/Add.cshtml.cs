@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Schools.Application.ViewModels.SchoolsViewModels;
 using Schools.Domain.Models.Schools;
 using Schools.Domain.Repository.InterfaceRepository;
@@ -24,6 +25,7 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.Schools.Groups
 
         public void OnGet()
         {
+            
         }
 
         public IActionResult OnPost()

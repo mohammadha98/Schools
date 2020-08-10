@@ -24,7 +24,7 @@
                             <div class="form-group">
                                 <label for="exampleInputEmail1">عنوان :</label>
                                 <input type="text" asp-for="schoolGroupsViewModel.GroupTitle" class="form-control" id="exampleInputEmail1" placeholder="عنوان را وارد کنید">
-                            </div>                            
+                            </div>
                             <div class="checkbox">
                                 <label>
                                     <input asp-for="schoolGroupsViewModel.IsDelete" type="checkbox"> حذف این گروه
@@ -39,6 +39,35 @@
                     </form>
                 </div>
 
+                <section class="col-lg-6 col-md-6">
+
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">افزودن سر گروه</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <!-- form start -->
+                        <form role="form">
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">عنوان :</label>
+                                    <input type="text" asp-for="schoolGroupsViewModel.GroupTitle" class="form-control" id="exampleInputEmail1" placeholder="عنوان را وارد کنید">
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input asp-for="schoolGroupsViewModel.IsDelete" type="checkbox"> حذف این گروه
+                                    </label>
+                                </div>
+                            </div>
+                            <!-- /.box-body -->
+
+                            <div class="box-footer">
+                                <button type="submit" class="btn btn-primary">افزودن</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </section>
             </section>
         </div>
     </section>
