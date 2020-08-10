@@ -20,6 +20,12 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Schools
             _context.SaveChanges();
         }
 
+        public void DeleteGroup(SchoolGroup schoolGroup)
+        {
+            _context.Entry(schoolGroup).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
+            _context.SaveChanges();
+        }
+
         public List<SchoolGroup> GetAllGroups()
         {
             return _context.SchoolGroups.ToList();
@@ -28,6 +34,12 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Schools
         public SchoolGroup GetSchoolGroupById(int groupId)
         {
             return _context.SchoolGroups.Find(groupId);
+        }
+
+        public void Update(SchoolGroup schoolGroup)
+        {
+            _context.Entry(schoolGroup).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _context.SaveChanges();
         }
     }
 }

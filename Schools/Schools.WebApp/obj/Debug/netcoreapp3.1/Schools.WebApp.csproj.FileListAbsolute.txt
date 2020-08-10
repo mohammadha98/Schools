@@ -756,3 +756,4 @@ E:\Projects\Repos\Barnamenevisan\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\
 E:\Projects\Repos\Barnamenevisan\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Areas\ManagementPanel\Pages\Blogs\Index.cshtml.g.cs
 E:\Projects\Repos\Barnamenevisan\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Areas\ManagementPanel\Pages\Schools\Groups\Add.cshtml.g.cs
 E:\Projects\Repos\Barnamenevisan\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Areas\ManagementPanel\Pages\Schools\Groups\AddSubGroup.cshtml.g.cs
+E:\Projects\Repos\Barnamenevisan\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Areas\ManagementPanel\Pages\Schools\Groups\Edit.cshtml.g.cs

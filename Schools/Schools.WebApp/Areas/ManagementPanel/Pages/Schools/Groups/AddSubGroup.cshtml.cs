@@ -32,8 +32,6 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.Schools.Groups
         {
             if (id != null)
                 GroupName = _schoolGroupsRepository.GetSchoolGroupById(id).GroupTitle;
-                
-            
 
             ViewData["Groups"] = _context.SchoolGroups.Where(g => g.ParentId == null).Select(g => new SelectListItem()
             {
