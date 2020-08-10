@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity.Core.Mapping;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
@@ -23,42 +23,26 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.Schools.Groups
             _schoolGroupsRepository = schoolGroupsRepository;
         }
 
-        [BindProperty]
-        public SchoolGroupsViewModel SchoolGroupsViewModel { get; set; }
-        public string GroupName { get; set; }
-        public int Id { get; set; }
+        [BindProperty] 
+        public SchoolGroup SchoolGroup { get; set; }
 
         public void OnGet(int id)
         {
-            if (id != null)
-                GroupName = _schoolGroupsRepository.GetSchoolGroupById(id).GroupTitle;
-                
-            
-
-            ViewData["Groups"] = _context.SchoolGroups.Where(g => g.ParentId == null).Select(g => new SelectListItem()
-            {
-                Text = g.GroupTitle,
-                Value = g.GroupId.ToString()
-            }).ToList();
-
+            var group = _schoolGroupsRepository.GetSchoolGroupById(id);
+            //اگر گروه خالی باشه یعنی شناسه وارد شده نا معتبر است
+            if (group == null)
+                Response.Redirect("/ManageMentPanel/Schools/Groups");
 
         }
 
 
-        public IActionResult OnPost()
+        public IActionResult OnPost(int id)
         {
             if (!ModelState.IsValid)
                 return Page();
 
-            var parentId = Id == null ? SchoolGroupsViewModel.GroupId : Id;
-
-            _schoolGroupsRepository.CreateGroup(new SchoolGroup()
-            {
-                GroupTitle = SchoolGroupsViewModel.GroupTitle,
-                ParentId = parentId,
-                IsDelete = SchoolGroupsViewModel.IsDelete
-            });
-
+            SchoolGroup.ParentId = id;
+            _schoolGroupsRepository.CreateGroup(SchoolGroup);
 
             return RedirectToPage("Index");
         }

@@ -20,8 +20,8 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.Schools.Groups
         }
 
 
-        [BindProperty]
-        public SchoolGroupsViewModel schoolGroupsViewModel { get; set; }
+        [BindProperty] 
+        public SchoolGroup SchoolGroup { get; set; }
 
         public void OnGet()
         {
@@ -33,15 +33,8 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.Schools.Groups
             if (!ModelState.IsValid)
                 return Page();
 
-
-            SchoolGroup schoolGroup = new SchoolGroup()
-            {
-                IsDelete = schoolGroupsViewModel.IsDelete,
-                GroupTitle = schoolGroupsViewModel.GroupTitle,
-                ParentId = null
-            };
-
-            _schoolGroupsRepository.CreateGroup(schoolGroup);
+            SchoolGroup.IsDelete = false;
+            _schoolGroupsRepository.CreateGroup(SchoolGroup);
 
             return RedirectToPage("Index");
         }
