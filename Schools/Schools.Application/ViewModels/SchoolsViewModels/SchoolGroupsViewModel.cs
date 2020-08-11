@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Schools.Application.ViewModels.SchoolsViewModels
 {
-    public class SchoolGroupsViewModel
+    public class AddSchoolGroupsViewModel
     {
         public string GroupTitle { get; set; }
         public bool IsDelete { get; set; }
