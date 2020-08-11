@@ -68,7 +68,7 @@
                             </div>
 
                             <div class="col-lg-4 col-md-4" style="margin-top: 38px;">
-                                <button type="submit" class="btn btn-block btn-info">فیلتر</button>
+                                <a id="filter" class="btn btn-block btn-info">فیلتر</a>
 
                             </div>
                         </form>
@@ -155,6 +155,12 @@
 @section Scripts
 {
     <script>
+        $("#filter").click(function () {
+            $("#SchoolModel_CurrentPage").val(1);
+
+            $("#paginat").submit();
+
+        });
         function ChangePage(pageId) {
             $("#SchoolModel_CurrentPage").val(pageId);
             $("#paginat").submit();
@@ -189,6 +195,6 @@
                 $("#SchoolModel_ParentId").html(data);
             });
         });
-    
+
     </script>
 }

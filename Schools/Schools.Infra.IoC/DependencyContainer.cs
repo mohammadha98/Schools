@@ -32,6 +32,7 @@ namespace Schools.Infra.IoC
             service.AddScoped<ISchoolGroupsService, SchoolGroupsService>();
             service.AddScoped<ISchoolGalleryService, SchoolGalleryService>();
             service.AddScoped<ISchoolTeacherService, SchoolTeacherService>();
+            service.AddScoped<ISchoolTrainingTypeService, SchoolTrainingTypeService>();
             #endregion
 
             //From Infra Data Layer
@@ -46,6 +47,7 @@ namespace Schools.Infra.IoC
             service.AddScoped<ISchoolGalleryRepository, SchoolGalleryRepository>();
             service.AddScoped<ISchoolTeacherRepository, SchoolTeacherRepository>();
             service.AddScoped<ITeacherRateRepository, TeacherRateRepository>();
+            service.AddScoped<ISchoolTrainingTypeRepository, SchoolTrainingTypeRepository>();
             #endregion
 
             #region Blogs
