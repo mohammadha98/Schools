@@ -27,6 +27,11 @@
                     <i class="fa fa-dashboard"></i> <span>داشبرد</span>
                 </a>
             </li>
+            <li class="@((Model=="Locations"?"active":null))">
+                <a href="/ManagementPanel/Locations">
+                    <i class="fa fa-map-o"></i> <span>موقعیت مکانی</span>
+                </a>
+            </li>
             <li class="@((Model.Contains("user")?"active treeview":"treeview"))">
                 <a href="#">
                     <i class="fa fa-users"></i>

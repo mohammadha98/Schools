@@ -27,5 +27,17 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.Schools.Groups
         {
             List = _schoolGroupsRepository.GetAllGroups();
         }
+
+        public IActionResult OnGetDeleteGroup(int groupId)
+        {
+            if (_schoolGroupsService.IsGroupHasSchool(groupId))
+                return Content("Error");
+
+            
+            _schoolGroupsRepository.DeleteGroup(groupId);
+            return Content("Deleted");
+
+
+        }
     }
 }

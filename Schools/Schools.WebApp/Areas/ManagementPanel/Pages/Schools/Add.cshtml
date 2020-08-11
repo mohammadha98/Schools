@@ -1,8 +1,11 @@
 ﻿@page
+@using Schools.Application.Service.Interfaces.Locations
 @using Schools.Application.Utilities.Convertors
 @model Schools.WebApp.Areas.ManagementPanel.Pages.Schools.AddModel
+@inject ILocationService _Location;
 @{
     var menuModel = "schools";
+    var shires = _Location.GetAllShire();
 }
 
 <partial name="_MainMenu" model="menuModel" />
@@ -53,8 +56,12 @@
                             </div>
                             <div class="col-lg-4 col-md-4" style="margin-top: 8px">
                                 <p>استان</p>
-                                <select class="form-control" asp-for="School.Shire">
+                                <select class="form-control"  asp-for="School.Shire">
                                     <option value="0">انتخاب کنید</option>
+                                    @foreach (var item in shires)
+                                    {
+                                        <option value="@item.ShireId">@item.ShireTitle</option>
+                                    }
                                 </select>
                             </div>
                             <div class="col-lg-4 col-md-4" style="margin-top: 8px">
@@ -132,7 +139,21 @@
     </script>
 
     <script>
-
+        $("#School_Shire").change(function() {
+            var shireId = $(this).val();
+            $.ajax({
+                url: "/ManagementPanel/Schools/GetCity?shireId=" + shireId,
+                type: "get",
+                beforeSend: function () {
+                    $(".loading").show();
+                },
+                complete: function () {
+                    $(".loading").hide();
+                }
+            }).done(function(data) {
+                $("#School_City").html(data);
+            });
+        });
         ClassicEditor
             .create(document.querySelector('#School_Description'),
                 {
@@ -180,7 +201,7 @@
                 console.warn('Build id: 1hgh63bxm5nk-t1efehf8ocs2');
                 console.error(error);
             });
-        $("#School_MetaDescription").keydown(function () {
+        $("#School_MetaDescription").keydown(function() {
             var len = $(this).val().length;
             $(".counter").html(len);
         });

@@ -1,0 +1,36 @@
+﻿@page "{shireId}"
+@model Schools.WebApp.Areas.ManagementPanel.Pages.Locations.EditModel
+@{
+    var menuModel = "Locations";
+}
+<partial name="_MainMenu" model="menuModel" />
+
+<div class="content-wrapper">
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-info">
+                    <div class="box-header">
+                        <h3 class="box-title">استان ها</h3>
+                    </div>
+                    <!-- /.box-header -->
+
+                    <div class="box-body">
+                        <form method="post" class="row">
+                            <div class="col-lg-12">
+                                <input type="hidden" asp-for="Shire.ShireId" />
+                                <input type="hidden" asp-for="Shire.IsDelete" />
+                                <p>نام استان </p>
+                                <input type="text" class="form-control" asp-for="Shire.ShireTitle" />
+                                <br class="col-lg-12" />
+                                <button type="submit" class="btn btn-success btn-flat">ثبت تغییرات</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+        </div>
+    </section>
+</div>
