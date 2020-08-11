@@ -20,22 +20,18 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.BlogRepositoris
         {
             return _context.Blogs.ToList();
         }
-
         public Blog GetBlogById(int blogId)
         {
             return _context.Blogs.Find(blogId);
         }
-
         public void InsertBlog(Blog blog)
         {
             _context.Blogs.Add(blog);
         }
-
         public void Save()
         {
             _context.SaveChanges();
         }
-
         public void UpdateBlog(Blog blog)
         {
             _context.Entry(blog).State = EntityState.Modified;

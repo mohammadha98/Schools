@@ -29,6 +29,9 @@
             "projectReferences": {
               "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Domain\\Schools.Domain.csproj": {
                 "projectPath": "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Domain\\Schools.Domain.csproj"
+              },
+              "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Infra.Data\\Schools.Infra.Data.csproj": {
+                "projectPath": "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Infra.Data\\Schools.Infra.Data.csproj"
               }
             }
           }
@@ -105,6 +108,10 @@
         "netcoreapp3.1": {
           "dependencies": {
             "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[3.1.6, )"
             },
@@ -312,6 +319,12 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
+              "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Application\\Schools.Application.csproj": {
+                "projectPath": "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Application\\Schools.Application.csproj"
+              },
+              "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Domain\\Schools.Domain.csproj": {
+                "projectPath": "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Domain\\Schools.Domain.csproj"
+              },
               "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Infra.Data\\Schools.Infra.Data.csproj": {
                 "projectPath": "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Infra.Data\\Schools.Infra.Data.csproj"
               },

@@ -7,8 +7,7 @@ namespace Schools.Domain.Repository.InterfaceRepository.BlogRepositories
 {
     public interface IBlogGroupsRepository
     {
-        IEnumerable<BlogGroup> GetAllGroups();
-        IEnumerable<BlogGroup> GetGroupsByFilter(string parameter);
+        IEnumerable<BlogGroup> GetAllGroups(string parameter);
         BlogGroup GetGroupById(int groupId);
         void InsertGroup(BlogGroup blogGroup);
         void UpdateGroup(BlogGroup blogGroup);

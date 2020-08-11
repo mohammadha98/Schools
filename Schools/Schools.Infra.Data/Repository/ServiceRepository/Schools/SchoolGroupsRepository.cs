@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using Schools.Domain.Models.Schools;
 using Schools.Domain.Repository.InterfaceRepository;
@@ -12,7 +11,7 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Schools
         SchoolsDbContext _context;
         public SchoolGroupsRepository(SchoolsDbContext context)
         {
-            _context = context;
+           _context = context;
         }
 
         public void CreateGroup(SchoolGroup schoolGroup)
@@ -21,26 +20,9 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Schools
             _context.SaveChanges();
         }
 
-        public void EditGroup(SchoolGroup @group)
+        public void DeleteGroup(SchoolGroup schoolGroup)
         {
-            _context.SchoolGroups.Update(group);
-            _context.SaveChanges();
-        }
-
-        public void DeleteGroup(int groupId)
-        {
-            var group = GetSchoolGroupById(groupId);
-            if (group == null)
-                return;
-
-            var sub = _context.SchoolGroups.Where(s => s.ParentId == groupId);
-            foreach (var item in sub)
-            {
-                item.IsDelete = true;
-                _context.SchoolGroups.Update(item);
-            }
-
-            group.IsDelete = true;
+            _context.Entry(schoolGroup).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
             _context.SaveChanges();
         }
 
@@ -51,9 +33,13 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Schools
 
         public SchoolGroup GetSchoolGroupById(int groupId)
         {
-            return _context.SchoolGroups
-                .Include(g => g.SchoolsSub)
-                .Include(g => g.Schools).SingleOrDefault(g => g.GroupId == groupId);
+            return _context.SchoolGroups.Find(groupId);
+        }
+
+        public void Update(SchoolGroup schoolGroup)
+        {
+            _context.Entry(schoolGroup).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _context.SaveChanges();
         }
     }
 }

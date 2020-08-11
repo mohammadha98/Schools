@@ -30,7 +30,7 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.Blogs.Groups
 
             var group = _blogGroupsRepository.GetGroupById(id);
             group.GroupName = groups.GroupName;
-
+            
             _blogGroupsRepository.Save();
             return RedirectToPage("index");
         }

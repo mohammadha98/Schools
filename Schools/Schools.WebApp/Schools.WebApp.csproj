@@ -20,6 +20,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Schools.Application\Schools.Application.csproj" />
+    <ProjectReference Include="..\Schools.Domain\Schools.Domain.csproj" />
     <ProjectReference Include="..\Schools.Infra.Data\Schools.Infra.Data.csproj" />
     <ProjectReference Include="..\Schools.Infra.IoC\Schools.Infra.IoC.csproj" />
   </ItemGroup>
@@ -133,6 +135,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\images\blogs\" />
     <Folder Include="wwwroot\images\schools\gallery\" />
   </ItemGroup>
 

@@ -58,6 +58,21 @@
                     <li class="@((Model=="schoolsGroup"?"active":null))"><a href="/ManagementPanel/Schools/Groups"><i class="fa fa-circle-o"></i>گروه ها</a></li>
                 </ul>
             </li>
+            <li class="@((Model.Contains("blogs")?"active treeview":"treeview"))">
+                <a href="#">
+                    <i class="fa fa-home"></i>
+                    <span>بلاگ ها</span>
+                    <span class="pull-left-container">
+                        <i class="fa fa-angle-right pull-left"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="@((Model=="blogs"?"active":null))"><a href="/ManagementPanel/Blogs"><i class="fa fa-circle-o"></i>نمایش بلاگ ها</a></li>
+                    <li class="@((Model=="blogsGroups"?"active":null))"><a href="/ManagementPanel/Blogs/Groups"><i class="fa fa-circle-o"></i>گروه بلاگ ها</a></li>
+                    <li class="@((Model=="schoolsGroup"?"active":null))"><a href="/ManagementPanel/Schools"><i class="fa fa-circle-o"></i></a></li>
+
+                </ul>
+            </li>
         </ul>
     </section>
     <!-- /.sidebar -->

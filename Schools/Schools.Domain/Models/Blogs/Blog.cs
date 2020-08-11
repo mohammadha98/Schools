@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Dynamic;
 using System.Text;
 
@@ -8,14 +9,10 @@ namespace Schools.Domain.Models.Blogs
 {
     public class Blog
     {
-        public Blog()
-        {
-
-        }
         [Key]
         public int BlogId { get; set; }
 
-        [Display(Name ="گروه دسته بندی")]
+        [Display(Name ="دسته بندی")]
         public int GroupId { get; set; }
 
         [Display(Name = "نوع بلاگ")]
@@ -45,6 +42,7 @@ namespace Schools.Domain.Models.Blogs
         [Display(Name ="بازدید")]
         public int BlogVisit { get; set; }
 
+        [Display(Name = "تاریخ ساخت")]
         public DateTime CreateDate { get; set; }
 
         public bool IsDelete { get; set; }
@@ -52,8 +50,9 @@ namespace Schools.Domain.Models.Blogs
 
         #region Relation
         public BlogGroup BlogGroup { get; set; }
-        public List<BlogComment> BlogComment { get; set; }
         public BlogType BlogType { get; set; }
+        public List<BlogComment> BlogComment { get; set; }
+        
         #endregion
     }
 }
