@@ -80,5 +80,10 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Schools
             _context.Schools.Update(school);
             _context.SaveChanges();
         }
+
+        public bool IsSchoolExist(int schoolId)
+        {
+            return _context.Schools.Any(s => s.SchoolId == schoolId);
+        }
     }
 }

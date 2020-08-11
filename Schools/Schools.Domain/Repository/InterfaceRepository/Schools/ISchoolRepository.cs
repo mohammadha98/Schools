@@ -11,5 +11,6 @@ namespace Schools.Domain.Repository.InterfaceRepository.Schools
         void DeleteSchool(int schoolId);
         void AddSchool(School school);
         void EditSchool(School school);
+        bool IsSchoolExist(int schoolId);
     }
 }

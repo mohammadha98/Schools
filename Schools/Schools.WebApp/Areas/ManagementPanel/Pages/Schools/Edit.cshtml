@@ -1,7 +1,19 @@
 ﻿@page "{schoolId}"
+@using Schools.Application.Utilities.Convertors
+@using Schools.Domain.Models.Schools
+@using Schools.Domain.Models.Schools.Locations
+@using Schools.Domain.Repository.InterfaceRepository
+@using Schools.Domain.Repository.InterfaceRepository.Locations
 @model Schools.WebApp.Areas.ManagementPanel.Pages.Schools.EditModel
+@inject ILocationRepository _location
+@inject ISchoolGroupsRepository _groups
 @{
     var menuModel = "schools";
+    var allGroups = _groups.GetAllGroups();
+    var groups = allGroups.Where(g => g.ParentId == null).ToList();
+    var subGroups =allGroups.Where(g => g.ParentId == Model.School.GroupId).ToList();
+    var shires = _location.GetAllShires().ToList();
+    var cities = _location.GetAllCities().Where(c=>c.ShireId==Model.School.ShireId).ToList();
 }
 
 @if (Model.School != null)
@@ -19,16 +31,16 @@
                         <div class="box-body">
                             <div asp-validation-summary="All" class="text-danger"></div>
                             <form class="row" method="post" enctype="multipart/form-data">
-                                <input type="hidden" asp-for="School.ImageName"/>
-                                <input type="hidden" asp-for="School.IsDelete"/>
-                                <input type="hidden" asp-for="School.RegisterDate"/>
+                                <input type="hidden" asp-for="School.ImageName" />
+                                <input type="hidden" asp-for="School.RegisterDate" />
+                                <input type="hidden" asp-for="School.BuildDate" />
                                 <div class="col-lg-6 col-md-6" style="margin-top: 8px">
                                     <p>نام آموزشگاه</p>
-                                    <input type="text" asp-for="School.SchoolTitle" class="form-control" placeholder="نام آموزشکاه"/>
+                                    <input type="text" asp-for="School.SchoolTitle" class="form-control" placeholder="نام آموزشکاه" />
                                 </div>
                                 <div class="col-lg-6 col-md-6" style="margin-top: 8px">
                                     <p>مدیر آموزشگاه (شناسه کاربر را وارد کنید)</p>
-                                    <input type="text" asp-for="School.SchoolManager" class="form-control" placeholder="مدیر آموزشگاه"/>
+                                    <input type="text" asp-for="School.SchoolManager" class="form-control" placeholder="مدیر آموزشگاه" />
                                 </div>
                                 <div class="col-lg-12 col-md-12" style="margin-top: 8px">
                                     <p>Meta Description <span class="counter" style="padding: 2px; border-radius: 50%; font-size: 12px">0</span></p>
@@ -40,55 +52,69 @@
                                 </div>
                                 <div class="col-lg-6 col-md-6" style="margin-top: 8px">
                                     <p>شماره تلفن آموزشگاه (با - از هم جدا کنید)</p>
-                                    <input type="text" asp-for="School.SchoolPhone" class="form-control" placeholder="شماره تلفن ها"/>
+                                    <input type="text" asp-for="School.SchoolPhone" class="form-control" placeholder="شماره تلفن ها" />
                                 </div>
                                 <div class="col-lg-6 col-md-6" style="margin-top: 8px">
                                     <p>ایمیل آموزشگاه</p>
-                                    <input type="email" asp-for="School.SchoolEmail" class="form-control" placeholder="ایمیل"/>
+                                    <input type="email" asp-for="School.SchoolEmail" class="form-control" placeholder="ایمیل" />
                                 </div>
                                 <div class="col-lg-6 col-md-6" style="margin-top: 8px">
                                     <p>آدرس آموزشگاه</p>
-                                    <input type="text" asp-for="School.SchoolAddress" class="form-control" placeholder="آدرس آموزشگاه"/>
+                                    <input type="text" asp-for="School.SchoolAddress" class="form-control" placeholder="آدرس آموزشگاه" />
                                 </div>
                                 <div class="col-lg-6 col-md-6" style="margin-top: 8px">
                                     <p>فکس آموزشگاه</p>
-                                    <input type="text" class="form-control" asp-for="School.SchoolFax" placeholder="فکس"/>
+                                    <input type="text" class="form-control" asp-for="School.SchoolFax" placeholder="فکس" />
                                 </div>
-                                <div class="col-lg-4 col-md-4" style="margin-top: 8px">
+                                <div class="col-lg-6 col-md-6" style="margin-top: 8px">
                                     <p>استان</p>
-                                    <select class="form-control" asp-for="School.Shire">
+                                    <select class="form-control" asp-for="School.ShireId">
                                         <option value="0">انتخاب کنید</option>
+                                        @foreach (var item in shires)
+                                        {
+                                            <option value="@item.ShireId">@item.ShireTitle</option>
+
+                                        }
                                     </select>
                                 </div>
-                                <div class="col-lg-4 col-md-4" style="margin-top: 8px">
+                                <div class="col-lg-6 col-md-6" style="margin-top: 8px">
                                     <p>شهر</p>
-                                    <select class="form-control" asp-for="School.City">
+                                    <select class="form-control" asp-for="School.CityId">
                                         <option value="0">انتخاب کنید</option>
-                                    </select>
-                                </div>
-                                <div class="col-lg-4 col-md-4" style="margin-top: 8px">
-                                    <p>منطقه</p>
-                                    <select class="form-control" asp-for="School.AreaId">
-                                        <option value="null">انتخاب کنید</option>
+                                        @foreach (var item in cities)
+                                        {
+                                            <option value="@item.CityId">@item.CityTitle</option>
+
+                                        }
                                     </select>
                                 </div>
                                 <div class="col-lg-6 col-md-6" style="margin-top: 8px">
                                     <p>گروه</p>
                                     <select class="form-control" asp-for="School.GroupId">
                                         <option value="0">انتخاب کنید</option>
+                                        @foreach (var item in groups!)
+                                        {
+                                            <option value="@item.GroupId">@item.GroupTitle</option>
+
+                                        }
                                     </select>
                                 </div>
                                 <div class="col-lg-6 col-md-6" style="margin-top: 8px">
                                     <p>زیر گروه</p>
                                     <select class="form-control" asp-for="School.SubGroupId">
-                                        <option value="null">انتخاب کنید</option>
+                                        <option value="0">انتخاب کنید</option>
+                                        @foreach (var item in subGroups!)
+                                        {
+                                            <option value="@item.GroupId">@item.GroupTitle</option>
+
+                                        }
                                     </select>
                                 </div>
                                 <div class="col-lg-6 col-md-6" style="margin-top: 8px">
                                     <p>وضعیت آموزشگاه</p>
                                     <select class="form-control" asp-for="School.IsActive">
                                         <option class="text-success" value="true" selected="selected">فعال</option>
-                                        <option class="text-danger" value="true">غیر فعل</option>
+                                        <option class="text-danger" value="false">غیر فعل</option>
                                     </select>
                                 </div>
                                 <div class="col-lg-6 col-md-6" style="margin-top: 8px">
@@ -97,22 +123,31 @@
                                         <div class="input-group-addon">
                                             <i class="fa fa-calendar"></i>
                                         </div>
-                                        <input type="text" id="tarikh" class="form-control pull-right">
+                                        <input type="text" value="@Model.School.BuildDate.ToShamsi()" name="buildDate" class="form-control pull-right">
+
                                     </div>
+
+                                </div>
+                                <div class="col-lg-12 col-md-12" style="margin-top: 8px">
+                                    <p>کلمات  کلیدی <span class="text-muted">با '-' از هم جدا کنید </span></p>
+
+                                    <input type="text" class="form-control" asp-for="School.Tags" />
+
                                 </div>
                                 <div class="col-lg-6 col-md-6" style="margin-top: 8px">
+
+                                    <p>آلبوم عکس</p>
+                                    <input type="file" accept="image/*" multiple="" class="form-control" name="gallery" />
                                     <div class="alert alert-warning alert-dismissible">
                                         <button type="button" class="close pull-left" data-dismiss="alert" aria-hidden="true">×</button>
                                         <h4><i class="icon fa fa-warning"></i> توجه</h4>
                                         در صورت انتخاب عکس عکس های قبلی حذف می شوند
                                     </div>
-                                    <p>آلبوم عکس</p>
-                                    <input type="file" accept="image/*" multiple="" class="form-control" required="" name="gallery"/>
                                 </div>
                                 <div class="col-lg-6 col-md-6" style="margin-top: 8px">
                                     <p>عکس پروفایل</p>
-                                    <input type="file" accept="image/*" class="form-control" required="" name="avatar"/>
-                                    <img src="/images/schools/@Model.School.ImageName" style="width: 100%; max-height: 300px" alt="@Model.School.SchoolTitle"/>
+                                    <input type="file" accept="image/*" class="form-control" name="avatar" />
+                                    <img src="/images/schools/@Model.School.ImageName" style="width: 100%; max-height: 300px" alt="@Model.School.SchoolTitle" />
                                 </div>
                                 <button class="col-lg-12 btn btn-block btn-success btn-flat" style="margin-top: 12px">ثبت</button>
                             </form>
@@ -129,13 +164,10 @@
     <script src="/admin/dist/js/persian-datepicker-0.4.5.min.js"></script>
     <script src="/ckeditor5/build/ckeditor.js"></script>
     <script>
-        function showValue() {
-            console.log($("#tarikh").val());
-        }
 
         $(document).ready(function () {
             $('#tarikh').pDatepicker({
-                format: 'YYYY/MM/D',
+                format: 'YYYY/MM/D'
             });
         });
 
@@ -198,6 +230,37 @@
         $("#School_MetaDescription").keydown(function () {
             var len = $(this).val().length;
             $(".counter").html(len);
+        });
+
+        $("#School_ShireId").change(function() {
+            var shireId = $(this).val();
+            $.ajax({
+                url: "/ManagementPanel/Schools/GetCity?shireId=" + shireId,
+                type: "get",
+                beforeSend: function () {
+                    $(".loading").show();
+                },
+                complete: function () {
+                    $(".loading").hide();
+                }
+            }).done(function(data) {
+                $("#School_CityId").html(data);
+            });
+        });
+        $("#School_GroupId").change(function () {
+            var groupId = $(this).val();
+            $.ajax({
+                url: "/ManagementPanel/Schools/GetSubGroups?groupId=" + groupId,
+                type: "get",
+                beforeSend: function () {
+                    $(".loading").show();
+                },
+                complete: function () {
+                    $(".loading").hide();
+                }
+            }).done(function (data) {
+                $("#School_SubGroupId").html(data);
+            });
         });
     </script>
 

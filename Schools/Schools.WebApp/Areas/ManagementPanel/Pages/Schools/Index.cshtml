@@ -1,9 +1,15 @@
 ﻿@page "{handler?}"
+@using Schools.Application.Service.Interfaces.Locations
 @using Schools.Application.Utilities.Convertors
+@using Schools.Domain.Models.Schools
 @model Schools.WebApp.Areas.ManagementPanel.Pages.Schools.IndexModel
+@inject ILocationService _Location;
 @{
     var menuModel = "schools";
-
+    var shires = _Location.GetAllShire();
+    List<SchoolGroup> groups = ViewData["groups"] as List<SchoolGroup>;
+    List<SchoolGroup> subGroups = ViewData["subGroups"] as List<SchoolGroup>;
+    var cities = _Location.GetAllCityByShireId(Model.SchoolModel.ShireId);
 }
 <partial name="_MainMenu" model="menuModel" />
 
@@ -13,49 +19,60 @@
             <section class="col-lg-12 col-md-12">
                 <div class="box box-info">
                     <div class="box-header">
-                 
+
                         <form class="row" id="paginat">
-                            <input type="hidden" name="pageId" asp-for="SchoolModel.CurrentPage"/>
+                            <input type="hidden" name="pageId" asp-for="SchoolModel.CurrentPage" />
                             <div class="col-lg-4 col-md-4" style="margin-top: 8px">
                                 <p>نام آموزشگاه</p>
-                                <input type="text" asp-for="SchoolModel.SchoolName" class="form-control" placeholder="نام آموزشکاه" name="schoolName"/>
+                                <input type="text" asp-for="SchoolModel.SchoolName" class="form-control" placeholder="نام آموزشکاه" name="schoolName" />
                             </div>
                             <div class="col-lg-4 col-md-4" style="margin-top: 8px">
                                 <p>گروه</p>
                                 <select class="form-control" asp-for="SchoolModel.GroupId" name="groupId">
                                     <option value="0">انتخاب کنید</option>
+                                    @foreach (var item in groups)
+                                    {
+                                        <option value="@item.GroupId">@item.GroupTitle</option>
+                                    }
                                 </select>
                             </div>
                             <div class="col-lg-4 col-md-4" style="margin-top: 8px">
                                 <p>زیر گروه</p>
                                 <select class="form-control" asp-for="SchoolModel.ParentId" name="subId">
                                     <option value="0">انتخاب کنید</option>
+                                    @foreach (var item in subGroups)
+                                    {
+                                        <option value="@item.GroupId">@item.GroupTitle</option>
+                                    }
                                 </select>
                             </div>
                             <div class="col-lg-4 col-md-4" style="margin-top: 8px">
                                 <p>استان</p>
                                 <select class="form-control" asp-for="SchoolModel.ShireId" name="shireId">
                                     <option value="0">انتخاب کنید</option>
+                                    @foreach (var item in shires)
+                                    {
+                                        <option value="@item.ShireId">@item.ShireTitle</option>
+                                    }
                                 </select>
                             </div>
                             <div class="col-lg-4 col-md-4" style="margin-top: 8px">
                                 <p>شهر</p>
                                 <select class="form-control" asp-for="SchoolModel.CityId" name="cityId">
                                     <option value="0">انتخاب کنید</option>
+                                    @foreach (var item in cities)
+                                    {
+                                        <option value="@item.CityId">@item.CityTitle</option>
+                                    }
                                 </select>
                             </div>
-                            <div class="col-lg-4 col-md-4" style="margin-top: 8px">
-                                <p>منطقه</p>
-                                <select class="form-control" asp-for="SchoolModel.AreaId" name="areaId">
-                                    <option value="0">انتخاب کنید</option>
-                                </select>
-                            </div>
-                            <div class="col-lg-4 col-md-4" style="margin-top: 8px">
+
+                            <div class="col-lg-4 col-md-4" style="margin-top: 38px;">
                                 <button type="submit" class="btn btn-block btn-info">فیلتر</button>
 
                             </div>
                         </form>
-                        <hr/>
+                        <hr />
                         <a href="/ManagementPanel/Schools/add" class="btn btn-success btn-flat">افزودن آموزشگاه</a>
 
                     </div>
@@ -69,10 +86,8 @@
                                         <th>مدیر آموزشگاه</th>
                                         <th>استان</th>
                                         <th>شهر</th>
-                                        <th>منطقه</th>
                                         <th>تاریخ ثبت</th>
                                         <td>
-                                         
                                         </td>
                                     </tr>
                                 </thead>
@@ -85,12 +100,12 @@
                                             <td>@item.User.Name @item.User.Family</td>
                                             <td>@item.Shire.ShireTitle</td>
                                             <td>@item.City.CityTitle</td>
-                                            <td>@item.Area.AreaTitle</td>
                                             <td>@item.RegisterDate.ToShamsi()</td>
                                             <td>
-                                                <a href="/ManagementPanel/Schools/Teachers" class="btn btn-sm btn-flat btn-primary">مدرسین</a>
-                                                <a href="/ManagementPanel/Schools/Courses" class="btn btn-sm btn-flat btn-info">دوره ها</a>
-                                                <a href="/ManagementPanel/Schools/Detail" class="btn btn-sm btn-flat btn-success">جزییات</a>
+                                                <a href="/ManagementPanel/Schools/Edit/@item.SchoolId" class="btn btn-sm btn-flat btn-primary">ویرایش</a>
+                                                <a href="/ManagementPanel/Schools/Teachers/@item.SchoolId" class="btn btn-sm btn-flat btn-warning">مدرسین</a>
+                                                <a href="/ManagementPanel/Schools/Courses/@item.SchoolId" class="btn btn-sm btn-flat btn-info">دوره ها</a>
+                                                <a href="/ManagementPanel/Schools/Detail/@item.SchoolId" class="btn btn-sm btn-flat btn-success">جزییات</a>
                                                 <a class="btn btn-sm btn-danger btn-flat">حذف</a>
                                             </td>
                                         </tr>
@@ -144,7 +159,36 @@
             $("#SchoolModel_CurrentPage").val(pageId);
             $("#paginat").submit();
         }
-
-  
+        $("#SchoolModel_ShireId").change(function () {
+            var shireId = $(this).val();
+            $.ajax({
+                url: "/ManagementPanel/Schools/GetCity?shireId=" + shireId,
+                type: "get",
+                beforeSend: function () {
+                    $(".loading").show();
+                },
+                complete: function () {
+                    $(".loading").hide();
+                }
+            }).done(function (data) {
+                $("#SchoolModel_CityId").html(data);
+            });
+        });
+        $("#SchoolModel_GroupId").change(function () {
+            var groupId = $(this).val();
+            $.ajax({
+                url: "/ManagementPanel/Schools/GetSubGroups?groupId=" + groupId,
+                type: "get",
+                beforeSend: function () {
+                    $(".loading").show();
+                },
+                complete: function () {
+                    $(".loading").hide();
+                }
+            }).done(function (data) {
+                $("#SchoolModel_ParentId").html(data);
+            });
+        });
+    
     </script>
 }

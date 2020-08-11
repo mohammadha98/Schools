@@ -1,23 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Schools.Application.Service.Interfaces.Schools;
 using Schools.Domain.Models.Schools;
+using Schools.Domain.Repository.InterfaceRepository.Users;
 
 namespace Schools.WebApp.Areas.ManagementPanel.Pages.Schools
 {
     public class AddModel : PageModel
     {
         private ISchoolService _school;
+        private IUserRepository _user;
 
-        public AddModel(ISchoolService school)
+        public AddModel(ISchoolService school, IUserRepository user)
         {
             _school = school;
+            _user = user;
         }
         [BindProperty]
         public School School { get; set; }
@@ -25,15 +26,15 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.Schools
         {
         }
 
-        public IActionResult OnPost(string buildDate,List<IFormFile> gallery ,IFormFile avatar)
+        public IActionResult OnPost(string buildDate, List<IFormFile> gallery, IFormFile avatar)
         {
             if (School.ShireId == 0 || School.CityId == 0)
             {
-                ModelState.AddModelError("ShireId","لطفا موقعیت مکانی آموزشگاه را انتخاب کنید");
+                ModelState.AddModelError("ShireId", "لطفا موقعیت مکانی آموزشگاه را انتخاب کنید");
                 return Page();
             }
 
-            if (School.GroupId==0)
+            if (School.GroupId == 0)
             {
                 ModelState.AddModelError("GroupId", "لطفا گروه آموزشگاه را انتخاب کنید");
                 return Page();
@@ -65,16 +66,21 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.Schools
                 new PersianCalendar()//نوع تاریخ
             );
             School.BuildDate = dateConverted;
+            if (_user.GetUserById(School.SchoolManager) == null)
+            {
+                ModelState.AddModelError("SchoolManager", "کاربری با شناسه وارد شده وجود ندارد");
+                return Page();
 
-           var result=_school.AddNewSchool(School, gallery, avatar);
+            }
+            var result = _school.AddNewSchool(School, gallery, avatar);
 
-           if (result==false)
-           {
-               ModelState.AddModelError("avatar", "شما فقط مجاز به انتخاب عکس می باشید");
-               return Page();
-           }
+            if (result == false)
+            {
+                ModelState.AddModelError("avatar", "شما فقط مجاز به انتخاب عکس می باشید");
+                return Page();
+            }
 
-           return RedirectToPage("Index");
+            return RedirectToPage("Index");
         }
     }
 }

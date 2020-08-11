@@ -1,4 +1,115 @@
-﻿@page
+﻿@page "{schoolId}/{handler?}"
+@using Schools.Domain.Models.Schools
 @model Schools.WebApp.Areas.ManagementPanel.Pages.Schools.Teachers.IndexModel
 @{
+    var menuModel = "schools";
+    var counter = 1;
+    var school = ViewData["School"] as School;
+
+}
+@if (school == null)
+{
+
+}
+else
+{
+
+
+    <partial name="_MainMenu" model="menuModel" />
+
+    <div class="content-wrapper">
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box box-info">
+                        <div class="box-header">
+                            <h3 class="box-title">مدرسین آموزشگاه ' @school.SchoolTitle ' </h3>
+                        </div>
+                        <div class="box-body table-responsive no-padding">
+                            <a class="btn btn-success btn-flat" href="/ManagementPanel/Schools/Teachers/Add/@school.SchoolId" style="margin-bottom: 10px">افزودن مدرس</a>
+                            <table class="table table-hover">
+                                <tr>
+                                    <th>#</th>
+                                    <th>شناسه کاربری</th>
+                                    <th>نام و نام خانوادگی</th>
+                                    <td></td>
+                                </tr>
+                                <tbody>
+                                    @foreach (var teacher in Model.SchoolTeachers)
+                                    {
+                                        <tr>
+                                            <td>@counter</td>
+                                            <td>
+                                                <a href="#" target="_blank">@teacher.UserId</a>
+                                            </td>
+                                            <td>
+                                                @teacher.User.Name @teacher.User.Family
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-info btn-flat" href="/ManagementPanel/Schools/Teachers/Edit/@teacher.TeacherId/@teacher.SchoolId">ویرایش</a>
+                                                <a onclick="deleteItem(@teacher.TeacherId)" class="btn btn-danger btn-flat">حذف</a>
+                                            </td>
+                                        </tr>
+
+                                        counter += 1;
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+}
+@section Scripts
+{
+    <script>
+
+        function deleteItem(id) {
+            swal({
+                title: "اخطار !",
+                text: "آیا از حذف مدرس مطمعا هستید ؟",
+                icon: "warning",
+                buttons: ["لغو", "بله"]
+            }).then((isOk) => {
+                if (isOk) {
+                    $.ajax({
+                        url: "/ManagementPanel/Schools/Teachers/"+@school.SchoolId+"/DeleteTeacher?teacherId=" + id,
+                        type: "get",
+                        beforeSend: function () {
+                            $(".loading").show();
+                        },
+                        complete: function () {
+                            $(".loading").hide();
+                        }
+                    }).done(function (data) {
+                        if (data === "NotFound") {
+                            swal({
+                                title: "شناسه وارد شده نا معتبر است",
+                                icon: "error",
+                                button: "باشه"
+                            });
+                        }
+                        if (data === "Deleted") {
+                            swal({
+                                title: "اعملیات با موفقیت انجام شد",
+                                icon: "success",
+                                button: "باشه"
+                            }).then((isOk) => {
+                                location.reload();
+                            });
+                        } else {
+                            swal({
+                                title: "اعملیات به مشکل برخورد کرد",
+                                icon: "error",
+                                button: "باشه"
+                            });
+                        }
+                    });
+                }
+            });
+
+        }
+    </script>
 }

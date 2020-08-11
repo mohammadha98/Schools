@@ -1,27 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Schools.Application.Service.Interfaces.Schools;
 using Schools.Domain.Models.Schools;
 using Schools.Domain.Repository.InterfaceRepository.Schools;
+using Schools.Domain.Repository.InterfaceRepository.Users;
 
 namespace Schools.WebApp.Areas.ManagementPanel.Pages.Schools
 {
     public class EditModel : PageModel
     {
         private ISchoolService _school;
-        public ISchoolRepository  _repos { get; set; }
+        private ISchoolRepository _repos;
+        private IUserRepository _user;
 
-        public EditModel(ISchoolService school)
+        public EditModel(ISchoolService school, ISchoolRepository repos, IUserRepository user)
         {
             _school = school;
+            _repos = repos;
+            _user = user;
         }
-     
+
+      
+       
         [BindProperty]
         public School School { get; set; }
         public void OnGet(int schoolId)
@@ -31,12 +35,26 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.Schools
             {
                 Response.Redirect("/ManagementPanel/Schools");
             }
+            else
+            {
+         
+                School = school;
+            }
 
-            School = school;
+           
         }
 
         public IActionResult OnPost(int schoolId, string buildDate,List<IFormFile> gallery,IFormFile avatar)
         {
+            if (_user.GetUserById(School.SchoolManager) == null)
+            {
+                ModelState.AddModelError("SchoolManager", "کاربری با شناسه وارد شده وجود ندارد");
+                return Page();
+
+            }
+
+            School.SchoolId = schoolId;
+            School.IsDelete = false;
             if (School.ShireId == 0 || School.CityId == 0)
             {
                 ModelState.AddModelError("ShireId", "لطفا موقعیت مکانی آموزشگاه را انتخاب کنید");
@@ -53,11 +71,7 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.Schools
                 ModelState.AddModelError("buildDate", "لطفا تاریخ تاسیس آموزشگاه را انتخاب کنید");
                 return Page();
             }
-            if (avatar == null || gallery.Count < 1)
-            {
-                ModelState.AddModelError("avatar", "انتخاب عکس اجباری است");
-                return Page();
-            }
+       
             if (!ModelState.IsValid)
             {
                 return Page();

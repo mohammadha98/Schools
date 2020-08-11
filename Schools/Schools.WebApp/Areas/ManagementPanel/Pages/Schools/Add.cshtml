@@ -1,11 +1,14 @@
 ﻿@page
 @using Schools.Application.Service.Interfaces.Locations
 @using Schools.Application.Utilities.Convertors
+@using Schools.Domain.Repository.InterfaceRepository
 @model Schools.WebApp.Areas.ManagementPanel.Pages.Schools.AddModel
 @inject ILocationService _Location;
+@inject ISchoolGroupsRepository _Groups
 @{
     var menuModel = "schools";
     var shires = _Location.GetAllShire();
+    var groups = _Groups.GetAllGroups().Where(g => g.ParentId == null);
 }
 
 <partial name="_MainMenu" model="menuModel" />
@@ -54,9 +57,9 @@
                                 <p>فکس آموزشگاه</p>
                                 <input type="text" class="form-control" asp-for="School.SchoolFax" placeholder="فکس" />
                             </div>
-                            <div class="col-lg-4 col-md-4" style="margin-top: 8px">
+                            <div class="col-lg-6 col-md-6" style="margin-top: 8px">
                                 <p>استان</p>
-                                <select class="form-control"  asp-for="School.Shire">
+                                <select class="form-control" asp-for="School.ShireId">
                                     <option value="0">انتخاب کنید</option>
                                     @foreach (var item in shires)
                                     {
@@ -64,22 +67,20 @@
                                     }
                                 </select>
                             </div>
-                            <div class="col-lg-4 col-md-4" style="margin-top: 8px">
+                            <div class="col-lg-6 col-md-6" style="margin-top: 8px">
                                 <p>شهر</p>
-                                <select class="form-control" asp-for="School.City">
+                                <select class="form-control" asp-for="School.CityId">
                                     <option value="0">انتخاب کنید</option>
-                                </select>
-                            </div>
-                            <div class="col-lg-4 col-md-4" style="margin-top: 8px">
-                                <p>منطقه</p>
-                                <select class="form-control" asp-for="School.AreaId">
-                                    <option value="null">انتخاب کنید</option>
                                 </select>
                             </div>
                             <div class="col-lg-6 col-md-6" style="margin-top: 8px">
                                 <p>گروه</p>
                                 <select class="form-control" asp-for="School.GroupId">
                                     <option value="0">انتخاب کنید</option>
+                                    @foreach (var item in groups)
+                                    {
+                                        <option value="@item.GroupId">@item.GroupTitle</option>
+                                    }
                                 </select>
                             </div>
                             <div class="col-lg-6 col-md-6" style="margin-top: 8px">
@@ -92,7 +93,7 @@
                                 <p>وضعیت آموزشگاه</p>
                                 <select class="form-control" asp-for="School.IsActive">
                                     <option class="text-success" value="true" selected="selected">فعال</option>
-                                    <option class="text-danger" value="true">غیر فعل</option>
+                                    <option class="text-danger" value="false">غیر فعل</option>
                                 </select>
                             </div>
                             <div class="col-lg-6 col-md-6" style="margin-top: 8px">
@@ -101,8 +102,14 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    <input type="text" id="tarikh" class="form-control pull-right">
+                                    <input type="text" id="tarikh" name="buildDate" class="form-control pull-right">
                                 </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6" style="margin-top: 8px">
+                                <p>کلمات  کلیدی <span class="text-muted">با '-' از هم جدا کنید </span></p>
+                              
+                                    <input type="text" class="form-control" asp-for="School.Tags"/>
+                               
                             </div>
                             <div class="col-lg-6 col-md-6" style="margin-top: 8px">
                                 <p>آلبوم عکس</p>
@@ -139,7 +146,7 @@
     </script>
 
     <script>
-        $("#School_Shire").change(function() {
+        $("#School_ShireId").change(function() {
             var shireId = $(this).val();
             $.ajax({
                 url: "/ManagementPanel/Schools/GetCity?shireId=" + shireId,
@@ -151,7 +158,22 @@
                     $(".loading").hide();
                 }
             }).done(function(data) {
-                $("#School_City").html(data);
+                $("#School_CityId").html(data);
+            });
+        });
+        $("#School_GroupId").change(function () {
+            var groupId = $(this).val();
+            $.ajax({
+                url: "/ManagementPanel/Schools/GetSubGroups?groupId=" + groupId,
+                type: "get",
+                beforeSend: function () {
+                    $(".loading").show();
+                },
+                complete: function () {
+                    $(".loading").hide();
+                }
+            }).done(function (data) {
+                $("#School_SubGroupId").html(data);
             });
         });
         ClassicEditor

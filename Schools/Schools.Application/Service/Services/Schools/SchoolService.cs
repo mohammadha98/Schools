@@ -33,9 +33,9 @@ namespace Schools.Application.Service.Services.Schools
 
             //Filtering
 
-            if (string.IsNullOrEmpty(schoolName))
+            if (!string.IsNullOrEmpty(schoolName))
             {
-                result = result.Where(r => r.SchoolTitle == schoolName);
+                result = result.Where(r => r.SchoolTitle.Contains(schoolName));
             }
 
             if (groupId > 0)

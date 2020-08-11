@@ -44,7 +44,7 @@ namespace Schools.Application.Service.Services.Schools
 
         public void DeleteSchoolGalleries(int schoolId)
         {
-            var galleries = _gallery.GetSchoolGalleriesBySchoolId(schoolId);
+            var galleries = _gallery.GetSchoolGalleriesBySchoolId(schoolId).ToList();
             foreach (var gallery in galleries)
             {
                 //اگر فایلی در مسیر وارد شده وحود داشته باشه حذف میشه
