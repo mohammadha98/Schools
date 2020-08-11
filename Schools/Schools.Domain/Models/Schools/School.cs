@@ -87,6 +87,7 @@ namespace Schools.Domain.Models.Schools
         public List<SchoolTrainingType> SchoolTrainingTypes { get; set; }
         public List<SchoolCourse> SchoolCourses { get; set; }
         public List<SchoolVisit> SchoolVisits { get; set; }
+        public List<UserLike> UserLikes { get; set; }
         #endregion
     }
 }

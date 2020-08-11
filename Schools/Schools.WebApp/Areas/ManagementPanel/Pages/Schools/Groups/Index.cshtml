@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{handler?}"
 @model Schools.WebApp.Areas.ManagementPanel.Pages.Schools.Groups.IndexModel
 @{
     ViewData["Title"] = "گروه های آموزشگاها";
@@ -15,14 +15,7 @@
             <section class="col-lg-12 col-md-12">
                 <div class="box box-info">
                     <div class="box-header">
-                        <form class="row">
 
-                            <div class="col-lg-4 col-md-4" style="margin-top: 8px">
-                                <button type="submit" class="btn btn-block btn-info">فیلتر</button>
-
-                            </div>
-                        </form>
-                        <hr />
                         <a href="/ManagementPanel/Schools/Groups/Add" class="btn btn-success btn-flat">افزودن گروه</a>
                     </div>
                     <div class="box-body">
@@ -39,7 +32,7 @@
 
                                 <tbody>
 
-                                    @foreach (var Group in Model.List.Where(g=>g.ParentId == null))
+                                    @foreach (var Group in Model.List.Where(g => g.ParentId == null))
                                     {
                                         <tr>
                                             <td>@Group.GroupId</td>
@@ -51,8 +44,8 @@
                                                         <li>
                                                             <p>
                                                                 @sub.GroupTitle
-                                                                <a class="btn btn-danger btn-sm" href="/Schools/Groups/DeleteGroup/@sub.GroupId"><i class="glyphicon-eye-open"></i></a>
-                                                                <a class="btn btn-warning btn-sm" href="/Schools/Groups/EditGroup/@sub.GroupId"><i class="glyphicon-eye-open"></i></a>
+                                                                <a class="btn btn-danger btn-sm" onclick="deleteItem(@Group.GroupId)">حذف</a>
+                                                                <a class="btn btn-sm btn-info" href="/ManageMentPanel/Schools/Groups/Edit/@sub.GroupId">ویرایش</a>
                                                             </p>
                                                         </li>
 
@@ -60,9 +53,9 @@
                                                 </ul>
                                             </td>
                                             <td>
-                                                <a href="/ManageMentPanel/Schools?page=1&GroupId=@Group.GroupId" class="btn btn-info btn-sm">نمایش آموزشگاه های این گروه</a>
-                                                <a class="btn btn-warning btn-sm">ویرایش</a>
-                                                <a class="btn btn-danger btn-sm">حذف</a>
+                                                <a href="/ManagementPanel/Schools/Groups/AddSubGroup/@Group.GroupId" class="btn btn-success btn-sm">افزودن زیرگروه</a>
+                                                <a href="/ManageMentPanel/Schools/Groups/Edit/@Group.GroupId" class="btn btn-warning btn-sm">ویرایش</a>
+                                                <a onclick="deleteItem(@Group.GroupId)" class="btn btn-danger btn-sm">حذف</a>
 
                                             </td>
                                         </tr>
@@ -71,30 +64,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="dataTables_paginate paging_simple_numbers text-center" id="example2_paginate">
 
-                            <hr class="mt-0">
-
-                            <ul class="pagination">
-
-                                <li class="paginate_button previous disabled" id="example2_previous">
-                                    <a onclick="ChangePage(1)">1</a>
-                                </li>
-
-
-
-
-
-                                <li class="paginate_button active">
-                                    <a onclick="ChangePage(1)" href="javascript:void(0)">1</a>
-                                </li>
-
-                                <li class="paginate_button next" id="example2_next">
-                                    <a onclick="ChangePage(10)">10</a>
-                                </li>
-                            </ul>
-
-                        </div>
                     </div>
                 </div>
             </section>
@@ -102,3 +72,47 @@
     </section>
 </div>
 
+@section Scripts
+{
+    <script>
+
+        function deleteItem(id) {
+            swal({
+                title: "اخطار !!",
+                text: "آیا از حذف گروه مطمعا هستید؟",
+                icon: "warning",
+                buttons: ["خیر", "بله"]
+            }).then((isOk) => {
+                if (isOk) {
+                    $.ajax({
+                        url: "/ManagementPanel/Schools/Groups/DeleteGroup?groupId=" + id,
+                        type: "get",
+                        beforeSend: function() {
+                            $(".loading").show();
+                        },
+                        complete: function() {
+                            $(".loading").hide();
+                        }
+                    }).done(function(data) {
+                        if (data === "Deleted") {
+                            swal({
+                                title: "اعملیات با موفقیت انجام شد",
+                                icon: "success",
+                                button: "باشه"
+                            }).then((isOk) => {
+                                location.reload();
+                            });
+                        } else {
+                            swal({
+                                title: "اعملیات به مشکل برخورد کرد",
+                                icon: "error",
+                                button: "باشه"
+                            });
+                        }
+                    });
+                }
+            });
+
+        }
+    </script>
+}

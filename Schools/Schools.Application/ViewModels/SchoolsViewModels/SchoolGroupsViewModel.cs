@@ -4,11 +4,11 @@ using System.Text;
 
 namespace Schools.Application.ViewModels.SchoolsViewModels
 {
-    public class SchoolGroupsViewModel
+    public class AddSchoolGroupsViewModel
     {
         public string GroupTitle { get; set; }
         public bool IsDelete { get; set; }
-        public string? SubGroup { get; set; }
+        public int GroupId { get; set; }
 
     }
 }

@@ -7,9 +7,8 @@ namespace Schools.Domain.Models.Schools.Locations
     {
         [Key]
         public int ShireId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "لطفا نام استان را وارد کنید")]
         public string ShireTitle { get; set; }
-        [Required]
         public bool IsDelete { get; set; }
 
 

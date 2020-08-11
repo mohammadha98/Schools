@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Schools.Domain\Schools.Domain.csproj" />
     <ProjectReference Include="..\Schools.Infra.Data\Schools.Infra.Data.csproj" />
     <ProjectReference Include="..\Schools.Infra.IoC\Schools.Infra.IoC.csproj" />
   </ItemGroup>
@@ -37,6 +38,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
     <None Include="wwwroot\ckeditor5\build\ckeditor.js" />
     <None Include="wwwroot\ckeditor5\build\ckeditor.js.map" />
     <None Include="wwwroot\ckeditor5\build\translations\af.js" />

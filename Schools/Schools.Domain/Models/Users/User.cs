@@ -66,7 +66,7 @@ namespace Schools.Domain.Models.Users
         [InverseProperty("Receiver")]
         public List<UserMessage> ReceiverMessages { get; set; }
 
-        public List<SchoolLike> SchoolLikes { get; set; }
+        public List<UserLike> UserLikes { get; set; }
         public List<SchoolRate> SchoolRates { get; set; }
         #endregion
     }

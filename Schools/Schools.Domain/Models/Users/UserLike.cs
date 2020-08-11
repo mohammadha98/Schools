@@ -1,18 +1,13 @@
-﻿using Schools.Domain.Models.Users;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
+using Schools.Domain.Models.Schools;
 
-namespace Schools.Domain.Models.Schools
+namespace Schools.Domain.Models.Users
 {
-    public class SchoolLike
+    public class UserLike
     {
         [Key]
-
-        public int SchoolLikeId { get; set; }
+        public int UserLikeId { get; set; }
 
         [Required]
         public int SchoolId { get; set; }
@@ -20,10 +15,7 @@ namespace Schools.Domain.Models.Schools
         [Required]
         public int UserId { get; set; }
 
-        public bool isLiked { get; set; }
         public bool IsDelete { get; set; }
-
-
 
         #region relations
 
@@ -34,5 +26,4 @@ namespace Schools.Domain.Models.Schools
 
         #endregion
     }
-
 }

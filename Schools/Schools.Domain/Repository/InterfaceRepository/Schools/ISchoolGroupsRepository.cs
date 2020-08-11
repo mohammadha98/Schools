@@ -1,7 +1,6 @@
 ﻿using Schools.Domain.Models.Schools;
-using System;
 using System.Collections.Generic;
-using System.Text;
+
 
 namespace Schools.Domain.Repository.InterfaceRepository
 {
@@ -10,5 +9,7 @@ namespace Schools.Domain.Repository.InterfaceRepository
         List<SchoolGroup> GetAllGroups();
         SchoolGroup GetSchoolGroupById(int groupId);
         void CreateGroup(SchoolGroup schoolGroup);
+        void DeleteGroup(SchoolGroup schoolGroup);
+        void Update(SchoolGroup schoolGroup);
     }
 }

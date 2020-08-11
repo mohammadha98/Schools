@@ -435,34 +435,6 @@ namespace Schools.Infra.Data.Migrations
                     b.ToTable("SchoolGroups");
                 });
 
-            modelBuilder.Entity("Schools.Domain.Models.Schools.SchoolLike", b =>
-                {
-                    b.Property<int>("SchoolLikeId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("SchoolId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("isLiked")
-                        .HasColumnType("bit");
-
-                    b.HasKey("SchoolLikeId");
-
-                    b.HasIndex("SchoolId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("SchoolLikes");
-                });
-
             modelBuilder.Entity("Schools.Domain.Models.Schools.SchoolRate", b =>
                 {
                     b.Property<int>("RateId")
@@ -863,6 +835,31 @@ namespace Schools.Infra.Data.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("Schools.Domain.Models.Users.UserLike", b =>
+                {
+                    b.Property<int>("UserLikeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("SchoolId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserLikeId");
+
+                    b.HasIndex("SchoolId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserLikes");
+                });
+
             modelBuilder.Entity("Schools.Domain.Models.Users.UserNotification", b =>
                 {
                     b.Property<int>("NotificationId")
@@ -1037,21 +1034,6 @@ namespace Schools.Infra.Data.Migrations
                         .HasForeignKey("ParentId");
                 });
 
-            modelBuilder.Entity("Schools.Domain.Models.Schools.SchoolLike", b =>
-                {
-                    b.HasOne("Schools.Domain.Models.Schools.School", "School")
-                        .WithMany()
-                        .HasForeignKey("SchoolId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Schools.Domain.Models.Users.User", "User")
-                        .WithMany("SchoolLikes")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Schools.Domain.Models.Schools.SchoolRate", b =>
                 {
                     b.HasOne("Schools.Domain.Models.Schools.School", "School")
@@ -1187,6 +1169,21 @@ namespace Schools.Infra.Data.Migrations
                     b.HasOne("Schools.Domain.Models.Users.Tickets.TicketPriority", "TicketPriority")
                         .WithMany("UserTickets")
                         .HasForeignKey("PriorityId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Schools.Domain.Models.Users.UserLike", b =>
+                {
+                    b.HasOne("Schools.Domain.Models.Schools.School", "School")
+                        .WithMany("UserLikes")
+                        .HasForeignKey("SchoolId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Schools.Domain.Models.Users.User", "User")
+                        .WithMany("UserLikes")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
