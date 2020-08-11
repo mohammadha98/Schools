@@ -21,24 +21,7 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.Blogs.Groups
         public IEnumerable<BlogGroup> Groups { get; set; }
         public void OnGet(string parameter)
         {
-            //if (parameter == null)
-            //{
-                Groups = _blogGroupsRepository.GetAllGroups();
-            //}
-
-            if (parameter != null)
-            {
-                Groups = null;
-                var groupFilter = _blogGroupsRepository.GetGroupsByFilter(parameter);
-                Groups = groupFilter;
-            }
+            Groups = _blogGroupsRepository.GetAllGroups(parameter);
         }
-
-        //public IActionResult OnPost(string parameter)
-        //{
-        //    var groupFilter = _blogGroupsRepository.GetGroupsByFilter(parameter);
-        //    Groups = groupFilter;
-        //    return Page();
-        //}
     }
 }

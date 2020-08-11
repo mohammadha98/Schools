@@ -24,7 +24,7 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.Blogs.Groups
             groups = group;
         }
 
-        public IActionResult OnPost(int id)
+        public IActionResult OnPost()
         {
             var group = _blogGroupsRepository.GetGroupById(groups.GroupId);
             group.IsDelete = true;

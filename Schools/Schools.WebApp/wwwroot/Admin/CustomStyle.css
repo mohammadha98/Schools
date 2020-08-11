@@ -60,3 +60,46 @@
     min-height: 300px !important;
     font-family: 'iranyekan', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
 }
+
+/* Filter Section Blog Admin*/
+
+.term-categories .switch-field {
+    width: 100%;
+    overflow: hidden;
+    border: 1px solid #E8E8E8;
+}
+
+    .term-categories .switch-field input {
+        border: 0 none;
+        clip: rect(0px, 0px, 0px, 0px);
+        height: 1px;
+        overflow: hidden;
+        position: absolute;
+        width: 1px;
+    }
+
+    .term-categories .switch-field label {
+        background-color: #fff;
+        float: right;
+        color: #333;
+        display: inline-block;
+        font-size: 13px;
+        font-weight: normal;
+        padding: 5px 10px;
+        text-align: center;
+        text-shadow: none;
+        transition: all 0.1s ease-in-out 0s;
+        margin-bottom: 0;
+        width: 33.33%;
+        height: 38px;
+        line-height: 30px
+    }
+
+        .term-categories .switch-field label:hover {
+            cursor: pointer;
+        }
+
+    .term-categories .switch-field input:checked + label {
+        background-color: #2aaf27;
+        color: #fff
+    }

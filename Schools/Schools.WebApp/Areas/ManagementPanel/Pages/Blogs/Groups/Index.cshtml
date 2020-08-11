@@ -3,51 +3,56 @@
 @{
     var menuModel = "blogGroups";
 }
-    <partial name="_MainMenu" model="menuModel" />
-    <div class="content-wrapper">
-        <section class="content">
-            <div class="row">
-                <div class="col-xs-12">
-                    <a href="/ManagementPanel/Blogs/Groups/Add" class="btn btn-success btn-flat">افزودن گروه</a>
-                    <div class="box">
-                        <div class="box-header">
-                            <h3 class="box-title">گروه بلاگ ها</h3>
+<partial name="_MainMenu" model="menuModel" />
+<div class="content-wrapper">
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <a asp-page="Add" class="btn bg-olive margin">افزودن گروه</a>
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">گروه بلاگ ها</h3>
 
-                            <div class="box-tools">
-                                <div class="input-group input-group-sm" style="width: 150px;">
-                                    <form method="get">
+                        <div class="box-tools">
+                            <div class="input-group input-group-sm" style="width: 150px;">
+                                <form method="get">
+                                    <div class="input-group input-group-sm" style="width: 150px;">
                                         <input type="text" name="parameter" class="form-control pull-right" placeholder="جستجو">
+
                                         <div class="input-group-btn">
-                                            <button  type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                                         </div>
-                                    </form>
-                                </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
-                        <!-- /.box-header -->
-                        <div class="box-body table-responsive no-padding">
-                            <table class="table table-hover">
-                                <tr>
-                                    <th>شماره</th>
-                                    <th>عنوان</th>
-                                    <th>دستورات</th>
-                                </tr>
-                                @foreach (var item in Model.Groups)
-                                {
-                                    <tr>
-                                        <td>@item.GroupId</td>
-                                        <td>@item.GroupName</td>
-                                        <td><a asp-page="Edit" asp-route-id="@item.GroupId" class="btn btn-info">ویرایش</a>
-                                        <a asp-page="Delete" asp-route-id="@item.GroupId" class="btn btn-danger">حذف</a></td>
-                                    </tr>
-                                }
-                            </table>
-                        </div>
-
-                        <!-- /.box-body -->
                     </div>
-                    <!-- /.box -->
+                    <!-- /.box-header -->
+                    <div class="box-body table-responsive no-padding">
+                        <table class="table table-hover">
+                            <tr>
+                                <th>شماره</th>
+                                <th>عنوان</th>
+                                <th>دستورات</th>
+                            </tr>
+                            @foreach (var item in Model.Groups)
+                            {
+                                <tr>
+                                    <td>@item.GroupId</td>
+                                    <td>@item.GroupName</td>
+                                    <td>
+                                        <a asp-page="Edit" asp-route-id="@item.GroupId" class="btn btn-info">ویرایش</a>
+                                        <a asp-page="Delete" asp-route-id="@item.GroupId" class="btn btn-danger">حذف</a>
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    </div>
+
+                    <!-- /.box-body -->
                 </div>
+                <!-- /.box -->
             </div>
-        </section>
-    </div>
+        </div>
+    </section>
+</div>

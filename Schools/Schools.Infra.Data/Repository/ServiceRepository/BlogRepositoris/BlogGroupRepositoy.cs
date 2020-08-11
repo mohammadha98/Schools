@@ -16,20 +16,22 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.BlogRepositoris
         {
             _context = context;
         }
-        public IEnumerable<BlogGroup> GetAllGroups()
+        public IEnumerable<BlogGroup> GetAllGroups(string parameter)
         {
-            return _context.BlogGroups.ToList();
+            if (parameter == null)
+            {
+                return _context.BlogGroups.ToList();
+            }
+            else
+            {
+                var list = _context.BlogGroups.Where(c => c.GroupName.Contains(parameter) || c.GroupId.ToString().Contains(parameter)).ToList();
+                return list.Distinct().ToList();
+            }
         }
 
         public BlogGroup GetGroupById(int groupId)
         {
             return _context.BlogGroups.Find(groupId);
-        }
-
-        public IEnumerable<BlogGroup> GetGroupsByFilter(string parameter)
-        {
-            var list=_context.BlogGroups.Where(c => c.GroupName.Contains(parameter) || c.GroupId.ToString().Contains(parameter)).ToList();
-            return list.Distinct().ToList();
         }
 
         public void InsertGroup(BlogGroup blogGroup)
