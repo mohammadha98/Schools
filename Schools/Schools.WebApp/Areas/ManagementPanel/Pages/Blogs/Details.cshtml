@@ -1,5 +1,6 @@
 ﻿@page
 @model Schools.WebApp.Areas.ManagementPanel.Pages.Blogs.DetailsModel
+@using Schools.Application.Utilities.Convertors
 @{
     var menuModel = "blogs";
 }
@@ -25,15 +26,15 @@
                         </dt>
                         <dd><label asp-for="Blog.BlogText"></label></dd>
                         <dt>
-                            <textarea asp-for="Blog.BlogText" class="form-control" readonly ></textarea>
+                            <textarea rows="15" asp-for="Blog.BlogText" class="form-control" readonly></textarea>
                         </dt>
                         <dd><label asp-for="Blog.GroupId"></label></dd>
                         <dt>
-                            <input asp-for="Blog.GroupId" class="form-control" readonly />
+                            <input asp-for="Blog.BlogGroup.GroupName" class="form-control" readonly />
                         </dt>
                         <dd><label asp-for="Blog.TypeId"></label></dd>
                         <dt>
-                            <input asp-for="Blog.TypeId" class="form-control" readonly />
+                            <input asp-for="Blog.BlogType.TypeTitle" class="form-control" readonly />
                         </dt>
                         <dd><label asp-for="Blog.Tags"></label></dd>
                         <dt>
@@ -45,11 +46,7 @@
                         </dt>
                         <dd><label asp-for="Blog.CreateDate"></label></dd>
                         <dt>
-                            <input asp-for="Blog.CreateDate" class="form-control" readonly />
-                        </dt>
-                        <dd><label asp-for="Blog.ImageName"></label></dd>
-                        <dt>
-                            <img src="/images/blogs/@Model.Blog.ImageName" class="thumbnail" style="max-width:120px" />
+                           <input value="@Model.Blog.CreateDate.ToShamsi()" class="form-control" readonly/> 
                         </dt>
                         <dd></dd>
                     </dl>

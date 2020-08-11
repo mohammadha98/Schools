@@ -33,7 +33,7 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.Schools.Groups
             if (_schoolGroupsService.IsGroupHasSchool(groupId))
                 return Content("Error");
 
-            
+
             _schoolGroupsRepository.DeleteGroup(groupId);
             return Content("Deleted");
 

@@ -42,6 +42,7 @@ namespace Schools.Domain.Models.Blogs
         [Display(Name ="بازدید")]
         public int BlogVisit { get; set; }
 
+        [Display(Name = "تاریخ ساخت")]
         public DateTime CreateDate { get; set; }
 
         public bool IsDelete { get; set; }

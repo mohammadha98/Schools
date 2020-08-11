@@ -1,5 +1,6 @@
 ﻿@page
 @model Schools.WebApp.Areas.ManagementPanel.Pages.Blogs.IndexModel
+@using Schools.Application.Utilities.Convertors
 @{
     var menuModel = "blogs";
 }
@@ -16,7 +17,7 @@
 
                         <section class="term-categories">
                             <form id="formFilter" method="get">
-                                @{ 
+                                @{
                                     List<int> selected = ViewBag.GetType as List<int>;
                                 }
                                 <div class="col-md-4 col-sm-6 col-xs-12 pull-right">
@@ -52,7 +53,7 @@
                                 <th>عنوان</th>
                                 <th>تاریخ</th>
                                 <th>توضیح مختصر</th>
-                                <th>دستورات</th>
+                                <th></th>
                             </tr>
                             @foreach (var item in Model.Blogs)
                             {
@@ -61,7 +62,7 @@
                                     <td><img src="/images/blogs/@item.ImageName" class="thumbnail" style="max-width:120px" /></td>
                                     <td>@item.BlogType</td>
                                     <td>@item.Title</td>
-                                    <td>@item.CreateDate</td>
+                                    <td>@item.CreateDate.ToShamsi()</td>
                                     <td>@item.ShortDescription</td>
                                     <td>
                                         <a asp-page="Edit" asp-route-id="@item.BlogId" class="btn-sm btn-info">ویرایش</a>
