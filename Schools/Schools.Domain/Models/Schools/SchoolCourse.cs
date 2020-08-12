@@ -15,6 +15,7 @@ namespace Schools.Domain.Models.Schools
         public int SchoolId { get; set; }
         public bool IsDelete { get; set; }
         public bool IsActive { get; set; }
+
         #region Relations
 
         [ForeignKey("SchoolId")]

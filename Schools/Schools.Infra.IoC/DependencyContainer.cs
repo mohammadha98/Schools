@@ -14,6 +14,8 @@ using Schools.Domain.Repository.InterfaceRepository.Users;
 using Schools.Infra.Data.Repository.ServiceRepository.BlogRepositoris;
 using Schools.Infra.Data.Repository.ServiceRepository.Locations;
 using Schools.Infra.Data.Repository.ServiceRepository.Users;
+using Schools.Application.Service.Interfaces.Users;
+using Schools.Application.Service.Services.Users;
 
 namespace Schools.Infra.IoC
 {
@@ -58,6 +60,7 @@ namespace Schools.Infra.IoC
             #region Users
 
             service.AddScoped<IUserRepository, UserRepository>();
+            service.AddScoped<IUserService, UserService>();
 
             #endregion
         }
