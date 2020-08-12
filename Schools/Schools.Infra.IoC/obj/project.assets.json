@@ -5797,23 +5797,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Dour-Andish\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\mohammad\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Projects\\Repos\\Barnamenevisan\\Schools\\Schools.Infra.IoC\\Schools.Infra.IoC.csproj",
+      "projectUniqueName": "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Infra.IoC\\Schools.Infra.IoC.csproj",
       "projectName": "Schools.Infra.IoC",
-      "projectPath": "E:\\Projects\\Repos\\Barnamenevisan\\Schools\\Schools.Infra.IoC\\Schools.Infra.IoC.csproj",
-      "packagesPath": "C:\\Users\\Dour-Andish\\.nuget\\packages\\",
-      "outputPath": "E:\\Projects\\Repos\\Barnamenevisan\\Schools\\Schools.Infra.IoC\\obj\\",
+      "projectPath": "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Infra.IoC\\Schools.Infra.IoC.csproj",
+      "packagesPath": "C:\\Users\\mohammad\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Infra.IoC\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Dour-Andish\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\mohammad\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5826,11 +5822,11 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "E:\\Projects\\Repos\\Barnamenevisan\\Schools\\Schools.Application\\Schools.Application.csproj": {
-              "projectPath": "E:\\Projects\\Repos\\Barnamenevisan\\Schools\\Schools.Application\\Schools.Application.csproj"
+            "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Application\\Schools.Application.csproj": {
+              "projectPath": "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Application\\Schools.Application.csproj"
             },
-            "E:\\Projects\\Repos\\Barnamenevisan\\Schools\\Schools.Infra.Data\\Schools.Infra.Data.csproj": {
-              "projectPath": "E:\\Projects\\Repos\\Barnamenevisan\\Schools\\Schools.Infra.Data\\Schools.Infra.Data.csproj"
+            "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Infra.Data\\Schools.Infra.Data.csproj": {
+              "projectPath": "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Infra.Data\\Schools.Infra.Data.csproj"
             }
           }
         }
@@ -5878,7 +5874,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
       }
     }
   }

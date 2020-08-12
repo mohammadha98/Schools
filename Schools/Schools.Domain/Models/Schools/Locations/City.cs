@@ -19,7 +19,6 @@ namespace Schools.Domain.Models.Schools.Locations
         [ForeignKey("ShireId")]
         public Shire Shire { get; set; }
         public List<School> Schools { get; set; }
-        public List<Area> Areas { get; set; }
         #endregion
     }
 }

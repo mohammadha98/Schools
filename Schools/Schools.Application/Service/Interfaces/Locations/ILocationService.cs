@@ -7,7 +7,7 @@ namespace Schools.Application.Service.Interfaces.Locations
     {
         List<Shire> GetAllShire();
         List<City> GetAllCityByShireId(int shireId);
-        List<Area> GetAllAreaByCityId(int cityId);
+   
         bool IsShireHasASchool(int shireId);
         bool IsCityHasASchool(int cityId);
     }

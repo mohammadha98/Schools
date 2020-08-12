@@ -67,9 +67,6 @@ namespace Schools.Domain.Models.Schools
         [ForeignKey("CityId")]
         public City City { get; set; }
 
-        [ForeignKey("AreaId")]
-        public Area Area { get; set; }
-
         [ForeignKey("GroupId")]
         public SchoolGroup SchoolGroup { get; set; }
 

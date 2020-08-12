@@ -17,21 +17,17 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Locations
         }
         public IEnumerable<Shire> GetAllShires()
         {
-            return _context.Shires.Include(s => s.Cities).ThenInclude(s=>s.Areas);
+            return _context.Shires.Include(s => s.Cities);
         }
 
     
         public IEnumerable<City> GetAllCities()
         {
-            return _context.Cities.Include(s => s.Areas);
+            return _context.Cities;
 
         }
 
-        public IEnumerable<Area> GetAllAreas()
-        {
-            return _context.Areas;
-
-        }
+       
 
         public Shire GetShireById(int shireId)
         {
@@ -44,11 +40,6 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Locations
 
         }
 
-        public Area GetAreaById(int areaId)
-        {
-            return _context.Areas.SingleOrDefault(s => s.AreaId == areaId);
-
-        }
 
         public void AddShire(Shire shire)
         {
@@ -62,12 +53,7 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Locations
             _context.SaveChanges();
         }
 
-        public void AddArea(Area area)
-        {
-
-            _context.Areas.Add(area);
-            _context.SaveChanges();
-        }
+     
 
         public void EditShire(Shire shire)
         {
@@ -81,11 +67,7 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Locations
             _context.SaveChanges();
         }
 
-        public void EditArea(Area area)
-        {
-            _context.Areas.Update(area);
-            _context.SaveChanges();
-        }
+       
 
         public void DeleteShire(Shire shire)
         {

@@ -19,7 +19,6 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Schools
             return _context.Schools
                 .Include(s=>s.Shire)
                 .Include(s=>s.City)
-                .Include(s=>s.Area)
                 .Include(s=>s.User);
         }
 
@@ -38,7 +37,6 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Schools
                 .Include(s => s.SchoolSubGroup)
                 .Include(s => s.Shire)
                 .ThenInclude(s => s.Cities)
-                .ThenInclude(s => s.Areas)
                 .SingleOrDefault(s => s.SchoolId == schoolId);
         }
 
@@ -57,7 +55,6 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Schools
                 .Include(s=>s.SchoolSubGroup)
                 .Include(s=>s.Shire)
                 .ThenInclude(s=>s.Cities)
-                .ThenInclude(s=>s.Areas)
                 .SingleOrDefault(s => s.SchoolManager == userId);
 
         }
