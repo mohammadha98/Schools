@@ -23,8 +23,8 @@ namespace Schools.Application.Service.Services.Users
             var user = _IuserRepository.GetUserById(userId);
             UserInfoViewModel info = new UserInfoViewModel();
             info.User = user;
-            info.userRoles = _IuserRepository.GetAllRolesByUserId(user.UserId);
-
+            info.userRoles = _IuserRepository.GetAllUserRolesByUserId(user.UserId);
+            info.Schools = _IuserRepository.GetAllSchoolInUserLikesByUserId(user.UserId);
             return info;
         }
 

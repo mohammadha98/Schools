@@ -58,16 +58,16 @@ namespace Schools.Domain.Models.Users
 
         #region Relations
 
-        public  List<UserRole> UserRoles { get; set; }
-        public List<UserTicket> UserTickets { get; set; }
-        public List<UserNotification> UserNotifications { get; set; }
+        public virtual  List<UserRole> UserRoles { get; set; }
+        public virtual List<UserTicket> UserTickets { get; set; }
+        public virtual List<UserNotification> UserNotifications { get; set; }
         [InverseProperty("Sender")]
-        public List<UserMessage> SenderMessages { get; set; }
+        public virtual List<UserMessage> SenderMessages { get; set; }
         [InverseProperty("Receiver")]
-        public List<UserMessage> ReceiverMessages { get; set; }
+        public virtual List<UserMessage> ReceiverMessages { get; set; }
 
-        public List<UserLike> UserLikes { get; set; }
-        public List<SchoolRate> SchoolRates { get; set; }
+        public virtual List<UserLike> UserLikes { get; set; }
+        public virtual List<SchoolRate> SchoolRates { get; set; }
         #endregion
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Schools.Domain.Models.Schools;
 using Schools.Domain.Models.Users;
 using Schools.Domain.Repository.InterfaceRepository.Users;
 using Schools.Infra.Data.Context;
@@ -15,9 +16,14 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Users
             _context = context;
         }
 
-        public List<UserRole> GetAllRolesByUserId(int userId)
+        public List<School> GetAllSchoolInUserLikesByUserId(int userId)
         {
-            return _context.UserRoles.Where(u => u.UserId == userId).ToList();
+            return _context.UserLikes.Where(u => u.UserId == userId).Select(s => s.School).ToList();
+        }
+
+        public List<string> GetAllUserRolesByUserId(int userId)
+        {
+            return _context.UserRoles.Where(u => u.UserId == userId).Select(r => r.Role.RoleTitle).ToList();
         }
 
         public User GetUserById(int userId)
