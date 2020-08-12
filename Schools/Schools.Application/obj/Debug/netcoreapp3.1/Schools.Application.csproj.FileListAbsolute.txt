@@ -66,3 +66,8 @@ C:\Users\mohammad\source\repos\schools\Schools\Schools.Application\bin\Debug\net
 C:\Users\mohammad\source\repos\schools\Schools\Schools.Application\bin\Debug\netcoreapp3.1\Schools.Application.runtimeconfig.dev.json
 C:\Users\mohammad\source\repos\schools\Schools\Schools.Application\bin\Debug\netcoreapp3.1\Schools.Infra.Data.dll
 C:\Users\mohammad\source\repos\schools\Schools\Schools.Application\bin\Debug\netcoreapp3.1\Schools.Infra.Data.pdb
+E:\Projects\Repos\Barnamenevisan\Schools\Schools.Application\bin\Debug\netcoreapp3.1\Schools.Application.runtimeconfig.json
+E:\Projects\Repos\Barnamenevisan\Schools\Schools.Application\bin\Debug\netcoreapp3.1\Schools.Application.runtimeconfig.dev.json
+E:\Projects\Repos\Barnamenevisan\Schools\Schools.Application\bin\Debug\netcoreapp3.1\Schools.Infra.Data.dll
+E:\Projects\Repos\Barnamenevisan\Schools\Schools.Application\bin\Debug\netcoreapp3.1\Schools.Infra.Data.pdb
+E:\Projects\Repos\Barnamenevisan\Schools\Schools.Application\obj\Debug\netcoreapp3.1\Schools.Application.genruntimeconfig.cache

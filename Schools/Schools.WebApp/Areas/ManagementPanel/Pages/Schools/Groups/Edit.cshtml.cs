@@ -1,12 +1,41 @@
 
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ActionConstraints;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Schools.Domain.Models.Schools;
+using Schools.Domain.Repository.InterfaceRepository;
 
 namespace Schools.WebApp.Areas.ManagementPanel.Pages.Schools.Groups
 {
     public class EditModel : PageModel
     {
-        public void OnGet()
+        private ISchoolGroupsRepository _schoolGroupsRepository;
+        public EditModel(ISchoolGroupsRepository schoolGroupsRepository)
         {
+            _schoolGroupsRepository = schoolGroupsRepository;
+        }
+
+        [BindProperty]
+        public SchoolGroup SchoolGroup { get; set; }
+        
+
+        public void OnGet(int id)
+        {
+            if (id != null)
+                SchoolGroup = _schoolGroupsRepository.GetSchoolGroupById(id);
+        }
+
+        public IActionResult OnPost()
+        {
+
+            if (SchoolGroup != null)
+            {
+                _schoolGroupsRepository.Update(SchoolGroup);
+                return RedirectToPage("Index");
+            }
+
+            return Page();
+            
         }
     }
 }
