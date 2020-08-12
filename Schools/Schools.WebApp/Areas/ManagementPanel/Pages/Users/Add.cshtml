@@ -78,7 +78,15 @@
                             </div>
                         </div>
                         <div class="box-body">
-                            
+                            <div class="checkbox">
+                                @foreach (var item in Model.Roles)
+                                {
+                                    <label>
+                                        <input type="checkbox"> @item.RoleTitle
+                                    </label>
+                                    <br />
+                                }
+                            </div>
                         </div>
                         <!-- /.box-body -->
 

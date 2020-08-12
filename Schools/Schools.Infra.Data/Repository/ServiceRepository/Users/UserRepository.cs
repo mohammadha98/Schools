@@ -16,6 +16,11 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Users
             _context = context;
         }
 
+        public List<Role> GetAllRoles()
+        {
+            return _context.Roles.ToList();
+        }
+
         public List<School> GetAllSchoolInUserLikesByUserId(int userId)
         {
             return _context.UserLikes.Where(u => u.UserId == userId).Select(s => s.School).ToList();
