@@ -1,7 +1,10 @@
 ﻿@page
 @model Schools.WebApp.Areas.ManagementPanel.Pages.Blogs.AddModel
+@using Schools.Domain.Repository.InterfaceRepository.BlogRepositories;
+@inject IBlogGroupsRepository _groupRepository;
 @{
     var menuModel = "blogs";
+    var Groups = _groupRepository.GetAllGroups("");
 }
 <partial name="_MainMenu" model="menuModel" />
 
@@ -55,10 +58,13 @@
                                     <input asp-for="Blog.TypeId" value="2" type="radio" class="minimal-red">
                                 </label>
                             </div>
-
                             <div class="form-group">
                                 <label asp-for="Blog.GroupId"></label>
-                                <select asp-for="Blog.GroupId" class="form-control" asp-items="ViewBag.GroupId">
+                                <select asp-for="Blog.GroupId" class="form-control">
+                                    @foreach (var item in Groups)
+                                    {
+                                        <option value="@item.GroupId">@item.GroupName</option>
+                                    }
                                 </select>
                             </div>
 

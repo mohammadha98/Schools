@@ -24,9 +24,9 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.Blogs
         [BindProperty]
         public List<BlogsViewModels> Blogs { get; set; }
 
-        public void OnGet(string filter = "", int getType = 0)
+        public void OnGet(string filter = "", int getType = 0, List<int> selectedGroups = null)
         {
-            Blogs = _blogServices.FilterBlog(filter, getType);
+            Blogs = _blogServices.FilterBlog(filter, getType, selectedGroups);
         }
     }
 }

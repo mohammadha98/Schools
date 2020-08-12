@@ -19,7 +19,7 @@ namespace Schools.Application.Service.Services.Blogs
             _context = context;
         }
 
-        List<BlogsViewModels> IBlogServices.FilterBlog(string filter, int getType)
+        List<BlogsViewModels> IBlogServices.FilterBlog(string filter, int getType, List<int> selectedGroups = null)
         {
             IQueryable<Blog> result = _context.Blogs;
             if (!string.IsNullOrEmpty(filter))
@@ -41,6 +41,14 @@ namespace Schools.Application.Service.Services.Blogs
                         result = result.Where(c => c.TypeId == 2);
                         break;
                     }
+            }
+
+            if (selectedGroups != null && selectedGroups.Any())
+            {
+                foreach (int groupId in selectedGroups)
+                {
+                    result = result.Where(c => c.GroupId == groupId);
+                }
             }
             var query = result.Include(c=>c.BlogType).Select(c => new BlogsViewModels()
             {

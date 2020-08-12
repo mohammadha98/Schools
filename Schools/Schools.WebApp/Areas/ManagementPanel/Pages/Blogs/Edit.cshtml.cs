@@ -15,21 +15,17 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.Blogs
     public class EditModel : PageModel
     {
         private IBlogRepository _blogRepository;
-        private IBlogGroupsRepository _groupsRepository;
-        public EditModel(IBlogRepository blogRepository, IBlogGroupsRepository groupsRepository)
+        public EditModel(IBlogRepository blogRepository)
         {
             _blogRepository = blogRepository;
-            _groupsRepository = groupsRepository;
         }
 
         [BindProperty]
         public Blog Blog { get; set; }
-        public void OnGet(int id,string parameter)
+        public void OnGet(int id)
         {
             var blog = _blogRepository.GetBlogById(id);
             Blog = blog;
-            ViewData["GroupId"] = new SelectList(_groupsRepository.GetAllGroups(parameter), "GroupId", "GroupName");
-
         }
 
         public IActionResult OnPost(int id,IFormFile imgUp)
@@ -61,7 +57,6 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.Blogs
 
             _blogRepository.Save();
             return RedirectToPage("index");
-
         }
     }
 }

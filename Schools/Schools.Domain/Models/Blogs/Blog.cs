@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -49,7 +50,9 @@ namespace Schools.Domain.Models.Blogs
 
 
         #region Relation
+        [ForeignKey("GroupId")]
         public BlogGroup BlogGroup { get; set; }
+        [ForeignKey("TypeId")]
         public BlogType BlogType { get; set; }
         public List<BlogComment> BlogComment { get; set; }
         

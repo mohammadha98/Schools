@@ -8,6 +8,6 @@ namespace Schools.Application.Service.Interfaces.Blogs
 {
     public interface IBlogServices
     {
-        List<BlogsViewModels> FilterBlog(string filter = "", int getType = 0);
+        List<BlogsViewModels> FilterBlog(string filter = "", int getType = 0, List<int> selectedGroups = null);
     }
 }

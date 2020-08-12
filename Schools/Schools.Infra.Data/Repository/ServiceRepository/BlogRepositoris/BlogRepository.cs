@@ -22,7 +22,7 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.BlogRepositoris
         }
         public Blog GetBlogById(int blogId)
         {
-            return _context.Blogs.Find(blogId);
+            return _context.Blogs.Include(c => c.BlogGroup).Include(c=>c.BlogType).First(c => c.BlogId == blogId);
         }
         public void InsertBlog(Blog blog)
         {

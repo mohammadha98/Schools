@@ -15,17 +15,15 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.Blogs
     public class AddModel : PageModel
     {
         private IBlogRepository _blogRepository;
-        private IBlogGroupsRepository _groupsRepository;
-        public AddModel(IBlogRepository blogRepository,IBlogGroupsRepository groupsRepository)
+        public AddModel(IBlogRepository blogRepository)
         {
             _blogRepository = blogRepository;
-            _groupsRepository = groupsRepository;
         }
         [BindProperty]
         public Blog Blog { get; set; }
-        public void OnGet(string parameter)
+        public void OnGet()
         {
-            ViewData["GroupId"] = new SelectList(_groupsRepository.GetAllGroups(parameter), "GroupId", "GroupName");
+           
         }
         public IActionResult OnPost(IFormFile imgUp)
         {
@@ -40,8 +38,8 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.Blogs
                 Tags = Blog.Tags,
                 TypeId = Blog.TypeId,
                 GroupId = Blog.GroupId,
-                CreateDate=DateTime.Now
-        };
+                CreateDate = DateTime.Now
+            };
 
             _blogRepository.InsertBlog(blog);
             _blogRepository.Save();
