@@ -137,6 +137,7 @@
   <ItemGroup>
     <Folder Include="wwwroot\images\blogs\" />
     <Folder Include="wwwroot\images\schools\gallery\" />
+    <Folder Include="wwwroot\UserProfile\" />
   </ItemGroup>
 
 </Project>
