@@ -26,7 +26,9 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.Users
         public void OnGet(int id)
         {
             var user = _UserRepository.GetUserById(id);
-            UserInfoView = _userService.GetUserInfoByUserId(user.UserId);
+            if (user != null)
+                UserInfoView = _userService.GetUserInfoByUserId(user.UserId);
+
         }
     }
 }
