@@ -22,7 +22,7 @@ namespace Schools.Application.Service.Services.Schools
             if (group == null)
                 return true;
 
-            return group.SchoolGroups != null || group.SchoolsSub != null;
+            return group.Schools.Any() || group.SchoolsSub.Any();
         }
     }
 }

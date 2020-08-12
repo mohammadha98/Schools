@@ -25,11 +25,7 @@ namespace Schools.Application.Service.Services.Locations
             return _location.GetAllCities().Where(c => c.ShireId == shireId).ToList();
         }
 
-        public List<Area> GetAllAreaByCityId(int cityId)
-        {
-            return _location.GetAllAreas().Where(a => a.CityId == cityId).ToList();
-        }
-
+      
         public bool IsShireHasASchool(int shireId)
         {
             var shire = _location.GetShireById(shireId);

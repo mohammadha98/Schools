@@ -18,12 +18,10 @@
                     </div>
                     <div class="box-body">
                         <form class="row" method="post">
+                            <input type="hidden" asp-for="SchoolGroup.ParentId"/>
                             <div class="col-lg-12">
                                 <label>عنوان :</label>
-                                <input type="text" asp-for="SchoolGroup.GroupTitle" required="" class="form-control" placeholder="عنوان را وارد کنید" />
-                                <div class="checkbox">
-                                    <input type="checkbox" asp-for="SchoolGroup.IsDelete"/> حذف این گروه
-                                </div>
+                                <input type="text" asp-for="SchoolGroup.GroupTitle" required="" class="form-control" placeholder="عنوان را وارد کنید"/>
                                 <button type="submit" class="btn btn-warning" style="margin-top: 8px">ویرایش</button>
 
                             </div>

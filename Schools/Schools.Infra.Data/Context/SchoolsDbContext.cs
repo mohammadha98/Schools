@@ -29,7 +29,7 @@ namespace Schools.Infra.Data.Context
 
         public DbSet<Shire> Shires { get; set; }
         public DbSet<City> Cities { get; set; }
-        public DbSet<Area> Areas { get; set; }
+     
         #endregion
         #region Schools
 
@@ -93,8 +93,7 @@ namespace Schools.Infra.Data.Context
                 .HasQueryFilter(u => !u.IsDelete);
             modelBuilder.Entity<City>()
                 .HasQueryFilter(u => !u.IsDelete);
-            modelBuilder.Entity<Area>()
-                .HasQueryFilter(u => !u.IsDelete);
+          
             #endregion
 
             #region Schools

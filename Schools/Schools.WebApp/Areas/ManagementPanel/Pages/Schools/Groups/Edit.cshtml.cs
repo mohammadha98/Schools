@@ -17,25 +17,28 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.Schools.Groups
 
         [BindProperty]
         public SchoolGroup SchoolGroup { get; set; }
-        
+
 
         public void OnGet(int id)
         {
-            if (id != null)
-                SchoolGroup = _schoolGroupsRepository.GetSchoolGroupById(id);
+            var group = _schoolGroupsRepository.GetSchoolGroupById(id);
+            if (group == null)
+                Response.Redirect("/ManagementPanel/Schools/Groups");
+
+            SchoolGroup = group;
         }
 
-        public IActionResult OnPost()
+        public IActionResult OnPost(int id)
         {
+            SchoolGroup.GroupId = id;
+            SchoolGroup.IsDelete = false;
 
-            if (SchoolGroup != null)
+            if (!ModelState.IsValid)
             {
-                _schoolGroupsRepository.Update(SchoolGroup);
-                return RedirectToPage("Index");
+                return Page();
             }
-
-            return Page();
-            
+            _schoolGroupsRepository.Update(SchoolGroup);
+            return RedirectToPage("Index");
         }
     }
 }

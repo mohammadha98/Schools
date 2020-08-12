@@ -6,16 +6,12 @@
 
   <ItemGroup>
     <Compile Remove="Controller\**" />
-    <Compile Remove="Views\**" />
     <Compile Remove="wwwroot\AdminContent\**" />
     <Content Remove="Controller\**" />
-    <Content Remove="Views\**" />
     <Content Remove="wwwroot\AdminContent\**" />
     <EmbeddedResource Remove="Controller\**" />
-    <EmbeddedResource Remove="Views\**" />
     <EmbeddedResource Remove="wwwroot\AdminContent\**" />
     <None Remove="Controller\**" />
-    <None Remove="Views\**" />
     <None Remove="wwwroot\AdminContent\**" />
   </ItemGroup>
 
@@ -135,6 +131,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Views\" />
     <Folder Include="wwwroot\images\blogs\" />
     <Folder Include="wwwroot\images\schools\gallery\" />
     <Folder Include="wwwroot\UserProfile\" />

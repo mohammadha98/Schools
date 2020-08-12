@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using Schools.Domain.Models.Schools;
 using Schools.Domain.Repository.InterfaceRepository;
 using Schools.Infra.Data.Context;
@@ -22,8 +23,8 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Schools
 
         public void DeleteGroup(SchoolGroup schoolGroup)
         {
-            _context.SchoolGroups.Remove(schoolGroup);
-            _context.SaveChanges();
+            schoolGroup.IsDelete = true;
+            Update(schoolGroup);
         }
 
         public List<SchoolGroup> GetAllGroups()
@@ -33,7 +34,7 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Schools
 
         public SchoolGroup GetSchoolGroupById(int groupId)
         {
-            return _context.SchoolGroups.SingleOrDefault(g=>g.GroupId==groupId);
+            return _context.SchoolGroups.Include(s=>s.Schools).Include(s=>s.SchoolsSub).SingleOrDefault(g=>g.GroupId==groupId);
         }
 
         public void Update(SchoolGroup schoolGroup)
