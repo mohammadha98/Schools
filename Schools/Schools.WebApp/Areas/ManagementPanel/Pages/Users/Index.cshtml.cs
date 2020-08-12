@@ -22,5 +22,6 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.Users
         {
             usersForAdminPanelViewModel = _userService.GetUsersByFilter(username, pageId);
         }
+
     }
 }

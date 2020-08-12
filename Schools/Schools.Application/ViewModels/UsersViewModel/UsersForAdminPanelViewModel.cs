@@ -12,4 +12,10 @@ namespace Schools.Application.ViewModels.UsersViewModel
         public int PageCount { get; set; }
 
     }
+
+    public class UserInfoViewModel
+    {
+        public User User { get; set; }
+        public List<UserRole> userRoles { get; set; }
+    }
 }

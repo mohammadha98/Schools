@@ -18,6 +18,16 @@ namespace Schools.Application.Service.Services.Users
             _IuserRepository = userRepository;
         }
 
+        public UserInfoViewModel GetUserInfoByUserId(int userId)
+        {
+            var user = _IuserRepository.GetUserById(userId);
+            UserInfoViewModel info = new UserInfoViewModel();
+            info.User = user;
+            info.userRoles = _IuserRepository.GetAllRolesByUserId(user.UserId);
+
+            return info;
+        }
+
         public UsersForAdminPanelViewModel GetUsersByFilter(string username = "", int pageId = 1)
         {
             var list = _IuserRepository.GetUsers();

@@ -26,6 +26,7 @@
                                         <th>نام</th>
                                         <th>فامیل</th>
                                         <th>تاریخ ثبت نام</th>
+                                        <th>عملیات ها</th>
                                     </tr>
                                 </thead>
 
@@ -38,6 +39,9 @@
                                             <td>@item.Name</td>
                                             <td>@item.Family</td>
                                             <td>@item.RegisterDate</td>
+                                            <td>
+                                                <a class="btn btn-primary btn-sm" href="/ManagementPanel/Users/ShowProfile/@item.UserId">مشاهده پروفایل</a>
+                                            </td>
                                         </tr>
                                     }
 
