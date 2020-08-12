@@ -20,4 +20,9 @@ namespace Schools.Application.ViewModels.UsersViewModel
         public List<string> userRoles { get; set; }
         public List<School> Schools { get; set; }
     }
+
+    public class AddUserViewModel
+    {
+
+    }
 }
