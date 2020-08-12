@@ -22,7 +22,7 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Schools
 
         public void DeleteGroup(SchoolGroup schoolGroup)
         {
-            _context.Entry(schoolGroup).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
+            _context.SchoolGroups.Remove(schoolGroup);
             _context.SaveChanges();
         }
 
@@ -33,12 +33,12 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Schools
 
         public SchoolGroup GetSchoolGroupById(int groupId)
         {
-            return _context.SchoolGroups.Find(groupId);
+            return _context.SchoolGroups.SingleOrDefault(g=>g.GroupId==groupId);
         }
 
         public void Update(SchoolGroup schoolGroup)
         {
-            _context.Entry(schoolGroup).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _context.SchoolGroups.Update(schoolGroup);
             _context.SaveChanges();
         }
     }

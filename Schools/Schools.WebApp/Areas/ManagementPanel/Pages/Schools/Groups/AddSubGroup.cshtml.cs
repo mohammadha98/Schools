@@ -27,10 +27,13 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.Schools.Groups
 
         public void OnGet(int id)
         {
-            if (id != null && id != 0)
-            {
-                SchoolGroup = _schoolGroupsRepository.GetSchoolGroupById(id);
-            }
+            var group = _schoolGroupsRepository.GetSchoolGroupById(id);
+            if (group == null)
+                Response.Redirect("/ManagementPanel/Schools/Groups");
+
+            SchoolGroup = group;
+
+
         }
 
 

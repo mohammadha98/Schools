@@ -30,11 +30,15 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.Schools.Groups
 
         public IActionResult OnGetDeleteGroup(int groupId)
         {
+            var group = _schoolGroupsRepository.GetSchoolGroupById(groupId);
+            if (group == null)
+                return Content("NotFound");
+                
+            
             if (_schoolGroupsService.IsGroupHasSchool(groupId))
                 return Content("Error");
 
-
-            _schoolGroupsRepository.DeleteGroup(groupId);
+            _schoolGroupsRepository.DeleteGroup(group);
             return Content("Deleted");
 
 

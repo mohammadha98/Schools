@@ -21,7 +21,6 @@ namespace Schools.Domain.Models.Schools
         public int? SubGroupId { get; set; }
         public int ShireId { get; set; }
         public int CityId { get; set; }
-        public int? AreaId { get; set; }
         [Display(Name = "Meta Description")]
         [Required(ErrorMessage = "لطفا متا دیسکریپشن را وارد کنید")]
         public string MetaDescription { get; set; }
