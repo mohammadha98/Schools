@@ -8,92 +8,95 @@
 <partial name="_MainMenu" model="menuModel" />
 
 <div class="content-wrapper">
-    <section class="content">
-        <div class="row">
-            <section class="col-lg-12 col-md-12">
-                <div class="col-md-6">
-                    <div class="box">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">افزودن کاربر</h3>
+    <form role="form" method="post">
+        <section class="content">
+            <div class="row">
+                <section class="col-lg-12 col-md-12">
+                    <div class="col-md-6">
+                        <div class="box">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">افزودن کاربر</h3>
 
-                            <div class="box-tools pull-right">
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                                    <i class="fa fa-minus"></i>
-                                </button>
+                                <div class="box-tools pull-right">
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                        <i class="fa fa-minus"></i>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                        <div class="box-body">
-                            <form role="form" method="post">
+                            <div class="box-body">
+
                                 <label>نام کاربری :</label>
-                                <input type="text" class="form-control" placeholder="نام کاربری را وارد کنید" />
+                                <input type="text" asp-for="add.UserName" class="form-control" placeholder="نام کاربری را وارد کنید" />
                                 <br />
                                 <label>نام :</label>
-                                <input type="text" class="form-control" placeholder="نام را وارد کنید" />
+                                <input type="text" asp-for="add.Name" class="form-control" placeholder="نام را وارد کنید" />
                                 <br />
                                 <label>نام خانوادگی :</label>
-                                <input type="text" class="form-control" placeholder="نام خانوادگی را وارد کنید" />
+                                <input type="text" asp-for="add.Family" class="form-control" placeholder="نام خانوادگی را وارد کنید" />
                                 <br />
                                 <label>کلمه عبور :</label>
-                                <input type="text" class="form-control" placeholder="کلمه عبور را وارد کنید" />
+                                <input type="text" class="form-control" asp-for="add.Password" placeholder="کلمه عبور را وارد کنید" />
                                 <br />
-                                <input type="submit" class="btn btn-success" value="افزودن"/>
-                            </form>
+                                <input type="submit" class="btn btn-success" value="افزودن" />
+
+                            </div>
+                            <!-- /.box-body -->
+
                         </div>
-                        <!-- /.box-body -->
-                       
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="box">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">تصویر پروفایل</h3>
+                    <div class="col-md-6">
+                        <div class="box">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">تصویر پروفایل</h3>
 
-                            <div class="box-tools pull-right">
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                                    <i class="fa fa-minus"></i>
-                                </button>
+                                <div class="box-tools pull-right">
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                        <i class="fa fa-minus"></i>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                        <div class="box-body">
-                            <div>
-                                <img class="thumbnail" width="250" src="~/UserProfile/default.png" />
+                            <div class="box-body">
+                                <div>
+                                    <img class="thumbnail" width="250" src="~/UserProfile/default.png" />
+                                </div>
+                                <input type="file" asp-for="add.Image" />
                             </div>
-                            <input type="file"/>
+                            <!-- /.box-body -->
+
                         </div>
-                        <!-- /.box-body -->
+                    </div>
+                </section>
+                <section class="col-lg-12 col-md-12">
+                    <div class="col-md-6">
+                        <div class="box">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">انتخاب نقش</h3>
+
+                                <div class="box-tools pull-right">
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                        <i class="fa fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="box-body">
+                                <div class="checkbox">
+                                    @foreach (var item in Model.Roles)
+                                    {
+                                        <label>
+                                            <input type="checkbox" name="SelectedRoles" value="@item.RoleId"> @item.RoleTitle
+                                        </label>
+                                        <br />
+                                    }
+                                </div>
+                            </div>
+                            <!-- /.box-body -->
+
+                        </div>
 
                     </div>
-                </div>
-            </section>
-            <section class="col-lg-12 col-md-12">
-                <div class="col-md-6">
-                    <div class="box">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">انتخاب نقش</h3>
-
-                            <div class="box-tools pull-right">
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                                    <i class="fa fa-minus"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="box-body">
-                            <div class="checkbox">
-                                @foreach (var item in Model.Roles)
-                                {
-                                    <label>
-                                        <input type="checkbox"> @item.RoleTitle
-                                    </label>
-                                    <br />
-                                }
-                            </div>
-                        </div>
-                        <!-- /.box-body -->
-
-                    </div>
-                </div>
-                <div class="col-md-6"></div>
-            </section>
-        </div>
-    </section>
+                    <div class="col-md-6"></div>
+                </section>
+            </div>
+        </section>
+    </form>
 </div>

@@ -12,6 +12,8 @@ namespace Schools.Domain.Repository.InterfaceRepository.Users
         List<School> GetAllSchoolInUserLikesByUserId(int userId);
         List<Role> GetAllRoles();
         User GetUserById(int userId);
+        int AddUser(User user);
+        void AddRolesForUser(List<int> SelectedRoles, int userId);
         bool IsUserExist(int userId);
     }
 }

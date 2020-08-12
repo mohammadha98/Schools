@@ -16,6 +16,27 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Users
             _context = context;
         }
 
+        public void AddRolesForUser(List<int> SelectedRoles, int userId)
+        {
+            foreach(var item in SelectedRoles)
+            {
+                _context.UserRoles.Add(new UserRole()
+                {
+                    IsDelete = false,
+                    UserId = userId,
+                    RoleId = item,
+                });
+                _context.SaveChanges();
+            }
+        }
+
+        public int AddUser(User user)
+        {
+            _context.Users.Add(user);
+            _context.SaveChanges();
+            return user.UserId;
+        }
+
         public List<Role> GetAllRoles()
         {
             return _context.Roles.ToList();

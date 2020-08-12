@@ -1,4 +1,5 @@
-﻿using Schools.Domain.Models.Schools;
+﻿using Microsoft.AspNetCore.Http;
+using Schools.Domain.Models.Schools;
 using Schools.Domain.Models.Users;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,11 @@ namespace Schools.Application.ViewModels.UsersViewModel
 
     public class AddUserViewModel
     {
-
+        public string Name { get; set; }
+        public string Family { get; set; }        
+        public string UserName { get; set; }
+        public string Password { get; set; }
+        public List<int> SelectedRoles { get; set; }
+        public IFormFile Image { get; set; }
     }
 }
