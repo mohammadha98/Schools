@@ -796,3 +796,6 @@ E:\Projects\Repos\Barnamenevisan\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\
 C:\Users\mohammad\source\repos\schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Areas\ManagementPanel\Pages\Users\Index.cshtml.g.cs
 C:\Users\mohammad\source\repos\schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Areas\ManagementPanel\Pages\Users\ShowProfile.cshtml.g.cs
 E:\Projects\Repos\Barnamenevisan\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Areas\ManagementPanel\Pages\Users\Add.cshtml.g.cs
+D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Areas\ManagementPanel\Pages\Users\Add.cshtml.g.cs
+D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Areas\ManagementPanel\Pages\Users\Index.cshtml.g.cs
+D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Areas\ManagementPanel\Pages\Users\ShowProfile.cshtml.g.cs

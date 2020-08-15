@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Projects\\Repos\\Barnamenevisan\\Schools\\Schools.Infra.Data\\Schools.Infra.Data.csproj": {}
+    "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.Infra.Data\\Schools.Infra.Data.csproj": {}
   },
   "projects": {
-    "E:\\Projects\\Repos\\Barnamenevisan\\Schools\\Schools.Domain\\Schools.Domain.csproj": {
+    "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.Domain\\Schools.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Projects\\Repos\\Barnamenevisan\\Schools\\Schools.Domain\\Schools.Domain.csproj",
+        "projectUniqueName": "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.Domain\\Schools.Domain.csproj",
         "projectName": "Schools.Domain",
-        "projectPath": "E:\\Projects\\Repos\\Barnamenevisan\\Schools\\Schools.Domain\\Schools.Domain.csproj",
-        "packagesPath": "C:\\Users\\Dour-Andish\\.nuget\\packages\\",
-        "outputPath": "E:\\Projects\\Repos\\Barnamenevisan\\Schools\\Schools.Domain\\obj\\",
+        "projectPath": "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.Domain\\Schools.Domain.csproj",
+        "packagesPath": "C:\\Users\\ali\\.nuget\\packages\\",
+        "outputPath": "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Dour-Andish\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ali\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -71,24 +71,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "E:\\Projects\\Repos\\Barnamenevisan\\Schools\\Schools.Infra.Data\\Schools.Infra.Data.csproj": {
+    "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.Infra.Data\\Schools.Infra.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Projects\\Repos\\Barnamenevisan\\Schools\\Schools.Infra.Data\\Schools.Infra.Data.csproj",
+        "projectUniqueName": "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.Infra.Data\\Schools.Infra.Data.csproj",
         "projectName": "Schools.Infra.Data",
-        "projectPath": "E:\\Projects\\Repos\\Barnamenevisan\\Schools\\Schools.Infra.Data\\Schools.Infra.Data.csproj",
-        "packagesPath": "C:\\Users\\Dour-Andish\\.nuget\\packages\\",
-        "outputPath": "E:\\Projects\\Repos\\Barnamenevisan\\Schools\\Schools.Infra.Data\\obj\\",
+        "projectPath": "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.Infra.Data\\Schools.Infra.Data.csproj",
+        "packagesPath": "C:\\Users\\ali\\.nuget\\packages\\",
+        "outputPath": "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.Infra.Data\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Dour-Andish\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ali\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -101,8 +101,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "E:\\Projects\\Repos\\Barnamenevisan\\Schools\\Schools.Domain\\Schools.Domain.csproj": {
-                "projectPath": "E:\\Projects\\Repos\\Barnamenevisan\\Schools\\Schools.Domain\\Schools.Domain.csproj"
+              "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.Domain\\Schools.Domain.csproj": {
+                "projectPath": "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.Domain\\Schools.Domain.csproj"
               }
             }
           }
@@ -150,7 +150,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
         }
       }
     }
