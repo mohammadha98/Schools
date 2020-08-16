@@ -21,7 +21,7 @@ namespace Schools.WebApp
         {
             services.AddControllersWithViews();
             services.AddRazorPages();
-            services.AddDbContext<SchoolsDbContext>(options=>
+            services.AddDbContext<SchoolsDbContext>(options =>
             {
                 options.UseSqlServer("Data Source=.;Initial Catalog=Schools_DB;Integrated Security=true");
             });
@@ -54,7 +54,10 @@ namespace Schools.WebApp
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
-            
+                endpoints.MapControllerRoute(
+                        name: "default",
+                        pattern: "{controller=Intro}/{action=Index}/{id?}"
+                    );
             });
         }
 
