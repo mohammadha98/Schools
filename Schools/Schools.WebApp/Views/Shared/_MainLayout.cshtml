@@ -15,12 +15,19 @@
     <link rel="stylesheet" type="text/css" href="/css/icon.css">
     <link rel="stylesheet" type="text/css" href="/css/public.css">
     <link rel="stylesheet" type="text/css" href="/css/home.css">
+    <link rel="stylesheet" type="text/css" href="/css/Custom.css">
     <script src="/js/jquery.min.js"></script>
+    @await  RenderSectionAsync("Meta",false)
 
 </head>
 <body>
     <script src="/js/modernizr.js"></script>
-
+<div class="loading">
+    <div class="loading-body">
+        <img src="/loading/Double Ring-1.4s-200px.gif" />
+        <p>لطفا منتظر بمانید ...</p>
+    </div>
+</div>
     <div class="overlay"></div>
     <div class="top-layer">
         <div class="container">
@@ -51,7 +58,7 @@
             </div>
             <!-- /top bar -->
             <!-- main menu -->
-            <partial name="TopLayer/_MainMenu"/>
+            <partial name="TopLayer/_MainMenu" />
             <!--/ main menu -->
         </div>
 
@@ -59,7 +66,7 @@
         <partial name="TopLayer/_FixMenu" />
         <!-- /fixed-menu -->
 
-       @await RenderSectionAsync("Topic_Layer",false)
+        @await RenderSectionAsync("Topic_Layer", false)
 
     </div>
     @await RenderSectionAsync("Search", false)

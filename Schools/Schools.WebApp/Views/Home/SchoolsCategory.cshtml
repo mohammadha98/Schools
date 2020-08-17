@@ -1,0 +1,152 @@
+﻿@model Schools.Application.ViewModels.SchoolsViewModels.SchoolsCategoryViewModel
+@{
+    ViewData["Title"] = "SchoolsCategory";
+}
+@section Meta
+{
+    <link rel="stylesheet" type="text/css" href="/css/search.css">
+    <link rel="stylesheet" type="text/css" href="/css/form.css">
+}
+@section Topic_Layer
+{
+    <div class="container page-title">
+        <h1><a href="#"> جستجو در سایت </a></h1>
+        <ul itemtype="http://schema.org/BreadcrumbList" class="breadcrumb">
+            <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement"><a href="/" itemprop="item"><span itemprop="name"> بانک اطلاعاتی آموزشگاه ها </span></a></li>
+            <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement"><a href="#" itemprop="item" class="current"><span itemprop="name"> جستجو در سایت </span></a></li>
+        </ul>
+    </div>
+}
+<div class="container search-page">
+    <!-- search -->
+    <div class="search-option shadow-style">
+        <h2> جستجو در سایت </h2>
+        <span> جستجو بین @Model.SchoolCount آموزشگاه </span>
+        <form asp-controller="Home" id="filter_result" asp-action="SchoolCategory" method="get">
+            <input type="hidden" name="page" asp-for="CurrentPage" />
+            <select asp-for="ShireTitle" name="shireTitle" id="shires">
+                <option value=""> انتخاب استان </option>
+
+                @foreach (var item in Model.Shires)
+                {
+                    <option value="@item.ShireTitle"> استان @item.ShireTitle </option>
+                }
+
+
+            </select>
+            <select asp-for="CityTitle" name="cityTitle" id="cities">
+                <option value=""> انتخاب شهر </option>
+                @if (Model.Cities != null)
+                {
+                    @foreach (var item in Model.Cities)
+                    {
+                        <option value="@item.CityTitle">  @item.CityTitle </option>
+
+                    }
+
+                }
+
+            </select>
+            <select asp-for="CategoryTitle" name="categoryTitle">
+                <option value=""> انتخاب موضوع آموزشگاه </option>
+                @foreach (var item in Model.SchoolGroups)
+                {
+                    <option value="@item.GroupTitle"> @item.GroupTitle</option>
+
+                }
+            </select>
+            <input type="text" name="schoolName" asp-for="SchoolName" placeholder="نام آموزشگاه ...">
+            <input type="text" name="" asp-for="CourseName" placeholder="نام دوره ...">
+            <input type="text" name="" asp-for="TeacherName" placeholder="نام استاد ...">
+            <div class="search-row">
+                <div class="multi-radio-in-row">
+                    <div class="radio-option">
+                        <input asp-for="OrderBy" type="radio" value="all" name="orderBy" id="rd-1">
+                        <label for="rd-1"> همه آموزشگاه ها </label>
+                    </div>
+                    <div class="radio-option">
+                        <input asp-for="OrderBy" type="radio" value="popular" name="orderBy" id="rd-2">
+                        <label for="rd-2"> محبوب ترین ها </label>
+                    </div>
+                    <!-- بر اساس سال تاسیس -->
+                    <div class="radio-option">
+                        <input asp-for="OrderBy" type="radio" value="topHistory" name="orderBy" id="rd-3">
+                        <label for="rd-3"> با سابقه ترین ها </label>
+                    </div>
+                    <div class="radio-option">
+                        <input asp-for="OrderBy" type="radio" value="best" name="orderBy" id="rd-4">
+                        <label for="rd-4"> برترین ها </label>
+                    </div>
+                </div>
+                <button onclick="ChangePage(1)" type="submit"> جستجو کنید <i class="zmdi zmdi-search"></i></button>
+            </div>
+        </form>
+    </div>
+    <!-- /search -->
+
+    <div class="row">
+        <!-- item -->
+        @foreach (var item in Model.Schools)
+        {
+            <div class="col-md-3 col-sm-4 col-xs-6 section-item-col">
+                <section class="section-item shadow-style">
+                    <div class="img-layer">
+                        <span> @(item.CityTitle ?? item.ShireTitle) </span>
+                        <a href=""><img src="images/schools/@item.ImageName" alt="@item.Title"></a>
+                    </div>
+                    <h2><a href=""> <span class="category-name"> @item.CategoryTitle </span>  @item.Title </a></h2>
+                    <div class="detail">
+                        <span class="history"> <i class="zmdi zmdi-calendar-check"></i> @item.History سال سابقه </span>
+                        @switch (Model.OrderBy)
+                        {
+                            case "popular":
+                                {
+                                    <span class="like"><i class="zmdi zmdi-favorite-outline"></i>  @item.Like.ToString("#,0") </span>
+
+                                    break;
+                                }
+                            case "best":
+                                {
+                                    <span class="rating-star"><span class="readonly-rating-star" data-score="@item.Rate"></span></span>
+
+                                    break;
+                                }
+                        }
+                    </div>
+                </section>
+            </div>
+        }
+        <!-- /item -->
+
+    </div>
+    @if (Model.PageCount > 1)
+    {
+        <div class="pagination-layer">
+            <div class="inner">
+                @if (Model.CurrentPage > 1)
+                {
+                    <a onclick="ChangePage(@(Model.CurrentPage+1))" class="next-page disabled"> صفحه بعدی </a>
+                }
+
+                @for (var i = Model.StartPage; i <= Model.EndPage; i++)
+                {
+                    <a onclick="ChangePage(@i)" class="@((i == Model.CurrentPage ? "page current" : "page"))">@i</a>
+                }
+                @if (Model.CurrentPage < Model.PageCount)
+                {
+                    <a onclick="ChangePage(@(Model.CurrentPage-1))" class="prev-page"> صفحه قبلی </a>
+                }
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts
+{
+    <script>
+        function ChangePage(pageId) {
+            $("#CurrentPage").val(pageId);
+            $("#filter_result").submit();
+        }
+    </script>
+}

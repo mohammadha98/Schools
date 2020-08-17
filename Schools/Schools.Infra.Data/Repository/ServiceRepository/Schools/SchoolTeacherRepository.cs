@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using Schools.Domain.Models.Schools.Teachers;
 using Schools.Domain.Repository.InterfaceRepository.Schools;
 using Schools.Infra.Data.Context;

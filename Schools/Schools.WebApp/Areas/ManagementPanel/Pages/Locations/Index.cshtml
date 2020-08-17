@@ -17,11 +17,12 @@
                     </div>
                     <div class="box-body table-responsive no-padding">
                         <a class="btn btn-success btn-flat" href="/ManagementPanel/Locations/Add" style="margin-bottom: 10px">ثبت استان جدید</a>
-                        <table class="table table-hover">
+                        <table class="table table-hover text-center">
                             <tr>
                                 <th>#</th>
                                 <th>عنوان</th>
                                 <th>تعداد شهر</th>
+                                <th>جزیره</th>
                                 <td></td>
                             </tr>
 
@@ -32,8 +33,21 @@
                                     <td>@item.ShireTitle</td>
                                     <td>@item.Cities.Count</td>
                                     <td>
+                                        @if (item.IsLand)
+                                        {
+                                            <i class="fa fa-check text-success"></i>
+                                        }
+                                        else
+                                        {
+                                            <i class="fa fa-close text-danger"></i>
+                                        }
+                                    </td>
+                                    <td>
                                         <a href="/ManagementPanel/Locations/Edit/@item.ShireId" class="btn btn-info btn-flat">ویرایش</a>
-                                        <a href="/ManagementPanel/Locations/Cities/@item.ShireId" class="btn btn-primary btn-flat">شهر ها</a>
+                                        @if (!item.IsLand)
+                                        {
+                                            <a href="/ManagementPanel/Locations/Cities/@item.ShireId" class="btn btn-primary btn-flat">شهر ها</a>
+                                        }
                                         <a onclick="deleteItem(@item.ShireId)" class="btn btn-danger btn-flat">حذف</a>
                                     </td>
                                 </tr>
@@ -87,7 +101,7 @@
                         } else {
                             swal({
                                 title: "اعملیات به مشکل برخورد کرد",
-                               
+
                                 icon: "error",
                                 button: "باشه"
                             });

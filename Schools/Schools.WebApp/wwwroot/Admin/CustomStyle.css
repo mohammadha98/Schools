@@ -21,7 +21,9 @@
         width: 90% !important;
     }
 }
-
+.mt-1 {
+    margin-top: 10px !important;
+}
 .loading-body {
     width: 40%;
     margin: auto;

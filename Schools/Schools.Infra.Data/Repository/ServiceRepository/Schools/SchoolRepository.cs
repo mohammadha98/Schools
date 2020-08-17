@@ -18,8 +18,14 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Schools
         {
             return _context.Schools
                 .Include(s=>s.Shire)
+                .Include(s=>s.UserLikes)
+                .Include(s=>s.SchoolRates)
+                .Include(s=>s.Shire)
                 .Include(s=>s.City)
-                .Include(s=>s.User);
+                .Include(s=>s.User)
+                .Include(s=>s.SchoolTeachers)
+                .ThenInclude(s=>s.User)
+                ;
         }
 
         public School GetSchoolBySchoolId(int schoolId)

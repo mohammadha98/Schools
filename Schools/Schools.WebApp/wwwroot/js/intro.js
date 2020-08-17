@@ -82,9 +82,32 @@ $(function(){
         else {
             $('.content .left-col .list.province .select-options .item-title').html('').html('انتخاب کنید').removeClass('active');
         }
-
-        $('.description-layer').fadeIn();
-        $('.description-layer > span.item-title').html('').html(title);
+        //Get Data From Server
+        $.ajax({
+            url: "/intro/GetShireInfo?title=" + title,
+            type:"get",
+            beforeSend: function () {
+                $(".loading").show();
+            },
+            complete: function () {
+                $(".loading").hide();
+            }
+        }).done(function(data) {
+            if (data !== "Error") {
+                $('.description-layer').fadeIn();
+                $('.description-layer > span.item-title').html('').html(title);
+                $('.item-count i').html(data);
+                if (data === "0") {
+                    $('.view-btn').css('display', 'none');
+                    $('.submit-btn').css("float", 'none');
+                } else {
+                    $('.view-btn').css('display', 'block');
+                    $('.view-btn').attr('href', '/Schools?ShireTitle='+title);
+                    $('.submit-btn').css("float", 'left');
+                }
+            }
+        });
+       
     });
 
     $('.main-menu .responsive-menu').click(function(){

@@ -9,9 +9,9 @@ namespace Schools.Domain.Models.Schools.Locations
         public int ShireId { get; set; }
         [Required(ErrorMessage = "لطفا نام استان را وارد کنید")]
         public string ShireTitle { get; set; }
+        public string EnglishName { get; set; }
         public bool IsDelete { get; set; }
-
-
+        public bool IsLand { get; set; }
         #region Relations
         public List<School> Schools { get; set; }
         public List<City> Cities { get; set; }
