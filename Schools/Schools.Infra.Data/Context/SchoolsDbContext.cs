@@ -1,10 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
-using Schools.Domain.Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Schools.Domain.Models.Blogs;
 using Schools.Domain.Models.Schools;
 using Schools.Domain.Models.Schools.Locations;
@@ -13,7 +8,6 @@ using Schools.Domain.Models.Schools.TrainingTypes;
 using Schools.Domain.Models.Users;
 using Schools.Domain.Models.Users.Messages;
 using Schools.Domain.Models.Users.Tickets;
-
 
 namespace Schools.Infra.Data.Context
 {

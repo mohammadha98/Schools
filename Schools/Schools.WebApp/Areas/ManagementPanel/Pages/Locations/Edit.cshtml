@@ -17,13 +17,25 @@
 
                     <div class="box-body">
                         <form method="post" class="row">
-                            <div class="col-lg-12">
-                                <input type="hidden" asp-for="Shire.ShireId" />
-                                <input type="hidden" asp-for="Shire.IsDelete" />
+                            <input type="hidden" asp-for="Shire.ShireId" />
+                            <div class="col-lg-6">
                                 <p>نام استان </p>
-                                <input type="text" class="form-control" asp-for="Shire.ShireTitle" />
-                                <br class="col-lg-12" />
-                                <button type="submit" class="btn btn-success btn-flat">ثبت تغییرات</button>
+                                <input type="text" required="" class="form-control" asp-for="Shire.ShireTitle" />
+                            </div>
+                            <div class="col-lg-6 mt-1">
+                                <p>نام انگلیسی </p>
+                                <input type="text" required="" class="form-control" asp-for="Shire.EnglishName" />
+                            </div>
+                            <div class="col-lg-12 mt-1">
+                                <p>نوع</p>
+                                <select asp-for="Shire.IsLand" class="form-control">
+                                    <option value="false">استان</option>
+                                    <option value="true">جزیره</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-12 mt-1">
+                                <button type="submit" class="btn btn-success btn-flat btn-block">ثبت</button>
+
                             </div>
                         </form>
                     </div>

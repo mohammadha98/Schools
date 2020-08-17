@@ -121,3 +121,18 @@ $(function(){
     });
 
 });
+$("#shires").change(function() {
+    var shireTitle = $("#shires").val();
+    $.ajax({
+        url: "/GetCityByShireId/" + shireTitle,
+        type: "get",
+        beforeSend: function () {
+            $(".loading").show();
+        },
+        complete: function () {
+            $(".loading").hide();
+        }
+    }).done(function(data) {
+        $("#cities").html(data);
+    });
+});

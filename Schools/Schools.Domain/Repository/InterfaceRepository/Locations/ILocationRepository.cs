@@ -9,6 +9,8 @@ namespace Schools.Domain.Repository.InterfaceRepository.Locations
         IEnumerable<City> GetAllCities();
       
         Shire GetShireById(int shireId);
+        Shire GetShireByTitle(string shireTitle);
+        Shire GetShireByEnglishName(string englishName);
         City GetCityById(int cityId);
        
         void AddShire(Shire shire);

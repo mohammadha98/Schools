@@ -23,7 +23,7 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Locations
     
         public IEnumerable<City> GetAllCities()
         {
-            return _context.Cities;
+            return _context.Cities.Include(c=>c.Shire);
 
         }
 
@@ -32,6 +32,17 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Locations
         public Shire GetShireById(int shireId)
         {
             return _context.Shires.Include(s=>s.Schools).SingleOrDefault(s => s.ShireId == shireId);
+        }
+
+        public Shire GetShireByTitle(string shireTitle)
+        {
+            return _context.Shires.Include(s => s.Schools).SingleOrDefault(s => s.ShireTitle == shireTitle);
+        }
+
+        public Shire GetShireByEnglishName(string englishName)
+        {
+            return _context.Shires.Include(s => s.Schools).SingleOrDefault(s => s.EnglishName == englishName);
+
         }
 
         public City GetCityById(int cityId)

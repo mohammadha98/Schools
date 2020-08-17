@@ -29,7 +29,12 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Schools
 
         public List<SchoolGroup> GetAllGroups()
         {
-            return _context.SchoolGroups.ToList();
+            return _context.SchoolGroups
+                .Include(g=>g.Schools)
+                .ThenInclude(s=>s.Shire)
+                .Include(g=>g.SchoolsSub)
+                .ThenInclude(g=>g.Shire)
+                .ToList();
         }
 
         public SchoolGroup GetSchoolGroupById(int groupId)

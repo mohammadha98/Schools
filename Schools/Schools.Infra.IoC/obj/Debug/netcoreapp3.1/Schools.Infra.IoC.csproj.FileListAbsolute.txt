@@ -64,6 +64,10 @@ E:\Projects\Repos\Barnamenevisan\Schools\Schools.Infra.IoC\obj\Debug\netcoreapp3
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.Infra.IoC\bin\Debug\netcoreapp3.1\Schools.Infra.IoC.runtimeconfig.json
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.Infra.IoC\bin\Debug\netcoreapp3.1\Schools.Infra.IoC.runtimeconfig.dev.json
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.Infra.IoC\obj\Debug\netcoreapp3.1\Schools.Infra.IoC.genruntimeconfig.cache
+D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.Infra.IoC\obj\Debug\netcoreapp3.1\Schools.Infra.IoC.csproj.CoreCompileInputs.cache
+E:\Projects\Repos\Barnamenevisan\Schools\Schools.Infra.IoC\bin\Debug\netcoreapp3.1\Schools.Infra.IoC.runtimeconfig.json
+E:\Projects\Repos\Barnamenevisan\Schools\Schools.Infra.IoC\bin\Debug\netcoreapp3.1\Schools.Infra.IoC.runtimeconfig.dev.json
+E:\Projects\Repos\Barnamenevisan\Schools\Schools.Infra.IoC\obj\Debug\netcoreapp3.1\Schools.Infra.IoC.genruntimeconfig.cache
 C:\Users\mohammad\source\repos\schools\Schools\Schools.Infra.IoC\bin\Debug\netcoreapp3.1\Schools.Infra.IoC.deps.json
 C:\Users\mohammad\source\repos\schools\Schools\Schools.Infra.IoC\bin\Debug\netcoreapp3.1\Schools.Infra.IoC.runtimeconfig.json
 C:\Users\mohammad\source\repos\schools\Schools\Schools.Infra.IoC\bin\Debug\netcoreapp3.1\Schools.Infra.IoC.runtimeconfig.dev.json
@@ -81,7 +85,3 @@ C:\Users\mohammad\source\repos\schools\Schools\Schools.Infra.IoC\obj\Debug\netco
 C:\Users\mohammad\source\repos\schools\Schools\Schools.Infra.IoC\obj\Debug\netcoreapp3.1\Schools.Infra.IoC.csproj.CopyComplete
 C:\Users\mohammad\source\repos\schools\Schools\Schools.Infra.IoC\obj\Debug\netcoreapp3.1\Schools.Infra.IoC.dll
 C:\Users\mohammad\source\repos\schools\Schools\Schools.Infra.IoC\obj\Debug\netcoreapp3.1\Schools.Infra.IoC.pdb
-E:\Projects\Repos\Barnamenevisan\Schools\Schools.Infra.IoC\bin\Debug\netcoreapp3.1\Schools.Infra.IoC.runtimeconfig.json
-E:\Projects\Repos\Barnamenevisan\Schools\Schools.Infra.IoC\bin\Debug\netcoreapp3.1\Schools.Infra.IoC.runtimeconfig.dev.json
-E:\Projects\Repos\Barnamenevisan\Schools\Schools.Infra.IoC\obj\Debug\netcoreapp3.1\Schools.Infra.IoC.genruntimeconfig.cache
-D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.Infra.IoC\obj\Debug\netcoreapp3.1\Schools.Infra.IoC.csproj.CoreCompileInputs.cache
