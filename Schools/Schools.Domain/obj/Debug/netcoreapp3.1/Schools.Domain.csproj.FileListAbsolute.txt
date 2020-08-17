@@ -46,6 +46,6 @@ E:\Projects\Repos\Barnamenevisan\Schools\Schools.Domain\obj\Debug\netcoreapp3.1\
 E:\Projects\Repos\Barnamenevisan\Schools\Schools.Domain\obj\Debug\netcoreapp3.1\Schools.Domain.csproj.CoreCompileInputs.cache
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.Domain\bin\Debug\netcoreapp3.1\Schools.Domain.runtimeconfig.json
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.Domain\bin\Debug\netcoreapp3.1\Schools.Domain.runtimeconfig.dev.json
-D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.Domain\obj\Debug\netcoreapp3.1\Schools.Domain.csproj.CoreCompileInputs.cache
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.Domain\obj\Debug\netcoreapp3.1\Schools.Domain.genruntimeconfig.cache
 E:\Projects\Repos\Barnamenevisan\Schools\Schools.Domain\obj\Debug\netcoreapp3.1\Schools.Domain.csprojAssemblyReference.cache
+D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.Domain\obj\Debug\netcoreapp3.1\Schools.Domain.csproj.CoreCompileInputs.cache

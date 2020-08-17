@@ -58,6 +58,7 @@ namespace Schools.Infra.IoC
             service.AddScoped<IBlogRepository, BlogRepository>();
             service.AddScoped<IBlogGroupsRepository, BlogGroupRepositoy>();
             service.AddScoped<IBlogServices, BlogServices>();
+            service.AddScoped<IBlogGroupsServices, BlogGroupsServices>();
             #endregion
 
             #region Users

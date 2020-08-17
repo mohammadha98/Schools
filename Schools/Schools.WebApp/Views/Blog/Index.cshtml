@@ -1,0 +1,139 @@
+﻿@model List<Schools.Application.ViewModels.BlogsViewModels.ShowCourseBlogViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@section Topic_Layer{
+    <div class="container page-title">
+        <h1><a href=""> آرشیو مقالات </a></h1>
+        <ul itemtype="http://schema.org/BreadcrumbList" class="breadcrumb">
+            <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement"><a href="" itemprop="item"><span itemprop="name"> بانک اطلاعاتی آموزشگاه ها </span></a></li>
+            <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement"><a href="" itemprop="item" class="current"><span itemprop="name"> آرشیو مقالات </span></a></li>
+        </ul>
+    </div>
+}
+
+<div class="container">
+        <div class="page-default page-style-one blog-category-page">
+            <div class="row">
+                <!-- right -->
+                <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
+                    <!-- Top Layer -->
+                    <div class="top-search shadow-style">
+                        <form asp-action="Index" method="get">
+                            <input name="filter" placeholder=" جستجوی کنید ... " type="text">
+                            <button><i class="zmdi zmdi-search"></i></button>
+                        </form>
+                    </div>
+                    <!-- /Top Layer -->
+
+                    <section class="article-items">
+                        <div class="row">
+                            @foreach (var item in Model)
+                            {
+                                <partial name="_CourseBlog" model="@item"/>
+                            }
+
+                        </div>
+                    </section>
+
+                    <div class="pagination-layer">
+                        <div class="inner">
+                            <a href="" class="next-page"> صفحه بعدی </a>
+                            <div class="pages">
+                                <a href="" class="page">1</a>
+                                <a href="" class="page">2</a>
+                                <a href="" class="page current">3</a>
+                                <a href="" class="page">4</a>
+                                <a href="" class="page">5</a>
+                                <a href="" class="page">...</a>
+                            </div>
+                            <a href="" class="prev-page"> صفحه قبلی </a>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /right -->
+                <!-- left -->
+                <aside class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
+                    <!-- category -->
+                    @await Component.InvokeAsync("ShowBlogGroupsComponent")
+                    <!-- /category -->
+                    <!-- last blog -->
+                    <section class="last-blog shadow-style">
+                        <header> <h2> آخرین مطالب بلاگ </h2> </header>
+                        <!-- item -->
+                        @await Component.InvokeAsync("ShowLatesBlogComponent")
+                        <!-- /item -->
+                    </section>
+                    <!-- last blog -->
+                    <!-- last post -->
+                    <section class="last-posts shadow-style">
+                        <header> <h2> آخرین آموزشگاه های ثبت شده </h2> </header>
+                        <div class="inner">
+                            <!-- item -->
+                            <article>
+                                <h2><a href=""><span> آموزشگاه رانندگی </span> عصر نو </a></h2>
+                                <span><i class="zmdi zmdi-calendar"></i> 23 سال سابقه </span>
+                            </article>
+                            <!-- /item -->
+                            <!-- item -->
+                            <article>
+                                <h2><a href=""><span>  آموزشگاه زبان</span>  اینده سازان </a></h2>
+                                <span><i class="zmdi zmdi-calendar"></i> 15 سال سابقه </span>
+                            </article>
+                            <!-- /item -->
+                            <!-- item -->
+                            <article>
+                                <h2><a href=""><span>  آموزشگاه هنر</span> ایده پویا </a></h2>
+                                <span><i class="zmdi zmdi-calendar"></i> 5 سال سابقه </span>
+                            </article>
+                            <!-- /item -->
+                            <!-- item -->
+                            <article>
+                                <h2><a href=""><span> آموزشگاه رانندگی </span> عصر نو </a></h2>
+                                <span><i class="zmdi zmdi-calendar"></i> 23 سال سابقه </span>
+                            </article>
+                            <!-- /item -->
+                            <!-- item -->
+                            <article>
+                                <h2><a href=""><span>  آموزشگاه زبان</span>  اینده سازان </a></h2>
+                                <span><i class="zmdi zmdi-calendar"></i> 15 سال سابقه </span>
+                            </article>
+                            <!-- /item -->
+                            <!-- item -->
+                            <article>
+                                <h2><a href=""><span>  آموزشگاه هنر</span> ایده پویا </a></h2>
+                                <span><i class="zmdi zmdi-calendar"></i> 5 سال سابقه </span>
+                            </article>
+                            <!-- /item -->
+                            <!-- item -->
+                            <article>
+                                <h2><a href=""><span> آموزشگاه رانندگی </span> عصر نو </a></h2>
+                                <span><i class="zmdi zmdi-calendar"></i> 23 سال سابقه </span>
+                            </article>
+                            <!-- /item -->
+                            <!-- item -->
+                            <article>
+                                <h2><a href=""><span>  آموزشگاه زبان</span>  اینده سازان </a></h2>
+                                <span><i class="zmdi zmdi-calendar"></i> 15 سال سابقه </span>
+                            </article>
+                            <!-- /item -->
+                            <!-- item -->
+                            <article>
+                                <h2><a href=""><span>  آموزشگاه هنر</span> ایده پویا </a></h2>
+                                <span><i class="zmdi zmdi-calendar"></i> 5 سال سابقه </span>
+                            </article>
+                            <!-- /item -->
+                        </div>
+                    </section>
+                    <!-- /last post -->
+                    <!-- popular  -->
+                    <!-- /popular  -->
+
+                </aside>
+                <!-- /left -->
+            </div>
+        </div>
+</div>

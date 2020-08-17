@@ -18,12 +18,19 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.BlogRepositoris
         }
         public IEnumerable<Blog> GetAllBlogs()
         {
-            return _context.Blogs.ToList();
+            return _context.Blogs.Include(c => c.BlogGroup).Include(c => c.BlogType).ToList();
         }
+
         public Blog GetBlogById(int blogId)
         {
-            return _context.Blogs.Include(c => c.BlogGroup).Include(c=>c.BlogType).First(c => c.BlogId == blogId);
+            return _context.Blogs.Include(c => c.BlogGroup).Include(c => c.BlogType).First(c => c.BlogId == blogId);
         }
+
+        public IEnumerable<Blog> GetLatesBlog()
+        {
+            return _context.Blogs.Include(c=>c.BlogType).Include(c=>c.BlogGroup).OrderByDescending(c => c.CreateDate).Take(4).ToList();
+        }
+
         public void InsertBlog(Blog blog)
         {
             _context.Blogs.Add(blog);

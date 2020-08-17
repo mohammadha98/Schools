@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Schools.Domain.Models.Users;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Schools.Domain.Models.Blogs
@@ -14,6 +16,8 @@ namespace Schools.Domain.Models.Blogs
         [Key]
         public int CommentId { get; set; }
         public int BlogId { get; set; }
+        public int AnswerId { get; set; }
+        public int UserId { get; set; }
 
         [Display(Name ="نام و نام خانودگی")]
         [Required(ErrorMessage ="لطفا {0} را وارد کنید")]
@@ -46,6 +50,9 @@ namespace Schools.Domain.Models.Blogs
 
         #region Relation
         public Blog Blog { get; set; }
+        [ForeignKey("UserId")]
+        public User User { get; set; }
+        public List<AnswersComment> answersComments { get; set; }
         #endregion
     }
 }

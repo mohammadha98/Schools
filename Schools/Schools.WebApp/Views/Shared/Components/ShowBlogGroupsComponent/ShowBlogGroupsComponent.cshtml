@@ -1,0 +1,25 @@
+﻿@model IEnumerable<Schools.Application.ViewModels.BlogsViewModels.ShowGroupsViewModels>
+
+    <section class="category-list shadow-style">
+        <header> <h2> دسته بندی موضوعات </h2> </header>
+            <ul>
+                <li>
+                    <a href="/blog/1/0"> دنیای خبر </a>
+                    <ul>
+                        @foreach (var item in Model)
+                        {
+                            <li><a href="/blog/1/@item.GroupId" > @item.GroupName </a></li>
+                        }
+                    </ul>
+                </li>
+                <li>
+                    <a href="/blog/2/0"> مقالات </a>
+                    <ul>
+                        @foreach (var item in Model)
+                        {
+                            <li><a href="/blog/2/@item.GroupId"> @item.GroupName </a></li>
+                        }
+                    </ul>
+                </li>
+            </ul>
+    </section>

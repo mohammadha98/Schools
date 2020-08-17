@@ -19,6 +19,50 @@ namespace Schools.Application.Service.Services.Blogs
             _context = context;
         }
 
+        public List<ShowCourseBlogViewModel> GetCourse(string filter="", int typeId = 0, int groupId = 0)
+        {
+            IQueryable<Blog> result = _context.Blogs;
+
+            if (!string.IsNullOrEmpty(filter))
+            {
+                result = result.Where(c => c.Title.Contains(filter) || c.Tags.Contains(filter));
+            }
+
+            switch (typeId)
+            {
+                case 0:
+                    break;
+                case 1:
+                    {
+                        result = result.Where(c => c.TypeId == 1);
+                        break;
+                    }
+                case 2:
+                    {
+                        result = result.Where(c => c.TypeId == 2);
+                        break;
+                    }
+            }
+
+            if (groupId != 0)
+            {
+                result = result.Where(c => c.GroupId == groupId);
+            }
+
+            var query = result.Include(c => c.BlogType).Include(c=>c.BlogGroup)
+                .Select(c => new ShowCourseBlogViewModel()
+            {
+                BlogId=c.BlogId,
+                BlogType=c.BlogType.TypeTitle,
+                BlogGroup=c.BlogGroup.GroupName,
+                CreateDate=c.CreateDate,
+                ImageName=c.ImageName,
+                Title=c.Title
+            }).ToList();
+
+            return query;
+        }
+
         List<BlogsViewModels> IBlogServices.FilterBlog(string filter, int getType, List<int> selectedGroups = null)
         {
             IQueryable<Blog> result = _context.Blogs;

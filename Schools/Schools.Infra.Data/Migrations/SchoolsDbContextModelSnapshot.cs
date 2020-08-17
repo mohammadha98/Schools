@@ -19,6 +19,32 @@ namespace Schools.Infra.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Schools.Domain.Models.Blogs.AnswersComment", b =>
+                {
+                    b.Property<int>("AnswerId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AnswerText")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CommentId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("AnswerId");
+
+                    b.HasIndex("CommentId");
+
+                    b.ToTable("AnswersComments");
+                });
+
             modelBuilder.Entity("Schools.Domain.Models.Blogs.Blog", b =>
                 {
                     b.Property<int>("BlogId")
@@ -79,6 +105,9 @@ namespace Schools.Infra.Data.Migrations
                     b.Property<int?>("Answer")
                         .HasColumnType("int");
 
+                    b.Property<int>("AnswerId")
+                        .HasColumnType("int");
+
                     b.Property<int>("BlogId")
                         .HasColumnType("int");
 
@@ -108,9 +137,14 @@ namespace Schools.Infra.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("CommentId");
 
                     b.HasIndex("BlogId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("BlogComments");
                 });
@@ -884,6 +918,21 @@ namespace Schools.Infra.Data.Migrations
                     b.ToTable("UserRoles");
                 });
 
+            modelBuilder.Entity("Schools.Domain.Models.Blogs.AnswersComment", b =>
+                {
+                    b.HasOne("Schools.Domain.Models.Blogs.BlogComment", "blogComment")
+                        .WithMany("answersComments")
+                        .HasForeignKey("CommentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Schools.Domain.Models.Users.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CommentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Schools.Domain.Models.Blogs.Blog", b =>
                 {
                     b.HasOne("Schools.Domain.Models.Blogs.BlogGroup", "BlogGroup")
@@ -904,6 +953,12 @@ namespace Schools.Infra.Data.Migrations
                     b.HasOne("Schools.Domain.Models.Blogs.Blog", "Blog")
                         .WithMany("BlogComment")
                         .HasForeignKey("BlogId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Schools.Domain.Models.Users.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });

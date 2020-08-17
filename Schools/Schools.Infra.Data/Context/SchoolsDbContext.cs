@@ -59,6 +59,7 @@ namespace Schools.Infra.Data.Context
         public DbSet<BlogComment> BlogComments { get; set; }
         public DbSet<BlogGroup> BlogGroups { get; set; }
         public DbSet<BlogType> BlogTypes { get; set; }
+        public DbSet<AnswersComment> AnswersComments { get; set; }
 
         #endregion
 
@@ -134,6 +135,8 @@ namespace Schools.Infra.Data.Context
             modelBuilder.Entity<BlogType>()
                 .HasQueryFilter(u => !u.IsDelete);
             modelBuilder.Entity<BlogComment>()
+                .HasQueryFilter(u => !u.IsDelete);
+            modelBuilder.Entity<AnswersComment>()
                 .HasQueryFilter(u => !u.IsDelete);
             modelBuilder.Entity<BlogGroup>()
                 .HasQueryFilter(u => !u.IsDelete);
