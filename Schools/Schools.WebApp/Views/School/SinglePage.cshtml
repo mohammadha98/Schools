@@ -1,0 +1,287 @@
+﻿@using Schools.Application.Utilities.Convertors
+@using Schools.Application.ViewModels.SchoolsViewModels
+@using Schools.Domain.Models.Schools.Locations
+@model Schools.Domain.Models.Schools.School
+@{
+    ViewData["Title"] = "SinglePage";
+    var schoolShireTitle = Model.Shire.ShireTitle;
+    var schoolCityTitle = Model.City.CityTitle;
+    var schoolRate = Model.SchoolRates.Sum(r => r.Rate) / Model.SchoolRates.Count;
+    var categoryTitle = Model.SchoolSubGroup.GroupTitle ?? Model.SchoolGroup.GroupTitle;
+    var comments = ViewData["Comments"] as SchoolCommentsViewModel;
+    var shires = ViewData["Shires"] as List<Shire>;
+    var cities = ViewData["Cities"] as List<City>;
+}
+@section Meta
+{
+    <link rel="stylesheet" type="text/css" href="/css/material-icon.css">
+    <link rel="stylesheet" type="text/css" href="/css/owl.carousel.css">
+    <link rel="stylesheet" type="text/css" href="/css/profile.css">
+    <link rel="stylesheet" type="text/css" href="/css/lightslider.css">
+}
+<div class="container">
+    <!-- search -->
+    <div class="search-layer">
+        <form asp-controller="School" asp-action="SchoolCategory" method="get">
+            <select name="shireTitle" id="shires">
+                <option value=""> انتخاب استان </option>
+                @foreach (var item in shires!)
+                {
+                    <option value="@item.ShireTitle" selected="@((item.ShireTitle==schoolShireTitle?"selected":null))"> @item.ShireTitle </option>
+
+                }
+            </select>
+            <select name="cityTitle" id="cities">
+                <option value=""> انتخاب شهر </option>
+                @foreach (var item in cities!)
+                {
+                    <option value="@item.CityTitle"  selected="@((item.CityTitle==schoolCityTitle?"selected":null))"> @item.CityTitle </option>
+
+                }
+            </select>
+            <input type="text" name="schoolName" placeholder="نام آموزشگاه ...">
+            <input type="text" name="courseName" placeholder="نام دوره ...">
+            <button type="submit"> جستجو کنید <i class="zmdi zmdi-search"></i></button>
+        </form>
+    </div>
+    <!-- /search -->
+    <!-- content -->
+    <div class="main-content">
+        <!-- Top Content -->
+        <div class="top-content">
+            <div class="right-col">
+                <div class="img-layer shadow-style"> <img src="/images/schools/@Model.ImageName" alt="@Model.SchoolTitle"> </div>
+                <div class="links-layer">
+                    <a href="javascript:void(0)" id="gallery-button"> گالری تصاویر </a>
+                    <a href="javascript:void(0)" id="contact-button"> اطلاعات تماس </a>
+                    <a href="javascript:void(0)" id="submit-comment-button"> ثبت نظر </a>
+                </div>
+            </div>
+            <div class="left-col">
+                <div class="stars-rating">
+                    <span class="readonly-rating-star" data-score="@schoolRate"></span>
+                </div>
+                <h2><a href="">  @categoryTitle @Model.SchoolTitle </a></h2>
+                <h3> با مدیریت <span>  @Model.User.Name @Model.User.Family </span> </h3>
+                <ul>
+                    <li><span> مکان آموزشگاه : </span> <a href=""> @Model.Shire.ShireTitle </a> - <a href=""> @Model.City.CityTitle </a> </li>
+                    <li><span> تاریخ عضویت در سایت : </span> @Model.RegisterDate.ToShamsi() </li>
+                    <li><span> موضوع فعالیت : </span> <a href=""> @(Model.SchoolSubGroup.GroupTitle ?? Model.SchoolGroup.GroupTitle) </a></li>
+                    <li><span> سال تاسیس : </span> @Model.BuildDate.ToShamsi() </li>
+                    <li>
+                        <span> نوع آموزش : </span>
+                        @foreach (var item in Model.SchoolTrainingTypes)
+                        {
+                            <a href="#">
+                                @item.TrainingType.TypeTitle
+                            </a>
+                        }
+
+                    </li>
+                    <li><span> میزان محبوبیت : </span> @Model.UserLikes.Count پسند شده </li>
+                    <li><span> بازدید از پروفایل : </span> @Model.SchoolVisits.Count بازدید </li>
+                </ul>
+
+                <a href="javascript:void(0)" class="like-this"> <i class="zmdi zmdi-favorite"></i> آموزشگاه را میپسندم </a>
+                <a href="javascript:void(0)" class="send-message"> <i class="zmdi zmdi-comment"></i> ارسال پیام به آموزشگاه</a>
+                <a href="javascript:void(0)" id="submit-rating"> <i class="zmdi zmdi-star"></i> امتیاز دهی به آموزشگاه </a>
+                <div class="notification">
+                    کاربر گرامی ، <span> میزان محبوبیت آموزشگاه </span> و <span> امتیاز کسب شده توسط کاربران </span> با تاریخ ثبت آموزشگاه در سایت رابطه ی مستقیم خواهد داشت، لذا جهت مقایسه آموزشگاه ها به تاریخ ثبت آنها نیز دقت فرمایید.
+                </div>
+            </div>
+        </div>
+        <!-- /Top Content -->
+        <!-- description -->
+        <div class="description-layer shadow-style">
+            @Html.Raw(Model.Description)
+        </div>
+        <!-- /description -->
+        <!-- contact info -->
+        <section class="contact-info-layer shadow-style">
+            <header><h2> تماس با  @categoryTitle @Model.SchoolTitle </h2></header>
+            <p>
+                نشانی : @Model.SchoolAddress
+            </p>
+            <ul>
+                <li>
+                    <span> تلفن : </span>
+                    @foreach (var item in Model.SchoolPhone.Split('-'))
+                    {
+                        <a href="tel:+98@(item.TrimStart('0')) "> @item </a>
+                    }
+
+                </li>
+                <li>
+                    <span> فکس : </span>
+                    @foreach (var item in Model.SchoolFax.Split('-'))
+                    {
+
+                        <a href="javascript:void(0)"> @item </a>
+
+                    }
+                </li>
+                <li><span> ایمیل : </span> <a href="">@Model.SchoolEmail</a></li>
+            </ul>
+        </section>
+        <!-- /contact info -->
+        <!-- terms -->
+        <section class="terms-list-layer shadow-style">
+            <header><h2> دوره های  @categoryTitle @Model.SchoolTitle </h2></header>
+            <article>
+                <ul>
+                    <li>
+                        <h3> دوره های خردسالان </h3>
+                        <div class="desc">
+                            <p>
+                                از آن جا که بهترین زمان یادگیری زبان انگلیسی دوران کودکی و نیز مهمترین امر در یادگیری جذابیت و ایجاد علاقه می باشد، این دوره (Pre-Primary) تلاش بر این دارد تا با به وجود آوردن فضای آموزشی شاد یادگیری زبان انگلیسی را برای زبان آموزان ابتدایی فراهم سازد.
+                                در این دوره در موسسه زبان آفاق، آموزش مکالمه های روزمره وموردنیاز این گروه سنی با توجه به موقعیت های گوناگون (منزل،پارک،مدرسه…) به صورت سمعی و بصری در قالب بازی های متنوع و جذاب صورت می گیرد.
+                                زبان آموزان پس از پایان دوره قادر خواهند بود مکالمات ابتدایی خود را در فضا های ذکر شده به صورت انگلیسی انجام دهند.
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <h3> دوره های کودکان </h3>
+                        <div class="desc">
+                            <p>
+                                یادگیری حروف انگلیسی از ابتدایی ترین نیاز ها برای شروع یادگیری زبان انگلیسی می باشد. زبان آموزان موسسه زبان آفاق در  دوره Primary با آوا، شکل و مثال های حروف انگلیسی به صورت کاملا حرفه ای آشنا میگردند و پس از از پایان دوره قادر خواهند بود متون ابتدایی انگلیسی رابخوانند و نیز توانایی نوشتن کلمات و جملات ساده انگلیسی را کسب خواهند کرد.
+                                لازم به ذکر می باشد آموزش در این دوره به صورت کاملا انگلیسی ولی با زبان ساده صورت می گیرد.
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <h3> دوره های نوجوانان و جوانان </h3>
+                        <div class="desc">
+                            <p>
+                                یادگیری حروف انگلیسی از ابتدایی ترین نیاز ها برای شروع یادگیری زبان انگلیسی می باشد. زبان آموزان موسسه زبان آفاق در  دوره Primary با آوا، شکل و مثال های حروف انگلیسی به صورت کاملا حرفه ای آشنا میگردند و پس از از پایان دوره قادر خواهند بود متون ابتدایی انگلیسی رابخوانند و نیز توانایی نوشتن کلمات و جملات ساده انگلیسی را کسب خواهند کرد.
+                                لازم به ذکر می باشد آموزش در این دوره به صورت کاملا انگلیسی ولی با زبان ساده صورت می گیرد.
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <h3> دوره های بزرگسالان </h3>
+                        <div class="desc">
+                            <p>
+                                یادگیری حروف انگلیسی از ابتدایی ترین نیاز ها برای شروع یادگیری زبان انگلیسی می باشد. زبان آموزان موسسه زبان آفاق در  دوره Primary با آوا، شکل و مثال های حروف انگلیسی به صورت کاملا حرفه ای آشنا میگردند و پس از از پایان دوره قادر خواهند بود متون ابتدایی انگلیسی رابخوانند و نیز توانایی نوشتن کلمات و جملات ساده انگلیسی را کسب خواهند کرد.
+                                لازم به ذکر می باشد آموزش در این دوره به صورت کاملا انگلیسی ولی با زبان ساده صورت می گیرد.
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <h3> دوره های تخصصی بزرگسالان </h3>
+                        <div class="desc">
+                            <p>
+                                یادگیری حروف انگلیسی از ابتدایی ترین نیاز ها برای شروع یادگیری زبان انگلیسی می باشد. زبان آموزان موسسه زبان آفاق در  دوره Primary با آوا، شکل و مثال های حروف انگلیسی به صورت کاملا حرفه ای آشنا میگردند و پس از از پایان دوره قادر خواهند بود متون ابتدایی انگلیسی رابخوانند و نیز توانایی نوشتن کلمات و جملات ساده انگلیسی را کسب خواهند کرد.
+                                لازم به ذکر می باشد آموزش در این دوره به صورت کاملا انگلیسی ولی با زبان ساده صورت می گیرد.
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+            </article>
+        </section>
+        <!-- /terms -->
+        <!-- teachers -->
+        <section class="teachers-list-layer shadow-style">
+            <header><h2> اساتید  @categoryTitle @Model.SchoolTitle </h2></header>
+            <partial name="School/_SchoolTeachers" model="@Model.SchoolTeachers" />
+        </section>
+        <!-- /teachers -->
+
+        <div class="row">
+            <!-- right -->
+            <div class="col-md-6 col-sm-12 col-xs-12">
+                <section class="gallery-layer shadow-style">
+                    <header><h2> گالری تصویر  @categoryTitle @Model.SchoolTitle </h2></header>
+                    <div class="gallery-slider clearfix">
+                        <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
+                            @foreach (var item in Model.SchoolGalleries)
+                            {
+                                <li data-thumb="/images/schools/gallery/@item.ImageName">
+                                    <img src="/images/schools/gallery/@item.ImageName" alt="گالری تصاویر آموزشگاه @Model.SchoolTitle" />
+                                </li>
+                            }
+
+                        </ul>
+                    </div>
+                </section>
+            </div>
+            <!-- /right -->
+
+            <!-- left -->
+            <div class="col-md-6 col-sm-12 col-xs-12">
+                <div class="submit-rating-layer shadow-style">
+                    <header><h3> امتیازدهی به  @categoryTitle @Model.SchoolTitle </h3></header>
+                    <form>
+                        <p>
+                            کاربر گرامی، تمامی فعالیت های امتیازدهی شما در حساب کاربری شما ثبت خواهد شد، لطفا تنها در صورتی که در این آموزشگاه تجربه ی تحصیل داشته اید اقدام به ثبت امتیاز کنید.
+                        </p>
+                        <div class="select-rating-layer">
+                            <!-- row -->
+                            <div class="rating-row">
+                                <span> محیط آموزشی مناسب </span>
+                                <div id="rate-one"></div>
+                                <input type="text" name="" id="environment-rate" value="0">
+                            </div>
+                            <!-- row -->
+                            <div class="rating-row">
+                                <span> سطح کیفی آموزش </span>
+                                <div id="rate-two"></div>
+                                <input type="text" name="" id="quality-rate" value="0">
+                            </div>
+                            <!-- row -->
+                            <div class="rating-row">
+                                <span> نحوه برخورد اساتید و کارکنان  </span>
+                                <div id="rate-three"></div>
+                                <input type="text" name="" id="employees-rate" value="0">
+                            </div>
+                            <!-- row -->
+                            <div class="rating-row">
+                                <span> آرامش محیط آموزشی </span>
+                                <div id="rate-four"></div>
+                                <input type="text" name="" id="calm-rate" value="0">
+                            </div>
+                            <!-- row -->
+                            <div class="rating-row">
+                                <span> تنوع ابزارهای کمک آموزشی </span>
+                                <div id="rate-five"></div>
+                                <input type="text" name="" id="variety-tools-rate" value="0">
+                            </div>
+                            <!-- row -->
+                            <div class="rating-row">
+                                <span> سطح کیفی ابزارهای آموزشی </span>
+                                <div id="rate-six"></div>
+                                <input type="text" name="" id="quality-tools-rate" value="0">
+                            </div>
+                        </div>
+                        <div class="show-selected-rate">
+                            <span class="title"> امتیاز شما به این آموزشگاه </span>
+                            <span class="view">
+                                <i> 0 </i> از 5
+                            </span>
+                        </div>
+
+                        <button class="button-st green submit-rating-button"><span><i class="icon-check"></i></span> ثبت نهایی امتیاز </button>
+                    </form>
+                </div>
+            </div>
+            <!-- /left -->
+        </div>
+
+ 
+        <div class="comments">
+
+
+            <partial name="School/_SchoolComments" model="comments" />
+            
+        </div>
+    </div>
+
+</div>
+
+@section Scripts
+{
+    <script src="/ckeditor5/build/ckeditor.js"></script>
+    <script src="/js/owl.carousel.js"></script>
+    <script src="/js/raty.js"></script>
+    <script src="/js/profile.js"></script>
+    <script src="/js/lightslider.js"></script>
+}

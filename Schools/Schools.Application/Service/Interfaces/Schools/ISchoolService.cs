@@ -1,4 +1,5 @@
 ﻿using Schools.Application.ViewModels.SchoolsViewModels;
+using Schools.Domain.Models.Schools;
 
 namespace Schools.Application.Service.Interfaces.Schools
 {
@@ -13,5 +14,6 @@ namespace Schools.Application.Service.Interfaces.Schools
         bool AddNewSchool(AddSchoolViewModel school);
         bool EditSchool(EditSchoolViewModel school);
         EditSchoolViewModel GetSchoolForEdit(int schoolId);
+        School GetSchoolById(int schoolId);
     }
 }

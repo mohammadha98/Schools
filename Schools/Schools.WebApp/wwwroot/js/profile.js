@@ -240,3 +240,19 @@ $(function(){
         targetType : "number"
     });
 });
+
+function ChangePage(pageId) {
+    var schoolId = window.location.pathname.split('/')[2];
+    $.ajax({
+        url: "/GetComments/"+pageId+"/"+schoolId,
+        type: "get",
+        beforeSend: function () {
+            $(".loading").show();
+        },
+        complete: function () {
+            $(".loading").hide();
+        }
+    }).done(function(data) {
+        console.log(data);
+    });
+}

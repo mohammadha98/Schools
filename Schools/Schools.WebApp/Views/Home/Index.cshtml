@@ -7,12 +7,18 @@
         </div>
     </div>
 }
+@section Meta
+{
+    <link rel="stylesheet" type="text/css" href="/css/material-icon.css">
+    <link rel="stylesheet" type="text/css" href="/css/owl.carousel.css">
+    <link rel="stylesheet" type="text/css" href="/css/home.css">
+}
 @section Search{
     <div class="container">
         <div class="search-layer">
-            <form asp-controller="Home" asp-action="SchoolCategory" method="get">
+            <form asp-controller="School" asp-action="SchoolCategory" method="get">
                 <select name="shireTitle" id="shires">
-                    <option > انتخاب استان </option>
+                    <option value=""> انتخاب استان </option>
                     @foreach (var item in Model.Shires)
                     {
                         <option selected="@((item.ShireTitle==Model.ShireTitle?"selected":null))" value="@item.ShireTitle"> @item.ShireTitle </option>
@@ -20,7 +26,7 @@
                     }
                 </select>
                 <select name="cityTitle" id="cities">
-                    <option > انتخاب شهر </option>
+                    <option value=""> انتخاب شهر </option>
                     @foreach (var item in Model.ShireCities)
                     {
                         <option value="@item.CityTitle"> @item.CityTitle </option>
@@ -83,19 +89,7 @@
                     <!-- item -->
                     @foreach (var item in Model.PopularSchools)
                     {
-                        <div class="item">
-                            <section class="section-item shadow-style">
-                                <div class="img-layer">
-                                    <span> @(item.CityTitle ?? Model.ShireTitle)</span>
-                                    <a href=""><img src="/images/schools/@item.ImageName" alt="@item.Title"></a>
-                                </div>
-                                <h2><a href=""> <span class="category-name"> @item.CategoryTitle </span> @item.Title </a></h2>
-                                <div class="detail">
-                                    <span class="history"> <i class="zmdi zmdi-calendar-check"></i> @item.History سال سابقه </span>
-                                    <span class="like"><i class="zmdi zmdi-favorite-outline"></i>  @item.Like.ToString("#,0") </span>
-                                </div>
-                            </section>
-                        </div>
+                      <partial name="School/_SchoolItem" model="@item"/>
                     }
 
                 </div>
@@ -111,11 +105,11 @@
                     <!-- پیش فرض گروه بندی تهرانه  -->
                     <span class="title-place"> مشاهده آموزشگاه های <i> @Model.ShireTitle </i> </span>
                     <ul>
-                      
+
                         <li><label><input type="radio" name="select-list" value="@Model.ShireTitle" id="select-1">@Model.ShireTitle</label></li>
                         @foreach (var city in Model.ShireCities.Take(12))
                         {
-                            
+
 
                             <li><a href="/schools?shireTitle=@Model.ShireTitle&cityTitle=@city.CityTitle"><label>@city.CityTitle</label></a></li>
                         }
@@ -129,18 +123,7 @@
                 <!-- col -->
                 @foreach (var item in Model.LastRegisteredSchools)
                 {
-                    <div class="col-md-3 col-sm-4 col-xs-6 section-item-col">
-                        <section class="section-item shadow-style">
-                            <div class="img-layer">
-                                <span> @(item.CityTitle ?? Model.ShireTitle) </span>
-                                <a href=""><img src="/images/schools/@item.ImageName" alt="@item.Title"></a>
-                            </div>
-                            <h2><a href=""> <span class="category-name"> @item.CategoryTitle </span>  @item.Title </a></h2>
-                            <div class="detail">
-                                <span class="history"> <i class="zmdi zmdi-calendar-check"></i> @item.History سال سابقه </span>
-                            </div>
-                        </section>
-                    </div>
+                   <partial name="School/_SchoolCard" model="item"/>
                 }
 
 
@@ -161,7 +144,7 @@
                 <!-- پیش فرض گروه بندی تهرانه  -->
                 <span class="title-place"> مشاهده آموزشگاه های <i> @Model.ShireTitle </i> </span>
                 <ul>
-                
+
                     <li><label><input type="radio" name="select-list" value="@Model.ShireTitle" id="select-1">@Model.ShireTitle</label></li>
                     @foreach (var city in Model.ShireCities.Take(12))
                     {
@@ -195,3 +178,9 @@
         </div>
     </div>
 </section>
+@section Scripts
+{
+    <script src="/js/raty.js"></script>
+    <script src="/js/home.js"></script>
+    <script src="/js/owl.carousel.js"></script>
+}

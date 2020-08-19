@@ -1,0 +1,13 @@
+﻿@model Schools.Application.ViewModels.SchoolsViewModels.SchoolCardViewModel
+<div class="col-md-3 col-sm-4 col-xs-6 section-item-col">
+    <section class="section-item shadow-style">
+        <div class="img-layer">
+            <span> @(Model.CityTitle ?? Model.ShireTitle) </span>
+            <a href="/School/@Model.SchoolId/@Model.Title.Replace(" ","-").Trim()"><img src="/images/schools/@Model.ImageName" alt="@Model.Title"></a>
+        </div>
+        <h2><a href="/School/@Model.SchoolId/@Model.Title.Replace(" ","-").Trim()"> <span class="category-name"> @Model.CategoryTitle </span>  @Model.Title </a></h2>
+        <div class="detail">
+            <span class="history"> <i class="zmdi zmdi-calendar-check"></i> @Model.History سال سابقه </span>
+        </div>
+    </section>
+</div>

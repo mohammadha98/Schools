@@ -37,12 +37,14 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Schools
                 .Include(s => s.SchoolVisits)
                 .Include(s => s.SchoolGalleries)
                 .Include(s => s.SchoolCourses)
-                .Include(s => s.SchoolComments)
                 .Include(s => s.SchoolRates)
                 .Include(s => s.SchoolGroup)
                 .Include(s => s.SchoolSubGroup)
                 .Include(s => s.Shire)
                 .ThenInclude(s => s.Cities)
+                .Include(s=>s.SchoolTrainingTypes)
+                .ThenInclude(s=>s.TrainingType)
+                .Include(s=>s.UserLikes)
                 .SingleOrDefault(s => s.SchoolId == schoolId);
         }
 
