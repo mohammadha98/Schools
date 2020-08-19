@@ -1,7 +1,8 @@
-﻿@model List<Schools.Application.ViewModels.BlogsViewModels.ShowCourseBlogViewModel>
+﻿@model Tuple<List<Schools.Application.ViewModels.BlogsViewModels.ShowCourseBlogViewModel>, int>
 
 @{
     ViewData["Title"] = "Index";
+    int pageNum = ViewBag.pageId;
 }
 
 @section Topic_Layer{
@@ -15,44 +16,43 @@
 }
 
 <div class="container">
+    <form id="formSearch" asp-action="Index" method="get">
+        <input type="hidden" id="pageId" name="pageId" value="@ViewBag.pageId.ToString()" />
         <div class="page-default page-style-one blog-category-page">
             <div class="row">
                 <!-- right -->
                 <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
                     <!-- Top Layer -->
                     <div class="top-search shadow-style">
-                        <form asp-action="Index" method="get">
-                            <input name="filter" placeholder=" جستجوی کنید ... " type="text">
-                            <button><i class="zmdi zmdi-search"></i></button>
-                        </form>
+                        <input name="filter" placeholder=" جستجوی کنید ... " type="text">
+                        <button><i class="zmdi zmdi-search"></i></button>
                     </div>
                     <!-- /Top Layer -->
 
                     <section class="article-items">
                         <div class="row">
-                            @foreach (var item in Model)
+                            @foreach (var item in Model.Item1)
                             {
-                                <partial name="_CourseBlog" model="@item"/>
+                                <partial name="_CourseBlog" model="@item" />
                             }
-
                         </div>
                     </section>
 
-                    <div class="pagination-layer">
-                        <div class="inner">
-                            <a href="" class="next-page"> صفحه بعدی </a>
-                            <div class="pages">
-                                <a href="" class="page">1</a>
-                                <a href="" class="page">2</a>
-                                <a href="" class="page current">3</a>
-                                <a href="" class="page">4</a>
-                                <a href="" class="page">5</a>
-                                <a href="" class="page">...</a>
+                    @if (Model.Item2 > 1)
+                    {
+                        <div class="pagination-layer">
+                            <div class="inner">
+                                <a onclick="prePage(@(pageNum-=1))" class="prev-page" href="#"> صفحه قبلی </a>
+                                <div class="pages">
+                                    @for (int i = 1; i <= (int)Model.Item2; i++)
+                                    {
+                                        <a class="page-link" onclick="changePage(@i)" href="#">@i</a>
+                                    }
+                                </div>
+                                <a onclick="nextPage(@(pageNum+=2))" href="#" class="next-page"> صفحه بعدی </a>
                             </div>
-                            <a href="" class="prev-page"> صفحه قبلی </a>
                         </div>
-                    </div>
-
+                    }
                 </div>
                 <!-- /right -->
                 <!-- left -->
@@ -136,4 +136,32 @@
                 <!-- /left -->
             </div>
         </div>
+    </form>
 </div>
+
+@section Scripts{
+    <script type="text/javascript">
+
+        function changeGroup() {
+            $("#formSearch").submit();
+        }
+
+        function changePage(pageId) {
+            $("#pageId").val(pageId);
+            $("#formSearch").submit();
+        }
+
+        function nextPage(pageNum) {
+            if ($("#pageId").val() <= @Model.Item2-1) {
+                $("#pageId").val(pageNum);
+                $("#formSearch").submit();
+            }
+        }
+        function prePage(pageNum) {
+            if ($("#pageId").val() > 1) {
+                $("#pageId").val(pageNum);
+                $("#formSearch").submit();
+            }
+        }
+    </script>
+}

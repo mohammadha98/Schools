@@ -19,8 +19,11 @@ namespace Schools.Application.Service.Services.Blogs
             _context = context;
         }
 
-        public List<ShowCourseBlogViewModel> GetCourse(string filter="", int typeId = 0, int groupId = 0)
+        public Tuple<List<ShowCourseBlogViewModel>, int> GetCourse(int pageId = 1, string filter="", int typeId = 0, int groupId = 0,int take=0)
         {
+            if (take == 0)
+                take = 8;
+
             IQueryable<Blog> result = _context.Blogs;
 
             if (!string.IsNullOrEmpty(filter))
@@ -49,6 +52,19 @@ namespace Schools.Application.Service.Services.Blogs
                 result = result.Where(c => c.GroupId == groupId);
             }
 
+            int skip = (pageId - 1) * take;
+
+            int pageCount= result.Include(c => c.BlogType).Include(c => c.BlogGroup)
+                .Select(c => new ShowCourseBlogViewModel()
+                {
+                    BlogId = c.BlogId,
+                    BlogType = c.BlogType.TypeTitle,
+                    BlogGroup = c.BlogGroup.GroupName,
+                    CreateDate = c.CreateDate,
+                    ImageName = c.ImageName,
+                    Title = c.Title
+                }).Count()/take;
+
             var query = result.Include(c => c.BlogType).Include(c=>c.BlogGroup)
                 .Select(c => new ShowCourseBlogViewModel()
             {
@@ -58,9 +74,9 @@ namespace Schools.Application.Service.Services.Blogs
                 CreateDate=c.CreateDate,
                 ImageName=c.ImageName,
                 Title=c.Title
-            }).ToList();
+            }).Skip(skip).Take(take).ToList();
 
-            return query;
+            return Tuple.Create(query, pageCount);
         }
 
         List<BlogsViewModels> IBlogServices.FilterBlog(string filter, int getType, List<int> selectedGroups = null)

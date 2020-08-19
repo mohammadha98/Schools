@@ -11,8 +11,10 @@ namespace Schools.WebApp.Controllers.Blog
             _blogRepository = blogRepository;
         }
         [Route("blogPage/{blogId}")]
-        public IActionResult ShowBlog(int blogId)
+        public IActionResult ShowBlog(int blogId, int groupId = 0, int typeId=0)
         {
+            ViewBag.groupId = groupId;
+            ViewBag.typeId = typeId;
             var blog = _blogRepository.GetBlogById(blogId);
             if (blog != null)
             {
