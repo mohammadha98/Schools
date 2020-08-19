@@ -829,3 +829,4 @@ D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_MainLayout.cshtml.g.cs
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\_ViewImports.cshtml.g.cs
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\_ViewStart.cshtml.g.cs
+D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Blog\ShowBlog.cshtml.g.cs

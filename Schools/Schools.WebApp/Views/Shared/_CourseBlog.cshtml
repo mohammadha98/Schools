@@ -3,10 +3,10 @@
 <!-- col -->
 <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 article-col">
     <section>
-        <a href="blogPage/@Model.BlogId" class="img-layer"><img src="/images/blogs/@Model.ImageName"></a>
-        <h2><a href="blogPage/@Model.BlogId"> @Model.Title </a></h2>
+        <a href="ShowBlog/@Model.BlogId" class="img-layer"><img src="/images/blogs/@Model.ImageName"></a>
+        <h2><a href="ShowBlog/@Model.BlogId"> @Model.Title </a></h2>
         <div class="detail">
-            <a href="blogPage/@Model.BlogId"><i class="zmdi zmdi-folder"></i>@Model.BlogType @Model.BlogGroup </a>
+            <a href="ShowBlog/@Model.BlogId"><i class="zmdi zmdi-folder"></i>@Model.BlogType @Model.BlogGroup </a>
             <span> <i class="zmdi zmdi-calendar-check"></i> @Model.CreateDate.ToShamsi() </span>
         </div>
     </section>
