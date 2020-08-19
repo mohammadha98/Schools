@@ -1,4 +1,23 @@
-﻿.loading-body {
+﻿
+.ck.ck-reset_all * {
+    font-family: 'IRANSans',tahoma, 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
+
+.ck-button {
+    cursor: pointer;
+}
+
+.ck.ck-editor__main > .ck-editor__editable:not(.ck-focused) {
+    min-height: 250px !important;
+}
+
+.ck-rounded-corners .ck.ck-editor__main > .ck-editor__editable, .ck.ck-editor__main > .ck-editor__editable.ck-rounded-corners {
+    min-height: 250px !important;
+    font-family: 'IRANSans',tahoma, Helvetica, Arial, sans-serif !important;
+}
+
+
+.loading-body {
     width: 40%;
     margin: auto;
     background: white;

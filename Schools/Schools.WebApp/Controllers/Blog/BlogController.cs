@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Schools.Application.Service.Interfaces.Blogs;
-using Schools.Domain.Repository.InterfaceRepository.BlogRepositories;
 
 namespace Schools.WebApp.Controllers.Blog
 {
@@ -15,7 +10,7 @@ namespace Schools.WebApp.Controllers.Blog
         {
             _blogServices = blogServices;
         }
-        
+        [Route("/Blog")]
         public IActionResult Index(string filter = "")
         {
             return View(_blogServices.GetCourse(filter));

@@ -389,5 +389,10 @@ namespace Schools.Application.Service.Services.Schools
 
             return schoolModel;
         }
+
+        public School GetSchoolById(int schoolId)
+        {
+            return _school.GetSchoolBySchoolId(schoolId);
+        }
     }
 }

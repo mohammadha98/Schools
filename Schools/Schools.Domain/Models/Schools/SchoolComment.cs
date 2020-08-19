@@ -12,6 +12,8 @@ namespace Schools.Domain.Models.Schools
         public int CommentId { get; set; }
         [Required]
         public int UserId { get; set; }
+        [Required]
+        public int SchoolId { get; set; }
         [Display(Name = "متن نظر")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         public string Text { get; set; }
@@ -23,8 +25,10 @@ namespace Schools.Domain.Models.Schools
         #region Relations
         [ForeignKey("UserId")]
         public User User { get; set; }
-
-        public List<SchoolComment> SchoolComments { get; set; }
+        [ForeignKey("SchoolId")]
+        public School School { get; set; }
+        [ForeignKey("Answer")]
+        public List<SchoolComment> Answers { get; set; }
 
         #endregion
     }

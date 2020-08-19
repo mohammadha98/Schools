@@ -33,21 +33,6 @@ namespace Schools.WebApp.Controllers
 
             return NotFound();
         }
-        [Route("/Schools")]
-        public IActionResult SchoolCategory(int page=1,string shireTitle="",string cityTitle="",string categoryTitle="",string schoolName="",string courseName="",string teacherName="",string orderBy="all")
-        {
-            var model = _school.GetSchoolsForCategory(page, 20, shireTitle, cityTitle, categoryTitle, schoolName,
-                courseName, teacherName, orderBy);
-            if (!string.IsNullOrEmpty(shireTitle))
-            {
-                model.Cities = _locationService.GetAllCityByShireTitle(shireTitle);
-            }
-            return View("SchoolsCategory",model);
-        }
-
-
-
-
 
         [Route("/Home/HandleError/{code}")]
         public IActionResult HandlerError(int code)

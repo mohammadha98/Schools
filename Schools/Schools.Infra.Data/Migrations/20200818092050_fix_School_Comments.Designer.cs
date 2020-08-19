@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Schools.Infra.Data.Context;
 
 namespace Schools.Infra.Data.Migrations
 {
     [DbContext(typeof(SchoolsDbContext))]
-    partial class SchoolsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200818092050_fix_School_Comments")]
+    partial class fix_School_Comments
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -337,6 +339,9 @@ namespace Schools.Infra.Data.Migrations
                     b.Property<bool>("IsDelete")
                         .HasColumnType("bit");
 
+                    b.Property<int?>("SchoolCommentCommentId")
+                        .HasColumnType("int");
+
                     b.Property<int>("SchoolId")
                         .HasColumnType("int");
 
@@ -349,7 +354,7 @@ namespace Schools.Infra.Data.Migrations
 
                     b.HasKey("CommentId");
 
-                    b.HasIndex("Answer");
+                    b.HasIndex("SchoolCommentCommentId");
 
                     b.HasIndex("SchoolId");
 
@@ -1009,8 +1014,8 @@ namespace Schools.Infra.Data.Migrations
             modelBuilder.Entity("Schools.Domain.Models.Schools.SchoolComment", b =>
                 {
                     b.HasOne("Schools.Domain.Models.Schools.SchoolComment", null)
-                        .WithMany("Answers")
-                        .HasForeignKey("Answer");
+                        .WithMany("SchoolComments")
+                        .HasForeignKey("SchoolCommentCommentId");
 
                     b.HasOne("Schools.Domain.Models.Schools.School", "School")
                         .WithMany("SchoolComments")

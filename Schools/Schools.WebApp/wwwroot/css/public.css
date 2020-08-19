@@ -1342,13 +1342,18 @@ footer .trust-col a img{
     margin: 0 3px
   }
 }
-
+.current {
+    color: #2986e8 !important;
+    border: 1px solid #2986e8 !important;
+    border-bottom: 3px solid #2986e8 !important;
+    cursor: default
+}
 @media screen and (max-width : 480px){
   .last-items-layer .section-item h2 a{
     font-size: 13px;
     font-weight: normal;
     line-height: 30px;
-    height: 30px
+      height: 30px;
   }
   .last-items-layer .section-item h2 a span{
     font-weight: normal;

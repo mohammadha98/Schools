@@ -10,26 +10,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap-rtl.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/material-icon.css">
-    <link rel="stylesheet" type="text/css" href="/css/owl.carousel.css">
     <link rel="stylesheet" type="text/css" href="/css/icon.css">
     <link rel="stylesheet" type="text/css" href="/css/public.css">
-    <link rel="stylesheet" type="text/css" href="/css/search.css">
-    <link rel="stylesheet" type="text/css" href="/css/page.css">
-    <link rel="stylesheet" type="text/css" href="/css/home.css">
     <link rel="stylesheet" type="text/css" href="/css/Custom.css">
+    @await RenderSectionAsync("Meta", false)
+
     <script src="/js/jquery.min.js"></script>
-    @await  RenderSectionAsync("Meta",false)
 
 </head>
 <body>
     <script src="/js/modernizr.js"></script>
-<div class="loading">
-    <div class="loading-body">
-        <img src="/loading/Double Ring-1.4s-200px.gif" />
-        <p>لطفا منتظر بمانید ...</p>
+    <div class="loading">
+        <div class="loading-body">
+            <img src="/loading/Double Ring-1.4s-200px.gif" />
+            <p>لطفا منتظر بمانید ...</p>
+        </div>
     </div>
-</div>
     <div class="overlay"></div>
     <div class="top-layer">
         <div class="container">
@@ -79,10 +75,9 @@
 
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/jquery.slimscroll.js"></script>
-    <script src="/js/owl.carousel.js"></script>
     <script src="/js/public.js"></script>
-    <script src="/js/raty.js"></script>
-    <script src="/js/home.js"></script>
+
+
     @await RenderSectionAsync("Scripts", false)
 </body>
 </html>

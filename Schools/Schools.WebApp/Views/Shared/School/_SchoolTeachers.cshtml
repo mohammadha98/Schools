@@ -1,0 +1,25 @@
+﻿@model List<Schools.Domain.Models.Schools.Teachers.SchoolTeacher>
+
+    <article>
+        <ul>
+            <!-- item -->
+            @foreach (var item in Model)
+            {
+                var teacherRate =item.TeacherRates.Sum(r=>r.Rate) / item.TeacherRates.Count;
+
+                <li>
+                    <header>
+                        <span class="readonly-rating-star" data-score="@teacherRate"></span>
+                        <h2> @item.User.Name @item.User.Family </h2>
+                    </header>
+                    <div class="desc">
+                        <p>
+                            @item.Bio
+                        </p>
+                        <a href="javascript:void(0)" class="submit-rating" id="user-1"> <i class="zmdi zmdi-star"></i> ثبت امتیاز به این استاد </a>
+                    </div>
+                </li>
+            }
+
+        </ul>
+    </article>

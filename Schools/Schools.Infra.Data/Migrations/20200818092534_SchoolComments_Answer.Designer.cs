@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Schools.Infra.Data.Context;
 
 namespace Schools.Infra.Data.Migrations
 {
     [DbContext(typeof(SchoolsDbContext))]
-    partial class SchoolsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200818092534_SchoolComments_Answer")]
+    partial class SchoolComments_Answer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1009,7 +1011,7 @@ namespace Schools.Infra.Data.Migrations
             modelBuilder.Entity("Schools.Domain.Models.Schools.SchoolComment", b =>
                 {
                     b.HasOne("Schools.Domain.Models.Schools.SchoolComment", null)
-                        .WithMany("Answers")
+                        .WithMany("SchoolComments")
                         .HasForeignKey("Answer");
 
                     b.HasOne("Schools.Domain.Models.Schools.School", "School")
