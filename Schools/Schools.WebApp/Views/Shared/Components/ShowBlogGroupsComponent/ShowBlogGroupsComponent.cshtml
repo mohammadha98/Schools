@@ -1,25 +1,29 @@
 ﻿@model IEnumerable<Schools.Application.ViewModels.BlogsViewModels.ShowGroupsViewModels>
 
-    <section class="category-list shadow-style">
-        <header> <h2> دسته بندی موضوعات </h2> </header>
-            <ul>
-                <li>
-                    <a href="/blog/1/0"> دنیای خبر </a>
-                    <ul>
-                        @foreach (var item in Model)
-                        {
-                            <li><a href="/blog/1/@item.GroupId" > @item.GroupName </a></li>
-                        }
-                    </ul>
-                </li>
-                <li>
-                    <a href="/blog/2/0"> مقالات </a>
-                    <ul>
-                        @foreach (var item in Model)
-                        {
-                            <li><a href="/blog/2/@item.GroupId"> @item.GroupName </a></li>
-                        }
-                    </ul>
-                </li>
-            </ul>
-    </section>
+<section class="category-list shadow-style">
+    <header> <h2> دسته بندی موضوعات </h2> </header>
+    <form id="formSearch" asp-controller="Blog" asp-action="Index" method="get">
+        <input type="hidden" id="groupId" name="groupId" value="@ViewBag.groupId.ToString()" />
+        <input type="hidden" id="typeId" name="typeId" value="@ViewBag.typeId.ToString()" />
+        <ul>
+            <li>
+                <a onclick="$('#typeId').val(1),$('#groupId').val(0),changeGroup()" href="#"> دنیای خبر </a>
+                <ul>
+                    @foreach (var item in Model)
+                    {
+                        <li><a class="page-link" value="@item.GroupId" onclick="$('#typeId').val(1),$('#groupId').val(@item.GroupId),changeGroup()" href="#"> @item.GroupName </a></li>
+                    }
+                </ul>
+            </li>
+            <li>
+                <a onclick="$('#typeId').val(2),$('#groupId').val(0),changeGroup()" href="#"> مقالات </a>
+                <ul>
+                    @foreach (var item in Model)
+                    {
+                        <li><a class="page-link" value="@item.GroupId" onclick="$('#typeId').val(2),$('#groupId').val(@item.GroupId),changeGroup()" href="#"> @item.GroupName </a></li>
+                    }
+                </ul>
+            </li>
+        </ul>
+    </form>
+</section>
