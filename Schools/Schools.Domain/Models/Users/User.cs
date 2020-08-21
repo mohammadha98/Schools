@@ -15,27 +15,37 @@ namespace Schools.Domain.Models.Users
         public int UserId { get; set; }
 
         [Display(Name = "نام")]
-        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        //[Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         [MaxLength(50, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
 
         public string Name { get; set; }
         [Display(Name = "نام خانوادگی")]
-        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        //[Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         [MaxLength(50, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
 
         public string Family { get; set; }
 
 
         [Display(Name = "نام کاربری")]
-        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        //[Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         [MaxLength(100, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
 
         public string UserName { get; set; }
 
-        [Display(Name ="رمز عبور")]  
-        [MaxLength(50, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
+        [Display(Name = "ایمیل")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        [MaxLength(200, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
+        [EmailAddress(ErrorMessage ="ایمیل وارد شده معتبر نمی باشد")]
+        public string Email { get; set; }
 
+        [Display(Name = "تلفن همراه")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        [MaxLength(15)]
+        public string PhoneNumber { get; set; }
+
+        [Display(Name ="کلمه عبور")]  
+        [MaxLength(50, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
+        //[Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         public string Password { get; set; }
 
         [Display(Name = "کد فعال سازی")]

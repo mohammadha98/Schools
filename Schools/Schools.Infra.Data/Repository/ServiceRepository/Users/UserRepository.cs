@@ -30,6 +30,17 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Users
             }
         }
 
+        public void AddRoleUserForRegister(int roleId, int userId)
+        {
+            _context.UserRoles.Add(new UserRole()
+            {
+                IsDelete = false,
+                UserId = userId,
+                RoleId = roleId
+            });
+            _context.SaveChanges();
+        }
+
         public int AddUser(User user)
         {
             _context.Users.Add(user);

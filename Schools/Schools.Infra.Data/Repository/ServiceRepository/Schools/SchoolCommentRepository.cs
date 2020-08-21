@@ -1,12 +1,12 @@
-﻿using System.Data.Entity;
-using System.Linq;
+﻿using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using Schools.Domain.Models.Schools;
 using Schools.Domain.Repository.InterfaceRepository.Schools;
 using Schools.Infra.Data.Context;
 
 namespace Schools.Infra.Data.Repository.ServiceRepository.Schools
 {
-    public class SchoolCommentRepository:ISchoolCommentRepository
+    public class SchoolCommentRepository : ISchoolCommentRepository
     {
         private SchoolsDbContext _db;
 

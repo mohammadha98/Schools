@@ -1,7 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore.Internal;
 using Schools.Application.Service.Interfaces.Users;
+using Schools.Application.Utilities.Generator;
 using Schools.Application.ViewModels.UsersViewModel;
+using Schools.Domain.Models.Users;
 using Schools.Domain.Repository.InterfaceRepository.Users;
+using Schools.Infra.Data.Context;
+using Schools.Infra.Data.Migrations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,25 +16,40 @@ namespace Schools.Application.Service.Services.Users
 {
     public class UserService : IUserService
     {
-        private IUserRepository _IuserRepository;
-        public UserService(IUserRepository userRepository)
+        private IUserRepository _userRepository;
+        private SchoolsDbContext _context;
+        public UserService(IUserRepository userRepository,SchoolsDbContext context)
         {
-            _IuserRepository = userRepository;
+            _userRepository = userRepository;
+            _context = context;
+        }
+
+        public bool ActiveAccount(string activeCode)
+        {
+            var user = _context.Users.SingleOrDefault(u => u.ActiveCode == activeCode);
+
+            if (user == null || user.IsActive)
+                return false;
+
+            user.IsActive = true;
+            user.ActiveCode = NameGenerator.GenerateUniqCode();
+            _context.SaveChanges();
+            return true;
         }
 
         public UserInfoViewModel GetUserInfoByUserId(int userId)
         {
-            var user = _IuserRepository.GetUserById(userId);
+            var user = _userRepository.GetUserById(userId);
             UserInfoViewModel info = new UserInfoViewModel();
             info.User = user;
-            info.userRoles = _IuserRepository.GetAllUserRolesByUserId(user.UserId);
-            info.Schools = _IuserRepository.GetAllSchoolInUserLikesByUserId(user.UserId);
+            info.userRoles = _userRepository.GetAllUserRolesByUserId(user.UserId);
+            info.Schools = _userRepository.GetAllSchoolInUserLikesByUserId(user.UserId);
             return info;
         }
 
         public UsersForAdminPanelViewModel GetUsersByFilter(string username = "", int pageId = 1)
         {
-            var list = _IuserRepository.GetUsers();
+            var list = _userRepository.GetUsers();
 
             if (!string.IsNullOrEmpty(username))
                 list = list.Where(u => u.UserName.Contains(username));
@@ -44,6 +63,18 @@ namespace Schools.Application.Service.Services.Users
             result.GetUsers = list.OrderByDescending(u => u.RegisterDate).Take(take).Skip(skip).ToList();
 
             return result;
+        }
+
+        public bool IsExistEmail(string email)
+        {
+            var users = _userRepository.GetUsers();
+            return users.Any(u => u.Email == email);
+        }
+
+        public bool IsExistUserName(string userName)
+        {
+            var users = _userRepository.GetUsers();
+            return users.Any(u => u.UserName == userName);
         }
     }
 }

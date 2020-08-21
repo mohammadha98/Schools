@@ -1,0 +1,39 @@
+﻿@model Schools.Application.ViewModels.UsersViewModel.RegisterViewModel
+@{
+    ViewData["Title"] = "ثبت نام";
+}
+@section Meta
+{
+    <link href="/css/clientarea.css" rel="stylesheet" />
+}
+@section Topic_Layer{
+    <div class="container page-title">
+        <h1><a href=""> ثبت نام در سایت </a></h1>
+        <ul itemtype="http://schema.org/BreadcrumbList" class="breadcrumb">
+            <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement"><a href="" itemprop="item"><span itemprop="name"> بانک اطلاعاتی آموزشگاه ها </span></a></li>
+            <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement"><a href="" itemprop="item" class="current"><span itemprop="name"> ثبت نام در سایت </span></a></li>
+        </ul>
+    </div>
+}
+
+<div class="clientarea-layer">
+    <div class="content shadow-style">
+        <h2> هنگام ثبت نام به موارد زیر توجه فرمایید  </h2>
+        <ul>
+            <li>ابتدا <a href="">قوانین و شرایط</a> عضویت در سامانه را با دقت مطالعه نموده و سپس اقدام به ثبت نام در سامانه نمایید .</li>
+            <li>لطفا مشخصات و شماره موبایل خود را با دقت و بطور صحیح وارد نمایید ، جهت تکمیل ادامه مراحل ثبت نام کد تایید به شماره موبایل شما ارسال خواهد شد. </li>
+        </ul>
+        <form method="post" asp-action="Register">
+            <input asp-for="Email" type="email" class="right-corner" placeholder="ایمیل خود را وارد نمایید">
+            <input asp-for="PhoneNumber" type="text" class="left-corner" placeholder="شماره موبایل خود را وارد نمایید">
+            <button class="right-corner"> دریافت کد تایید و ادامه ثبت نام  </button>
+
+            <div asp-validation-summary="All" class="text-danger">
+
+            </div>
+            <div class="detail margin-t-25">
+                <a href=""><i class="zmdi zmdi-account"></i>  قبلا ثبت نام کرده ام ! </a>
+            </div>
+        </form>
+    </div>
+</div>

@@ -441,8 +441,6 @@ E:\Projects\Repos\Barnamenevisan\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\
 E:\Projects\Repos\Barnamenevisan\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Areas\ManagementPanel\Pages\Schools\Groups\Index.cshtml.g.cs
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\bin\Debug\netcoreapp3.1\Schools.WebApp.Views.dll
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\bin\Debug\netcoreapp3.1\Schools.WebApp.Views.pdb
-D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\bin\Debug\netcoreapp3.1\EntityFramework.SqlServer.dll
-D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\bin\Debug\netcoreapp3.1\EntityFramework.dll
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Cryptography.Internal.dll
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
@@ -464,13 +462,11 @@ D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\bin\Debug\netcoreapp3
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\bin\Debug\netcoreapp3.1\NuGet.Frameworks.dll
-D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\bin\Debug\netcoreapp3.1\System.CodeDom.dll
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\bin\Debug\netcoreapp3.1\System.Composition.AttributedModel.dll
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\bin\Debug\netcoreapp3.1\System.Composition.Convention.dll
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\bin\Debug\netcoreapp3.1\System.Composition.Hosting.dll
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\bin\Debug\netcoreapp3.1\System.Composition.Runtime.dll
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\bin\Debug\netcoreapp3.1\System.Composition.TypedParts.dll
-D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\bin\Debug\netcoreapp3.1\System.Data.SqlClient.dll
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\bin\Debug\netcoreapp3.1\cs\Microsoft.CodeAnalysis.resources.dll
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\bin\Debug\netcoreapp3.1\de\Microsoft.CodeAnalysis.resources.dll
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\bin\Debug\netcoreapp3.1\es\Microsoft.CodeAnalysis.resources.dll
@@ -523,8 +519,6 @@ D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\bin\Debug\netcoreapp3
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\bin\Debug\netcoreapp3.1\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\bin\Debug\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
-D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
-D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Schools.WebApp.RazorAssemblyInfo.cache
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Schools.WebApp.RazorAssemblyInfo.cs
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Schools.WebApp.TagHelpers.input.cache
@@ -815,10 +809,8 @@ C:\Users\mohammad\source\repos\schools\Schools\Schools.WebApp\obj\Debug\netcorea
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Blog\Index.cshtml.g.cs
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Home\NotFound.cshtml.g.cs
-D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Home\SchoolsCategory.cshtml.g.cs
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Home\ServerError.cshtml.g.cs
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Intro\Index.cshtml.g.cs
-D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Page\ShowBlog.cshtml.g.cs
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\ShowBlogGroupsComponent\ShowBlogGroupsComponent.cshtml.g.cs
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\ShowLatesBlogComponent\ShowLatesBlogComponent.cshtml.g.cs
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Shared\TopLayer\_FixMenu.cshtml.g.cs
@@ -830,3 +822,12 @@ D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\_ViewImports.cshtml.g.cs
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\_ViewStart.cshtml.g.cs
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Blog\ShowBlog.cshtml.g.cs
+D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\School\SchoolsCategory.cshtml.g.cs
+D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\School\SinglePage.cshtml.g.cs
+D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Shared\School\_SchoolCard.cshtml.g.cs
+D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Shared\School\_SchoolComments.cshtml.g.cs
+D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Shared\School\_SchoolItem.cshtml.g.cs
+D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Shared\School\_SchoolTeachers.cshtml.g.cs
+D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Account\Register.cshtml.g.cs
+D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Account\RegisterStip2.cshtml.g.cs
+D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Account\RegisterStip3.cshtml.g.cs

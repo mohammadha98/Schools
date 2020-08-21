@@ -799,8 +799,12 @@ namespace Schools.Infra.Data.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
-                    b.Property<string>("Family")
+                    b.Property<string>("Email")
                         .IsRequired()
+                        .HasColumnType("nvarchar(200)")
+                        .HasMaxLength(200);
+
+                    b.Property<string>("Family")
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
@@ -811,14 +815,17 @@ namespace Schools.Infra.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
                     b.Property<string>("Password")
-                        .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(15)")
+                        .HasMaxLength(15);
 
                     b.Property<DateTime>("RegisterDate")
                         .HasColumnType("datetime2");
@@ -828,7 +835,6 @@ namespace Schools.Infra.Data.Migrations
                         .HasMaxLength(200);
 
                     b.Property<string>("UserName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
 

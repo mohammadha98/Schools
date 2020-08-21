@@ -1,13 +1,11 @@
-﻿using Schools.Application.Service.Interfaces.Blogs;
+﻿using Microsoft.EntityFrameworkCore;
+using Schools.Application.Service.Interfaces.Blogs;
 using Schools.Application.ViewModels.BlogsViewModels;
 using Schools.Domain.Models.Blogs;
-using Schools.Domain.Repository.InterfaceRepository.BlogRepositories;
 using Schools.Infra.Data.Context;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using System.Text;
 
 namespace Schools.Application.Service.Services.Blogs
 {
@@ -22,7 +20,7 @@ namespace Schools.Application.Service.Services.Blogs
         public Tuple<List<ShowCourseBlogViewModel>, int> GetCourse(int pageId = 1, string filter="", int typeId = 0, int groupId = 0,int take=0)
         {
             if (take == 0)
-                take = 8;
+                take = 21;
 
             IQueryable<Blog> result = _context.Blogs;
 

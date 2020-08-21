@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data.Entity;
 using System.Linq;
 using Schools.Application.Service.Interfaces.Schools;
 using Schools.Application.ViewModels.SchoolsViewModels;

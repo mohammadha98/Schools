@@ -24,7 +24,7 @@ namespace Schools.WebApp.Controllers.Blog
             ViewBag.pageId = pageId;
             ViewBag.groupId = groupId;
             ViewBag.typeId = typeId;
-            return View(_blogServices.GetCourse(pageId,filter,typeId,groupId,1));
+            return View(_blogServices.GetCourse(pageId,filter,typeId,groupId,21));
         }
 
         [Route("ShowBlog/{blogId}")]
