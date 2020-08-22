@@ -18,6 +18,11 @@ namespace Schools.Application.Service.Interfaces.Users
         bool IsExistUserName(string userName);
         bool IsExistEmail(string email);
         bool ActiveAccount(string activeCode);
+        User LoginUser(LoginViewModel login);
+        #endregion
+
+        #region UserPanel
+        bool IsExistPassword(int userId,string password);
         #endregion
     }
 }

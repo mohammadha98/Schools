@@ -6,6 +6,7 @@ using System.Text;
 
 namespace Schools.Application.ViewModels.UsersViewModel
 {
+    #region Register
     public class RegisterViewModel
     {
         [Display(Name = "ایمیل")]
@@ -33,12 +34,35 @@ namespace Schools.Application.ViewModels.UsersViewModel
         public int UserId { get; set; }
 
         [Display(Name = "نام کاربری")]
-        //[Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         [MaxLength(100, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
-
         public string UserName { get; set; }
-        public int RoleId { get; set; }
 
-        //public List<int>UserRoles { get; set; }
+        [Display(Name = "کلمه عبور")]
+        [Required(ErrorMessage = "لطفا {0} را وارد نمایید")]
+        [MaxLength(50)]
+        public string Password { get; set; }
+
+        public int RoleId { get; set; }
     }
+    #endregion
+
+    #region Login
+    public class LoginViewModel
+    {
+        [Display(Name = "ایمیل")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        [MaxLength(200, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
+        [EmailAddress(ErrorMessage = "ایمیل وارد شده معتبر نمی باشد")]
+        public string Email { get; set; }
+
+        [Display(Name = "کلمه عبور")]
+        [MaxLength(50, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        public string Password { get; set; }
+
+        [Display(Name = "مرا به خاطر به سپار")]
+        public bool RememberMe { get; set; }
+    }
+    #endregion
 }

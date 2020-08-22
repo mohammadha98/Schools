@@ -15,21 +15,20 @@ namespace Schools.Domain.Models.Users
         public int UserId { get; set; }
 
         [Display(Name = "نام")]
-        //[Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         [MaxLength(50, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
 
         public string Name { get; set; }
         [Display(Name = "نام خانوادگی")]
-        //[Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         [MaxLength(50, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
 
         public string Family { get; set; }
 
+        [Display(Name = "کد ملی")]
+        [MaxLength(10, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
+        public string NatinalCode { get; set; }
 
         [Display(Name = "نام کاربری")]
-        //[Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         [MaxLength(100, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
-
         public string UserName { get; set; }
 
         [Display(Name = "ایمیل")]
@@ -43,9 +42,12 @@ namespace Schools.Domain.Models.Users
         [MaxLength(15)]
         public string PhoneNumber { get; set; }
 
+        [Display(Name = "شماره ثابت")]
+        [MaxLength(15)]
+        public string TelNumber { get; set; }
+
         [Display(Name ="کلمه عبور")]  
         [MaxLength(50, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
-        //[Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         public string Password { get; set; }
 
         [Display(Name = "کد فعال سازی")]
@@ -63,6 +65,10 @@ namespace Schools.Domain.Models.Users
         public DateTime RegisterDate { get; set; }
 
         public bool IsDelete { get; set; }
+
+        [Display(Name = "توضیحات")]
+        [MaxLength(800, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
+        public string Description { get; set; }
 
 
 

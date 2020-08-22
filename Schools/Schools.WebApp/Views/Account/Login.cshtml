@@ -1,0 +1,51 @@
+﻿@model Schools.Application.ViewModels.UsersViewModel.LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+@section Meta
+{
+    <link href="/css/clientarea.css" rel="stylesheet" />
+}
+@section Topic_Layer{
+    <div class="container page-title">
+        <h1><a href=""> ورود به سایت </a></h1>
+        <ul itemtype="http://schema.org/BreadcrumbList" class="breadcrumb">
+            <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement"><a href="" itemprop="item"><span itemprop="name"> بانک اطلاعاتی آموزشگاه ها </span></a></li>
+            <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement"><a href="" itemprop="item" class="current"><span itemprop="name"> ورود به سایت </span></a></li>
+        </ul>
+    </div>
+}
+
+<div class="clientarea-layer">
+    <div class="content shadow-style">
+        <h2> هنگام ورود به حساب کاربری به موارد زیر توجه فرمایید  </h2>
+        <ul>
+            <li> در صورتی که برای اولین بار به حساب کاربری خود وارد می شوید ، پس از ورود به سامانه ، جهت حفظ امنیت بیشتر ، لطفا رمز عبور خود را تغییر دهید. </li>
+            <li> پس از ورود به حساب کاربری ، جهت حفظ امنیت ، لطفا از حساب کاربری خود خارج شوید. </li>
+            <li> در صورتی که رمز عبور خود را فراموش کرده اید ، می توانید از طریق شماره موبایلتان ، رمز عبور جدید را دریافت نمایید. </li>
+        </ul>
+        <form asp-action="Login" method="post">
+            <input asp-for="Email" type="email" class="right-corner" placeholder="ایمیل خود را وارد نمایید">
+            <input asp-for="Password" type="password" class="left-corner" placeholder="رمز عبور خود را وارد نمایید">
+            <button class="right-corner"> ورود به سایت </button>
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <div class="detail">
+                <div class="checkbox">
+                    <input asp-for="RememberMe" type="checkbox" id="remember-me">
+                    <label for="remember-me"> مرا بخاطر بسپار </label>
+                </div>
+                <a href="/ForgetPassword"><i class="zmdi zmdi-lock"></i>  رمز عبور خود را فراموش کرده ام ! </a>
+                <a href="Register"><i class="zmdi zmdi-account"></i>  ثبت نام در سایت ! </a>
+            </div>
+        </form>
+
+        <section class="other-login">
+            <header><h3> ورود با سایر حساب های کاربری </h3></header>
+            <a href="" class="shadow-style"><i class="zmdi zmdi-twitter"></i></a>
+            <a href="" class="shadow-style"><i class="zmdi zmdi-github"></i></a>
+            <a href="" class="shadow-style"><i class="zmdi zmdi-google-old"></i></a>
+        </section>
+    </div>
+</div>

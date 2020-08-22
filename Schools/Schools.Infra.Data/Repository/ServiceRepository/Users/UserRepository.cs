@@ -48,6 +48,12 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Users
             return user.UserId;
         }
 
+        public void EditUser(User user)
+        {
+            _context.Update(user);
+            _context.SaveChanges();
+        }
+
         public List<Role> GetAllRoles()
         {
             return _context.Roles.ToList();
@@ -76,6 +82,11 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Users
         public bool IsUserExist(int userId)
         {
             return _context.Users.Any(u => u.UserId == userId);
+        }
+
+        public void Save()
+        {
+            _context.SaveChanges();
         }
     }
 }

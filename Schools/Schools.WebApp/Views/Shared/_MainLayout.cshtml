@@ -38,20 +38,27 @@
                     <a href=""><i class="icon-aparat"></i></a>
                 </div>
                 <div class="left-side">
-                    <span class="hidden"><a href=""> ورود  </a> / <a href=""> عضویت </a><i class="zmdi zmdi-account"></i></span>
-                    <div class="logged-in">
-                        <a href="" class="avatar"><img src="/images/pic/avatar-1.jpg"></a>
-                        <span> میترا رحیمی خوش اومدی <i class="zmdi zmdi-caret-down"></i></span>
-                        <div class="sublayer">
-                            <ul>
-                                <li><a href=""> مشاهده پروفایل </a></li>
-                                <li><a href=""> ثبت آموزشگاه </a></li>
-                                <li><a href=""> ویرایش حساب کاربری </a></li>
-                                <li><a href=""> تغییر رمز عبور </a></li>
-                                <li><a href=""> خروج از حساب کاربری </a></li>
-                            </ul>
+                    
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <div class="logged-in">
+                            <a href="" class="avatar"><img src="/UserProfile/default.png"></a>
+                            <span> @User.Identity.Name خوش اومدی <i class="zmdi zmdi-caret-down"></i></span>
+                            <div class="sublayer">
+                                <ul>
+                                    <li><a href="/UserPanel/Edit/@User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)"> مشاهده پروفایل </a></li>
+                                    <li><a href=""> ثبت آموزشگاه </a></li>
+                                    <li><a href=""> ویرایش حساب کاربری </a></li>
+                                    <li><a href=""> تغییر رمز عبور </a></li>
+                                    <li><a href="/Logout"> خروج از حساب کاربری </a></li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
+                    }
+                    else
+                    {
+                    <span class=""><a href="/Login"> ورود  </a> / <a href="/Register"> عضویت </a><i class="zmdi zmdi-account"></i></span>
+                    }
                 </div>
             </div>
             <!-- /top bar -->

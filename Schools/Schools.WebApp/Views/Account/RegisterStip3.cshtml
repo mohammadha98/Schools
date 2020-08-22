@@ -33,11 +33,11 @@
                 <div class="radio-layer">
 
                     @*<div class="radio-row">
-                        @foreach (var item in roles)
-                        {
-                            <input asp-for="RoleId" type="radio" value="1"> <label asp-for="@item.RoleTitle"></label>
-                        }
-                        </div>*@
+            @foreach (var item in roles)
+            {
+                <input asp-for="RoleId" type="radio" value="1"> <label asp-for="@item.RoleTitle"></label>
+            }
+            </div>*@
 
                     <div class="radio-row">
                         <input asp-for="RoleId" type="radio" value="3" id="rd-user-1"> <label for="rd-user-1"> دانشجو هستم </label>
@@ -49,8 +49,9 @@
                 </div>
                 <!-- بعد از این مرحله اون رو به حساب کاربری منتقل کنید ، صفحه تکمیل اطلاعات  -->
 
-                <input asp-for="UserName" type="text" class="right-corner" placeholder=" نام و نام خانوادگی / نام آموزشگاه ">
-                <button class="left-corner"> ثبت نهایی و ورود به حساب کاربری  </button>
+                <input asp-for="UserName" type="text" class="right-corner" placeholder=" نام کاربری/ نام آموزشگاه ">
+                <input asp-for="Password" type="password" class="left-corner" placeholder="کلمه عبور">
+                <button class="right-corner"> ثبت نهایی و ورود به حساب کاربری  </button>
 
                 <div asp-validation-summary="All" class="text-danger"></div>
             </form>

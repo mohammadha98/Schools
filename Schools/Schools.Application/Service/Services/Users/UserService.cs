@@ -1,6 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Internal;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using Schools.Application.Service.Interfaces.Users;
+using Schools.Application.Utilities.Convertors;
 using Schools.Application.Utilities.Generator;
+using Schools.Application.Utilities.Security;
 using Schools.Application.ViewModels.UsersViewModel;
 using Schools.Domain.Models.Users;
 using Schools.Domain.Repository.InterfaceRepository.Users;
@@ -71,10 +74,29 @@ namespace Schools.Application.Service.Services.Users
             return users.Any(u => u.Email == email);
         }
 
+        public bool IsExistPassword(int userId,string password)
+        {
+            var user = _userRepository.GetUsers();
+            if (password != null)
+            {
+                var hashPassword = PasswordHelper.EncodePasswordMd5(password);
+                return user.Any(u => u.UserId == userId && u.Password == hashPassword);
+            }
+            return true;
+        }
+
         public bool IsExistUserName(string userName)
         {
             var users = _userRepository.GetUsers();
             return users.Any(u => u.UserName == userName);
+        }
+
+        public User LoginUser(LoginViewModel login)
+        {
+            string hashPassword = PasswordHelper.EncodePasswordMd5(login.Password);
+            string email = FixedText.FixedEmail(login.Email);
+            var users = _userRepository.GetUsers();
+            return users.SingleOrDefault(u => u.Email == email && u.Password == hashPassword);
         }
     }
 }
