@@ -13,11 +13,11 @@ using Schools.Domain.Repository.InterfaceRepository.Users;
 
 namespace Schools.WebApp.Controllers
 {
-    public class UserPanelController : Controller
+    public class UserController : Controller
     {
         private IUserRepository _userRepository;
         private IUserService _userService;
-        public UserPanelController(IUserRepository userRepository,IUserService userService)
+        public UserController(IUserRepository userRepository,IUserService userService)
         {
             _userRepository = userRepository;
             _userService = userService;
