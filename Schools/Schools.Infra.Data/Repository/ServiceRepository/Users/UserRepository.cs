@@ -74,6 +74,11 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Users
             return _context.Users.SingleOrDefault(u => u.UserId == userId);
         }
 
+        public int GetUserIdByUserName(string userName)
+        {
+            return _context.Users.Single(u => u.UserName == userName).UserId;
+        }
+
         public IQueryable<User> GetUsers()
         {
             return _context.Users;

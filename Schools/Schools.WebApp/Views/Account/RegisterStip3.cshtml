@@ -31,21 +31,12 @@
             <form asp-action="RegisterStip3" method="post">
                 <input asp-for="UserId" type="hidden" id="userId" name="userId" value="@ViewBag.UserId" />
                 <div class="radio-layer">
-
-                    @*<div class="radio-row">
-            @foreach (var item in roles)
-            {
-                <input asp-for="RoleId" type="radio" value="1"> <label asp-for="@item.RoleTitle"></label>
-            }
-            </div>*@
-
-                    <div class="radio-row">
-                        <input asp-for="RoleId" type="radio" value="3" id="rd-user-1"> <label for="rd-user-1"> دانشجو هستم </label>
-                    </div>
-                    <div class="radio-row">
-                        <input asp-for="RoleId" type="radio" value="4" id="rd-user-2"> <label for="rd-user-2"> آموزشگاه هستیم </label>
-                    </div>
-
+                    @foreach (var item in roles)
+                    {
+                        <div class="radio-row">
+                            <input asp-for="RoleId" type="radio" value="@item.RoleId" id="rd-user-@item.RoleId"> <label for="rd-user-@item.RoleId"> @item.RoleTitle </label>
+                        </div>
+                    }
                 </div>
                 <!-- بعد از این مرحله اون رو به حساب کاربری منتقل کنید ، صفحه تکمیل اطلاعات  -->
 

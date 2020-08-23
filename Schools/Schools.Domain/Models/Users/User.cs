@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Dynamic;
 using System.Text;
+using Schools.Domain.Models.Blogs;
 using Schools.Domain.Models.Schools;
 using Schools.Domain.Models.Users.Messages;
 using Schools.Domain.Models.Users.Tickets;
@@ -84,6 +86,7 @@ namespace Schools.Domain.Models.Users
 
         public virtual List<UserLike> UserLikes { get; set; }
         public virtual List<SchoolRate> SchoolRates { get; set; }
+        public virtual List<BlogComment> BlogComments { get; set; }
         #endregion
     }
 }

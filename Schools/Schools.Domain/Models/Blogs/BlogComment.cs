@@ -16,7 +16,6 @@ namespace Schools.Domain.Models.Blogs
         [Key]
         public int CommentId { get; set; }
         public int BlogId { get; set; }
-        public int AnswerId { get; set; }
         public int UserId { get; set; }
 
         [Display(Name ="نام و نام خانودگی")]
@@ -35,18 +34,16 @@ namespace Schools.Domain.Models.Blogs
 
         [Display(Name = "دیدگاه شما")]
         [Required(ErrorMessage = "لطفا دیدگاهتان را بنویسید")]
-        [DataType(DataType.MultilineText)]
-        public string Text { get; set; }
+        [MaxLength(700)]
+        public string Comment { get; set; }
 
         public DateTime CreateDate { get; set; }
-
-        [Display(Name = "پاسخ")]
-        public int? Answer { get; set; }
 
         [Display(Name = "کد امنیتی")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         public int SecurityCode { get; set; }
         public bool IsDelete { get; set; }
+        public bool IsAdminRead { get; set; }
 
         #region Relation
         public Blog Blog { get; set; }

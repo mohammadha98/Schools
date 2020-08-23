@@ -77,6 +77,7 @@ namespace Schools.WebApp.Controllers
                 ViewData["UserId"] = registerStip2.UserId;
                 return View("RegisterStip3");
             }
+            
             return View();
         }
 
@@ -87,6 +88,12 @@ namespace Schools.WebApp.Controllers
             if (!ModelState.IsValid)
             {
                 return View("RegisterStip3");
+            }
+            if (_userService.IsExistUserName(registerStip3.UserName))
+            {
+                ModelState.AddModelError("UserName", "نام کاربری وجود دارد");
+                ViewData["UserId"] = registerStip3.UserId;
+                return View("RegisterStip3",registerStip3);
             }
             var user = _userRepository.GetUserById(registerStip3.UserId);
             user.UserName = registerStip3.UserName;

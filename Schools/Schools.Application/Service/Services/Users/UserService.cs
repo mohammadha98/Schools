@@ -77,12 +77,8 @@ namespace Schools.Application.Service.Services.Users
         public bool IsExistPassword(int userId,string password)
         {
             var user = _userRepository.GetUsers();
-            if (password != null)
-            {
                 var hashPassword = PasswordHelper.EncodePasswordMd5(password);
                 return user.Any(u => u.UserId == userId && u.Password == hashPassword);
-            }
-            return true;
         }
 
         public bool IsExistUserName(string userName)
