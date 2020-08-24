@@ -834,6 +834,6 @@ D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_PanelLayout.cshtml.g.cs
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Account\Login.cshtml.g.cs
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Home\SchoolsCategory.cshtml.g.cs
-D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Page\ShowBlog.cshtml.g.cs
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\User\Edit.cshtml.g.cs
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\User\EditPassword.cshtml.g.cs
+D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Blog\ShowComment.cshtml.g.cs

@@ -18,7 +18,7 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.BlogRepositoris
 
         public IEnumerable<BlogType> FilterType(int id)
         {
-            return _context.BlogTypes.Where(c => c.TypeId == id).ToList();
+            return _context.BlogTypes.Where(b => b.TypeId == id).ToList();
         }
 
         public IEnumerable<BlogType> GetAllType()

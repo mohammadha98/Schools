@@ -3,6 +3,21 @@
 @{
     ViewData["Title"] = "Index";
 }
+@section Topic_Layer{
+    <div class="container page-title">
+        <h1><a href=""> عنوان مطلب در این ناحیه قرار میگیرد </a></h1>
+        <ul itemtype="http://schema.org/BreadcrumbList" class="breadcrumb">
+            <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement"><a href="" itemprop="item"><span itemprop="name"> بانک اطلاعاتی آموزشگاه ها </span></a></li>
+            <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement"><a href="" itemprop="item" class="current"><span itemprop="name"> عنوان مطلب در این ناحیه قرار میگیرد </span></a></li>
+        </ul>
+    </div>
+
+}
+@section Meta
+{
+    <link href="/css/page.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="/css/material-icon.css">
+}
 <div class="container">
     <div class="page-default page-style-one">
         <div class="row">
@@ -46,131 +61,38 @@
                 <section class="user-comments-layer shadow-style">
                     <header> <h3> <i class="zmdi zmdi-comments"></i> نظرات کاربران </h3> <span> 28 نظر </span> </header>
                     <div class="comment-inner-layer">
-                        <form action="" method="">
+                        <form asp-controller="Blog" asp-action="CreateComment"
+                              data-ajax="true"
+                              data-ajax-method="post"
+                              data-ajax-mode="replace"
+                              data-ajax-update="#listComment"
+                              data-ajax-success="Success">
+                            <input type="hidden" name="comment.BlogId" value="@Model.BlogId" />
                             <div class="row">
                                 <div class="col-md-5 col-sm-5 col-xs-12">
-                                    <input name="" placeholder=" نام و نام خانوادگی" type="text">
-                                    <input name="" placeholder=" ایمیل " type="email">
-                                    <input name="" placeholder=" شماره تماس " type="text">
+                                    <input name="comment.Name" id="comment_Name" placeholder=" نام و نام خانوادگی" type="text">
+                                    <input name="comment.Email" id="comment_Email" placeholder=" ایمیل " type="email">
+                                    <input name="comment.PhoneNumber" id="comment_PhoneNumber" placeholder=" شماره تماس " type="text">
                                     <!-- here get comment id for reply , use this input's value and separate cm- -->
-                                    <input name="" id="reply-comment-id" type="hidden">
+                                    <input name="commentId_CommentId" id="reply-comment-id" type="hidden">
                                 </div>
                                 <div class="col-md-7 col-sm-7 col-xs-12">
-                                    <textarea placeholder=" متن نظر"></textarea>
-                                    <div class="captcha">
-                                        <input name="" placeholder=" کد امنیتی " type="text">
-                                        <img src="images/pic/captcha.jpg">
-                                    </div>
+                                    <textarea id="comment_Comment" name="comment.Comment" placeholder=" متن نظر"></textarea>
+                                    @*<div class="captcha">
+                                            <input name="" placeholder=" کد امنیتی " type="text">
+                                            <img src="images/pic/captcha.jpg">
+                                        </div>*@
                                     <button type="submit"> ارسال نظر ارزشمند شما </button>
                                 </div>
                             </div>
                         </form>
 
-                        <div class="comments-list">
-
-                            <div class="comment-box">
-                                <div class="img-layer"><img src="images/pic/avatar-1.jpg"></div>
-                                <div class="left">
-                                    <span> میترا رحیمی </span>
-                                    <i> ارسال شده در 15/07/1396</i>
-                                    <p>
-                                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.
-                                    </p>
-                                    <div class="action-layer">
-                                        <a href="" class="delete-cm"><i class="zmdi zmdi-delete"></i></a>
-                                        <a href="" class="edit-cm"><i class="zmdi zmdi-edit"></i></a>
-                                        <!-- set comment id for element's id for reply -->
-                                        <a href="javascript:void(0)" class="reply-cm" id="cm-1"><i class="zmdi zmdi-mail-reply"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="comment-box">
-                                <div class="img-layer"><img src="images/pic/avatar-1.jpg"></div>
-                                <div class="left">
-                                    <span> میترا رحیمی </span>
-                                    <i> ارسال شده در 15/07/1396</i>
-                                    <p>
-                                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.
-                                    </p>
-                                    <div class="action-layer">
-                                        <a href="" class="delete-cm"><i class="zmdi zmdi-delete"></i></a>
-                                        <a href="" class="edit-cm"><i class="zmdi zmdi-edit"></i></a>
-                                        <!-- set comment id for element's id for reply -->
-                                        <a href="javascript:void(0)" class="reply-cm" id="cm-1"><i class="zmdi zmdi-mail-reply"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="comment-box">
-                                <div class="img-layer"><img src="images/pic/avatar-1.jpg"></div>
-                                <div class="left">
-                                    <span> میترا رحیمی </span>
-                                    <i> ارسال شده در 15/07/1396</i>
-                                    <p>
-                                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.
-                                    </p>
-                                    <div class="action-layer">
-                                        <a href="" class="delete-cm"><i class="zmdi zmdi-delete"></i></a>
-                                        <a href="" class="edit-cm"><i class="zmdi zmdi-edit"></i></a>
-                                        <!-- set comment id for element's id for reply -->
-                                        <a href="javascript:void(0)" class="reply-cm" id="cm-1"><i class="zmdi zmdi-mail-reply"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="comment-box">
-                                <div class="img-layer"><img src="images/pic/avatar-1.jpg"></div>
-                                <div class="left">
-                                    <span> میترا رحیمی </span>
-                                    <i> ارسال شده در 15/07/1396</i>
-                                    <p>
-                                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.
-                                    </p>
-                                    <div class="action-layer">
-                                        <a href="" class="delete-cm"><i class="zmdi zmdi-delete"></i></a>
-                                        <a href="" class="edit-cm"><i class="zmdi zmdi-edit"></i></a>
-                                        <!-- set comment id for element's id for reply -->
-                                        <a href="javascript:void(0)" class="reply-cm" id="cm-2"><i class="zmdi zmdi-mail-reply"></i></a>
-                                    </div>
-                                </div>
-
-                                <div class="comment-box">
-                                    <div class="img-layer"><img src="images/pic/avatar-1.jpg"></div>
-                                    <div class="left">
-                                        <span> میترا رحیمی </span>
-                                        <i> ارسال شده در 15/07/1396</i>
-                                        <p>
-                                            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.
-                                        </p>
-                                        <div class="action-layer">
-                                            <a href="" class="delete-cm"><i class="zmdi zmdi-delete"></i></a>
-                                            <a href="" class="edit-cm"><i class="zmdi zmdi-edit"></i></a>
-                                            <!-- set comment id for element's id for reply -->
-                                            <a href="javascript:void(0)" class="reply-cm" id="cm-3"><i class="zmdi zmdi-mail-reply"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
+                        <div class="comments-list" id="listComment">
 
                         </div>
 
                         <!-- paging -->
-                        <div class="pagination-layer">
-                            <div class="inner">
-                                <a href="" class="next-page"> صفحه بعدی </a>
-                                <div class="pages">
-                                    <a href="" class="page">1</a>
-                                    <a href="" class="page">2</a>
-                                    <a href="" class="page current">3</a>
-                                    <a href="" class="page">4</a>
-                                    <a href="" class="page">5</a>
-                                    <a href="" class="page">...</a>
-                                </div>
-                                <a href="" class="prev-page"> صفحه قبلی </a>
-                            </div>
-                        </div>
+
 
                     </div>
                 </section>
@@ -270,7 +192,23 @@
 
 </div>
 @section Scripts{
+    <script src="/js/jquery.unobtrusive-ajax.min.js"></script>
     <script type="text/javascript">
+
+        function Success() {
+            $("#comment_Comment").val("");
+            $("#comment_Name").val("");
+            $("#comment_Email").val("");
+            $("#comment_PhoneNumber").val("");
+        }
+
+        $(function() {
+            $("#listComment").load("/Blog/ShowComment/" + @Model.BlogId);
+        });
+
+        function pageComment(pageid) {
+            $("#listComment").load("/Blog/ShowComment/" + @Model.BlogId+"?pageId="+pageid);
+        }
 
         function changeGroup() {
             $("#formFilter").submit();

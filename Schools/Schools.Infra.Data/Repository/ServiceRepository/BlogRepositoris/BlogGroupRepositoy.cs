@@ -24,7 +24,7 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.BlogRepositoris
             }
             else
             {
-                var list = _context.BlogGroups.Where(c => c.GroupName.Contains(parameter) || c.GroupId.ToString().Contains(parameter)).ToList();
+                var list = _context.BlogGroups.Where(b => b.GroupName.Contains(parameter) || b.GroupId.ToString().Contains(parameter)).ToList();
                 return list.Distinct().ToList();
             }
         }

@@ -1,0 +1,40 @@
+﻿@model Tuple<List<Schools.Domain.Models.Blogs.BlogComment>, int>
+@using Schools.Application.Utilities.Convertors
+
+@{ 
+    Layout = null;
+}
+
+@foreach (var item in Model.Item1)
+{
+    <div class="comment-box">
+        <div class="img-layer"><img src="/UserProfile/@item.User.UserAvatar"></div>
+        <div class="left">
+            <span> @item.Name </span>
+            <i>@item.CreateDate.ToShamsi()</i>
+            <p>
+               @item.Comment
+            </p>
+            <div class="action-layer">
+                <a href="" class="delete-cm"><i class="zmdi zmdi-delete"></i></a>
+                <a href="" class="edit-cm"><i class="zmdi zmdi-edit"></i></a>
+                <!-- set comment id for element's id for reply -->
+                <a href="javascript:void(0)" class="reply-cm" id="cm-1"><i class="zmdi zmdi-mail-reply"></i></a>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="pagination-layer">
+    <div class="inner">
+        @*<a href="" class="next-page"> صفحه بعدی </a>*@
+        <div class="pages">
+            @for (int i = 1; i <= Model.Item2; i++)
+            {
+                <a class="page-link" onclick="pageComment(@i)" href="#">@i</a>
+            }
+
+        </div>
+        @*<a href="" class="prev-page"> صفحه قبلی </a>*@
+    </div>
+</div>

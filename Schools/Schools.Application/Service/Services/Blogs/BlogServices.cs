@@ -26,7 +26,7 @@ namespace Schools.Application.Service.Services.Blogs
 
             if (!string.IsNullOrEmpty(filter))
             {
-                result = result.Where(c => c.Title.Contains(filter) || c.Tags.Contains(filter));
+                result = result.Where(b => b.Title.Contains(filter) || b.Tags.Contains(filter));
             }
 
             switch (typeId)
@@ -35,43 +35,43 @@ namespace Schools.Application.Service.Services.Blogs
                     break;
                 case 1:
                     {
-                        result = result.Where(c => c.TypeId == 1);
+                        result = result.Where(b => b.TypeId == 1);
                         break;
                     }
                 case 2:
                     {
-                        result = result.Where(c => c.TypeId == 2);
+                        result = result.Where(b => b.TypeId == 2);
                         break;
                     }
             }
 
             if (groupId != 0)
             {
-                result = result.Where(c => c.GroupId == groupId);
+                result = result.Where(b => b.GroupId == groupId);
             }
 
             int skip = (pageId - 1) * take;
 
-            int pageCount= result.Include(c => c.BlogType).Include(c => c.BlogGroup)
-                .Select(c => new ShowCourseBlogViewModel()
+            int pageCount= result.Include(b => b.BlogType).Include(b => b.BlogGroup)
+                .Select(b => new ShowCourseBlogViewModel()
                 {
-                    BlogId = c.BlogId,
-                    BlogType = c.BlogType.TypeTitle,
-                    BlogGroup = c.BlogGroup.GroupName,
-                    CreateDate = c.CreateDate,
-                    ImageName = c.ImageName,
-                    Title = c.Title
+                    BlogId = b.BlogId,
+                    BlogType = b.BlogType.TypeTitle,
+                    BlogGroup = b.BlogGroup.GroupName,
+                    CreateDate = b.CreateDate,
+                    ImageName = b.ImageName,
+                    Title = b.Title
                 }).Count()/take;
 
-            var query = result.Include(c => c.BlogType).Include(c=>c.BlogGroup)
-                .Select(c => new ShowCourseBlogViewModel()
+            var query = result.Include(b => b.BlogType).Include(b=>b.BlogGroup)
+                .Select(b => new ShowCourseBlogViewModel()
             {
-                BlogId=c.BlogId,
-                BlogType=c.BlogType.TypeTitle,
-                BlogGroup=c.BlogGroup.GroupName,
-                CreateDate=c.CreateDate,
-                ImageName=c.ImageName,
-                Title=c.Title
+                BlogId=b.BlogId,
+                BlogType=b.BlogType.TypeTitle,
+                BlogGroup=b.BlogGroup.GroupName,
+                CreateDate=b.CreateDate,
+                ImageName=b.ImageName,
+                Title=b.Title
             }).Skip(skip).Take(take).ToList();
 
             return Tuple.Create(query, pageCount);
@@ -82,7 +82,7 @@ namespace Schools.Application.Service.Services.Blogs
             IQueryable<Blog> result = _context.Blogs;
             if (!string.IsNullOrEmpty(filter))
             {
-                result = result.Where(c => c.Title.Contains(filter)||c.BlogId.ToString().Contains(filter));
+                result = result.Where(b => b.Title.Contains(filter)||b.BlogId.ToString().Contains(filter));
             }
 
             switch (getType)
@@ -91,12 +91,12 @@ namespace Schools.Application.Service.Services.Blogs
                     break;
                 case 1:
                     {
-                        result = result.Where(c => c.TypeId == 1);
+                        result = result.Where(b => b.TypeId == 1);
                         break;
                     }
                 case 2:
                     {
-                        result = result.Where(c => c.TypeId == 2);
+                        result = result.Where(b => b.TypeId == 2);
                         break;
                     }
             }
@@ -105,19 +105,19 @@ namespace Schools.Application.Service.Services.Blogs
             {
                 foreach (int groupId in selectedGroups)
                 {
-                    result = result.Where(c => c.GroupId == groupId);
+                    result = result.Where(b => b.GroupId == groupId);
                 }
             }
-            var query = result.Include(c=>c.BlogType).Select(c => new BlogsViewModels()
+            var query = result.Include(b=>b.BlogType).Select(b => new BlogsViewModels()
             {
-                BlogId = c.BlogId,
-                GroupId = c.GroupId,
-                ImageName = c.ImageName,
-                TypeId = c.TypeId,
-                Title = c.Title,
-                ShortDescription=c.ShortDescription,
-                CreateDate = c.CreateDate,
-                BlogType=c.BlogType.TypeTitle
+                BlogId = b.BlogId,
+                GroupId = b.GroupId,
+                ImageName = b.ImageName,
+                TypeId = b.TypeId,
+                Title = b.Title,
+                ShortDescription=b.ShortDescription,
+                CreateDate = b.CreateDate,
+                BlogType=b.BlogType.TypeTitle
             }).ToList();
 
             return query;

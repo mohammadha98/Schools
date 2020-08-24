@@ -5,7 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Schools.Application.Service.Interfaces.Blogs;
+using Schools.Application.Service.Interfaces.Users;
+using Schools.Domain.Models.Blogs;
 using Schools.Domain.Repository.InterfaceRepository.BlogRepositories;
+using Schools.Domain.Repository.InterfaceRepository.Users;
 
 namespace Schools.WebApp.Controllers.Blog
 {
@@ -13,10 +16,12 @@ namespace Schools.WebApp.Controllers.Blog
     {
         private IBlogServices _blogServices;
         private IBlogRepository _blogRepository;
-        public BlogController(IBlogServices blogServices,IBlogRepository blogRepository)
+        private IUserRepository _userRepository;
+        public BlogController(IBlogServices blogServices,IBlogRepository blogRepository,IUserRepository userRepository)
         {
             _blogServices = blogServices;
             _blogRepository = blogRepository;
+            _userRepository = userRepository;
         }
         
         public IActionResult Index(int pageId=1,string filter = "",int typeId=0,int groupId=0)
@@ -40,6 +45,22 @@ namespace Schools.WebApp.Controllers.Blog
                 _blogRepository.Save();
             }
             return View(blog);
+        }
+
+        [HttpPost]
+        public IActionResult CreateComment(BlogComment comment)
+        {
+            comment.IsDelete = false;
+            comment.CreateDate = DateTime.Now;
+            comment.UserId = _userRepository.GetUserIdByUserName(User.Identity.Name);
+            comment.SecurityCode = 123;
+            _blogRepository.AddComment(comment);
+
+            return View("ShowComment",_blogRepository.GetBlogComments(comment.BlogId));
+        }
+        public IActionResult ShowComment(int id, int pageId = 1)
+        {
+            return View(_blogRepository.GetBlogComments(id, pageId));
         }
     }
 }
