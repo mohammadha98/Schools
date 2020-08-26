@@ -837,3 +837,4 @@ D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Schools.WebApp.dll
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Schools.WebApp.pdb
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Schools.WebApp.genruntimeconfig.cache
+D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Blog\PageCount.cshtml.g.cs

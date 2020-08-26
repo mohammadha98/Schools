@@ -18,6 +18,7 @@
     <link rel="stylesheet" type="text/css" href="/css/material-icon.css">
     <link href="/css/page.css" rel="stylesheet" />
 }
+
 <div class="container">
     <div class="page-default page-style-one">
         <div class="row">
@@ -92,23 +93,10 @@
                         </div>
 
                         <!-- paging -->
-                        <div class="pagination-layer">
-                            <div class="inner">
-                                @*<a href="" class="next-page"> صفحه بعدی </a>*@
-                                <div class="pages">
-                                    @*@for (int i = 1; i <= Model.Item2; i++)
-                                    {*@
-                                    <a onclick="pageComment(1)" class="page">1</a>
-                                    <a onclick="pageComment(2)" class="page">2</a>
-                                    <a onclick="pageComment(3)" class="page">3</a>
-                                    <a onclick="pageComment(4)" class="page">4</a>
-                                    @*}*@
 
-                                </div>
-                                @*<a href="" class="prev-page"> صفحه قبلی </a>*@
-                            </div>
+                        <div class="pagination-layer" id="pageCount">
+
                         </div>
-
 
                     </div>
                 </section>
@@ -212,7 +200,7 @@
 </div>
 @section Scripts{
     <script src="/js/jquery.unobtrusive-ajax.min.js"></script>
-    <script>
+    <script type="text/javascript">
 
         function Success() {
             $("#comment_Comment").val("");
@@ -223,10 +211,11 @@
 
         $(function () {
             $("#listComment").load("/Blog/ShowComment/" +@Model.BlogId);
+            $("#pageCount").load("/Blog/PageCount/" + @Model.BlogId);
         });
 
-        function pageComment(pageId) {
-            $("#listComment").load("/Blog/ShowComment/" + @Model.BlogId+"?pageId="+pageId);
+        function pageComment(pageid) {
+            $("#pageCount").load("/Blog/PageCount/" + @Model.BlogId+"?pageId="+pageid);
         }
 
         function changeGroup() {

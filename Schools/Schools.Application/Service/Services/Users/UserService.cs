@@ -20,23 +20,22 @@ namespace Schools.Application.Service.Services.Users
     public class UserService : IUserService
     {
         private IUserRepository _userRepository;
-        private SchoolsDbContext _context;
-        public UserService(IUserRepository userRepository,SchoolsDbContext context)
+        public UserService(IUserRepository userRepository)
         {
             _userRepository = userRepository;
-            _context = context;
         }
 
         public bool ActiveAccount(string activeCode)
         {
-            var user = _context.Users.SingleOrDefault(u => u.ActiveCode == activeCode);
+            var users = _userRepository.GetUsers();
+            var user = users.SingleOrDefault(u => u.ActiveCode == activeCode);
 
             if (user == null || user.IsActive)
                 return false;
 
             user.IsActive = true;
             user.ActiveCode = NameGenerator.GenerateUniqCode();
-            _context.SaveChanges();
+            _userRepository.Save();
             return true;
         }
 
