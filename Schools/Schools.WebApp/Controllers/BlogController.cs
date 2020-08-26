@@ -10,7 +10,7 @@ using Schools.Domain.Models.Blogs;
 using Schools.Domain.Repository.InterfaceRepository.BlogRepositories;
 using Schools.Domain.Repository.InterfaceRepository.Users;
 
-namespace Schools.WebApp.Controllers.Blog
+namespace Schools.WebApp.Controllers
 {
     public class BlogController : Controller
     {
@@ -37,6 +37,7 @@ namespace Schools.WebApp.Controllers.Blog
         {
             ViewBag.groupId = groupId;
             ViewBag.typeId = typeId;
+            ViewBag.CommentCount = _blogRepository.CommentCount(blogId);
             var blog = _blogRepository.GetBlogById(blogId);
             if (blog != null)
             {
@@ -56,11 +57,11 @@ namespace Schools.WebApp.Controllers.Blog
             comment.SecurityCode = 123;
             _blogRepository.AddComment(comment);
 
-            return View("ShowComment",_blogRepository.GetBlogComments(comment.BlogId));
+            return View("ShowComment", _blogServices.GetBlogComments(comment.BlogId));
         }
-        public IActionResult ShowComment(int id, int pageId = 1)
+        public IActionResult ShowComment(int id, int pageId=1)
         {
-            return View(_blogRepository.GetBlogComments(id, pageId));
+            return View(_blogServices.GetBlogComments(id, pageId));
         }
     }
 }

@@ -10,5 +10,6 @@ namespace Schools.Application.Service.Interfaces.Blogs
     {
         List<BlogsViewModels> FilterBlog(string filter = "", int getType = 0, List<int> selectedGroups = null);
         Tuple<List<ShowCourseBlogViewModel>,int> GetCourse(int pageId = 1, string filter="",int typeId=0, int groupId=0,int take=0);
+        Tuple<List<BlogComment>, int> GetBlogComments(int blogId, int pageId = 1);
     }
 }

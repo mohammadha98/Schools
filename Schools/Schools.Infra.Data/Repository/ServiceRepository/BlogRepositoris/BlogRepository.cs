@@ -23,6 +23,11 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.BlogRepositoris
             _context.SaveChanges();
         }
 
+        public int CommentCount(int blogId)
+        {
+            return _context.BlogComments.Count(b => b.BlogId == blogId);
+        }
+
         public IEnumerable<Blog> GetAllBlogs()
         {
             return _context.Blogs.Include(b => b.BlogGroup).Include(b => b.BlogType).ToList();
@@ -31,21 +36,6 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.BlogRepositoris
         public Blog GetBlogById(int blogId)
         {
             return _context.Blogs.Include(b => b.BlogGroup).Include(b => b.BlogType).First(b => b.BlogId == blogId);
-        }
-
-        public Tuple<List<BlogComment>, int> GetBlogComments(int blogId, int pageId = 1)
-        {
-            int take = 5;
-            int skip = (pageId - 1) * take;
-            int pageCount = _context.BlogComments.Where(b => !b.IsDelete && b.BlogId == blogId).Count() / take;
-
-            if ((pageCount % 2) != 0)
-            {
-                pageCount += 1;
-            }
-            return Tuple.Create(
-                _context.BlogComments.Where(b => !b.IsDelete && b.BlogId == blogId).Skip(skip).Take(take)
-                .OrderByDescending(b => b.CreateDate).ToList(), pageCount);
         }
 
         public IEnumerable<Blog> GetLatesBlog()

@@ -11,7 +11,7 @@
         <div class="img-layer"><img src="/UserProfile/@item.User.UserAvatar"></div>
         <div class="left">
             <span> @item.Name </span>
-            <i>@item.CreateDate.ToShamsi()</i>
+            <i>@item.CreateDate.ToShamsi() ارسال شده در</i>
             <p>
                @item.Comment
             </p>
@@ -25,16 +25,3 @@
     </div>
 }
 
-<div class="pagination-layer">
-    <div class="inner">
-        @*<a href="" class="next-page"> صفحه بعدی </a>*@
-        <div class="pages">
-            @for (int i = 1; i <= Model.Item2; i++)
-            {
-                <a class="page-link" onclick="pageComment(@i)" href="#">@i</a>
-            }
-
-        </div>
-        @*<a href="" class="prev-page"> صفحه قبلی </a>*@
-    </div>
-</div>

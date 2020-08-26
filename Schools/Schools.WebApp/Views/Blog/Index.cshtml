@@ -8,6 +8,7 @@
 {
     <link href="/css/page.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="/css/material-icon.css">
+    <link href="/css/search.css" rel="stylesheet" />
 }
 
 @section Topic_Layer{
@@ -21,50 +22,55 @@
 }
 
 <div class="container">
-    <form id="formSearch" asp-action="Index" method="get">
-        <input type="hidden" id="pageId" name="pageId" value="@ViewBag.pageId.ToString()" />
-        <div class="page-default page-style-one blog-category-page">
-            <div class="row">
-                <!-- right -->
-                <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
-                    <!-- Top Layer -->
-                    <div class="top-search shadow-style">
+    @*<form id="formSearch" asp-action="Index" method="get">*@
+    <input type="hidden" id="pageId" name="pageId" value="@ViewBag.pageId.ToString()" />
+    <div class="page-default page-style-one blog-category-page">
+        <div class="row">
+            <!-- right -->
+            <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
+                <!-- Top Layer -->
+                <div class="top-search shadow-style">
+                    <form>
                         <input name="filter" placeholder=" جستجوی کنید ... " type="text">
                         <button><i class="zmdi zmdi-search"></i></button>
-                    </div>
-                    <!-- /Top Layer -->
-
-                    <section class="article-items">
-                        <div class="row">
-                            @foreach (var item in Model.Item1)
-                            {
-                                <partial name="_CourseBlog" model="@item" />
-                            }
-                        </div>
-                    </section>
-
-                    @if (Model.Item2 > 1)
-                    {
-                        <div class="pagination-layer">
-                            <div class="inner">
-                                <a onclick="prePage(@(pageNum-=1))" class="prev-page" href="#"> صفحه قبلی </a>
-                                <div class="pages">
-                                    @for (int i = 1; i <= (int)Model.Item2; i++)
-                                    {
-                                        <a class="page-link" onclick="changePage(@i)" href="#">@i</a>
-                                    }
-                                </div>
-                                <a onclick="nextPage(@(pageNum+=2))" href="#" class="next-page"> صفحه بعدی </a>
-                            </div>
-                        </div>
-                    }
+                    </form>
                 </div>
-                <!-- /right -->
-                <!-- left -->
-                <aside class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
-                    <!-- category -->
+                <!-- /Top Layer -->
+
+                <section class="article-items">
+                    <div class="row">
+                        @foreach (var item in Model.Item1)
+                        {
+                            <partial name="_CourseBlog" model="@item" />
+                        }
+                    </div>
+                </section>
+
+                @if (Model.Item2 > 1)
+                {
+                    <div class="pagination-layer">
+                        <div class="inner">
+                            <a onclick="prePage(@(pageNum-=1))" class="prev-page" href="#"> صفحه قبلی </a>
+                            <div class="pages">
+                                @for (int i = 1; i <= (int)Model.Item2; i++)
+                                {
+                                    <a class="page-link" onclick="changePage(@i)" href="#">@i</a>
+                                }
+                            </div>
+                            <a onclick="nextPage(@(pageNum+=2))" href="#" class="next-page"> صفحه بعدی </a>
+                        </div>
+                    </div>
+                }
+            </div>
+            <!-- /right -->
+            <!-- left -->
+            <aside class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
+                <!-- category -->
+                <section class="category-list shadow-style">
+                    <header> <h2> دسته بندی موضوعات </h2> </header>
                     @await Component.InvokeAsync("ShowBlogGroupsComponent")
                     <!-- /category -->
+                    </section>
                     <!-- last blog -->
                     <section class="last-blog shadow-style">
                         <header> <h2> آخرین مطالب بلاگ </h2> </header>
@@ -137,17 +143,18 @@
                     <!-- popular  -->
                     <!-- /popular  -->
 
-                </aside>
-                <!-- /left -->
-            </div>
+            </aside>
+            <!-- /left -->
         </div>
-    </form>
+    </div>
+    @*</form>*@
 </div>
 
 @section Scripts{
     <script type="text/javascript">
 
         function changeGroup() {
+            
             $("#formSearch").submit();
         }
 

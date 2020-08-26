@@ -6,6 +6,10 @@
     var menuModel = "blogs";
     var Groups = _groupRepository.GetAllGroups("");
 }
+@section Meta
+{
+    <link rel="stylesheet" href="/Admin/bowercomponents/select2/dist/css/select2.min.css">
+}
 <partial name="_MainMenu" model="menuModel" />
 
 <div class="content-wrapper">
@@ -46,32 +50,32 @@
                             </div>
 
                             <!-- radio -->
-                            <div class="form-group">
-                                <label asp-for="Blog.TypeId">
-                                </label>
-                                <label>
-                                    خبر
-                                    <input asp-for="Blog.TypeId" value="1" type="radio" class="minimal-red" checked>
-                                </label>
-                                <label>
-                                    مقاله
-                                    <input asp-for="Blog.TypeId" value="2" type="radio" class="minimal-red">
-                                </label>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Blog.GroupId"></label>
-                                <select asp-for="Blog.GroupId" class="form-control">
-                                    @foreach (var item in Groups)
-                                    {
-                                        <option value="@item.GroupId">@item.GroupName</option>
-                                    }
-                                </select>
-                            </div>
+                                    <div class="form-group">
+                                        <label asp-for="Blog.TypeId">
+                                        </label>
+                                        <label>
+                                            خبر
+                                            <input asp-for="Blog.TypeId" value="1" type="radio" class="minimal-red" checked>
+                                        </label>
+                                        <label>
+                                            مقاله
+                                            <input asp-for="Blog.TypeId" value="2" type="radio" class="minimal-red">
+                                        </label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Blog.GroupId"></label>
+                                        <select asp-for="Blog.GroupId" class="form-control">
+                                            @foreach (var item in Groups)
+                                            {
+                                                <option value="@item.GroupId">@item.GroupName</option>
+                                            }
+                                        </select>
+                                    </div>
 
-                            <div class="form-group">
-                                <label asp-for="Blog.ImageName"></label>
-                                <input type="file" name="imgUp" asp-for="Blog.ImageName">
-                            </div>
+                                    <div class="form-group">
+                                        <label asp-for="Blog.ImageName"></label>
+                                        <input type="file" name="imgUp" asp-for="Blog.ImageName">
+                                    </div>
                         </div>
                         <!-- /.box-body -->
 
@@ -84,3 +88,6 @@
         </div>
     </section>
 </div>
+
+
+
