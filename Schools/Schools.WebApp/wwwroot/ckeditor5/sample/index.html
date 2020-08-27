@@ -109,10 +109,10 @@
 					items: [
 						'heading',
 						'|',
+						'fontSize',
 						'bold',
 						'italic',
 						'link',
-						'blockQuote',
 						'|',
 						'bulletedList',
 						'numberedList',
@@ -120,13 +120,13 @@
 						'indent',
 						'outdent',
 						'|',
-						'code',
-						'insertTable',
+						'codeBlock',
 						'imageUpload',
+						'blockQuote',
+						'insertTable',
 						'|',
 						'undo',
-						'redo',
-						'|'
+						'redo'
 					]
 				},
 				language: 'fa',
@@ -153,11 +153,15 @@
 				
 				
 				
+		
+				
+				
+				
 			} )
 			.catch( error => {
-				console.error( 'Oops, something gone wrong!' );
-				console.error( 'Please, report the following error in the https://github.com/ckeditor/ckeditor5 with the build id and the error stack trace:' );
-				console.warn( 'Build id: epboia4i3tia-stt9dfl42yqu' );
+				console.error( 'Oops, something went wrong!' );
+				console.error( 'Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:' );
+				console.warn( 'Build id: 94vej6jf8txl-5c3pt0gncq7i' );
 				console.error( error );
 			} );
 	</script>

@@ -1342,7 +1342,7 @@ footer .trust-col a img{
     margin: 0 3px
   }
 }
-.current {
+.pagination-layer .current {
     color: #2986e8 !important;
     border: 1px solid #2986e8 !important;
     border-bottom: 3px solid #2986e8 !important;

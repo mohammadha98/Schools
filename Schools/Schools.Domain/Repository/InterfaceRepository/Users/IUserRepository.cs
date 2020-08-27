@@ -12,6 +12,7 @@ namespace Schools.Domain.Repository.InterfaceRepository.Users
         List<School> GetAllSchoolInUserLikesByUserId(int userId);
         List<Role> GetAllRoles();
         User GetUserById(int userId);
+        User GetUserWithRelations(int userId);
         int GetUserIdByUserName(string userName);
         int AddUser(User user);
         void EditUser(User user);

@@ -640,11 +640,19 @@ namespace Schools.Infra.Data.Migrations
                     b.Property<bool>("IsDelete")
                         .HasColumnType("bit");
 
+                    b.Property<string>("MessageTitle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("ReceiverId")
                         .HasColumnType("int");
 
                     b.Property<int>("SenderId")
                         .HasColumnType("int");
+
+                    b.Property<string>("SenderText")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Um_Id");
 
@@ -760,6 +768,9 @@ namespace Schools.Infra.Data.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<bool>("IsDelete")
                         .HasColumnType("bit");
 
@@ -772,7 +783,12 @@ namespace Schools.Infra.Data.Migrations
                     b.Property<int>("PriorityId")
                         .HasColumnType("int");
 
+                    b.Property<string>("TicketMessage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("TicketTitle")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("TicketId");
@@ -820,7 +836,7 @@ namespace Schools.Infra.Data.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
-                    b.Property<string>("NatinalCode")
+                    b.Property<string>("NationalCode")
                         .HasColumnType("nvarchar(10)")
                         .HasMaxLength(10);
 
@@ -830,15 +846,15 @@ namespace Schools.Infra.Data.Migrations
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
-                        .HasColumnType("nvarchar(15)")
-                        .HasMaxLength(15);
+                        .HasColumnType("nvarchar(11)")
+                        .HasMaxLength(11);
 
                     b.Property<DateTime>("RegisterDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("TelNumber")
-                        .HasColumnType("nvarchar(15)")
-                        .HasMaxLength(15);
+                        .HasColumnType("nvarchar(11)")
+                        .HasMaxLength(11);
 
                     b.Property<string>("UserAvatar")
                         .HasColumnType("nvarchar(200)")
@@ -1118,7 +1134,7 @@ namespace Schools.Infra.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("Schools.Domain.Models.Users.User", "User")
-                        .WithMany()
+                        .WithMany("TeacherRates")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -1142,7 +1158,7 @@ namespace Schools.Infra.Data.Migrations
             modelBuilder.Entity("Schools.Domain.Models.Users.Messages.MessageContent", b =>
                 {
                     b.HasOne("Schools.Domain.Models.Users.Messages.UserMessage", "UserMessage")
-                        .WithMany()
+                        .WithMany("MessageContents")
                         .HasForeignKey("MessageId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();

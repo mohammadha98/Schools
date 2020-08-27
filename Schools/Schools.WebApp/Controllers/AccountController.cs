@@ -72,7 +72,7 @@ namespace Schools.WebApp.Controllers
                 return View("RegisterStip2");
             }
 
-            if (_userService.ActiveAccount(registerStip2.ActiveCode) == true)
+            if (_userService.ActiveAccount(registerStip2.ActiveCode))
             {
                 ViewData["UserId"] = registerStip2.UserId;
                 return View("RegisterStip3");
@@ -102,7 +102,7 @@ namespace Schools.WebApp.Controllers
             _userRepository.AddRoleUserForRegister(registerStip3.RoleId, registerStip3.UserId);
 
             var id = registerStip3.UserId;
-            return RedirectToAction("Edit", "UserPanel", new { id });
+            return Redirect("/UserPanel/Edit");
         }
         #endregion
 
@@ -128,7 +128,9 @@ namespace Schools.WebApp.Controllers
                     var claims = new List<Claim>()
                     {
                         new Claim(ClaimTypes.NameIdentifier,user.UserId.ToString()),
-                        new Claim(ClaimTypes.Name,user.UserName)
+                        new Claim(ClaimTypes.Name,user.UserName),
+                        new Claim(ClaimTypes.Email,user.Email),
+                        new Claim(ClaimTypes.MobilePhone,user.PhoneNumber)
                     };
                     var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                     var principal = new ClaimsPrincipal(identity);
@@ -145,7 +147,7 @@ namespace Schools.WebApp.Controllers
                     ModelState.AddModelError("Email", "حساب کاربری شما فعال نمی باشد");
                 }
             }
-            ModelState.AddModelError("Email", "کاربری با مشصات وارد شده یافت نشد");
+            ModelState.AddModelError("Email", "کاربری با مشخصات وارد شده یافت نشد");
             return View();
         }
         #endregion

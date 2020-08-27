@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -11,11 +12,14 @@ namespace Schools.Domain.Models.Users.Tickets
         public int PriorityId { get; set; }
         public int BuilderId { get; set; }
         public int CategoryId { get; set; }
+        [Required(ErrorMessage = "عنوان تیکت را وارد کنید")]
         public string TicketTitle { get; set; }
+        [Required(ErrorMessage = "متن تیکت را وارد کنید")]
+        public string TicketMessage { get; set; }
         public bool IsOpen { get; set; }
         public bool IsSendEmail { get; set; }
         public bool IsDelete { get; set; }
-
+        public DateTime CreateDate { get; set; }
 
         #region Relations
         [ForeignKey("BuilderId")]

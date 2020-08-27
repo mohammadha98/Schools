@@ -1,4 +1,4 @@
-$(function(){
+﻿$(function(){
     $('[data-toggle="tooltip"]').tooltip();
 
     $('.notification-row .message-layer .text p').click(function(){
@@ -6,10 +6,20 @@ $(function(){
         var message = $this.parents().closest('.notification-row').find('.message-text');
         $(message).slideToggle();
     });
-    $('.notification-layer ul li > a').click(function(){
+    $('.notification-layer ul li > a').click(function () {
+        var counter = 1;
         var $this = $(this);
         var message = $this.parents().closest('li').find('.message-layer');
         $(message).slideToggle();
+        var id = message.attr("data-item");
+        if (id) {
+           $.ajax({
+               url: "/UserPanel/Notifications/SeeNotification?id=" + id,
+               type: "get"
+           }).done(function () {
+               $(message).removeAttr("data-item");
+           });
+       }
     });
     $('.terms-layer ul li > a').click(function(){
         var $this = $(this);
@@ -66,3 +76,48 @@ $(function(){
         }
     });
 });
+function ChangePage(pageId) {
+    $("#pageId").val(pageId);
+    $(".form-layer-style").submit();
+}
+$(".submit-button").click(function() {
+    $("#pageId").val(1);
+
+});
+
+function deleteItem(notificationId) {
+    swal({
+        title: "آیا از حذف اطمینان دارید؟",
+        icon: "warning",
+        buttons: ["خیر", "بله"]
+    }).then((isOk) => {
+        if (isOk) {
+            $.ajax({
+                url: "/UserPanel/Notifications/DeleteNotification?notificationId=" + notificationId,
+                type: "get",
+                beforeSend: function() {
+                    $(".loading").show();
+                },
+                complete: function() {
+                    $(".loading").hide();
+                }
+            }).done(function(data) {
+                if (data === "Deleted") {
+                    swal({
+                        title: "عملیات  با موفقیت انجام شد",
+                        icon: "success",
+                        button: "باشه"
+                    }).then((isOk) => {
+                        location.reload();
+                    });
+                } else {
+                    swal({
+                        title: "عملیات به مشکل برخورد کرد",
+                        icon: "error",
+                        button: "باشه"
+                    });
+                }
+            });
+        }
+    });
+}

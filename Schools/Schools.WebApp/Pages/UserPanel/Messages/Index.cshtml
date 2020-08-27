@@ -1,0 +1,144 @@
+﻿@page
+@using Schools.Application.Utilities
+@using Schools.Application.Utilities.Convertors
+@using Schools.Domain.Models.Users
+@using Schools.Domain.Repository.InterfaceRepository.Users
+@model Schools.WebApp.Pages.UserPanel.Messages.IndexModel
+@inject IUserRepository _User
+@{
+    var user = _User.GetUserWithRelations(User.GetUserId());
+    ViewData["title"] = $"حساب کاربری {user.Name} {user.Family} ";
+}
+@section Meta
+{
+    <link rel="stylesheet" type="text/css" href="/css/jquery.Bootstrap-PersianDateTimePicker.css">
+    <link rel="stylesheet" type="text/css" href="/css/account.css">
+}
+@section Topic_Layer
+{
+    <div class="container page-title">
+        <h1><a href="javascript:void(0)"> حساب کاربری </a></h1>
+        <ul itemtype="http://schema.org/BreadcrumbList" class="breadcrumb">
+            <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement"><a href="/" itemprop="item"><span itemprop="name"> بانک اطلاعاتی آموزشگاه ها </span></a></li>
+            <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement">
+                <a href="/UserPanel" itemprop="item">
+                    <span itemprop="name"> حساب کاربری @user.Name @user.Family </span>
+                </a>
+            </li>
+            <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement">
+                <a href="javascript:void(0)" itemprop="item" class="current">
+                    <span itemprop="name"> ویرایش اطلاعات </span>
+                </a>
+            </li>
+        </ul>
+    </div>
+}
+<div class="account-layer">
+    <div class="container">
+        @{
+            var menuModel = new Tuple<User, string>(user, "Messages");
+        }
+        <partial name="Shared/_RightMenu" model="menuModel" />
+
+
+        <div class="left-side">
+            <!-- account heading -->
+            <div class="account-heading layer-style">
+                <span class="status green"> وضعیت :  <i> فعال </i></span>
+                <a href="/UserPanel/Tickets/Add"> <i class="zmdi zmdi-plus"></i> ثبت تیکت </a>
+            </div>
+            <!-- /account heading -->
+
+            <div class="account-content-layer layer-style">
+                <h3> پیام های خصوصی</h3>
+                <div class="inner">
+
+                    <form method="get" class="form-layer-style filter-messages">
+                        <input type="hidden" asp-for="MessageModel.CurrentPage" id="pageId" name="pageId" />
+
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <!-- input -->
+                                <div class="input-layer" data-MdDateTimePicker="true" data-trigger="click" data-targetselector="#fromDate" data-groupid="group1" data-fromdate="true" data-enabletimepicker="false" data-placement="bottom">
+                                    <label><i class="zmdi zmdi-calendar"></i> از تاریخ </label>
+                                    <input name="startDate" autocomplete="off" asp-for="MessageModel.StartDate" type="text" id="fromDate" placeholder="از تاریخ" data-MdDateTimePicker="true" data-trigger="click" data-targetselector="#fromDate" data-groupid="group1" data-fromdate="true" data-enabletimepicker="false" data-placement="right">
+                                </div>
+                                <!--/ input -->
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <!-- input -->
+                                <div class="input-layer" data-MdDateTimePicker="true" data-trigger="click" data-targetselector="#toDate" data-groupid="group1" data-todate="true" data-enabletimepicker="false" data-placement="bottom">
+                                    <label><i class="zmdi zmdi-calendar"></i> تا تاریخ </label>
+                                    <input name="endDate" autocomplete="off" asp-for="MessageModel.EndDate" type="text" id="toDate" placeholder="تا تاریخ" data-MdDateTimePicker="true" data-trigger="click" data-targetselector="#toDate" data-groupid="group1" data-todate="true" data-enabletimepicker="true" data-placement="right" />
+                                </div>
+                                <!--/ input -->
+                            </div>
+
+                            <div class="col-md-3 col-sm-3 col-xs-12 pull-left">
+                                <button type="submit" class="submit-button green"> اعمال فیلتر </button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="support-layer">
+
+                        @foreach (var item in Model.MessageModel.UserMessages)
+                        {
+                            <div class="ticket-box layer-style">
+                                <button class="delete-item"><i class="zmdi zmdi-close"></i></button>
+                                <div class="head">
+                                    <span class="resgiter-date"> تاریخ ثبت : <i>@item.CreateDate.ToShamsi()</i> </span>
+                                    @if (item.SenderId == User.GetUserId())
+                                    {
+                                        <span class="status">  ارتباط با : <i>@item.Receiver.UserName</i> </span>
+
+                                    }
+                                    @if (item.ReceiverId == User.GetUserId())
+                                    {
+                                        <span class="status">  ارتباط با : <i>@item.Sender.UserName</i> </span>
+
+                                    }
+                                </div>
+
+                                <div class="text">
+                                    <a href="/UserPanel/Messages/Show/@item.Um_Id">@item.MessageTitle</a>
+                                </div>
+
+                            </div>
+                        }
+
+                        @if (Model.MessageModel.PageCount > 1)
+                        {
+                            <div class="pagination-layer">
+                                <div class="inner">
+                                    @if (Model.MessageModel.CurrentPage > 1)
+                                    {
+                                        <a onclick="ChangePage(@(Model.MessageModel.CurrentPage-1))" href="javascript:void(0)" class="prev-page"> صفحه قبلی </a>
+                                    }
+                                    <div class="pages">
+                                        @for (var i = Model.MessageModel.StartPage; i <= Model.MessageModel.EndPage; i++)
+                                        {
+                                            <a onclick="ChangePage(@i)" href="javascript:void(0)" class="@((i == Model.MessageModel.CurrentPage ? "page current" : "page"))">@i</a>
+                                        }
+                                    </div>
+
+                                    @if (Model.MessageModel.CurrentPage >= 1 && Model.MessageModel.CurrentPage < Model.MessageModel.PageCount)
+                                    {
+                                        <a onclick="ChangePage(@(Model.MessageModel.CurrentPage + 1))" href="javascript:void(0)" class="next-page"> صفحه بعدی </a>
+                                    }
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts
+{
+    <script src="/js/calendar.js"></script>
+    <script src="/js/account.js"></script>
+    <script src="/js/jquery.Bootstrap-PersianDateTimePicker.js"></script>
+}

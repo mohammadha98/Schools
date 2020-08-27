@@ -1,0 +1,106 @@
+﻿@page
+@using Schools.Application.Utilities
+@using Schools.Domain.Models.Users
+@using Schools.Domain.Repository.InterfaceRepository.Users
+@model Schools.WebApp.Pages.UserPanel.EditModel
+@inject IUserRepository _User
+@{
+    var user = _User.GetUserWithRelations(User.GetUserId());
+    ViewData["title"] = $"ویرایش حساب کاربری";
+}
+@section Meta
+{
+    <link rel="stylesheet" type="text/css" href="/css/account.css">
+}
+@section Topic_Layer
+{
+    <div class="container page-title">
+        <h1><a href="javascript:void(0)"> حساب کاربری </a></h1>
+        <ul itemtype="http://schema.org/BreadcrumbList" class="breadcrumb">
+            <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement"><a href="/" itemprop="item"><span itemprop="name"> بانک اطلاعاتی آموزشگاه ها </span></a></li>
+            <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement">
+                <a href="/UserPanel" itemprop="item">
+                    <span itemprop="name"> حساب کاربری @user.Name @user.Family </span>
+                </a>
+            </li>
+            <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement">
+                <a href="javascript:void(0)" itemprop="item" class="current">
+                    <span itemprop="name"> ویرایش اطلاعات </span>
+                </a>
+            </li>
+        </ul>
+    </div>
+}
+<div class="account-layer">
+    <div class="container">
+        @{
+            var menuModel = new Tuple<User, string>(user, "Edit");
+        }
+        <partial name="Shared/_RightMenu" model="menuModel" />
+
+        <div class="left-side">
+            <div class="account-heading layer-style">
+                <span class="status green"> وضعیت : <i> @(user.IsActive ? "فعال" : "غییر فعال") </i></span>
+                <a href="/UserPanel/Tickets/Add"> <i class="zmdi zmdi-plus"></i> ثبت تیکت </a>
+            </div>
+            <div class="account-content-layer layer-style">
+                <h3> ویرایش حساب کاربری </h3>
+                <div class="inner">
+                    <form method="post" class="form-layer-style">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                <div class="input-layer">
+                                    <label><i class="zmdi zmdi-account"></i>نام</label>
+                                    <input asp-for="UserModel.Name" value="@user.Name" type="text">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                <div class="input-layer">
+                                    <label><i class="zmdi zmdi-account"></i> نام خانوادگی</label>
+                                    <input asp-for="UserModel.Family" value="@user.Family" type="text">
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="input-layer">
+                                    <label><i class="zmdi zmdi-account"></i> کد ملی</label>
+                                    <input asp-for="UserModel.NationalCode" value="@user.NationalCode" type="number">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                <!-- input -->
+                                <div class="input-layer">
+                                    <label><i class="zmdi zmdi-phone-in-talk"></i>  شماره ثابت </label>
+                                    <input type="number" asp-for="UserModel.TelNumber" value="@user.TelNumber">
+                                </div>
+                                <!-- /input -->
+                            </div>
+                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                <div class="input-layer">
+                                    <label><i class="zmdi zmdi-smartphone-android"></i>  شماره موبایل </label>
+                                    <input asp-for="UserModel.Phone" value="@user.PhoneNumber" type="number">
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="textarea-layer">
+                                    <label><i class="zmdi zmdi-assignment"></i>  توضیحات </label>
+                                    <textarea name="UserModel.AboutMe" id="UserModel_AboutMe">@user.Description</textarea>
+                                </div>
+                            </div>
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                            <div class="col-md-3 col-sm-3 col-xs-12 pull-left">
+                                <button type="submit" class="submit-button green"> ویرایش اطلاعات </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+@section Scripts
+{
+    <script src="/js/jquery.validate.min.js"></script>
+    <script src="/js/jquery.validate.unobtrusive.js"></script>
+    <script src="/js/account.js"></script>
+}

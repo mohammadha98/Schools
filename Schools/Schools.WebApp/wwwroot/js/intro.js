@@ -136,3 +136,12 @@ $(function(){
 
 
 });
+$('.top-bar .left-side .logged-in > span').click(function(){
+    $('.top-bar .left-side .logged-in .sublayer').fadeToggle();
+});
+
+$("html , body").click(function(e) {
+    if (!$(e.target).parents().hasClass('logged-in')) {
+        $('.top-bar .left-side .logged-in .sublayer').fadeOut('fast');
+    }
+});

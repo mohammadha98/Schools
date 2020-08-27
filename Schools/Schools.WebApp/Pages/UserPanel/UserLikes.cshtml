@@ -1,0 +1,64 @@
+﻿@page
+@using Schools.Domain.Models.Users
+@model Schools.WebApp.Pages.UserPanel.UserLikesModel
+@{
+    ViewData["title"] = $"حساب کاربری {Model.UserModel.Name} {Model.UserModel.Family} ";
+}
+@section Meta
+{
+    <link rel="stylesheet" type="text/css" href="/css/account.css">
+}
+@section Topic_Layer
+{
+    <div class="container page-title">
+        <h1><a href="javascript:void(0)"> حساب کاربری </a></h1>
+        <ul itemtype="http://schema.org/BreadcrumbList" class="breadcrumb">
+            <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement"><a href="/" itemprop="item"><span itemprop="name"> بانک اطلاعاتی آموزشگاه ها </span></a></li>
+            <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement">
+                <a href="" itemprop="item" class="current">
+                    <span itemprop="name"> حساب کاربری @Model.UserModel.Name @Model.UserModel.Family </span>
+                </a>
+            </li>
+        </ul>
+    </div>
+}
+<div class="account-layer">
+    <div class="container">
+        @{
+            var menuModel = new Tuple<User, string>(Model.UserModel, "UserLikes");
+        }
+        <partial name="Shared/_RightMenu" model="menuModel" />
+
+        <div class="left-side">
+            <div class="account-heading layer-style">
+                <span class="status green"> وضعیت : <i> @(Model.UserModel.IsActive ? "فعال" : "غییر فعال") </i></span>
+                <a href=""> <i class="zmdi zmdi-plus"></i> ثبت تیکت </a>
+            </div>
+
+            <div class="account-content-layer layer-style last-like">
+                <h3>  آموزشگاه های پسند شده توسط شما </h3>
+                <div class="inner">
+                    @if (Model.UserModel.UserLikes.Count >= 1)
+                    {
+                        <ul>
+                            @foreach (var item in Model.UserModel.UserLikes)
+                            {
+                                <li><a href="/School/@item.SchoolId/@item.School.SchoolTitle.Replace(" ", "-").Trim()"> @item.School.SchoolTitle <span> (میزان محبوبیت : @item.School.UserLikes.Count نفر) </span></a></li>
+                            }
+
+                        </ul>
+                    }
+                    else
+                    {
+                        <div class="alert alert-info">
+                            موردی برای نمایش وجود ندارد
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+

@@ -37,14 +37,12 @@ namespace Schools.WebApp.Controllers
         [Route("/Home/HandleError/{code}")]
         public IActionResult HandlerError(int code)
         {
-         
-
-            if (code >= 500)
+            if (code == 404)
             {
-                return View("ServerError");
+                return View("NotFound");
             }
 
-            return View("NotFound");
+            return View("ServerError");
 
         }
         [Route("/GetCityByShireId/{shireTitle}")]
@@ -59,6 +57,6 @@ namespace Schools.WebApp.Controllers
             }
             return result;
         }
-       
+
     }
 }

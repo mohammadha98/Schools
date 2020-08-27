@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Dynamic;
-using System.Text;
 using Schools.Domain.Models.Blogs;
 using Schools.Domain.Models.Schools;
+using Schools.Domain.Models.Schools.Teachers;
 using Schools.Domain.Models.Users.Messages;
 using Schools.Domain.Models.Users.Tickets;
 
@@ -27,7 +26,7 @@ namespace Schools.Domain.Models.Users
 
         [Display(Name = "کد ملی")]
         [MaxLength(10, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
-        public string NatinalCode { get; set; }
+        public string NationalCode { get; set; }
 
         [Display(Name = "نام کاربری")]
         [MaxLength(100, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
@@ -41,11 +40,11 @@ namespace Schools.Domain.Models.Users
 
         [Display(Name = "تلفن همراه")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
-        [MaxLength(15)]
+        [MaxLength(11)]
         public string PhoneNumber { get; set; }
 
         [Display(Name = "شماره ثابت")]
-        [MaxLength(15)]
+        [MaxLength(11)]
         public string TelNumber { get; set; }
 
         [Display(Name ="کلمه عبور")]  
@@ -75,18 +74,17 @@ namespace Schools.Domain.Models.Users
 
 
         #region Relations
-
-        public virtual  List<UserRole> UserRoles { get; set; }
-        public virtual List<UserTicket> UserTickets { get; set; }
-        public virtual List<UserNotification> UserNotifications { get; set; }
+        public   List<UserRole> UserRoles { get; set; }
+        public  List<UserTicket> UserTickets { get; set; }
+        public  List<UserNotification> UserNotifications { get; set; }
         [InverseProperty("Sender")]
-        public virtual List<UserMessage> SenderMessages { get; set; }
+        public  List<UserMessage> SenderMessages { get; set; }
         [InverseProperty("Receiver")]
-        public virtual List<UserMessage> ReceiverMessages { get; set; }
-
-        public virtual List<UserLike> UserLikes { get; set; }
-        public virtual List<SchoolRate> SchoolRates { get; set; }
-        public virtual List<BlogComment> BlogComments { get; set; }
+        public  List<UserMessage> ReceiverMessages { get; set; }
+        public  List<UserLike> UserLikes { get; set; }
+        public  List<SchoolRate> SchoolRates { get; set; }
+        public  List<TeacherRate> TeacherRates { get; set; }
+        public  List<BlogComment> BlogComments { get; set; }
         #endregion
     }
 }

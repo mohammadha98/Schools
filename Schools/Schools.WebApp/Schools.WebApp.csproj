@@ -12,10 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\js\calendar.js" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Schools.Application\Schools.Application.csproj" />
     <ProjectReference Include="..\Schools.Domain\Schools.Domain.csproj" />
     <ProjectReference Include="..\Schools.Infra.Data\Schools.Infra.Data.csproj" />
@@ -72,7 +68,6 @@
     <None Include="wwwroot\ckeditor5\build\translations\ku.js" />
     <None Include="wwwroot\ckeditor5\build\translations\lt.js" />
     <None Include="wwwroot\ckeditor5\build\translations\lv.js" />
-    <None Include="wwwroot\ckeditor5\build\translations\ms.js" />
     <None Include="wwwroot\ckeditor5\build\translations\nb.js" />
     <None Include="wwwroot\ckeditor5\build\translations\ne.js" />
     <None Include="wwwroot\ckeditor5\build\translations\nl.js" />
@@ -91,6 +86,7 @@
     <None Include="wwwroot\ckeditor5\build\translations\sr.js" />
     <None Include="wwwroot\ckeditor5\build\translations\sv.js" />
     <None Include="wwwroot\ckeditor5\build\translations\th.js" />
+    <None Include="wwwroot\ckeditor5\build\translations\tk.js" />
     <None Include="wwwroot\ckeditor5\build\translations\tr.js" />
     <None Include="wwwroot\ckeditor5\build\translations\tt.js" />
     <None Include="wwwroot\ckeditor5\build\translations\ug.js" />
@@ -131,6 +127,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\images\blogs\" />
+    <Folder Include="wwwroot\images\ticketImages\" />
     <Folder Include="wwwroot\images\schools\gallery\" />
     <Folder Include="wwwroot\UserProfile\" />
   </ItemGroup>
