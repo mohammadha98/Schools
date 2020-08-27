@@ -1,0 +1,15 @@
+﻿@model Tuple<List<Schools.Domain.Models.Blogs.BlogComment>, int>
+@{
+    Layout = null;
+}
+
+<div class="inner">
+    <a href="" class="next-page"> صفحه بعدی </a>
+    <div class="pages">
+        @for (int i = 1; i <= Model.Item2; i++)
+        {
+            <a class="page" onclick="pageComment(@i)">@i</a>
+        }
+    </div>
+    <a href="" class="prev-page"> صفحه قبلی </a>
+</div>

@@ -1,4 +1,6 @@
-﻿using Schools.Application.Service.Interfaces.Users;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
+using Schools.Application.Service.Interfaces.Users;
 using Schools.Application.Utilities.Convertors;
 using Schools.Application.Utilities.Generator;
 using Schools.Application.Utilities.Security;
@@ -6,30 +8,34 @@ using Schools.Application.ViewModels.UsersViewModel;
 using Schools.Domain.Models.Users;
 using Schools.Domain.Repository.InterfaceRepository.Users;
 using Schools.Infra.Data.Context;
+using Schools.Infra.Data.Migrations;
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
+using System.Text;
 
 namespace Schools.Application.Service.Services.Users
 {
     public class UserService : IUserService
     {
         private IUserRepository _userRepository;
-        private SchoolsDbContext _context;
-        public UserService(IUserRepository userRepository, SchoolsDbContext context)
+        public UserService(IUserRepository userRepository)
         {
             _userRepository = userRepository;
-            _context = context;
         }
 
         public bool ActiveAccount(string activeCode)
         {
-            var user = _context.Users.SingleOrDefault(u => u.ActiveCode == activeCode);
+            var users = _userRepository.GetUsers();
+            var user = users.SingleOrDefault(u => u.ActiveCode == activeCode);
 
             if (user == null || user.IsActive)
                 return false;
 
             user.IsActive = true;
             user.ActiveCode = NameGenerator.GenerateUniqCode();
-            _context.SaveChanges();
+            _userRepository.Save();
             return true;
         }
 
@@ -67,37 +73,11 @@ namespace Schools.Application.Service.Services.Users
             return users.Any(u => u.Email == email);
         }
 
-        public void EditUserInfo(EditUserInfoViewModel editModel)
+        public bool IsExistPassword(int userId,string password)
         {
-            var user = _userRepository.GetUserById(editModel.UserId);
-            user.Name = editModel.Name;
-            user.Family = editModel.Family;
-            user.NationalCode = editModel.NationalCode;
-            user.PhoneNumber = editModel.Phone;
-            user.TelNumber = editModel.TelNumber;
-            user.Description = editModel.AboutMe;
-            _userRepository.EditUser(user);
-        }
-
-        public bool ChangePassword(ChangePasswordViewModel password)
-        {
-            //وقتی وارد این متد بشه ما مطمعا هستیم که اعتبار سنجی ها انجام شده ولی یک بار دیگه هم این کار را انجام میدیم
-            var user = _userRepository.GetUserById(password.UserId);
-            if (user == null)
-                return false;
-
-            if (password.NewPassword.ToLower() != password.ReNewPassword.ToLower())
-                return false;
-
-            var oldPassword = PasswordHelper.EncodePasswordMd5(password.CurrentPassword);
-
-            if (oldPassword != user.Password)
-                return false;
-
-            var newPassword = PasswordHelper.EncodePasswordMd5(password.NewPassword);
-            user.Password = newPassword;
-            _userRepository.EditUser(user);
-            return true;
+            var user = _userRepository.GetUsers();
+                var hashPassword = PasswordHelper.EncodePasswordMd5(password);
+                return user.Any(u => u.UserId == userId && u.Password == hashPassword);
         }
 
         public bool IsExistUserName(string userName)

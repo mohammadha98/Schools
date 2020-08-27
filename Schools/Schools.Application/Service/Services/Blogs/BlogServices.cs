@@ -134,8 +134,8 @@ namespace Schools.Application.Service.Services.Blogs
                 pageCount += 1;
             }
             return Tuple.Create(
-                _context.BlogComments.Where(b => !b.IsDelete && b.BlogId == blogId).Skip(skip).Take(take)
-                .OrderByDescending(b => b.CreateDate).ToList(), pageCount);
+                _context.BlogComments.Include(b=>b.User).Where(b => !b.IsDelete && b.BlogId == blogId).OrderByDescending(b => b.CreateDate).Skip(skip).Take(take)
+                .ToList(), pageCount);
         }
     }
 }

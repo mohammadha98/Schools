@@ -63,5 +63,15 @@ namespace Schools.WebApp.Controllers
         {
             return View(_blogServices.GetBlogComments(id, pageId));
         }
+
+        public IActionResult PageCount(int id,int pageId = 1)
+        {
+            return View(_blogServices.GetBlogComments(id, pageId));
+        }
+
+        public IActionResult Delete(int id)
+        {
+            return View();
+        }
     }
 }
