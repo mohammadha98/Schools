@@ -22,8 +22,6 @@
 }
 
 <div class="container">
-    @*<form id="formSearch" asp-action="Index" method="get">*@
-    <input type="hidden" id="pageId" name="pageId" value="@ViewBag.pageId.ToString()" />
     <div class="page-default page-style-one blog-category-page">
         <div class="row">
             <!-- right -->
@@ -45,22 +43,24 @@
                         }
                     </div>
                 </section>
-
-                @if (Model.Item2 > 1)
-                {
-                    <div class="pagination-layer">
-                        <div class="inner">
-                            <a onclick="prePage(@(pageNum-=1))" class="prev-page" href="#"> صفحه قبلی </a>
-                            <div class="pages">
-                                @for (int i = 1; i <= (int)Model.Item2; i++)
-                                {
-                                    <a class="page-link" onclick="changePage(@i)" href="#">@i</a>
-                                }
+                <form id="formSearch" asp-action="Index" method="get">
+                    <input type="hidden" id="pageId" name="pageId" value="@ViewBag.pageId.ToString()" />
+                    @if (Model.Item2 > 1)
+                    {
+                        <div class="pagination-layer">
+                            <div class="inner">
+                                <a onclick="prePage(@(pageNum-=1))" class="prev-page" href="#"> صفحه قبلی </a>
+                                <div class="pages">
+                                    @for (int i = 1; i <= (int)Model.Item2; i++)
+                                    {
+                                        <a class="page-link" onclick="changePage(@i)" href="#">@i</a>
+                                    }
+                                </div>
+                                <a onclick="nextPage(@(pageNum+=2))" href="#" class="next-page"> صفحه بعدی </a>
                             </div>
-                            <a onclick="nextPage(@(pageNum+=2))" href="#" class="next-page"> صفحه بعدی </a>
                         </div>
-                    </div>
-                }
+                    }
+                </form>
             </div>
             <!-- /right -->
             <!-- left -->
@@ -70,92 +70,90 @@
                     <header> <h2> دسته بندی موضوعات </h2> </header>
                     @await Component.InvokeAsync("ShowBlogGroupsComponent")
                     <!-- /category -->
-                    </section>
-                    <!-- last blog -->
-                    <section class="last-blog shadow-style">
-                        <header> <h2> آخرین مطالب بلاگ </h2> </header>
+                </section>
+                <!-- last blog -->
+                <section class="last-blog shadow-style">
+                    <header> <h2> آخرین مطالب بلاگ </h2> </header>
+                    <!-- item -->
+                    @await Component.InvokeAsync("ShowLatesBlogComponent")
+                    <!-- /item -->
+                </section>
+                <!-- last blog -->
+                <!-- last post -->
+                <section class="last-posts shadow-style">
+                    <header> <h2> آخرین آموزشگاه های ثبت شده </h2> </header>
+                    <div class="inner">
                         <!-- item -->
-                        @await Component.InvokeAsync("ShowLatesBlogComponent")
+                        <article>
+                            <h2><a href=""><span> آموزشگاه رانندگی </span> عصر نو </a></h2>
+                            <span><i class="zmdi zmdi-calendar"></i> 23 سال سابقه </span>
+                        </article>
                         <!-- /item -->
-                    </section>
-                    <!-- last blog -->
-                    <!-- last post -->
-                    <section class="last-posts shadow-style">
-                        <header> <h2> آخرین آموزشگاه های ثبت شده </h2> </header>
-                        <div class="inner">
-                            <!-- item -->
-                            <article>
-                                <h2><a href=""><span> آموزشگاه رانندگی </span> عصر نو </a></h2>
-                                <span><i class="zmdi zmdi-calendar"></i> 23 سال سابقه </span>
-                            </article>
-                            <!-- /item -->
-                            <!-- item -->
-                            <article>
-                                <h2><a href=""><span>  آموزشگاه زبان</span>  اینده سازان </a></h2>
-                                <span><i class="zmdi zmdi-calendar"></i> 15 سال سابقه </span>
-                            </article>
-                            <!-- /item -->
-                            <!-- item -->
-                            <article>
-                                <h2><a href=""><span>  آموزشگاه هنر</span> ایده پویا </a></h2>
-                                <span><i class="zmdi zmdi-calendar"></i> 5 سال سابقه </span>
-                            </article>
-                            <!-- /item -->
-                            <!-- item -->
-                            <article>
-                                <h2><a href=""><span> آموزشگاه رانندگی </span> عصر نو </a></h2>
-                                <span><i class="zmdi zmdi-calendar"></i> 23 سال سابقه </span>
-                            </article>
-                            <!-- /item -->
-                            <!-- item -->
-                            <article>
-                                <h2><a href=""><span>  آموزشگاه زبان</span>  اینده سازان </a></h2>
-                                <span><i class="zmdi zmdi-calendar"></i> 15 سال سابقه </span>
-                            </article>
-                            <!-- /item -->
-                            <!-- item -->
-                            <article>
-                                <h2><a href=""><span>  آموزشگاه هنر</span> ایده پویا </a></h2>
-                                <span><i class="zmdi zmdi-calendar"></i> 5 سال سابقه </span>
-                            </article>
-                            <!-- /item -->
-                            <!-- item -->
-                            <article>
-                                <h2><a href=""><span> آموزشگاه رانندگی </span> عصر نو </a></h2>
-                                <span><i class="zmdi zmdi-calendar"></i> 23 سال سابقه </span>
-                            </article>
-                            <!-- /item -->
-                            <!-- item -->
-                            <article>
-                                <h2><a href=""><span>  آموزشگاه زبان</span>  اینده سازان </a></h2>
-                                <span><i class="zmdi zmdi-calendar"></i> 15 سال سابقه </span>
-                            </article>
-                            <!-- /item -->
-                            <!-- item -->
-                            <article>
-                                <h2><a href=""><span>  آموزشگاه هنر</span> ایده پویا </a></h2>
-                                <span><i class="zmdi zmdi-calendar"></i> 5 سال سابقه </span>
-                            </article>
-                            <!-- /item -->
-                        </div>
-                    </section>
-                    <!-- /last post -->
-                    <!-- popular  -->
-                    <!-- /popular  -->
+                        <!-- item -->
+                        <article>
+                            <h2><a href=""><span>  آموزشگاه زبان</span>  اینده سازان </a></h2>
+                            <span><i class="zmdi zmdi-calendar"></i> 15 سال سابقه </span>
+                        </article>
+                        <!-- /item -->
+                        <!-- item -->
+                        <article>
+                            <h2><a href=""><span>  آموزشگاه هنر</span> ایده پویا </a></h2>
+                            <span><i class="zmdi zmdi-calendar"></i> 5 سال سابقه </span>
+                        </article>
+                        <!-- /item -->
+                        <!-- item -->
+                        <article>
+                            <h2><a href=""><span> آموزشگاه رانندگی </span> عصر نو </a></h2>
+                            <span><i class="zmdi zmdi-calendar"></i> 23 سال سابقه </span>
+                        </article>
+                        <!-- /item -->
+                        <!-- item -->
+                        <article>
+                            <h2><a href=""><span>  آموزشگاه زبان</span>  اینده سازان </a></h2>
+                            <span><i class="zmdi zmdi-calendar"></i> 15 سال سابقه </span>
+                        </article>
+                        <!-- /item -->
+                        <!-- item -->
+                        <article>
+                            <h2><a href=""><span>  آموزشگاه هنر</span> ایده پویا </a></h2>
+                            <span><i class="zmdi zmdi-calendar"></i> 5 سال سابقه </span>
+                        </article>
+                        <!-- /item -->
+                        <!-- item -->
+                        <article>
+                            <h2><a href=""><span> آموزشگاه رانندگی </span> عصر نو </a></h2>
+                            <span><i class="zmdi zmdi-calendar"></i> 23 سال سابقه </span>
+                        </article>
+                        <!-- /item -->
+                        <!-- item -->
+                        <article>
+                            <h2><a href=""><span>  آموزشگاه زبان</span>  اینده سازان </a></h2>
+                            <span><i class="zmdi zmdi-calendar"></i> 15 سال سابقه </span>
+                        </article>
+                        <!-- /item -->
+                        <!-- item -->
+                        <article>
+                            <h2><a href=""><span>  آموزشگاه هنر</span> ایده پویا </a></h2>
+                            <span><i class="zmdi zmdi-calendar"></i> 5 سال سابقه </span>
+                        </article>
+                        <!-- /item -->
+                    </div>
+                </section>
+                <!-- /last post -->
+                <!-- popular  -->
+                <!-- /popular  -->
 
             </aside>
             <!-- /left -->
         </div>
     </div>
-    @*</form>*@
 </div>
 
 @section Scripts{
     <script type="text/javascript">
 
         function changeGroup() {
-            
-            $("#formSearch").submit();
+            $("#formCategory").submit();
         }
 
         function changePage(pageId) {

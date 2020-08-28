@@ -19,6 +19,7 @@ namespace Schools.Domain.Repository.InterfaceRepository.BlogRepositories
         #region BlogComment
         void AddComment(BlogComment comment);
         int CommentCount(int blogId);
+        void DeleteComment(int commentId);
         #endregion
     }
 }

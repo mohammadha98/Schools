@@ -28,6 +28,12 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.BlogRepositoris
             return _context.BlogComments.Count(b => b.BlogId == blogId);
         }
 
+        public void DeleteComment(int commentId)
+        {
+            var comment = _context.BlogComments.Find(commentId);
+            comment.IsDelete = true;
+        }
+
         public IEnumerable<Blog> GetAllBlogs()
         {
             return _context.Blogs.Include(b => b.BlogGroup).Include(b => b.BlogType).ToList();

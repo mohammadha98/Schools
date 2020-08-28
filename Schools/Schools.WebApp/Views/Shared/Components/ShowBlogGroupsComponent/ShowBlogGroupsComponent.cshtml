@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Schools.Application.ViewModels.BlogsViewModels.ShowGroupsViewModels>
 
 
-    <form id="formSearch" asp-controller="Blog" asp-action="Index" method="get">
+    <form id="formCategory" asp-controller="Blog" asp-action="Index" method="get">
         <input type="hidden" id="groupId" name="groupId" value="@ViewBag.groupId.ToString()" />
         <input type="hidden" id="typeId" name="typeId" value="@ViewBag.typeId.ToString()" />
     </form>
