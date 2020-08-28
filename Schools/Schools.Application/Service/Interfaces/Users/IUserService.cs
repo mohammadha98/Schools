@@ -1,8 +1,6 @@
 ﻿using Schools.Application.ViewModels.UsersViewModel;
 using Schools.Domain.Models.Users;
-using System;
-using System.Collections.Generic;
-using System.Text;
+
 
 namespace Schools.Application.Service.Interfaces.Users
 {
@@ -22,7 +20,9 @@ namespace Schools.Application.Service.Interfaces.Users
         #endregion
 
         #region UserPanel
-        bool IsExistPassword(int userId,string password);
+        void EditUserInfo(EditUserInfoViewModel editModel);
+        bool ChangePassword(ChangePasswordViewModel password);
+
         #endregion
     }
 }

@@ -93,5 +93,37 @@ namespace Schools.Application.Service.Services.Users
             var users = _userRepository.GetUsers();
             return users.SingleOrDefault(u => u.Email == email && u.Password == hashPassword);
         }
+
+        public void EditUserInfo(EditUserInfoViewModel editModel)
+        {
+            var user = _userRepository.GetUserById(editModel.UserId);
+            user.Family = editModel.Family;
+            user.Name = editModel.Name;
+            user.PhoneNumber = editModel.Phone;
+            user.TelNumber = editModel.TelNumber;
+            user.Description = editModel.AboutMe;
+            user.NationalCode = editModel.NationalCode;
+            _userRepository.EditUser(user);
+        }
+
+        public bool ChangePassword(ChangePasswordViewModel password)
+        {
+            var user = _userRepository.GetUserById(password.UserId);
+
+            if (password.NewPassword != password.ReNewPassword)
+            {
+                return false;
+            }
+
+            var oldPassword = PasswordHelper.EncodePasswordMd5(password.CurrentPassword);
+            if (oldPassword != user.Password)
+            {
+                return false;
+            }
+
+            var newPassword = PasswordHelper.EncodePasswordMd5(password.NewPassword);
+            user.Password = newPassword;
+            return true;
+        }
     }
 }

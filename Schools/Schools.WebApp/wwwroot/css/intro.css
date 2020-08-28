@@ -45,7 +45,87 @@ a,i,input[type="submit"], form button,.main-menu .responsive-menu{ outline: medi
 footer nav ul:after,.top-bar:after,.top-bar .left-side:after,.main-menu:after,.content:after,.content .right-col:after,
 .content .left-col .list .select-options ul:after,.description-layer:after,.search-layer form:after,
 .main-menu .responsive-menu:after{display: block; clear: both; content: ''; visibility: hidden; height: 0; line-height: 0}
+.top-bar .left-side .logged-in {
+    width: auto;
+    float: left;
+    display: inline-table;
+    position: relative;
+    color: #fff;
+    margin: -20px 0 0
+}
 
+.top-bar .left-side .logged-in .avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    -moz-border-radius: 100%;
+    -webkit-border-radius: 100%;
+    position: relative;
+    float: left;
+    border: 3px solid rgba(255,255,255,0.2);
+}
+
+.top-bar .left-side .logged-in .avatar img {
+    width: 100%;
+    border-radius: 100%;
+    -moz-border-radius: 100%;
+    -webkit-border-radius: 100%
+}
+
+ .top-bar .left-side .logged-in > span {
+    font-size: 13px;
+    color: #333333;
+    line-height: 25px;
+    width: auto;
+    min-width: 50px;
+    float: left;
+    position: relative;
+    top: 13px
+}
+
+.top-bar .left-side .logged-in > span i {
+    font-size: 19px;
+    position: relative;
+    top: 4px;
+    margin-right: 5px
+}
+
+.top-bar .left-side .logged-in:hover {
+    cursor: pointer;
+}
+
+ .top-bar .left-side .logged-in > span:hover {
+    color: #55cb54
+}
+
+ .top-bar .left-side .logged-in .sublayer {
+    position: absolute;
+    width: 180px;
+    top: 68px;
+    left: 0;
+    background-color: #353b41;
+    padding: 15px;
+    -webkit-border-radius: 4px;
+    -webkit-border-top-right-radius: 0;
+    -moz-border-radius: 4px;
+    -moz-border-radius-topright: 0;
+    border-radius: 4px;
+    border-top-right-radius: 0;
+    display: none;
+    z-index: 1
+}
+
+ .top-bar .left-side .logged-in .sublayer ul li a {
+    line-height: 22px;
+    font-size: 13px;
+    color: #fff;
+    margin: 3px 0;
+    padding: 0 10px
+}
+
+ .top-bar .left-side .logged-in .sublayer ul li a:hover {
+    color: #3bb73a
+}
 
 .main-content{
   position: relative;

@@ -1,0 +1,82 @@
+﻿@page
+@using Schools.Domain.Models.Users
+@model Schools.WebApp.Pages.UserPanel.RatesModel
+@{
+    ViewData["title"] = "تاریخچه امتیازدهی";
+}
+@section Meta
+{
+    <link rel="stylesheet" type="text/css" href="/css/account.css">
+}
+@section Topic_Layer
+{
+    <div class="container page-title">
+        <h1><a href="javascript:void(0)"> حساب کاربری </a></h1>
+        <ul itemtype="http://schema.org/BreadcrumbList" class="breadcrumb">
+            <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement"><a href="/" itemprop="item"><span itemprop="name"> بانک اطلاعاتی آموزشگاه ها </span></a></li>
+            <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement">
+                <a href="" itemprop="item">
+                    <span itemprop="name"> حساب کاربری @Model.UserModel.Name @Model.UserModel.Family </span>
+                </a>
+            </li>
+            <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement">
+                <a itemprop="item" class="current">
+                    <span itemprop="name">  تاریخچه امتیازدهی شما </span>
+                </a>
+            </li>
+        </ul>
+    </div>
+}
+<div class="account-layer">
+    <div class="container">
+        @{
+            var menuModel = new Tuple<User, string>(Model.UserModel, "Rates");
+        }
+        <partial name="Shared/_RightMenu" model="menuModel" />
+
+        <div class="left-side">
+            <div class="account-heading layer-style">
+                <span class="status green"> وضعیت :  <i> فعال </i></span>
+                <a href="submit-ticket.html"> <i class="zmdi zmdi-plus"></i> ثبت تیکت </a>
+            </div>
+            <div class="account-content-layer layer-style rating-history">
+                <h3> تاریخچه امتیازدهی شما </h3>
+                <div class="inner">
+                    <p>آموزشگاه ها</p>
+                    @if (Model.UserModel.SchoolRates.Count >= 1)
+                    {
+                        foreach (var item in Model.UserModel.SchoolRates)
+                        {
+                            <ul>
+                                <li><a href=""> آموزشگاه @item.School.SchoolTitle <span> ( مجموع امتیاز : @item.Rate) </span></a></li>
+                            </ul>
+                        }
+                    }
+                    else
+                    {
+                        <div class="alert alert-info">
+                            موردی برای نمایش وجود ندارد
+                        </div>
+                    }
+                    <h3>اساتید</h3>
+                    @if (Model.UserModel.TeacherRates.Count >= 1)
+                    {
+                        foreach (var item in Model.UserModel.TeacherRates)
+                        {
+                            <ul>
+                                <li><a href=""> استاد @item.SchoolTeacher.User.Name @item.SchoolTeacher.User.Family <span> ( مجموع امتیاز : @item.Rate) </span></a></li>
+                            </ul>
+                        }
+                    }
+                    else
+                    {
+                        <div class="alert alert-info">
+                            موردی برای نمایش وجود ندارد
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>

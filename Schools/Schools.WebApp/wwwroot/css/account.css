@@ -18,19 +18,26 @@
 /*********** clearFix ************/
 .multi-checkbox-in-row:after,.multi-radio-in-row:after,.form-layer-style .radio-selected:after,
 .workflow-row:after{display: block; clear: both; content: ''; visibility: hidden; height: 0; line-height: 0}
-
+.ProfileAvatarInput {
+    position: absolute;
+    cursor: pointer;
+    opacity: 0 !important;
+    height: 100px;
+    width: 100px;
+}
 .form-layer-style {
     padding: 10px
 }
-.form-layer-style .input-layer,
-.form-layer-style .select-layer,
-.form-layer-style .file-layer,
-.form-layer-style .textarea-layer{
-  width: 100%;
-  position: relative;
-  min-height: 50px;
-  margin-bottom: 35px
-}
+
+    .form-layer-style .input-layer,
+    .form-layer-style .select-layer,
+    .form-layer-style .file-layer,
+    .form-layer-style .textarea-layer {
+        width: 100%;
+        position: relative;
+        min-height: 50px;
+        margin-bottom: 35px
+    }
 .form-layer-style .input-layer span, .form-layer-style .select-layer span, .form-layer-style .textarea-layer span , .form-layer-style .file-layer span {
     font-size: 13px;
     line-height: 22px;
@@ -500,7 +507,7 @@
 .account-layer .right-side .quick-access ul li a:hover{
     color: #485e79
 }
-.account-layer .right-side .quick-access ul li .tooltip{
+.tooltip{
     line-height: 23px;
     padding: 5px 0;
     font-size: 12px;
@@ -1008,6 +1015,19 @@
   -moz-box-shadow: 0 0 8px #fbe3e3;
   -webkit-box-shadow: 0 0 8px #fbe3e3;
 }
+.delete {
+    cursor: pointer;
+    position: absolute;
+    left: 10px;
+    top: 2px;
+    transition: all ease .4s;
+    font-size: 15px;
+}
+.ticket-box.delete:hover {
+    color: #ea246a;
+    font-size: 17px !important;
+}
+
 .ticket-box .delete-item{
   line-height: 20px;
   width: 20px;

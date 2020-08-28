@@ -40,6 +40,14 @@ namespace Schools.Infra.IoC
             service.AddScoped<ISchoolCommentService, SchoolCommentService>();
             #endregion
 
+            #region Users
+
+            service.AddScoped<IUserService, UserService>();
+            service.AddScoped<IUserTicketService, UserTicketService>();
+            service.AddScoped<IUserNotificationService, UserNotificationService>();
+            service.AddScoped<IUserMessageService, UserMessageService>();
+
+            #endregion
             //From Infra Data Layer
 
             #region Locations
@@ -66,7 +74,9 @@ namespace Schools.Infra.IoC
             #region Users
 
             service.AddScoped<IUserRepository, UserRepository>();
-            service.AddScoped<IUserService, UserService>();
+            service.AddScoped<IUserTicketRepository, UserTicketRepository>();
+            service.AddScoped<IUserMessageRepository, UserMessageRepository>();
+            service.AddScoped<IUserNotificationRepository, UserNotificationRepository>();
 
             #endregion
         }

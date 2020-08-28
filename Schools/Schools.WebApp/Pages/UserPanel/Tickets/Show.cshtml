@@ -1,0 +1,124 @@
+﻿@page "{ticketId}"
+@using Schools.Application.Utilities
+@using Schools.Application.Utilities.Convertors
+@using Schools.Domain.Models.Users
+@using Schools.Domain.Repository.InterfaceRepository.Users
+@model Schools.WebApp.Pages.UserPanel.Tickets.ShowModel
+@inject IUserRepository _User
+@{
+    var user = _User.GetUserWithRelations(User.GetUserId());
+    ViewData["title"] = $"تیکت  پشتیبانی";
+}
+@section Meta
+{
+    <link rel="stylesheet" type="text/css" href="/css/jquery.Bootstrap-PersianDateTimePicker.css">
+    <link rel="stylesheet" type="text/css" href="/css/account.css">
+}
+@if (Model.UserTicket == null)
+{
+
+}
+else
+{
+
+    @section Topic_Layer
+    {
+        <div class="container page-title">
+            <h1><a href="javascript:void(0)"> حساب کاربری </a></h1>
+            <ul itemtype="http://schema.org/BreadcrumbList" class="breadcrumb">
+                <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement"><a href="/" itemprop="item"><span itemprop="name"> بانک اطلاعاتی آموزشگاه ها </span></a></li>
+                <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement">
+                    <a href="/UserPanel" itemprop="item">
+                        <span itemprop="name"> حساب کاربری @user.Name @user.Family </span>
+                    </a>
+                </li>
+                <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement">
+                    <a href="/UserPanel/Tickets" itemprop="item">
+                        <span itemprop="name">تیکت و پشتیبانی</span>
+                    </a>
+                </li>
+                <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement">
+                    <a href="javascript:void(0)" itemprop="item" class="current">
+                        <span itemprop="name"> @Model.UserTicket.TicketTitle </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    }
+    <div class="account-layer">
+        <div class="container">
+            @{
+                var menuModel = new Tuple<User, string>(user, "Tickets");
+            }
+            <partial name="Shared/_RightMenu" model="menuModel" />
+            <div class="left-side">
+                <div class="account-heading layer-style">
+                    <span class="status green"> وضعیت : <i> @(user.IsActive ? "فعال" : "غییر فعال") </i></span>
+                    <a href="/UserPanel/Tickets/Add"> <i class="zmdi zmdi-plus"></i> ثبت تیکت </a>
+                </div>
+                <div class="account-content-layer layer-style">
+                    <h3> @Model.UserTicket.TicketTitle </h3>
+                    <div class="inner">
+                        <div class="support-layer">
+                            <div class="ticket-box answer">
+                                <div class="head">
+                                    <span class="code"> کد پیام : <i>@Model.UserTicket.TicketId</i> </span>
+                                    <span class="resgiter-date"> تاریخ ثبت : <i>@Model.UserTicket.CreateDate.ToShamsi()</i> </span>
+                                    <span class="status">
+                                        وضعیت :
+                                        @if (Model.UserTicket.TicketMessages.Any(t => t.IsSeen == false))
+                                        {
+                                            <i>پاسخ داده شده</i>
+                                        }
+                                        @if (Model.UserTicket.IsOpen == false)
+                                        {
+                                            <i>بسته شده</i>
+                                        }
+                                        @if (Model.UserTicket.IsOpen && Model.UserTicket.TicketMessages.All(m => m.UserId == User.GetUserId()))
+                                        {
+                                            <i>درحال برسی</i>
+                                        }
+                                    </span>
+                                </div>
+                                <div class="question">
+                                    <p>
+                                        @Html.Raw(Model.UserTicket.TicketMessage)
+
+                                    </p>
+                                </div>
+                                <div class="answers">
+                                    @foreach (var message in Model.UserTicket.TicketMessages)
+                                    {
+                                        <div class="@((message.UserId==User.GetUserId()?"you":"supporter"))">
+                                            <span> تاریخ ثبت : @message.SendDate.ToShamsi() </span>
+                                            @Html.Raw(message.MessageText)
+                                        </div>
+                                    }
+                                    <form class="form-layer-style" method="post">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <div class="textarea-layer">
+                                                    <label><i class="zmdi zmdi-assignment"></i>  متن پاسخ </label>
+                                                    <textarea id="ticket_text" name="messageText"> </textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 col-sm-3 col-xs-12 pull-left">
+                                                <button class="button-st green" type="submit"> <span> ثبت پیام </span> </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section Scripts
+{
+    <script src="/ckeditor5/build/ckeditor.js"></script>
+    <script src="/js/CkeditorConfig.js"></script>
+    <script src="/js/account.js"></script>
+}

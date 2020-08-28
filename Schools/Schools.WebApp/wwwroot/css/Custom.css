@@ -15,7 +15,9 @@
     min-height: 250px !important;
     font-family: 'IRANSans',tahoma, Helvetica, Arial, sans-serif !important;
 }
-
+.validation-summary-errors ul li {
+    color: #a94442 !important;
+}
 
 .loading-body {
     width: 40%;

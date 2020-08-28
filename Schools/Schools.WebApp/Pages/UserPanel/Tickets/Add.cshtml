@@ -1,0 +1,129 @@
+﻿@page
+@using Schools.Application.Utilities
+@using Schools.Domain.Models.Users
+@using Schools.Domain.Models.Users.Tickets
+@using Schools.Domain.Repository.InterfaceRepository.Users
+@model Schools.WebApp.Pages.UserPanel.Tickets.AddModel
+@inject IUserRepository _User
+@{
+    var user = _User.GetUserWithRelations(User.GetUserId());
+    ViewData["title"] = $"ثبت تیکت جدید";
+    var categories = ViewData["Categories"] as List<TicketCategory>;
+    var priorities = ViewData["Priorities"] as List<TicketPriority>;
+}
+@section Meta
+{
+    <link rel="stylesheet" type="text/css" href="/css/jquery.Bootstrap-PersianDateTimePicker.css">
+    <link rel="stylesheet" type="text/css" href="/css/account.css">
+}
+@section Topic_Layer
+{
+    <div class="container page-title">
+        <h1><a href="javascript:void(0)"> حساب کاربری </a></h1>
+        <ul itemtype="http://schema.org/BreadcrumbList" class="breadcrumb">
+            <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement"><a href="/" itemprop="item"><span itemprop="name"> بانک اطلاعاتی آموزشگاه ها </span></a></li>
+            <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement">
+                <a href="/UserPanel" itemprop="item">
+                    <span itemprop="name"> حساب کاربری @user.Name @user.Family </span>
+                </a>
+            </li>
+            <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement">
+                <a href="/UserPanel/Tickets" itemprop="item">
+                    <span itemprop="name"> تیکت و پشتیبانی </span>
+                </a>
+            </li>
+            <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement">
+                <a itemprop="item" class="current">
+                    <span itemprop="name"> ثبت تیکت </span>
+                </a>
+            </li>
+        </ul>
+    </div>
+}
+<div class="account-layer">
+    <div class="container">
+        @{
+            var menuModel = new Tuple<User, string>(user, "Tickets");
+        }
+        <partial name="Shared/_RightMenu" model="menuModel" />
+        <div class="left-side">
+            <div class="account-heading layer-style">
+                <span class="status green"> وضعیت : <i> @(user.IsActive ? "فعال" : "غییر فعال") </i></span>
+                <a href="/UserPanel/Tickets/Add"> <i class="zmdi zmdi-plus"></i> ثبت تیکت </a>
+            </div>
+            <div class="account-content-layer layer-style">
+                <h3> ثبت تیکت جدید </h3>
+                <div class="inner">
+                    <div class="information-layer">
+                        <p> قبل از ثبت تیکت به نکات زیر دقت فرمایید </p>
+                        <ul>
+                            <li> میتوانید از این استایل برای نمایش اطلاعات به کاربران استفاده نمایید </li>
+                        </ul>
+                    </div>
+                    <form class="form-layer-style" method="post">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                <div class="select-layer">
+                                    <label><i class="zmdi zmdi-case-check"></i> اولویت تیکت </label>
+                                    <select asp-for="UserTicket.PriorityId">
+                                        @foreach (var item in priorities!)
+                                        {
+                                            <option value="@item.PriorityId">@item.PriorityTitle</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                <div class="select-layer">
+                                    <label><i class="zmdi zmdi-case-check"></i> واحد مربوطه </label>
+                                    <select asp-for="UserTicket.CategoryId">
+                                        @foreach (var item in categories!)
+                                        {
+                                            <option value="@item.CategoryId">@item.CategoryTitle</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="input-layer">
+
+                                    <label><i class="zmdi zmdi-assignment"></i> عنوان تیکت </label>
+                                    <span asp-validation-for="UserTicket.TicketTitle" class="text-danger"></span>
+                                    <input type="text" asp-for="UserTicket.TicketTitle"/>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="textarea-layer">
+                                    <label><i class="zmdi zmdi-assignment"></i> توضیحات کامل </label>
+                                    <span asp-validation-for="UserTicket.TicketMessage" class="text-danger"></span>
+                                    <textarea id="ticket_text" asp-for="UserTicket.TicketMessage"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="multi-checkbox-in-row">
+                                    <div class="checkbox-option">
+                                        <input type="checkbox" asp-for="UserTicket.IsSendEmail" id="chk-1" checked="">
+                                        <label for="chk-1"> پس از پاسخ به تیکت به من اطلاع بده </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-12 pull-left">
+                                <button class="submit-button green" type="submit"> <span> ثبت تیکت </span> </button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts
+{
+    <script src="/js/jquery.validate.min.js"></script>
+    <script src="/js/jquery.validate.unobtrusive.js"></script>
+    <script src="/ckeditor5/build/ckeditor.js"></script>
+    <script src="/js/CkeditorConfig.js"></script>
+    <script src="/js/account.js"></script>
+
+}

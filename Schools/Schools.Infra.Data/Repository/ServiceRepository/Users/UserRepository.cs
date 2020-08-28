@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using Schools.Domain.Models.Schools;
 using Schools.Domain.Models.Users;
 using Schools.Domain.Repository.InterfaceRepository.Users;
@@ -72,6 +73,24 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Users
         public User GetUserById(int userId)
         {
             return _context.Users.SingleOrDefault(u => u.UserId == userId);
+        }
+
+        public User GetUserWithRelations(int userId)
+        {
+            return _context.Users.Include(u => u.UserLikes)
+                .ThenInclude(u => u.School)
+                .Include(u => u.ReceiverMessages)
+                .ThenInclude(u => u.MessageContents)
+                .Include(t=>t.UserTickets)
+                .ThenInclude(t=>t.TicketMessages)
+                .Include(u=>u.ReceiverMessages)
+                .ThenInclude(t=>t.Sender)
+                .Include(u=>u.UserNotifications)
+                .Include(u=>u.TeacherRates)
+                .ThenInclude(u=>u.User)
+                .Include(u=>u.SchoolRates)
+                .ThenInclude(u=>u.School)
+                .SingleOrDefault(u => u.UserId == userId);
         }
 
         public int GetUserIdByUserName(string userName)

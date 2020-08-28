@@ -18,12 +18,12 @@
 </head>
 <body>
     <script src="/js/modernizr.js"></script>
-<div class="loading">
-    <div class="loading-body">
-        <img src="/loading/Double Ring-1.4s-200px.gif" />
-        <p>لطفا منتظر بمانید ...</p>
+    <div class="loading">
+        <div class="loading-body">
+            <img src="/loading/Double Ring-1.4s-200px.gif" />
+            <p>لطفا منتظر بمانید ...</p>
+        </div>
     </div>
-</div>
     <div class="main-content">
         <div class="container">
             <div class="top-bar">
@@ -35,7 +35,26 @@
                 </div>
                 <div class="left-side">
                     <span><a href="javascript:void(0)" class="search-title"> جستجو در سایت </a><i class="zmdi zmdi-search"></i></span>
-                    <span><a href="/Login"> ورود  </a> / <a href="/Register"> عضویت </a><i class="zmdi zmdi-account"></i></span>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <div class="logged-in">
+                            <a href="" class="avatar"><img src="/UserProfile/default.png"></a>
+                            <span> @User.Identity.Name خوش اومدی <i class="zmdi zmdi-caret-down"></i></span>
+                            <div class="sublayer">
+                                <ul>
+                                    <li><a href="/UserPanel"> مشاهده پروفایل </a></li>
+                                    <li><a href="/UserPanel/Edit"> ویرایش حساب کاربری </a></li>
+                                    <li><a href="/UserPanel/ChangePassword"> تغییر رمز عبور </a></li>
+                                    <li><a href="/Logout"> خروج از حساب کاربری </a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <span><a href="/Login"> ورود  </a> / <a href="/Register"> عضویت </a><i class="zmdi zmdi-account"></i></span>
+
+                    }
                 </div>
             </div>
             <div class="main-menu">
