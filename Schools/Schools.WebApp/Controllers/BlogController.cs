@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Schools.Application.Service.Interfaces.Blogs;
@@ -66,11 +67,14 @@ namespace Schools.WebApp.Controllers
 
         public IActionResult PageCount(int id,int pageId = 1)
         {
+            ViewData["pageId"] = pageId;
             return View(_blogServices.GetBlogComments(id, pageId));
         }
-
+        [HttpDelete]
         public IActionResult Delete(int id)
         {
+            _blogRepository.DeleteComment(id);
+            _blogRepository.Save();
             return View();
         }
     }
