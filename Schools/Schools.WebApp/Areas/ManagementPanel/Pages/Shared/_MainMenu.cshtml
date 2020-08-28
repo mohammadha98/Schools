@@ -58,6 +58,19 @@
                     <li class="@((Model=="schoolsGroup"?"active":null))"><a href="/ManagementPanel/Schools/Groups"><i class="fa fa-circle-o"></i>گروه ها</a></li>
                 </ul>
             </li>
+            <li class="@((Model.Contains("Tickets")?"active treeview":"treeview"))">
+                <a href="#">
+                    <i class="fa fa-comments"></i>
+                    <span>تیکت پشتیبانی</span>
+                    <span class="pull-left-container">
+                        <i class="fa fa-angle-right pull-left"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="@((Model=="Tickets"?"active":null))"><a href="/ManagementPanel/tickets"><i class="fa fa-circle-o"></i>نمایش تیکت ها</a></li>
+                    <li class="@((Model=="TicketsCategory"?"active":null))"><a href="/ManagementPanel/Tickets/Categories"><i class="fa fa-circle-o"></i>مدیریت گروه بندی</a></li>
+                </ul>
+            </li>
             <li class="@((Model.Contains("blogs")?"active treeview":"treeview"))">
                 <a href="#">
                     <i class="fa fa-home"></i>

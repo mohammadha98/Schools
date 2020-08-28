@@ -121,3 +121,6 @@ function deleteItem(notificationId) {
         }
     });
 }
+$("#upImgAvatar").change(function() {
+    $("#changeAvatar").submit();
+});

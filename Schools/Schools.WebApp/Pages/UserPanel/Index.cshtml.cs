@@ -18,5 +18,6 @@ namespace Schools.WebApp.Pages.UserPanel
         {
             UserModel = _user.GetUserWithRelations(User.GetUserId());
         }
+        
     }
 }

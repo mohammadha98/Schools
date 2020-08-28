@@ -20,21 +20,38 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Users
             return _context.UserTickets.Include(t=>t.TicketCategory).Include(t=>t.TicketMessages).Where(t => t.BuilderId == userId);
         }
 
+        public IQueryable<UserTicket> GetAllTickets()
+        {
+            return _context.UserTickets.Include(t=>t.TicketPriority).Include(t => t.TicketCategory).Include(t => t.TicketMessages);
+
+        }
+
         public void AddTicket(UserTicket ticket)
         {
             _context.UserTickets.Add(ticket);
             _context.SaveChanges();
         }
 
+        public void EditTicket(UserTicket ticket)
+        {
+            _context.UserTickets.Update(ticket);
+            _context.SaveChanges();
+        }
+
         public UserTicket GetUserTicket(int ticketId)
         {
-            return _context.UserTickets.Include(t=>t.TicketCategory).Include(t=>t.TicketMessages).SingleOrDefault(t => t.TicketId == ticketId);
+            return _context.UserTickets.Include(t=>t.TicketCategory).Include(t=>t.User).Include(t=>t.TicketMessages).ThenInclude(m=>m.User).SingleOrDefault(t => t.TicketId == ticketId);
         }
 
         public void AddTicketCategory(TicketCategory category)
         {
             _context.TicketCategories.Add(category);
             _context.SaveChanges();
+        }
+
+        public TicketCategory GetTicketCategory(int categoryId)
+        {
+            return _context.TicketCategories.SingleOrDefault(c => c.CategoryId == categoryId);
         }
 
         public List<TicketCategory> GetTicketCategories()

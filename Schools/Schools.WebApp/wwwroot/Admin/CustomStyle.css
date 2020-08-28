@@ -1,6 +1,7 @@
 ﻿select {
     padding-top: 0 !important;
 }
+
 .loading {
     position: fixed;
     display: none;
@@ -8,6 +9,10 @@
     height: 100%;
     background: rgba(2, 5, 0, .5);
     z-index: 1000000000;
+}
+
+.direct-chat-text img {
+    width: 100% !important;
 }
 
 @media (max-width: 720px) {
@@ -21,9 +26,11 @@
         width: 90% !important;
     }
 }
+
 .mt-1 {
     margin-top: 10px !important;
 }
+
 .loading-body {
     width: 40%;
     margin: auto;
@@ -35,14 +42,14 @@
     box-shadow: 0 0 5px 0 black;
 }
 
-.loading-body img {
-    max-width: 100%
-}
+    .loading-body img {
+        max-width: 100%
+    }
 
-.loading-body p {
-    margin-bottom: 20px !important;
-    font-size: 20px;
-}
+    .loading-body p {
+        margin-bottom: 20px !important;
+        font-size: 20px;
+    }
 
 .swal-text {
     text-align: justify !important;
@@ -51,9 +58,11 @@
 .ck.ck-reset_all * {
     font-family: 'iranyekan', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
 }
+
 .ck-button {
     cursor: pointer;
 }
+
 .ck.ck-editor__main > .ck-editor__editable:not(.ck-focused) {
     min-height: 300px !important;
 }

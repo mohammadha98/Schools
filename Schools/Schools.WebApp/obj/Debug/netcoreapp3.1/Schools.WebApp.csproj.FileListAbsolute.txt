@@ -864,3 +864,8 @@ C:\Users\mohammad\source\repos\schools\Schools\Schools.WebApp\obj\Debug\netcorea
 C:\Users\mohammad\source\repos\schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Shared\School\_SchoolTeachers.cshtml.g.cs
 C:\Users\mohammad\source\repos\schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_CourseBlog.cshtml.g.cs
 C:\Users\mohammad\source\repos\schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_PanelLayout.cshtml.g.cs
+C:\Users\mohammad\source\repos\schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Areas\ManagementPanel\Pages\Tickets\Index.cshtml.g.cs
+C:\Users\mohammad\source\repos\schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Areas\ManagementPanel\Pages\Tickets\Show.cshtml.g.cs
+C:\Users\mohammad\source\repos\schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Areas\ManagementPanel\Pages\Tickets\Categories\Add.cshtml.g.cs
+C:\Users\mohammad\source\repos\schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Areas\ManagementPanel\Pages\Tickets\Categories\Edit.cshtml.g.cs
+C:\Users\mohammad\source\repos\schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Areas\ManagementPanel\Pages\Tickets\Categories\Index.cshtml.g.cs

@@ -69,6 +69,55 @@ namespace Schools.Application.Service.Services.Users
             return ticketsModel;
         }
 
+        public GetTicketsViewModel GetTicketsForAdmin(int pageId, int take,string title,string status, int? priorityId, int? categoryId)
+        {
+            var result = _ticket.GetAllTickets();
+            if (!string.IsNullOrEmpty(title))
+            {
+                result = result.Where(r => r.TicketTitle.Contains(title));
+            }
+
+            if (priorityId != null)
+            {
+                result = result.Where(r => r.PriorityId == priorityId);
+
+            }
+            if (categoryId != null)
+            {
+                result = result.Where(r => r.CategoryId == categoryId);
+            }
+
+            if (!string.IsNullOrEmpty(status))
+            {
+                switch (status)
+                {
+                    case "all":
+                        break;
+                    case "open":
+                        result = result.Where(r => r.IsOpen);
+                        break;
+                    case "close":
+                        result = result.Where(r => r.IsOpen == false);
+                        break;
+                }
+            }
+           
+            var skip = (pageId - 1) * take;
+            var pageCount = (int)Math.Ceiling(result.Count() / (double)take);
+
+            var ticketsModel = new GetTicketsViewModel()
+            {
+                CurrentPage = pageId,
+                PageCount = pageCount,
+                StartPage = (pageId - 4 <= 0) ? 1 : pageId - 4,
+                EndPage = (pageId + 5 > pageCount) ? pageCount : pageId + 5,
+                UserTickets = result.Skip(skip).Take(take).ToList(),
+                Status = status,
+                Title = title
+            };
+            return ticketsModel;
+        }
+
         public UserTicket GetTicketById(int ticketId)
         {
             return _ticket.GetUserTicket(ticketId);
