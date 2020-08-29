@@ -23,7 +23,7 @@ namespace Schools.WebApp.Controllers
     {
         private IUserRepository _userRepository;
         private IUserService _userService;
-        public AccountController(IUserRepository userRepository,IUserService userService)
+        public AccountController(IUserRepository userRepository, IUserService userService)
         {
             _userRepository = userRepository;
             _userService = userService;
@@ -77,7 +77,7 @@ namespace Schools.WebApp.Controllers
                 ViewData["UserId"] = registerStip2.UserId;
                 return View("RegisterStip3");
             }
-            
+
             return View();
         }
 
@@ -93,13 +93,13 @@ namespace Schools.WebApp.Controllers
             {
                 ModelState.AddModelError("UserName", "نام کاربری وجود دارد");
                 ViewData["UserId"] = registerStip3.UserId;
-                return View("RegisterStip3",registerStip3);
+                return View("RegisterStip3", registerStip3);
             }
             var user = _userRepository.GetUserById(registerStip3.UserId);
             user.UserName = registerStip3.UserName;
             user.Password = PasswordHelper.EncodePasswordMd5(registerStip3.Password);
 
-            _userRepository.AddRoleUserForRegister(registerStip3.RoleId, registerStip3.UserId);
+            int userId = _userRepository.AddRoleUserForRegister(registerStip3.RoleId, registerStip3.UserId);
 
             var id = registerStip3.UserId;
             return Redirect("/UserPanel/Edit");
