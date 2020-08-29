@@ -16,6 +16,7 @@ namespace Schools.Domain.Models.Schools
         //UserId = SchoolManager
         [Required]
         public int SchoolManager { get; set; }
+        public int Visit { get; set; }
         [Required]
         public int GroupId { get; set; }
         public int? SubGroupId { get; set; }
@@ -82,7 +83,6 @@ namespace Schools.Domain.Models.Schools
 
         public List<SchoolTrainingType> SchoolTrainingTypes { get; set; }
         public List<SchoolCourse> SchoolCourses { get; set; }
-        public List<SchoolVisit> SchoolVisits { get; set; }
         public List<UserLike> UserLikes { get; set; }
         #endregion
     }

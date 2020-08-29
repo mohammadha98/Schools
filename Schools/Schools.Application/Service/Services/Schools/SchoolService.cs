@@ -357,6 +357,13 @@ namespace Schools.Application.Service.Services.Schools
             return true;
         }
 
+        public void AddVisitForSchool(School school)
+        {
+            school.Visit += 1;
+            _school.EditSchool(school);
+        }
+
+      
         public EditSchoolViewModel GetSchoolForEdit(int schoolId)
         {
             var mainSchool = _school.GetSchoolBySchoolId(schoolId);

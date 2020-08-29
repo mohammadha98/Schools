@@ -2,6 +2,7 @@
 using System.Linq;
 using Schools.Application.Service.Interfaces.Users;
 using Schools.Application.ViewModels.UsersViewModel;
+using Schools.Domain.Models.Users.Messages;
 using Schools.Domain.Repository.InterfaceRepository.Users;
 
 namespace Schools.Application.Service.Services.Users
@@ -42,6 +43,12 @@ namespace Schools.Application.Service.Services.Users
                 _message.UpdateMessageContent(item);
             }
             _message.SaveChange();
+        }
+
+        public void AddMessage(UserMessage message)
+        {
+         
+            _message.AddMessage(message);
         }
     }
 }

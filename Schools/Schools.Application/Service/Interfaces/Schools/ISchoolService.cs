@@ -13,6 +13,7 @@ namespace Schools.Application.Service.Interfaces.Schools
         MainPageViewModel GetSchoolsForMainPage(string shireTitle);
         bool AddNewSchool(AddSchoolViewModel school);
         bool EditSchool(EditSchoolViewModel school);
+        void AddVisitForSchool(School school);
         EditSchoolViewModel GetSchoolForEdit(int schoolId);
         School GetSchoolById(int schoolId);
     }

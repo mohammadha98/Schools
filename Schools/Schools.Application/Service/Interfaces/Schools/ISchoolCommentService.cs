@@ -7,9 +7,9 @@ namespace Schools.Application.Service.Interfaces.Schools
     {
         SchoolCommentsViewModel GetSchoolComments(int pageId,int take,int schoolId);
         SchoolComment GetSchoolCommentById(int commentId);
-        void DeleteComment(int commentId);
+        void DeleteComment(SchoolComment comment);
         bool IsCommentForUser(int userId, int commentId);
-        void AddComment(SchoolComment comment);
+        SchoolComment AddComment(SchoolComment comment);
         void EditComment(SchoolComment comment);
     }
 }

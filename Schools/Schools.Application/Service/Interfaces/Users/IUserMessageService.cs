@@ -1,4 +1,5 @@
 ﻿using Schools.Application.ViewModels.UsersViewModel;
+using Schools.Domain.Models.Users.Messages;
 
 namespace Schools.Application.Service.Interfaces.Users
 {
@@ -6,5 +7,6 @@ namespace Schools.Application.Service.Interfaces.Users
     {
         MessagesViewModel GetUserMessages(int pageId, int take, int userId);
         void SeenMessages(int messageId,int userId);
+        void AddMessage(UserMessage message);
     }
 }

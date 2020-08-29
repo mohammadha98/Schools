@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using Schools.Domain.Models.Schools.Teachers;
 using Schools.Domain.Repository.InterfaceRepository.Schools;
 using Schools.Infra.Data.Context;
 
 namespace Schools.Infra.Data.Repository.ServiceRepository.Schools
 {
-    public class TeacherRateRepository:ITeacherRateRepository
+    public class TeacherRateRepository : ITeacherRateRepository
     {
         private SchoolsDbContext _context;
 
@@ -16,7 +17,7 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Schools
         }
         public IEnumerable<TeacherRate> GetAllTeacherRateByTeacherId(int teacherId)
         {
-            return _context.TeacherRates.Where(r => r.TeacherId == teacherId);
+            return _context.TeacherRates.Include(t=>t.SchoolTeacher).ThenInclude(t=>t.User).Where(r => r.TeacherId == teacherId);
         }
 
         public void AddRateForTeacher(TeacherRate rate)
@@ -29,12 +30,18 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Schools
         {
             rate.IsDelete = true;
             _context.TeacherRates.Update(rate);
-           
+
         }
 
         public TeacherRate GetTeacherRateById(int rateId)
         {
             return _context.TeacherRates.SingleOrDefault(r => r.RateId == rateId);
+        }
+
+        public TeacherRate GetTeacherRate(int userId, int teacherId)
+        {
+            return _context.TeacherRates.SingleOrDefault(r => r.UserId == userId && r.TeacherId == teacherId);
+
         }
     }
 }

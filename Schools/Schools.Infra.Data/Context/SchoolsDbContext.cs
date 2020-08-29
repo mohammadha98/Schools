@@ -31,7 +31,6 @@ namespace Schools.Infra.Data.Context
         public DbSet<SchoolComment> SchoolComments { get; set; }
         public DbSet<SchoolCourse> SchoolCourses { get; set; }
         public DbSet<SchoolGroup> SchoolGroups { get; set; }
-        public DbSet<SchoolVisit> SchoolVisits { get; set; }
         public DbSet<SchoolRate> SchoolRates { get; set; }
         public DbSet<SchoolGallery> SchoolGalleries { get; set; }
         public DbSet<SchoolTrainingType> SchoolTrainingTypes { get; set; }
@@ -101,8 +100,6 @@ namespace Schools.Infra.Data.Context
                 .HasQueryFilter(u => !u.IsDelete);
             modelBuilder.Entity<SchoolComment>()
                 .HasQueryFilter(u => !u.IsDelete);
-            modelBuilder.Entity<SchoolVisit>()
-                .HasQueryFilter(u => !u.IsDelete); 
             modelBuilder.Entity<SchoolGallery>()
                 .HasQueryFilter(u => !u.IsDelete); 
             modelBuilder.Entity<SchoolCourse>()

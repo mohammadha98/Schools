@@ -87,7 +87,8 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Users
                 .ThenInclude(t=>t.Sender)
                 .Include(u=>u.UserNotifications)
                 .Include(u=>u.TeacherRates)
-                .ThenInclude(u=>u.User)
+                .ThenInclude(u=>u.SchoolTeacher)
+                .ThenInclude(t=>t.User)
                 .Include(u=>u.SchoolRates)
                 .ThenInclude(u=>u.School)
                 .SingleOrDefault(u => u.UserId == userId);
