@@ -17,7 +17,7 @@ namespace Schools.Domain.Repository.InterfaceRepository.Users
         int AddUser(User user);
         void EditUser(User user);
         void AddRolesForUser(List<int> SelectedRoles, int userId);
-        void AddRoleUserForRegister(int roleId, int userId);
+        int AddRoleUserForRegister(int roleId, int userId);
         bool IsUserExist(int userId);
         void Save();
     }

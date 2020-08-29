@@ -17,7 +17,7 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Users
             _context = context;
         }
 
-        public void AddRolesForUser(List<int> SelectedRoles, int userId)
+        public int AddRolesForUser(List<int> SelectedRoles, int userId)
         {
             foreach(var item in SelectedRoles)
             {
@@ -29,6 +29,8 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Users
                 });
                 _context.SaveChanges();
             }
+
+            return userId;
         }
 
         public void AddRoleUserForRegister(int roleId, int userId)
@@ -111,6 +113,16 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Users
         public void Save()
         {
             _context.SaveChanges();
+        }
+
+        void IUserRepository.AddRolesForUser(List<int> SelectedRoles, int userId)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        int IUserRepository.AddRoleUserForRegister(int roleId, int userId)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
