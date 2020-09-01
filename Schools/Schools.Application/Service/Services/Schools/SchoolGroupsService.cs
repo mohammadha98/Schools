@@ -48,5 +48,10 @@ namespace Schools.Application.Service.Services.Schools
         {
             return _groups.GetAllGroups();
         }
+
+        public SchoolGroup GetSchoolGroup(int groupId)
+        {
+            return _groups.GetSchoolGroupById(groupId);
+        }
     }
 }

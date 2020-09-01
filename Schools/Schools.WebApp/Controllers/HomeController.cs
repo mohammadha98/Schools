@@ -45,7 +45,7 @@ namespace Schools.WebApp.Controllers
             return View("ServerError");
 
         }
-        [Route("/GetCityByShireId/{shireTitle}")]
+        [Route("/GetCityByShireTitle/{shireTitle}")] 
         public string GetCities(string shireTitle)
         {
             var cities = _locationService.GetAllCityByShireTitle(shireTitle);
@@ -57,6 +57,17 @@ namespace Schools.WebApp.Controllers
             }
             return result;
         }
+        [Route("/GetCityByShireId/{shireId}")]
+        public string GetCitiesByShireId(int shireId)
+        {
+            var cities = _locationService.GetAllCityByShireId(shireId);
 
+            string result = "<option value ='0'> انتخاب شهر</option>";
+            foreach (var city in cities)
+            {
+                result += $"<option value='{city.CityId}'>{city.CityTitle}</option>";
+            }
+            return result;
+        }
     }
 }

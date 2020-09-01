@@ -35,6 +35,10 @@ namespace Schools.Infra.Data.Context
         public DbSet<SchoolGallery> SchoolGalleries { get; set; }
         public DbSet<SchoolTrainingType> SchoolTrainingTypes { get; set; }
         public DbSet<TrainingType> TrainingTypes { get; set; }
+        public DbSet<SchoolRequest> SchoolRequests { get; set; }
+        public DbSet<RequestGallery> RequestGalleries { get; set; }
+        public DbSet<SchoolRules> SchoolRules { get; set; }
+
 
         #region Teachers
         public DbSet<TeacherRate> TeacherRates { get; set; }
@@ -107,6 +111,10 @@ namespace Schools.Infra.Data.Context
             modelBuilder.Entity<TrainingType>()
                 .HasQueryFilter(u => !u.IsDelete); 
             modelBuilder.Entity<SchoolTrainingType>()
+                .HasQueryFilter(u => !u.IsDelete);
+            modelBuilder.Entity<SchoolRequest>()
+                .HasQueryFilter(u => !u.IsDelete);
+            modelBuilder.Entity<RequestGallery>()
                 .HasQueryFilter(u => !u.IsDelete);
             #region Teachers
 

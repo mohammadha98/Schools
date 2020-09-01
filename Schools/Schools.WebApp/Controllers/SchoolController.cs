@@ -99,9 +99,12 @@ namespace Schools.WebApp.Controllers
             }
             return Content(res);
         }
-        [Authorize]
         public IActionResult DeleteComment(int commentId, int schoolId)
         {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return Forbid();
+            }
             var comment = _comment.GetSchoolCommentById(commentId);
             if (comment != null)
             {

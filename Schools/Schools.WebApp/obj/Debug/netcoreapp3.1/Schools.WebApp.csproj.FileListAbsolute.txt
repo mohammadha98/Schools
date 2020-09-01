@@ -912,3 +912,14 @@ E:\Projects\Repos\Barnamenevisan\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\
 E:\Projects\Repos\Barnamenevisan\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_PanelLayout.cshtml.g.cs
 E:\Projects\Repos\Barnamenevisan\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\_ViewImports.cshtml.g.cs
 E:\Projects\Repos\Barnamenevisan\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\_ViewStart.cshtml.g.cs
+C:\Users\mohammad\source\repos\schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Pages\SchoolPanel\_ViewStart.cshtml.g.cs
+C:\Users\mohammad\source\repos\schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Pages\UserPanel\RegisterSchool\Index.cshtml.g.cs
+C:\Users\mohammad\source\repos\schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Pages\SchoolPanel\Index.cshtml.g.cs
+C:\Users\mohammad\source\repos\schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Pages\SchoolPanel\_ViewImports.cshtml.g.cs
+C:\Users\mohammad\source\repos\schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Pages\SchoolPanel\Edit.cshtml.g.cs
+C:\Users\mohammad\source\repos\schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Pages\SchoolPanel\Shared\_RightMenu.cshtml.g.cs
+C:\Users\mohammad\source\repos\schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Areas\ManagementPanel\Pages\Rules\Add.cshtml.g.cs
+C:\Users\mohammad\source\repos\schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Areas\ManagementPanel\Pages\Rules\Edit.cshtml.g.cs
+C:\Users\mohammad\source\repos\schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Areas\ManagementPanel\Pages\Rules\Index.cshtml.g.cs
+C:\Users\mohammad\source\repos\schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Areas\ManagementPanel\Pages\Schools\Requests\Index.cshtml.g.cs
+C:\Users\mohammad\source\repos\schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Areas\ManagementPanel\Pages\Schools\Requests\Show.cshtml.g.cs

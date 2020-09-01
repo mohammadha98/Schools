@@ -12,7 +12,7 @@ namespace Schools.Domain.Models.Schools
         [Required]
         public string ImageName { get; set; }
         public bool IsDelete { get; set; }
-
+        public bool IsActive { get; set; }
         #region Relations
         [ForeignKey("SchoolId")]
         public School School { get; set; }

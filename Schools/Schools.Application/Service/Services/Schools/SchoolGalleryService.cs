@@ -38,7 +38,7 @@ namespace Schools.Application.Service.Services.Schools
                 };
                 _gallery.AddSchoolGallery(imageGalley);
             }
-
+            _gallery.SaveChanges();
             return true;
         }
 
@@ -51,6 +51,7 @@ namespace Schools.Application.Service.Services.Schools
                 DeleteFileFromServer.DeleteFile(gallery.ImageName,"wwwroot/images/Schools/gallery");
                 _gallery.DeleteSchoolGallery(gallery.GalleryId);
             }
+            _gallery.SaveChanges();
         }
     }
 }

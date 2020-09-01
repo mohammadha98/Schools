@@ -17,6 +17,7 @@ namespace Schools.Domain.Models.Schools.Teachers
         public string Bio { get; set; }
 
         public bool IsDelete { get; set; }
+        public bool IsActive { get; set; }
 
         #region Relations
         [ForeignKey("UserId")]

@@ -234,6 +234,30 @@ namespace Schools.Infra.Data.Migrations
                     b.ToTable("Shires");
                 });
 
+            modelBuilder.Entity("Schools.Domain.Models.Schools.RequestGallery", b =>
+                {
+                    b.Property<int>("GalleryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ImageName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("RequestId")
+                        .HasColumnType("int");
+
+                    b.HasKey("GalleryId");
+
+                    b.HasIndex("RequestId");
+
+                    b.ToTable("RequestGalleries");
+                });
+
             modelBuilder.Entity("Schools.Domain.Models.Schools.School", b =>
                 {
                     b.Property<int>("SchoolId")
@@ -280,7 +304,6 @@ namespace Schools.Infra.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SchoolFax")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("SchoolManager")
@@ -401,6 +424,9 @@ namespace Schools.Infra.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsDelete")
                         .HasColumnType("bit");
 
@@ -466,6 +492,98 @@ namespace Schools.Infra.Data.Migrations
                     b.ToTable("SchoolRates");
                 });
 
+            modelBuilder.Entity("Schools.Domain.Models.Schools.SchoolRequest", b =>
+                {
+                    b.Property<int>("RequestId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("BuildDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CellPhone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CityId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DocumentsImage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Fax")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsAccept")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SchoolName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ShireId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TelePhone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TrainingTypes")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("RequestId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("SchoolRequests");
+                });
+
+            modelBuilder.Entity("Schools.Domain.Models.Schools.SchoolRules", b =>
+                {
+                    b.Property<int>("RoleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("RuleTitle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("RoleId");
+
+                    b.ToTable("SchoolRules");
+                });
+
             modelBuilder.Entity("Schools.Domain.Models.Schools.Teachers.SchoolTeacher", b =>
                 {
                     b.Property<int>("TeacherId")
@@ -476,6 +594,9 @@ namespace Schools.Infra.Data.Migrations
                     b.Property<string>("Bio")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsDelete")
                         .HasColumnType("bit");
@@ -983,6 +1104,15 @@ namespace Schools.Infra.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Schools.Domain.Models.Schools.RequestGallery", b =>
+                {
+                    b.HasOne("Schools.Domain.Models.Schools.SchoolRequest", "SchoolRequest")
+                        .WithMany("Galleries")
+                        .HasForeignKey("RequestId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Schools.Domain.Models.Schools.School", b =>
                 {
                     b.HasOne("Schools.Domain.Models.Schools.Locations.City", "City")
@@ -1068,6 +1198,15 @@ namespace Schools.Infra.Data.Migrations
 
                     b.HasOne("Schools.Domain.Models.Users.User", "User")
                         .WithMany("SchoolRates")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Schools.Domain.Models.Schools.SchoolRequest", b =>
+                {
+                    b.HasOne("Schools.Domain.Models.Users.User", "User")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();

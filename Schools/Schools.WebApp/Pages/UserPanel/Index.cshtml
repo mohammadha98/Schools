@@ -6,6 +6,8 @@
 @{
     ViewData["title"] = $"حساب کاربری {Model.UserModel.Name} {Model.UserModel.Family} ";
     bool isSuccess = TempData["EditSuccess"] != null;
+    bool isRegistered = TempData["RegisterSuccess"] != null;
+    bool isExistRequest = TempData["RequestExist"] != null;
 }
 @section Meta
 {
@@ -35,7 +37,8 @@
         <div class="left-side">
             <div class="account-heading layer-style">
                 <span class="status green"> وضعیت : <i> @(Model.UserModel.IsActive ? "فعال" : "غییر فعال") </i></span>
-                <a href=""> <i class="zmdi zmdi-plus"></i> ثبت تیکت </a>
+                <a href="/UserPanel/Tickets/Add"> <i class="zmdi zmdi-plus"></i> ثبت تیکت </a>
+                <a href="/UserPanel/RegisterSchool" style="background-color: cadetblue !important"> <i class="zmdi zmdi-plus"></i>  ثبت آموزشگاه </a>
             </div>
             <div class="dashboard-box layer-style last-like">
                 <h3> آخرین آموزشگاه های پسند شده </h3>
@@ -112,6 +115,24 @@
             swal({
                 title: "ویرایش  با موفقیت انجام شد",
                 icon: "success",
+                button: "باشه"
+            });
+        }
+        if (@isRegistered.ToString().ToLower())
+        {
+            swal({
+                title: "درخواست شما ثبت شد",
+                text:"نتیجه از طریق اطلاعیه به شما اعلام می شود",
+                icon: "success",
+                button: "باشه"
+            });
+        }
+        if (@isExistRequest.ToString().ToLower())
+        {
+            swal({
+                title: "درخواست شما قبلا ثبت شده است",
+                text:"برای پیگیری درخواست خود از طریق تیکت اقدام کنید",
+                icon: "warning",
                 button: "باشه"
             });
         }

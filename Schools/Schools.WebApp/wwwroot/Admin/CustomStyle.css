@@ -65,11 +65,13 @@
 
 .ck.ck-editor__main > .ck-editor__editable:not(.ck-focused) {
     min-height: 300px !important;
+    color: black !important;
 }
 
 .ck-rounded-corners .ck.ck-editor__main > .ck-editor__editable, .ck.ck-editor__main > .ck-editor__editable.ck-rounded-corners {
     min-height: 300px !important;
     font-family: 'iranyekan', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+    color: black !important;
 }
 
 /* Filter Section Blog Admin*/

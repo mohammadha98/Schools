@@ -26,6 +26,7 @@
             <li> در صورتی که رمز عبور خود را فراموش کرده اید ، می توانید از طریق شماره موبایلتان ، رمز عبور جدید را دریافت نمایید. </li>
         </ul>
         <form asp-action="Login" method="post">
+            <input type="hidden" name="returnTo" value="@ViewData["returnTo"]" />
             <input asp-for="Email" type="email" class="right-corner" placeholder="ایمیل خود را وارد نمایید">
             <input asp-for="Password" type="password" class="left-corner" placeholder="رمز عبور خود را وارد نمایید">
             <button class="right-corner"> ورود به سایت </button>
@@ -36,8 +37,8 @@
                     <input asp-for="RememberMe" type="checkbox" id="remember-me">
                     <label for="remember-me"> مرا بخاطر بسپار </label>
                 </div>
-                <a href="/ForgetPassword"><i class="zmdi zmdi-lock"></i>  رمز عبور خود را فراموش کرده ام ! </a>
-                <a href="Register"><i class="zmdi zmdi-account"></i>  ثبت نام در سایت ! </a>
+                <a href="/ForgetPassword"><i class="zmdi zmdi-lock"></i> رمز عبور خود را فراموش کرده ام ! </a>
+                <a href="Register"><i class="zmdi zmdi-account"></i> ثبت نام در سایت ! </a>
             </div>
         </form>
 

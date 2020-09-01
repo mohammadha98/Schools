@@ -51,6 +51,9 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Schools
         {
             return _context.Schools
                 .Include(s=>s.User)
+                .ThenInclude(s=>s.UserNotifications)
+                .Include(s=>s.User)
+                .ThenInclude(s=>s.ReceiverMessages)
                 .Include(s=>s.SchoolTeachers)
                 .ThenInclude(s=>s.TeacherRates)
                 .Include(s=>s.SchoolGalleries)

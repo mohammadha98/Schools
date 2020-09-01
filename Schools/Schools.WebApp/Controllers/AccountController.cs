@@ -108,18 +108,19 @@ namespace Schools.WebApp.Controllers
 
         #region Login
         [Route("Login")]
-        public IActionResult Login()
+        public IActionResult Login(string returnTo = "/")
         {
+            ViewData["returnTo"] = returnTo;
             return View();
         }
 
         [Route("Login")]
         [HttpPost]
-        public IActionResult Login(LoginViewModel login)
+        public IActionResult Login(LoginViewModel login, string returnTo)
         {
             if (!ModelState.IsValid)
                 return View(login);
-
+            returnTo ??= "/";
             var user = _userService.LoginUser(login);
             if (user != null)
             {
@@ -137,10 +138,11 @@ namespace Schools.WebApp.Controllers
 
                     var properties = new AuthenticationProperties
                     {
-                        IsPersistent = login.RememberMe
+                        IsPersistent = login.RememberMe,
+
                     };
                     HttpContext.SignInAsync(principal, properties);
-                    return Redirect("/");
+                    return Redirect(returnTo);
                 }
                 else
                 {

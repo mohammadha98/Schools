@@ -1,5 +1,4 @@
 ﻿$(function () {
-
     $('.send-message').click(function () {
         $('#send-message-popup').fadeIn();
     });
@@ -76,7 +75,8 @@
             '<i class="zmdi zmdi-caret-right"></i>'
         ]
     });
-    $(".submit-rating-layer").submit(function () {
+  
+    $(".popup-layer .submit-rating-layer").submit(function () {
         event.preventDefault();
         var schoolId = window.location.pathname.split('/')[2];
         var teacherId = event.target[0].value;
@@ -115,6 +115,14 @@
                                     button: "باشه"
                                 });
                             }
+                            if (error.status === 403 ) {
+                                swal({
+                                    title: "عملیات ناموفق",
+                                    text: "برای درج نظر باید وارد حساب کاربری خود شوید",
+                                    icon: "error",
+                                    button: "باشه"
+                                });
+                            }
                         }
                     }).done(function (data) {
                         if (data === "Success") {
@@ -127,7 +135,6 @@
                     });
                 }
             });
-
         }
     });
     $('#gallery-button').click(function () {
@@ -240,6 +247,14 @@
                                 swal({
                                     title: "عملیات ناموفق",
                                     text: "شما یک بار به این آموزشگاه امتیاز داده اید",
+                                    icon: "error",
+                                    button: "باشه"
+                                });
+                            }
+                            if (error.status === 403) {
+                                swal({
+                                    title: "عملیات ناموفق",
+                                    text: "برای درج نظر باید وارد حساب کاربری خود شوید",
                                     icon: "error",
                                     button: "باشه"
                                 });

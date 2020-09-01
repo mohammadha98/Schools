@@ -94,7 +94,7 @@ $(function(){
 $("#shires").change(function() {
     var title = $(this).val();
     $.ajax({
-        url: "/GetCityByShireId/"+title,
+        url: "/GetCityByShireTitle/"+title,
         type: "get",
         beforeSend: function () {
             $(".loading").show();
@@ -104,5 +104,20 @@ $("#shires").change(function() {
         }
     }).done(function (data) {
         $("#cities").html(data);
+    });
+});
+$(".shires").change(function () {
+    var id = $(this).val();
+    $.ajax({
+        url: "/GetCityByShireId/" + id,
+        type: "get",
+        beforeSend: function () {
+            $(".loading").show();
+        },
+        complete: function () {
+            $(".loading").hide();
+        }
+    }).done(function (data) {
+        $(".cities").html(data);
     });
 });

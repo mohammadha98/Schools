@@ -121,9 +121,12 @@
                 </li>
                 <li>
                     <span> فکس : </span>
-                    @foreach (var item in Model.SchoolFax.Split('-'))
+                    @if (!string.IsNullOrEmpty(Model.SchoolFax))
                     {
-                        <a href="javascript:void(0)"> @item </a>
+                        @foreach (var item in Model.SchoolFax.Split('-'))
+                        {
+                            <a href="javascript:void(0)"> @item </a>
+                        }
                     }
                 </li>
                 <li><span> ایمیل : </span> <a href="">@Model.SchoolEmail</a></li>
@@ -212,7 +215,7 @@
                                 <i> 0 </i> از 5
                             </span>
                         </div>
-                        <button class="button-st green submit-rating-button"><span><i class="icon-check"></i></span> ثبت نهایی امتیاز </button>
+                        <button class="button-st green submit-rating-button" type="submit"><span><i class="icon-check"></i></span> ثبت نهایی امتیاز </button>
                     </form>
                 </div>
             </div>
@@ -257,7 +260,7 @@
                     کاربر گرامی، تمامی فعالیت های امتیازدهی شما در حساب کاربری شما ثبت خواهد شد، لطفا تنها در صورتی که با این استاد تجربه ی تحصیل داشته اید اقدام به ثبت امتیاز کنید.
                 </div>
                 <form class="submit-rating-layer">
-                    <input type="hidden" value="" name="token" id="token"/>
+                    <input type="hidden" value="" name="token" id="token" />
                     <div class="select-rating-layer">
                         <!-- row -->
                         <div class="rating-row">
@@ -292,7 +295,7 @@
 
                     </div>
 
-                    <button class="button-st green submit-rating-button"><span><i class="icon-check"></i></span> ثبت نهایی امتیاز </button>
+                    <button class="button-st green submit-rating-button" type="submit"><span><i class="icon-check"></i></span> ثبت نهایی امتیاز </button>
                 </form>
             </div>
         </div>

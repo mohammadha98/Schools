@@ -124,3 +124,12 @@ function deleteItem(notificationId) {
 $("#upImgAvatar").change(function() {
     $("#changeAvatar").submit();
 });
+
+function ShowTab() {
+    $(".rules").fadeIn();
+}
+
+function closeTab() {
+    $(".rules").fadeOut();
+
+}

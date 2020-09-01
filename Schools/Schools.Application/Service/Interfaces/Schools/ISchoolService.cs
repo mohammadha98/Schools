@@ -1,4 +1,5 @@
 ﻿using Schools.Application.ViewModels.SchoolsViewModels;
+using Schools.Application.ViewModels.SchoolsViewModels.SchoolRequest;
 using Schools.Domain.Models.Schools;
 
 namespace Schools.Application.Service.Interfaces.Schools
@@ -12,6 +13,7 @@ namespace Schools.Application.Service.Interfaces.Schools
             string categoryTitle, string schoolName, string courseName, string teacherName, string orderBy);
         MainPageViewModel GetSchoolsForMainPage(string shireTitle);
         bool AddNewSchool(AddSchoolViewModel school);
+        bool AddNewSchool(SchoolRequest request,AcceptOrRejectRequestViewModel acceptModel);
         bool EditSchool(EditSchoolViewModel school);
         void AddVisitForSchool(School school);
         EditSchoolViewModel GetSchoolForEdit(int schoolId);

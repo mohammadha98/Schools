@@ -1,4 +1,167 @@
-﻿@page
+﻿@page "{schoolId}"
+@using Schools.Domain.Models.Schools
 @model Schools.WebApp.Areas.ManagementPanel.Pages.Schools.DetailModel
 @{
+    var menuModel = "Schools";
+}
+<partial name="_MainMenu" model="menuModel" />
+@if (Model.School == null)
+{
+
+}
+else
+{
+
+    <div class="content-wrapper">
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box box-info">
+                        <div class="box-header">
+                            <h3 class="box-title">آموزشگاه @Model.School.SchoolTitle</h3>
+                        </div>
+                        <!-- /.box-header -->
+
+                        <div class="box-body">
+                            <div class="col-lg-6 mt-1">
+                                <p> امتیاز :<b>@(Model.School.SchoolRates.Sum(r => r.Rate) / Model.School.SchoolRates.Count)</b> از <b> @Model.School.SchoolRates.Count.ToString("#,0") </b> رأی</p>
+                            </div>
+                            <div class="col-lg-6 mt-1">
+                                <p> محبوبیت : @Model.School.UserLikes.Count.ToString("#,0")</p>
+                            </div>
+                            <div class="col-lg-6 mt-1">
+                                <p>نام مدیر :@Model.School.User.Name @Model.School.User.Family </p>
+                            </div>
+                            <div class="col-lg-6 mt-1">
+                                <p>نام آموزشگاه : @Model.School.SchoolTitle</p>
+
+                            </div>
+                            <div class="col-lg-12 mt-1">
+                                <p>
+                                    نوع تدریس :
+                                    @foreach (var item in Model.School.SchoolTrainingTypes)
+                                    {
+                                        <span>@($" {item.TrainingType.TypeTitle} -")</span>
+                                    }
+                                </p>
+
+                            </div>
+                            <div class="col-lg-6 mt-1">
+                                <p> فکس : @Model.School.SchoolFax</p>
+
+                            </div>
+                            <div class="col-lg-6 mt-1">
+                                <p>
+                                    شماره تماس :
+                                    @foreach (var item in Model.School.SchoolPhone.Split("-"))
+                                    {
+                                        <span>@item - </span>
+                                    }
+                                </p>
+
+                            </div>
+                            <div class="col-lg-6 mt-1">
+                                <p> ایمیل : @Model.School.SchoolEmail</p>
+
+                            </div>
+                            <div class="col-lg-6 mt-1">
+                                <p> موضوع فعالیت : @Model.School.SchoolSubGroup.GroupTitle</p>
+
+                            </div>
+                            <div class="col-lg-6 mt-1">
+                                <p> استان : @Model.School.Shire.ShireTitle</p>
+
+                            </div>
+                            <div class="col-lg-6 mt-1">
+                                <p> شهر : @Model.School.City.CityTitle</p>
+                            </div>
+                            <hr />
+
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                    <div class="box box-info">
+                        <div class="box-header">
+                            <h3 class="box-title">گالری تصاویر</h3>
+                        </div>
+                        <div class="box-body">
+
+                            @foreach (var item in Model.School.SchoolGalleries)
+                            {
+                                <div class="col-lg-6 mt-1">
+                                    <img src="/images/schools/gallery/@item.ImageName" style="width: 90%; height: 300px; box-shadow: 0 0 5px 0 gray;margin: auto" />
+                                </div>
+                            }
+                        </div>
+
+                    </div>
+                    <div class="box box-info">
+                        <div class="box-header">
+                            <h3 class="box-title">مدرسین</h3>
+                        </div>
+                        <div class="box-body">
+
+                            @foreach (var item in Model.School.SchoolTeachers)
+                            {
+                                <div class="col-lg-6 mt-1">
+                                    <div style="width: 98%; box-shadow: 0 0 5px 0 gray;padding: 5px">
+                                        <p>
+                                            @item.User.Name @item.User.Family
+                                            @if (item.IsActive)
+                                            {
+                                                <span class="text-success pull-left">تایید شده</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="text-danger pull-left">غیرفعال</span>
+                                            }
+                                        </p>
+
+                                        <hr />
+                                        <p>@item.User.Description</p>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+
+                    </div>
+                    <div class="box box-info">
+                        <div class="box-header">
+                            <h3 class="box-title">دوره ها</h3>
+                        </div>
+                        <div class="box-body">
+
+                            @foreach (var item in Model.School.SchoolCourses)
+                            {
+                                <div class="col-lg-12 mt-1">
+                                    <div style="width: 98%; box-shadow: 0 0 5px 0 gray;padding: 5px">
+                                        <p>
+                                            @item.CourseTitle
+                                            @if (item.IsActive)
+                                            {
+                                                <span class="text-success">تایید شده</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="text-danger">غیرفعال</span>
+                                            }
+                                        </p>
+
+                                        <hr />
+
+                                        <p>
+                                            @Html.Raw(item.CourseDescription)
+                                        </p>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+
+                    </div>
+                    <a class="btn btn-success btn-flat" href="/School/@Model.School.SchoolId/@Model.School.SchoolTitle.Replace(" ","-").Trim()">نمایش آموزشگاه</a>
+                </div>
+            </div>
+        </section>
+    </div>
 }
