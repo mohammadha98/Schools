@@ -5,7 +5,7 @@ namespace Schools.Application.Service.Interfaces.Users
 {
     public interface IUserMessageService
     {
-        MessagesViewModel GetUserMessages(int pageId, int take, int userId);
+        MessagesViewModel GetUserMessages(int pageId, int take, int userId,string startDate,string endDate);
         void SeenMessages(int messageId,int userId);
         void AddMessage(UserMessage message);
     }

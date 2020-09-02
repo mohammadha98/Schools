@@ -17,7 +17,7 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Schools
         }
         public IEnumerable<TeacherRate> GetAllTeacherRateByTeacherId(int teacherId)
         {
-            return _context.TeacherRates.Include(t=>t.SchoolTeacher).ThenInclude(t=>t.User).Where(r => r.TeacherId == teacherId);
+            return _context.TeacherRates.Include(t=>t.SchoolTeacher).Where(r => r.TeacherId == teacherId);
         }
 
         public void AddRateForTeacher(TeacherRate rate)

@@ -117,8 +117,7 @@ namespace Schools.Application.Service.Services.Schools
             }
             if (!string.IsNullOrEmpty(teacherName))
             {
-                result = result.Where(r => r.SchoolTeachers.Any(t => t.User.Name.Contains(teacherName) || t.User.Family.Contains(teacherName)));
-
+                result = result.Where(r => r.SchoolTeachers.Any(s=>s.FullName.Contains(teacherName)));
             }
 
             switch (orderBy)

@@ -37,15 +37,17 @@ namespace Schools.WebApp.Controllers
         [Route("/Home/HandleError/{code}")]
         public IActionResult HandlerError(int code)
         {
-            if (code == 404)
+       
+
+            if (code >= 500)
             {
-                return View("NotFound");
+                return View("ServerError");
             }
 
-            return View("ServerError");
+            return View("NotFound");
 
         }
-        [Route("/GetCityByShireTitle/{shireTitle}")] 
+        [Route("/GetCityByShireTitle/{shireTitle}")]
         public string GetCities(string shireTitle)
         {
             var cities = _locationService.GetAllCityByShireTitle(shireTitle);

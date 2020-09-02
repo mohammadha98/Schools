@@ -17,32 +17,6 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Users
             _context = context;
         }
 
-        public int AddRolesForUser(List<int> SelectedRoles, int userId)
-        {
-            foreach(var item in SelectedRoles)
-            {
-                _context.UserRoles.Add(new UserRole()
-                {
-                    IsDelete = false,
-                    UserId = userId,
-                    RoleId = item,
-                });
-                _context.SaveChanges();
-            }
-
-            return userId;
-        }
-
-        public void AddRoleUserForRegister(int roleId, int userId)
-        {
-            _context.UserRoles.Add(new UserRole()
-            {
-                IsDelete = false,
-                UserId = userId,
-                RoleId = roleId
-            });
-            _context.SaveChanges();
-        }
 
         public int AddUser(User user)
         {
@@ -57,19 +31,10 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Users
             _context.SaveChanges();
         }
 
-        public List<Role> GetAllRoles()
-        {
-            return _context.Roles.ToList();
-        }
 
         public List<School> GetAllSchoolInUserLikesByUserId(int userId)
         {
             return _context.UserLikes.Where(u => u.UserId == userId).Select(s => s.School).ToList();
-        }
-
-        public List<string> GetAllUserRolesByUserId(int userId)
-        {
-            return _context.UserRoles.Where(u => u.UserId == userId).Select(r => r.Role.RoleTitle).ToList();
         }
 
         public User GetUserById(int userId)
@@ -90,7 +55,6 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Users
                 .Include(u=>u.UserNotifications)
                 .Include(u=>u.TeacherRates)
                 .ThenInclude(u=>u.SchoolTeacher)
-                .ThenInclude(t=>t.User)
                 .Include(u=>u.SchoolRates)
                 .ThenInclude(u=>u.School)
                 .SingleOrDefault(u => u.UserId == userId);
@@ -116,14 +80,6 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Users
             _context.SaveChanges();
         }
 
-        void IUserRepository.AddRolesForUser(List<int> SelectedRoles, int userId)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        int IUserRepository.AddRoleUserForRegister(int roleId, int userId)
-        {
-            throw new System.NotImplementedException();
-        }
+        
     }
 }

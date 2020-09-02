@@ -5510,11 +5510,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Infra.IoC\\Schools.Infra.IoC.csproj",
+      "projectUniqueName": "C:\\Users\\mohammad\\Source\\Repos\\schools\\Schools\\Schools.Infra.IoC\\Schools.Infra.IoC.csproj",
       "projectName": "Schools.Infra.IoC",
-      "projectPath": "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Infra.IoC\\Schools.Infra.IoC.csproj",
+      "projectPath": "C:\\Users\\mohammad\\Source\\Repos\\schools\\Schools\\Schools.Infra.IoC\\Schools.Infra.IoC.csproj",
       "packagesPath": "C:\\Users\\mohammad\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Infra.IoC\\obj\\",
+      "outputPath": "C:\\Users\\mohammad\\Source\\Repos\\schools\\Schools\\Schools.Infra.IoC\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\mohammad\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -5530,11 +5530,11 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Application\\Schools.Application.csproj": {
-              "projectPath": "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Application\\Schools.Application.csproj"
+            "C:\\Users\\mohammad\\Source\\Repos\\schools\\Schools\\Schools.Application\\Schools.Application.csproj": {
+              "projectPath": "C:\\Users\\mohammad\\Source\\Repos\\schools\\Schools\\Schools.Application\\Schools.Application.csproj"
             },
-            "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Infra.Data\\Schools.Infra.Data.csproj": {
-              "projectPath": "C:\\Users\\mohammad\\source\\repos\\schools\\Schools\\Schools.Infra.Data\\Schools.Infra.Data.csproj"
+            "C:\\Users\\mohammad\\Source\\Repos\\schools\\Schools\\Schools.Infra.Data\\Schools.Infra.Data.csproj": {
+              "projectPath": "C:\\Users\\mohammad\\Source\\Repos\\schools\\Schools\\Schools.Infra.Data\\Schools.Infra.Data.csproj"
             }
           }
         }

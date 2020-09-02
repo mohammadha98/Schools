@@ -1,0 +1,141 @@
+﻿@page
+@using Schools.Domain.Models.Schools
+@model Schools.WebApp.Pages.SchoolPanel.CoursesModel
+@{
+
+    ViewData["title"] = $"اساتید آموزشگاه";
+    bool isSuccess = TempData["Success"] != null;
+
+}
+@section Meta
+{
+    <link rel="stylesheet" type="text/css" href="/css/account.css">
+}
+@if (Model.School == null)
+{
+
+}
+else
+{
+
+
+    @section Topic_Layer
+    {
+        <div class="container page-title">
+            <h1><a href="javascript:void(0)"> حساب کاربری </a></h1>
+            <ul itemtype="http://schema.org/BreadcrumbList" class="breadcrumb">
+                <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement"><a href="/" itemprop="item"><span itemprop="name"> بانک اطلاعاتی آموزشگاه ها </span></a></li>
+                <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement">
+                    <a href="/SchoolPanel" itemprop="item">
+                        <span itemprop="name"> حساب آموزشگاه @Model.School.SchoolTitle </span>
+                    </a>
+                </li>
+                <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement">
+                    <a href="javascript:void(0)" itemprop="item" class="current">
+                        <span itemprop="name"> مدیریت اساتید </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    }
+    <div class="account-layer">
+        <div class="container">
+            @{
+                var menuModel = new Tuple<School, string>(Model.School, "Courses");
+            }
+            <partial name="Shared/_RightMenu" model="menuModel" />
+
+
+            <div class="left-side">
+                <div class="account-heading layer-style">
+                    <span class="status green"> وضعیت : <i> @(Model.School.IsActive ? "فعال" : "غییر فعال") </i></span>
+                    <a href="/SchoolPanel/Tickets/Add"> <i class="zmdi zmdi-plus"></i> ثبت تیکت </a>
+                </div>
+                <div class="account-content-layer layer-style">
+                    <h3> مدیریت اساتید </h3>
+                    <div class="inner">
+                        <form class="form-layer-style" method="post">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="input-layer">
+                                        <label><i class="zmdi zmdi-account"></i>  نام دوره </label>
+                                        <input type="text" asp-for="Course.CourseTitle">
+                                        <span asp-validation-for="Course.CourseTitle"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="textarea-layer">
+                                        <label><i class="zmdi zmdi-assignment"></i>  توضیحات </label>
+                                        <textarea asp-for="Course.CourseDescription"> </textarea>
+                                        <span asp-validation-for="Course.CourseDescription"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-3 col-xs-12 pull-left">
+                                    <button class="submit-button green"> ثبت دوره </button>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="terms-layer">
+                            <h4> دوره های ثبت شده </h4>
+                            <ul>
+                                @if (Model.SchoolCourses.Count >= 1)
+                                {
+                                    @foreach (var course in Model.SchoolCourses)
+                                    {
+                                        <li>
+                                            @if (course.IsActive)
+                                            {
+                                                <label class="pull-left text-success">فعال</label>
+
+                                            }
+                                            else
+                                            {
+                                                <label class="pull-left text-danger">غیرفعال</label>
+
+                                            }
+                                            <a href="javascript:void(0)">
+                                                <i class="zmdi zmdi-caret-down"></i> @course.CourseTitle
+
+                                            </a>
+                                            <div class="message-layer layer-style">
+                                                <p>
+                                                    @course.CourseDescription
+                                                </p>
+                                            </div>
+                                        </li>
+                                    }
+                                }
+                                else
+                                {
+                                    <li>
+                                        <div class="alert alert-info">
+                                            موردی برای نمایش وجود ندارد
+                                        </div>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section Scripts
+{
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="/js/jquery.validate.min.js"></script>
+    <script src="/js/jquery.validate.unobtrusive.js"></script>
+    <script src="/js/account.js"></script>
+    <script>
+        if (@isSuccess.ToString().ToLower()) {
+            swal({
+                title: "ثبت با موفقیت انجام شد",
+                text:"دوره ثبت شده بعد از تایید،در سایت نمایش داده می شود",
+                icon: "success",
+                button: "باشه"
+            });
+        }
+    </script>
+}
+

@@ -26,7 +26,7 @@ namespace Schools.WebApp.Pages.UserPanel.Messages
         public MessagesViewModel MessageModel { get; set; }
         public void OnGet(int pageId = 1, string startDate = "", string endDate = "")
         {
-            MessageModel = _service.GetUserMessages(pageId, 10, User.GetUserId());
+            MessageModel = _service.GetUserMessages(pageId, 10, User.GetUserId(), startDate,endDate);
         }
 
         public IActionResult OnGetSendMessage(string title,string text, int schoolId)

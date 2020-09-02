@@ -595,6 +595,14 @@ namespace Schools.Infra.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Education")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
@@ -604,14 +612,9 @@ namespace Schools.Infra.Data.Migrations
                     b.Property<int>("SchoolId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("TeacherId");
 
                     b.HasIndex("SchoolId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("SchoolTeachers");
                 });
@@ -1217,12 +1220,6 @@ namespace Schools.Infra.Data.Migrations
                     b.HasOne("Schools.Domain.Models.Schools.School", "School")
                         .WithMany("SchoolTeachers")
                         .HasForeignKey("SchoolId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Schools.Domain.Models.Users.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });

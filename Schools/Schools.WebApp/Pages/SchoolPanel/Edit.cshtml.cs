@@ -18,6 +18,7 @@ namespace Schools.WebApp.Pages.SchoolPanel
         {
             _service = service;
         }
+        [BindProperty]
         public EditUserInfoViewModel UserModel { get; set; }
         public void OnGet()
         {

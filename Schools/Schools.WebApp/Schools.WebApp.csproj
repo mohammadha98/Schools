@@ -126,6 +126,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Pages\SchoolPanel\Galleries\" />
+    <Folder Include="Pages\SchoolPanel\Courses\" />
+    <Folder Include="Pages\SchoolPanel\Comments\" />
     <Folder Include="wwwroot\images\blogs\" />
     <Folder Include="wwwroot\images\Requests\Gallery\" />
     <Folder Include="wwwroot\images\Requests\Documents\" />

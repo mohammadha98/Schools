@@ -7,7 +7,7 @@
 @inject IUserRepository _User
 @{
     var user = _User.GetUserWithRelations(User.GetUserId());
-    ViewData["title"] = $"حساب کاربری {user.Name} {user.Family} ";
+    ViewData["title"] = $"پیام های خصوصی";
 }
 @section Meta
 {

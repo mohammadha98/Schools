@@ -6,7 +6,7 @@ using Schools.Infra.Data.Context;
 
 namespace Schools.Infra.Data.Repository.ServiceRepository.Schools
 {
-    public class SchoolRepository:ISchoolRepository
+    public class SchoolRepository : ISchoolRepository
     {
         private SchoolsDbContext _context;
 
@@ -17,15 +17,14 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Schools
         public IQueryable<School> GetAllSchools()
         {
             return _context.Schools
-                .Include(s=>s.Shire)
-                .Include(s=>s.UserLikes)
-                .Include(s=>s.SchoolRates)
-                .Include(s=>s.Shire)
-                .Include(s=>s.City)
-                .Include(s=>s.User)
-                .Include(s=>s.SchoolTeachers)
-                .ThenInclude(s=>s.User)
-                ;
+                .Include(s => s.Shire)
+                .Include(s => s.UserLikes)
+                .Include(s => s.SchoolRates)
+                .Include(s => s.Shire)
+                .Include(s => s.City)
+                .Include(s => s.User)
+                .Include(s => s.SchoolTeachers);
+
         }
 
         public School GetSchoolBySchoolId(int schoolId)
@@ -41,31 +40,32 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Schools
                 .Include(s => s.SchoolSubGroup)
                 .Include(s => s.Shire)
                 .ThenInclude(s => s.Cities)
-                .Include(s=>s.SchoolTrainingTypes)
-                .ThenInclude(s=>s.TrainingType)
-                .Include(s=>s.UserLikes)
+                .Include(s => s.SchoolTrainingTypes)
+                .ThenInclude(s => s.TrainingType)
+                .Include(s => s.UserLikes)
                 .SingleOrDefault(s => s.SchoolId == schoolId);
         }
 
         public School GetSchoolByUserId(int userId)
         {
             return _context.Schools
-                .Include(s=>s.User)
-                .ThenInclude(s=>s.UserNotifications)
-                .Include(s=>s.User)
-                .ThenInclude(s=>s.ReceiverMessages)
-                .Include(s=>s.SchoolTeachers)
-                .ThenInclude(s=>s.TeacherRates)
-                .Include(s=>s.SchoolGalleries)
-                .Include(s=>s.SchoolCourses)
-                .Include(s=>s.SchoolComments)
-                .Include(s=>s.SchoolRates)
-                .Include(s=>s.SchoolGroup)
-                .Include(s=>s.SchoolSubGroup)
-                .Include(s=>s.Shire)
-                .ThenInclude(s=>s.Cities)
+                .Include(s => s.User)
+                .ThenInclude(s => s.UserNotifications)
+                .Include(s => s.User)
+                .ThenInclude(s => s.ReceiverMessages)
+                .ThenInclude(s => s.MessageContents)
+                .Include(s => s.User)
+                .ThenInclude(s => s.UserTickets)
+                .ThenInclude(s => s.TicketMessages)
+                .Include(s => s.SchoolComments)
+                .Include(s => s.SchoolRates)
                 .SingleOrDefault(s => s.SchoolManager == userId);
 
+        }
+
+        public bool IsUserHasASchool(int userId)
+        {
+            return _context.Schools.Any(s => s.SchoolManager == userId);
         }
 
         public void DeleteSchool(int schoolId)

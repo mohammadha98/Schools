@@ -18,22 +18,25 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.Users
     public class AddModel : PageModel
     {
         private IUserRepository _userRepository;
-        public AddModel(IUserRepository userRepository)
+        private IUserRoleRepository _role;
+
+        public AddModel(IUserRepository userRepository, IUserRoleRepository role)
         {
             _userRepository = userRepository;
+            _role = role;
         }
-
+    
         
         public List<Role> Roles { get; set; }
         [BindProperty]
-        public AddUserViewModel add { get; set; }
+        public AddUserViewModel Add { get; set; }
 
         public void OnGet()
         {
-            Roles = _userRepository.GetAllRoles();
+            Roles = _role.GetAllRoles().ToList();
         }
 
-        public IActionResult OnPost(List<int> SelectedRoles,IFormFile file)
+        public IActionResult OnPost(List<int> selectedRoles,IFormFile file)
         {
             if (!ModelState.IsValid)
                 return Page();
@@ -53,18 +56,18 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.Users
 
             User user = new User() 
             { 
-                Family = add.Family,
-                Name = add.Name,
+                Family = Add.Family,
+                Name = Add.Name,
                 RegisterDate = DateTime.Now,
                 IsDelete = false,
-                UserName = add.UserName,
+                UserName = Add.UserName,
                 UserAvatar = file.FileName,
                 IsActive = true,
-                Password = PasswordHelper.EncodePasswordMd5(add.Password)
+                Password = PasswordHelper.EncodePasswordMd5(Add.Password)
             };
             
             var userId = _userRepository.AddUser(user);
-            _userRepository.AddRolesForUser(SelectedRoles, userId);
+            _role.AddRolesForUser(selectedRoles, userId);
 
             return RedirectToPage("Index");
         }

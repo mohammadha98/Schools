@@ -1,0 +1,157 @@
+﻿@page
+@using Schools.Application.Utilities
+@using Schools.Domain.Models.Schools
+@using Schools.Domain.Repository.InterfaceRepository.Schools
+@model Schools.WebApp.Pages.SchoolPanel.Teachers.IndexModel
+@{
+
+    ViewData["title"] = $"اساتید آموزشگاه";
+    bool isSuccess = TempData["Success"] != null;
+
+}
+@section Meta
+{
+    <link rel="stylesheet" type="text/css" href="/css/account.css">
+}
+@if (Model.School == null)
+{
+
+}
+else
+{
+
+
+    @section Topic_Layer
+    {
+        <div class="container page-title">
+            <h1><a href="javascript:void(0)"> حساب کاربری </a></h1>
+            <ul itemtype="http://schema.org/BreadcrumbList" class="breadcrumb">
+                <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement"><a href="/" itemprop="item"><span itemprop="name"> بانک اطلاعاتی آموزشگاه ها </span></a></li>
+                <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement">
+                    <a href="/SchoolPanel" itemprop="item">
+                        <span itemprop="name"> حساب آموزشگاه @Model.School.SchoolTitle </span>
+                    </a>
+                </li>
+                <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement">
+                    <a href="javascript:void(0)" itemprop="item" class="current">
+                        <span itemprop="name"> مدیریت اساتید </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    }
+    <div class="account-layer">
+        <div class="container">
+            @{
+                var menuModel = new Tuple<School, string>(Model.School, "ChangePassword");
+            }
+            <partial name="Shared/_RightMenu" model="menuModel" />
+
+
+            <div class="left-side">
+                <div class="account-heading layer-style">
+                    <span class="status green"> وضعیت : <i> @(Model.School.IsActive ? "فعال" : "غییر فعال") </i></span>
+                    <a href="/SchoolPanel/Tickets/Add"> <i class="zmdi zmdi-plus"></i> ثبت تیکت </a>
+                </div>        <div class="account-content-layer layer-style">
+                    <h3> مدیریت اساتید </h3>
+                    <div class="inner">
+                        <form class="form-layer-style" method="post">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12 col-xs-12">
+                                    <!-- input -->
+                                    <div class="input-layer">
+                                        <label><i class="zmdi zmdi-account"></i>  نام و نام خانوادگی </label>
+                                        <input type="text" asp-for="Teacher.FullName" />
+                                        <span asp-validation-for="Teacher.FullName"></span>
+                                    </div>
+                                    <!--/ input -->
+                                </div>
+                                <div class=" col-md-6 col-sm-12 col-xs-12">
+                                    <!-- input -->
+                                    <div class="input-layer">
+                                        <label><i class="zmdi zmdi-assignment"></i>  مدرک تحصیلی </label>
+                                        <input type="text" asp-for="Teacher.Education">
+                                        <span asp-validation-for="Teacher.Education"></span>
+
+                                    </div>
+                                    <!--/ input -->
+                                </div>
+                                <div class="col-xs-12">
+                                    <!-- textarea -->
+                                    <div class="textarea-layer">
+                                        <label><i class="zmdi zmdi-assignment"></i>  توضیحات </label>
+                                        <textarea asp-for="Teacher.Bio"> </textarea>
+                                        <span asp-validation-for="Teacher.Bio"></span>
+
+                                    </div>
+                                    <!-- /textarea -->
+                                </div>
+                                <div class="col-md-3 col-sm-3 col-xs-12 pull-left">
+                                    <button class="submit-button green" type="submit"> ثبت استاد </button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <div class="terms-layer">
+                            <h4> استادهای ثبت شده </h4>
+                            <ul>
+                                @if (Model.SchoolTeachers.Count >= 1)
+                                {
+                                    @foreach (var teachers in Model.SchoolTeachers)
+                                    {
+                                        <li>
+                                            @if (teachers.IsActive)
+                                            {
+                                                <label class="pull-left text-success">فعال</label>
+
+                                            }
+                                            else
+                                            {
+                                                <label class="pull-left text-danger">غیرفعال</label>
+
+                                            }
+                                            <a href="javascript:void(0)">
+                                                <i class="zmdi zmdi-caret-down"></i> @teachers.FullName
+
+                                            </a>
+                                            <div class="message-layer layer-style">
+                                                <p>
+                                                    @teachers.Bio
+                                                </p>
+                                            </div>
+                                        </li>
+                                    }
+                                }
+                                else
+                                {
+                                    <li>
+                                        <div class="alert alert-info">
+                                            موردی برای نمایش وجود ندارد
+                                        </div>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section Scripts
+{
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="/js/jquery.validate.min.js"></script>
+    <script src="/js/jquery.validate.unobtrusive.js"></script>
+    <script src="/js/account.js"></script>
+    <script>
+        if (@isSuccess.ToString().ToLower()) {
+            swal({
+                title: "ثبت با موفقیت انجام شد",
+                text:"درصورت صحیح وارد کردن اطلاعات ، در کوتاه ترین زمان ممکن مدرس تایید میشود",
+                icon: "success",
+                button: "باشه"
+            });
+        }
+    </script>
+}

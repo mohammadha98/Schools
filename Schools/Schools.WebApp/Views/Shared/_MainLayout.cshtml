@@ -1,6 +1,8 @@
 ﻿@using Schools.Application.Utilities
+@using Schools.Domain.Repository.InterfaceRepository.Schools
 @using Schools.Domain.Repository.InterfaceRepository.Users
 @inject IUserRepository _user;
+@inject ISchoolRepository _School;
 @{
 }
 <!DOCTYPE html>
@@ -48,19 +50,40 @@
                     @if (User.Identity.IsAuthenticated)
                     {
                         var user = _user.GetUserById(User.GetUserId());
-
-                        <div class="logged-in">
-                            <a href="" class="avatar"><img src="/images/userAvatars/@user.UserAvatar" alt="عکس پروفایل کاربر"></a>
-                            <span> @User.Identity.Name خوش اومدی <i class="zmdi zmdi-caret-down"></i></span>
-                            <div class="sublayer">
-                                <ul>
-                                    <li><a href="/UserPanel"> مشاهده پروفایل </a></li>
-                                    <li><a href="/UserPanel/Edit"> ویرایش حساب کاربری </a></li>
-                                    <li><a href="/UserPanel/ChangePassword"> تغییر رمز عبور </a></li>
-                                    <li><a href="/Logout"> خروج از حساب کاربری </a></li>
-                                </ul>
+                        var isUserHasSchool = _School.IsUserHasASchool(User.GetUserId());
+                        if (isUserHasSchool)
+                        {
+                            <div class="logged-in">
+                                <a href="" class="avatar"><img src="/images/userAvatars/@user.UserAvatar" alt="عکس پروفایل کاربر"></a>
+                                <span> @user.Name @user.Family خوش اومدی <i class="zmdi zmdi-caret-down"></i></span>
+                                <div class="sublayer">
+                                    <ul>
+                                        <li><a href="/SchoolPanel"> مشاهده پروفایل </a></li>
+                                        <li><a href="/SchoolPanel/Teachers"> مدرسین </a></li>
+                                        <li><a href="/SchoolPanel/Courses"> دوره ها </a></li>
+                                        <li><a href="/SchoolPanel/Edit"> ویرایش حساب کاربری </a></li>
+                                        <li><a href="/SchoolPanel/ChangePassword"> تغییر رمز عبور </a></li>
+                                        <li><a href="/Logout"> خروج از حساب کاربری </a></li>
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
+                        }
+                        else
+                        {
+                            <div class="logged-in">
+                                <a href="" class="avatar"><img src="/images/userAvatars/@user.UserAvatar" alt="عکس پروفایل کاربر"></a>
+                                <span> @user.Name @user.Family خوش اومدی <i class="zmdi zmdi-caret-down"></i></span>
+                                <div class="sublayer">
+                                    <ul>
+                                        <li><a href="/UserPanel"> مشاهده پروفایل </a></li>
+                                        <li><a href="/UserPanel/Edit"> ویرایش حساب کاربری </a></li>
+                                        <li><a href="/UserPanel/ChangePassword"> تغییر رمز عبور </a></li>
+                                        <li><a href="/Logout"> خروج از حساب کاربری </a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        }
+
                     }
                     else
                     {

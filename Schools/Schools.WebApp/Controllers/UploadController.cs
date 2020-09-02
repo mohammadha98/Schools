@@ -43,6 +43,10 @@ namespace Schools.WebApp.Controllers
         [HttpPost]
         public IActionResult ChangeUserAvatar(IFormFile avatar)
         {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return Redirect("/");
+            }
             //اگر فایلی به  غییر از عکس وارد کنید وارد 
             if (!avatar.IsImage())
             {
@@ -51,14 +55,16 @@ namespace Schools.WebApp.Controllers
             var user = _user.GetUserById(User.GetUserId());
             if (user == null)
             {
-                return Redirect("/UserPanel");
+                return Redirect("/");
             }
 
             var imageName = SaveFileInServer.SaveFile(avatar, "wwwroot/images/userAvatars");
+            DeleteFileFromServer.DeleteFile(user.UserAvatar, "wwwroot/images/userAvatars");
             user.UserAvatar = imageName;
             _user.EditUser(user);
             TempData["EditSuccess"] = true;
-            return Redirect("/UserPanel");
+            var redirect = Request.Headers["Referer"].ToString();
+            return Redirect(redirect);
 
         }
     }

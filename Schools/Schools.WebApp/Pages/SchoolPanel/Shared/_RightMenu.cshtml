@@ -1,11 +1,17 @@
-﻿@using Schools.Application.Utilities.Convertors
+﻿@using Schools.Application.Utilities
+@using Schools.Application.Utilities.Convertors
 @model Tuple<Schools.Domain.Models.Schools.School, string>
 
 <div class="right-side">
     <div class="quick-access layer-style">
         <div class="img-layer">
-            <a href="javascript:void(0)" class="change-image"><i class="zmdi zmdi-edit"></i></a>
-            <img src="images/pic/avatar-1.jpg">
+            <a href="javascript:void(0)" class="change-image">
+                <form method="post" id="changeAvatar" asp-controller="Upload" asp-action="ChangeUserAvatar" enctype="multipart/form-data">
+                    <input type="file" id="upImgAvatar" name="avatar" class="ProfileAvatarInput">
+                </form>
+                <i class="zmdi zmdi-edit"></i>
+            </a>
+            <img src="/images/userAvatars/@Model.Item1.User.UserAvatar">
         </div>
         <div class="detail">
             <h3> آموزشگاه @Model.Item1.SchoolTitle </h3>
@@ -36,12 +42,12 @@
                         <li class="@((Model.Item2=="Galleries"?"active":null))"><a href="/SchoolPanel/Galleries"> مدیریت گالری تصاویر </a></li>
                         <li class="@((Model.Item2=="Courses"?"active":null))"><a href="/SchoolPanel/Courses"> مدیریت دوره ها </a></li>
                         <li class="@((Model.Item2=="Teachers"?"active":null))"><a href="/SchoolPanel/Teachers"> مدیریت اساتید </a></li>
-                        <li class="@((Model.Item2=="Comments"?"active":null))"><a href="/SchoolPanel/Comments"> نظرات کاربران </a> <i>2</i></li>
-                        <li class="@((Model.Item2=="Messages"?"active":null))"><a href="/SchoolPanel/Messages"> پیام های خصوصی </a> <i>2</i></li>
+                        <li class="@((Model.Item2=="Comments"?"active":null))"><a href="/SchoolPanel/Comments"> نظرات کاربران </a></li>
+                        <li class="@((Model.Item2=="Messages"?"active":null))"><a href="/SchoolPanel/Messages"> پیام های خصوصی </a> <i>@Model.Item1.User.ReceiverMessages.Count(m => m.MessageContents.Any(c => c.IsSeen == false && c.UserId != User.GetUserId()))</i></li>
                     </ul>
                 </li>
-                <li class="@((Model.Item2=="Notifications"?"active":null))"><a href="/SchoolPanel/Notifications"> اطلاعیه های سیستم </a> <i>2</i></li>
-                <li class="@((Model.Item2=="Tickets"?"active":null))"><a href="/SchoolPanel/Tickets"> تیکت و پشتیبانی </a></li>
+                <li class="@((Model.Item2=="Notifications"?"active":null))"><a href="/SchoolPanel/Notifications"> اطلاعیه های سیستم </a> <i>@Model.Item1.User.UserNotifications.Count(n => n.IsSee == false)</i></li>
+                <li class="@((Model.Item2=="Tickets"?"active":null))"><a href="/SchoolPanel/Tickets"> تیکت و پشتیبانی </a><i>@Model.Item1.User.UserTickets.Count(t => t.TicketMessages.Any(m => m.IsSeen == false))</i></li>
                 <li><a href="/Logout"> خروج از سیستم </a></li>
             </ul>
         </div>

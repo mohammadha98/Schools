@@ -23,11 +23,15 @@ namespace Schools.WebApp.Controllers
     {
         private IUserRepository _userRepository;
         private IUserService _userService;
-        public AccountController(IUserRepository userRepository, IUserService userService)
+        private IUserRoleRepository _role;
+
+        public AccountController(IUserRepository userRepository, IUserService userService, IUserRoleRepository role)
         {
             _userRepository = userRepository;
             _userService = userService;
+            _role = role;
         }
+     
         #region Register
         [Route("Register")]
         public IActionResult Register()
@@ -98,10 +102,14 @@ namespace Schools.WebApp.Controllers
             var user = _userRepository.GetUserById(registerStip3.UserId);
             user.UserName = registerStip3.UserName;
             user.Password = PasswordHelper.EncodePasswordMd5(registerStip3.Password);
+            var userRole=new UserRole()
+            {
+                IsDelete = false,
+                RoleId = 1,
+                UserId = registerStip3.UserId
+            };
+            _role.AddUserRole(userRole);
 
-            int userId = _userRepository.AddRoleUserForRegister(registerStip3.RoleId, registerStip3.UserId);
-
-            var id = registerStip3.UserId;
             return Redirect("/UserPanel/Edit");
         }
         #endregion

@@ -21,7 +21,7 @@
         <ul itemtype="http://schema.org/BreadcrumbList" class="breadcrumb">
             <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement"><a href="/" itemprop="item"><span itemprop="name"> بانک اطلاعاتی آموزشگاه ها </span></a></li>
             <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement">
-                <a href="/UserPanel" itemprop="item">
+                <a href="/SchoolPanel" itemprop="item">
                     <span itemprop="name"> حساب آموزشگاه @school.SchoolTitle </span>
                 </a>
             </li>
@@ -38,11 +38,11 @@
         @{
             var menuModel = new Tuple<School, string>(school, "Edit");
         }
-        <partial name="UserPanel/Shared/_RightMenu" model="menuModel" />
+        <partial name="Shared/_RightMenu" model="menuModel" />
 
         <div class="left-side">
             <div class="account-heading layer-style">
-                <span class="status green"> وضعیت : <i> @(school.User.IsActive ? "فعال" : "غییر فعال") </i></span>
+                <span class="status green"> وضعیت : <i> @(school.IsActive ? "فعال" : "غییر فعال") </i></span>
                 <a href="/SchoolPanel/Tickets/Add"> <i class="zmdi zmdi-plus"></i> ثبت تیکت </a>
             </div>
             <div class="account-content-layer layer-style">
@@ -54,18 +54,23 @@
                                 <div class="input-layer">
                                     <label><i class="zmdi zmdi-account"></i>نام</label>
                                     <input asp-for="UserModel.Name" value="@school.User.Name" type="text">
+                                    <span asp-validation-for="UserModel.Name"></span>
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-12 col-xs-12">
                                 <div class="input-layer">
                                     <label><i class="zmdi zmdi-account"></i> نام خانوادگی</label>
                                     <input asp-for="UserModel.Family" value="@school.User.Family" type="text">
+                                    <span asp-validation-for="UserModel.Family"></span>
+
                                 </div>
                             </div>
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <div class="input-layer">
                                     <label><i class="zmdi zmdi-account"></i> کد ملی</label>
                                     <input asp-for="UserModel.NationalCode" value="@school.User.NationalCode" type="number">
+                                    <span asp-validation-for="UserModel.NationalCode"></span>
+
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-12 col-xs-12">
@@ -73,6 +78,8 @@
                                 <div class="input-layer">
                                     <label><i class="zmdi zmdi-phone-in-talk"></i>  شماره ثابت </label>
                                     <input type="number" asp-for="UserModel.TelNumber" value="@school.User.TelNumber">
+                                    <span asp-validation-for="UserModel.TelNumber"></span>
+
                                 </div>
                                 <!-- /input -->
                             </div>
@@ -80,15 +87,18 @@
                                 <div class="input-layer">
                                     <label><i class="zmdi zmdi-smartphone-android"></i>  شماره موبایل </label>
                                     <input asp-for="UserModel.Phone" value="@school.User.PhoneNumber" type="number">
+                                    <span asp-validation-for="UserModel.Phone"></span>
+
                                 </div>
                             </div>
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <div class="textarea-layer">
                                     <label><i class="zmdi zmdi-assignment"></i>  توضیحات </label>
                                     <textarea name="UserModel.AboutMe" id="UserModel_AboutMe">@school.User.Description</textarea>
+                                    <span asp-validation-for="UserModel.AboutMe"></span>
                                 </div>
                             </div>
-                            <div asp-validation-summary="All" class="text-danger"></div>
+                          
                             <div class="col-md-3 col-sm-3 col-xs-12 pull-left">
                                 <button type="submit" class="submit-button green"> ویرایش اطلاعات </button>
                             </div>
