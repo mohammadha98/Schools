@@ -1,6 +1,7 @@
 ﻿@model Schools.Application.ViewModels.UsersViewModel.LoginViewModel
 @{
     ViewData["Title"] = "Login";
+    var isSuccess = TempData["Success"] != null;
 }
 
 @section Meta
@@ -52,6 +53,19 @@
 </div>
 @section Scripts
 {
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <script src="/js/jquery.validate.min.js"></script>
     <script src="/js/jquery.validate.unobtrusive.js"></script>
+    <script>
+        if (@isSuccess.ToString().ToLower())
+        {
+            swal({
+                title: "ثبت نام با موفقیت انجام شد",
+                text:"بعد از ورود لطفا اطلاعات حساب خود را تکمیل کنید",
+                icon: "success",
+                button: "باشه"
+            });
+        }
+    </script>
 }

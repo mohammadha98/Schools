@@ -31,7 +31,7 @@ namespace Schools.WebApp.Controllers
             _userService = userService;
             _role = role;
         }
-     
+
         #region Register
         [Route("Register")]
         public IActionResult Register()
@@ -47,62 +47,57 @@ namespace Schools.WebApp.Controllers
             {
                 return View(register);
             }
-
             if (_userService.IsExistEmail(FixedText.FixedEmail(register.Email)))
             {
                 ModelState.AddModelError("Email", "ایمیل معتبر نمی باشد");
                 return View(register);
             }
-            User user = new User()
+            if (_userService.IsExistUserName(register.UserName))
             {
-                ActiveCode = NameGenerator.GenerateUniqCode(),
-                Email = FixedText.FixedEmail(register.Email),
-                PhoneNumber = register.PhoneNumber,
-                IsActive = false,
-                RegisterDate = DateTime.Now,
-                UserAvatar = "default.png"
-            };
-            _userRepository.AddUser(user);
-            ViewData["UserId"] = user.UserId;
-            return View("RegisterStip2");
+                ModelState.AddModelError("Email", "نام کاربری معتبر نمی باشد");
+                return View(register);
+            }
+            _userService.RegisterUser(register);
+            TempData["Success"] = true;
+            return Redirect("/Login");
         }
 
         [HttpPost]
-        [Route("RegisterStip2")]
-        public IActionResult RegisterStip2(RegisterStip2ViewModel registerStip2)
+        [Route("RegisterStep2")]
+        public IActionResult RegisterStep2(RegisterStip2ViewModel registerStip2)
         {
             if (!ModelState.IsValid)
             {
-                return View("RegisterStip2");
+                return View("RegisterStep2");
             }
 
             if (_userService.ActiveAccount(registerStip2.ActiveCode))
             {
                 ViewData["UserId"] = registerStip2.UserId;
-                return View("RegisterStip3");
+                return View("RegisterStep3");
             }
 
             return View();
         }
 
         [HttpPost]
-        [Route("RegisterStip3")]
-        public IActionResult RegisterStip3(RegisterStip3ViewModel registerStip3)
+        [Route("RegisterStep3")]
+        public IActionResult RegisterStep3(RegisterStip3ViewModel registerStip3)
         {
             if (!ModelState.IsValid)
             {
-                return View("RegisterStip3");
+                return View("RegisterStep3");
             }
             if (_userService.IsExistUserName(registerStip3.UserName))
             {
                 ModelState.AddModelError("UserName", "نام کاربری وجود دارد");
                 ViewData["UserId"] = registerStip3.UserId;
-                return View("RegisterStip3", registerStip3);
+                return View("RegisterStep3", registerStip3);
             }
             var user = _userRepository.GetUserById(registerStip3.UserId);
             user.UserName = registerStip3.UserName;
             user.Password = PasswordHelper.EncodePasswordMd5(registerStip3.Password);
-            var userRole=new UserRole()
+            var userRole = new UserRole()
             {
                 IsDelete = false,
                 RoleId = 1,

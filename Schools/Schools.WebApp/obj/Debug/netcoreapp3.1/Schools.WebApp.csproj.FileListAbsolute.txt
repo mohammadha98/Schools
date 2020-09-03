@@ -894,8 +894,6 @@ C:\Users\mohammad\source\repos\schools\Schools\Schools.WebApp\obj\Debug\netcorea
 C:\Users\mohammad\source\repos\schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Pages\UserPanel\_ViewStart.cshtml.g.cs
 C:\Users\mohammad\source\repos\schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Account\Login.cshtml.g.cs
 C:\Users\mohammad\source\repos\schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Account\Register.cshtml.g.cs
-C:\Users\mohammad\source\repos\schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Account\RegisterStip2.cshtml.g.cs
-C:\Users\mohammad\source\repos\schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Account\RegisterStip3.cshtml.g.cs
 C:\Users\mohammad\source\repos\schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Blog\Index.cshtml.g.cs
 C:\Users\mohammad\source\repos\schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Blog\PageCount.cshtml.g.cs
 C:\Users\mohammad\source\repos\schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Blog\ShowBlog.cshtml.g.cs
@@ -936,3 +934,5 @@ C:\Users\mohammad\source\repos\schools\Schools\Schools.WebApp\obj\Debug\netcorea
 C:\Users\mohammad\source\repos\schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Areas\ManagementPanel\Pages\Schools\Galleries\Add.cshtml.g.cs
 C:\Users\mohammad\source\repos\schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Areas\ManagementPanel\Pages\Schools\Galleries\Edit.cshtml.g.cs
 C:\Users\mohammad\source\repos\schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Areas\ManagementPanel\Pages\Schools\Galleries\Index.cshtml.g.cs
+C:\Users\mohammad\source\repos\schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Account\RegisterStep2.cshtml.g.cs
+C:\Users\mohammad\source\repos\schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Account\RegisterStep3.cshtml.g.cs

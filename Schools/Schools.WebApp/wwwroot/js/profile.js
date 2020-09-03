@@ -114,14 +114,18 @@
                                     icon: "error",
                                     button: "باشه"
                                 });
+                                $("#submit-rating-popup").css("display", "none");
+
                             }
                             if (error.status === 403 ) {
                                 swal({
                                     title: "عملیات ناموفق",
-                                    text: "برای درج نظر باید وارد حساب کاربری خود شوید",
+                                    text: "برای امتیاز دهی باید وارد حساب کاربری خود شوید",
                                     icon: "error",
                                     button: "باشه"
                                 });
+                                $("#submit-rating-popup").css("display", "none");
+
                             }
                         }
                     }).done(function (data) {
@@ -131,6 +135,7 @@
                                 icon: "success",
                                 button: "باشه"
                             });
+                            $("#submit-rating-popup").css("display", "none");
                         }
                     });
                 }
