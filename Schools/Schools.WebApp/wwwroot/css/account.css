@@ -1399,15 +1399,24 @@
 .gallery-layer .gallery-images {
   padding: 20px 20px 0
 }
-.gallery-layer .gallery-images img{
-  border-radius: 3px;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-  border:3px solid #dee7ec;
-  margin-bottom: 20px;
-  display: block;
-  width: 100%
-}
+    .gallery-layer .gallery-images .accept {
+        border-radius: 3px;
+        -moz-border-radius: 3px;
+        -webkit-border-radius: 3px;
+        border: 3px solid #9dea9d;
+        margin-bottom: 20px;
+        display: block;
+        width: 100%
+    }
+    .gallery-layer .gallery-images .deAccept {
+        border-radius: 3px;
+        -moz-border-radius: 3px;
+        -webkit-border-radius: 3px;
+        border: 3px solid #e69191fc;
+        margin-bottom: 20px;
+        display: block;
+        width: 100%
+    }
 .gallery-layer .gallery-images .gallery-img-col{
   position: relative;
 }

@@ -20,6 +20,11 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Schools
             _db.SaveChanges();
         }
 
+        public SchoolCourse GetCourseById(int courseId)
+        {
+           return _db.SchoolCourses.SingleOrDefault(c => c.CourseId == courseId);
+        }
+
         public List<SchoolCourse> GetCoursesBySchoolId(int schoolId)
         {
             return _db.SchoolCourses.Where(c => c.SchoolId == schoolId).ToList();

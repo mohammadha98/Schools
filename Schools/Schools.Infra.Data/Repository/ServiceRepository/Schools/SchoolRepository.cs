@@ -23,7 +23,9 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Schools
                 .Include(s => s.Shire)
                 .Include(s => s.City)
                 .Include(s => s.User)
-                .Include(s => s.SchoolTeachers);
+                .Include(s => s.SchoolTeachers)
+                .Include(s=>s.SchoolCourses)
+                .Include(s=>s.SchoolGalleries);
 
         }
 

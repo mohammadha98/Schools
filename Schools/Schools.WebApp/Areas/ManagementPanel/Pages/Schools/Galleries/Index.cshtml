@@ -1,5 +1,5 @@
 ﻿@page "{schoolId}/{handler?}"
-@model Schools.WebApp.Areas.ManagementPanel.Pages.Schools.Courses.IndexModel
+@model Schools.WebApp.Areas.ManagementPanel.Pages.Schools.Galleries.IndexModel
 @{
     var menuModel = "courses";
     var counter = 1;
@@ -21,39 +21,38 @@ else
                 <div class="col-xs-12">
                     <div class="box box-info">
                         <div class="box-header">
-                            <h3 class="box-title">دوره های آموزشگاه ' @Model.School.SchoolTitle ' </h3>
+                            <h3 class="box-title">عکس های آموزشگاه ' @Model.School.SchoolTitle ' </h3>
                         </div>
                         <div class="box-body table-responsive no-padding">
-                            <a class="btn btn-success btn-flat" href="/ManagementPanel/Schools/Courses/Add/@Model.School.SchoolId" style="margin-bottom: 10px">افزودن دوره</a>
+                            <a class="btn btn-success btn-flat" href="/ManagementPanel/Schools/galleries/Add/@Model.School.SchoolId" style="margin-bottom: 10px">افزودن عکس</a>
                             <table class="table table-hover">
                                 <tr>
                                     <th>#</th>
-                                    <th>عنوان</th>
+                                    <th>عکس</th>
                                     <th>وضعیت</th>
                                     <td></td>
                                 </tr>
                                 <tbody>
-                                    @foreach (var course in Model.SchoolCourses)
+                                    @foreach (var gallery in Model.SchoolGalleries)
                                     {
                                         <tr>
                                             <td>@counter</td>
                                             <td>
-                                                @course.CourseTitle
+                                                <img src="/images/schools/gallery/@gallery.ImageName" style="max-width: 120px"/>
                                             </td>
                                             <td>
-                                                @if (course.IsActive)
+                                                @if (gallery.IsActive)
                                                 {
                                                     <span class="text-success">فعال</span>
                                                 }
                                                 else
                                                 {
                                                     <span class="text-danger">غیرفعال</span>
-
                                                 }
                                             </td>
                                             <td>
-                                                <a class="btn btn-info btn-flat" href="/ManagementPanel/Schools/Courses/Edit/@course.CourseId/@course.SchoolId">ویرایش</a>
-                                                <a onclick="deleteItem(@course.CourseId)" class="btn btn-danger btn-flat">حذف</a>
+                                                <a class="btn btn-info btn-flat" href="/ManagementPanel/Schools/Galleries/Edit/@gallery.GalleryId/@gallery.SchoolId">ویرایش</a>
+                                                <a onclick="deleteItem(@gallery.GalleryId)" class="btn btn-danger btn-flat">حذف</a>
                                             </td>
                                         </tr>
 
@@ -81,7 +80,7 @@ else
             }).then((isOk) => {
                 if (isOk) {
                     $.ajax({
-                        url: "/ManagementPanel/Schools/Courses/" + @Model.School.SchoolId + "/DeleteCourse?courseId=" + id,
+                        url: "/ManagementPanel/Schools/Galleries/" + @Model.School.SchoolId + "/DeleteGallery?galleryId=" + id,
                         type: "get",
                         beforeSend: function() {
                             $(".loading").show();

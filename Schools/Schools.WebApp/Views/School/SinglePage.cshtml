@@ -160,10 +160,10 @@
                     <header><h2> گالری تصویر  @categoryTitle @Model.SchoolTitle </h2></header>
                     <div class="gallery-slider clearfix">
                         <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
-                            @foreach (var item in Model.SchoolGalleries)
+                            @foreach (var item in Model.SchoolGalleries.Where(g => g.IsActive))
                             {
                                 <li data-thumb="/images/schools/gallery/@item.ImageName">
-                                    <img src="/images/schools/gallery/@item.ImageName" alt="گالری تصاویر آموزشگاه @Model.SchoolTitle" />
+                                    <img src="/images/schools/gallery/@item.ImageName" alt=" تصاویر آموزشگاه @Model.SchoolTitle" />
                                 </li>
                             }
                         </ul>
@@ -215,7 +215,15 @@
                                 <i> 0 </i> از 5
                             </span>
                         </div>
-                        <button class="button-st green submit-rating-button" type="submit"><span><i class="icon-check"></i></span> ثبت نهایی امتیاز </button>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <button class="button-st green submit-rating-button" type="submit"><span><i class="icon-check"></i></span> ثبت نهایی امتیاز </button>
+
+                        }
+                        else
+                        {
+                            <div class="alert alert-warning"> جهت ثبت امتیاز باید در سایت <a href="/Register">عضو</a> شوید و یا <a href="/Login">وارد</a> سایت شده باشید .</div>
+                        }
                     </form>
                 </div>
             </div>

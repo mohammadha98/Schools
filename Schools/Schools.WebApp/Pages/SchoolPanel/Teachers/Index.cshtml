@@ -43,7 +43,7 @@ else
     <div class="account-layer">
         <div class="container">
             @{
-                var menuModel = new Tuple<School, string>(Model.School, "ChangePassword");
+                var menuModel = new Tuple<School, string>(Model.School, "Teachers");
             }
             <partial name="Shared/_RightMenu" model="menuModel" />
 
@@ -52,7 +52,8 @@ else
                 <div class="account-heading layer-style">
                     <span class="status green"> وضعیت : <i> @(Model.School.IsActive ? "فعال" : "غییر فعال") </i></span>
                     <a href="/SchoolPanel/Tickets/Add"> <i class="zmdi zmdi-plus"></i> ثبت تیکت </a>
-                </div>        <div class="account-content-layer layer-style">
+                </div>
+                <div class="account-content-layer layer-style">
                     <h3> مدیریت اساتید </h3>
                     <div class="inner">
                         <form class="form-layer-style" method="post">

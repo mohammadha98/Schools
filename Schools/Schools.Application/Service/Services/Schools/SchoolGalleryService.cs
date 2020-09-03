@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
 using Schools.Application.Service.Interfaces.Schools;
@@ -9,7 +10,7 @@ using Schools.Domain.Repository.InterfaceRepository.Schools;
 
 namespace Schools.Application.Service.Services.Schools
 {
-    public class SchoolGalleryService:ISchoolGalleryService
+    public class SchoolGalleryService : ISchoolGalleryService
     {
         private ISchoolGalleryRepository _gallery;
 
@@ -30,7 +31,7 @@ namespace Schools.Application.Service.Services.Schools
             {
                 //این کلاس وظیفه ذخیره فایل را در مسیر وارد شده رو داره
                 var fileName = SaveFileInServer.SaveFile(file, "wwwroot/images/Schools/gallery");
-                var imageGalley=new SchoolGallery()
+                var imageGalley = new SchoolGallery()
                 {
                     ImageName = fileName,
                     SchoolId = schoolId,
@@ -48,9 +49,40 @@ namespace Schools.Application.Service.Services.Schools
             foreach (var gallery in galleries)
             {
                 //اگر فایلی در مسیر وارد شده وحود داشته باشه حذف میشه
-                DeleteFileFromServer.DeleteFile(gallery.ImageName,"wwwroot/images/Schools/gallery");
+                DeleteFileFromServer.DeleteFile(gallery.ImageName, "wwwroot/images/schools/gallery");
                 _gallery.DeleteSchoolGallery(gallery.GalleryId);
             }
+            _gallery.SaveChanges();
+        }
+
+        public bool DeleteGallery(int galleryId, int schoolId)
+        {
+            var gallery = _gallery.GetSchoolGalleryById(galleryId);
+            if (gallery == null) return false;
+            if (gallery.SchoolId != schoolId) return false;
+
+
+            DeleteFileFromServer.DeleteFile(gallery.ImageName, "wwwroot/images/schools/gallery");
+            _gallery.DeleteSchoolGallery(gallery.GalleryId);
+            _gallery.SaveChanges();
+            return true;
+        }
+
+        public void EditGallery(SchoolGallery gallery, IFormFile image)
+        {
+            
+       
+            if (gallery == null) return;
+
+            if (image != null)
+            {
+                if (!image.IsImage()) return;
+                DeleteFileFromServer.DeleteFile(gallery.ImageName, "wwwroot/images/schools/gallery");
+                var fileName = SaveFileInServer.SaveFile(image, "wwwroot/images/schools/gallery");
+                gallery.ImageName = fileName;
+            }
+
+            _gallery.EditSchoolGallery(gallery);
             _gallery.SaveChanges();
         }
     }

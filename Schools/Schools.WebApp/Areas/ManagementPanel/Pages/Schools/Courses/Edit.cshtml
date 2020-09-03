@@ -1,4 +1,50 @@
-﻿@page
+﻿@page "{courseId}/{schoolId}"
 @model Schools.WebApp.Areas.ManagementPanel.Pages.Schools.Courses.EditModel
 @{
+    var menuModel = "courses";
+
+}
+@if (Model.SchoolCourse == null)
+{
+
+}
+else
+{
+    <partial name="_MainMenu" model="menuModel" />
+
+    <div class="content-wrapper">
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box box-info">
+                        <div class="box-header">
+                            <h3 class="box-title">ویرایش دوره</h3>
+                        </div>
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="box-body">
+                            <form method="post" class="row">
+                                <div class="col-lg-6" style="margin-top: 10px">
+                                    <p>نام دوره</p>
+                                    <input type="text" required="" class="form-control" asp-for="SchoolCourse.CourseTitle" />
+                                </div>
+                                <div class="col-lg-6" style="margin-top: 10px">
+                                    <p>وضعیت</p>
+                                    <select class="form-control" asp-for="SchoolCourse.IsActive">
+                                        <option value="true">فعال</option>
+                                        <option value="false">غیرفعال</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-12" style="margin-top: 10px">
+                                    <p>توضیحات</p>
+                                    <textarea class="form-control" asp-for="SchoolCourse.CourseDescription" placeholder="توضیحات"></textarea>
+                                </div>
+                                <button class="btn btn-block btn-flat btn-success">ثبت</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
 }
