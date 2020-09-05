@@ -5,6 +5,7 @@
 @section Meta
 {
     <link href="/css/clientarea.css" rel="stylesheet" />
+    <link href="/css/Custom.css" rel="stylesheet" />
 }
 @section Topic_Layer{
     <div class="container page-title">
@@ -23,16 +24,18 @@
             <li>ابتدا <a href="">قوانین و شرایط</a> عضویت در سامانه را با دقت مطالعه نموده و سپس اقدام به ثبت نام در سامانه نمایید .</li>
             <li>لطفا مشخصات و شماره موبایل خود را با دقت و بطور صحیح وارد نمایید ، جهت تکمیل ادامه مراحل ثبت نام کد تایید به شماره موبایل شما ارسال خواهد شد. </li>
         </ul>
+      
         <form method="post" asp-action="Register">
+            <div asp-validation-summary="All"></div>
             <input asp-for="Email" type="email" class="right-corner" placeholder="ایمیل خود را وارد نمایید">
             <input asp-for="PhoneNumber" type="text" class="left-corner" placeholder="شماره موبایل خود را وارد نمایید">
-            <button class="right-corner"> دریافت کد تایید و ادامه ثبت نام  </button>
+            <input asp-for="UserName" type="text" class="right-corner" placeholder=" نام کاربری خود را وارد کنید ">
+            <input asp-for="Password" type="password" class="left-corner" placeholder="  کلمه عبور خود را وارد کنید ">
+            <button class="right-corner"> ثبت نام </button>
 
-            <div asp-validation-summary="All" class="text-danger">
 
-            </div>
             <div class="detail margin-t-25">
-                <a href=""><i class="zmdi zmdi-account"></i>  قبلا ثبت نام کرده ام ! </a>
+                <a href=""><i class="zmdi zmdi-account"></i> قبلا ثبت نام کرده ام ! </a>
             </div>
         </form>
     </div>
@@ -41,4 +44,6 @@
 {
     <script src="/js/jquery.validate.min.js"></script>
     <script src="/js/jquery.validate.unobtrusive.js"></script>
+    <script src="/js/public.js"></script>
+    <script src="/js/register.js"></script>
 }

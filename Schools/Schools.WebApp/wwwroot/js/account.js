@@ -121,3 +121,52 @@ function deleteItem(notificationId) {
         }
     });
 }
+$("#upImgAvatar").change(function() {
+    $("#changeAvatar").submit();
+});
+
+function ShowTab() {
+    $(".rules").fadeIn();
+}
+
+function closeTab() {
+    $(".rules").fadeOut();
+
+}
+
+function deleteImage(id) {
+    swal({
+        title: "آیا از حذف اطمینان دارید؟",
+        icon: "warning",
+        buttons: ["خیر", "بله"]
+    }).then((isOk) => {
+        if (isOk) {
+            $.ajax({
+                url: "/SchoolPanel/Galleries/DeleteGallery?galleryId=" + id,
+                type: "get",
+                beforeSend: function () {
+                    $(".loading").show();
+                },
+                complete: function () {
+                    $(".loading").hide();
+                }
+            }).done(function (data) {
+                if (data === "Deleted") {
+                    swal({
+                        title: "عملیات  با موفقیت انجام شد",
+                        icon: "success",
+                        button: "باشه"
+                    }).then((isOk) => {
+                        location.reload();
+                    });
+                } else {
+                    swal({
+                        title: "عملیات به مشکل برخورد کرد",
+                        icon: "error",
+                        button: "باشه"
+                    });
+                }
+            });
+        }
+    });
+}

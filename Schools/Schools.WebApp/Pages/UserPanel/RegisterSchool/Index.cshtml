@@ -1,0 +1,283 @@
+﻿@page
+@using Schools.Application.Service.Interfaces.Schools
+@using Schools.Application.Utilities
+@using Schools.Domain.Models.Users
+@using Schools.Domain.Repository.InterfaceRepository.Locations
+@using Schools.Domain.Repository.InterfaceRepository.Schools
+@using Schools.Domain.Repository.InterfaceRepository.Users
+@model Schools.WebApp.Pages.UserPanel.RegisterSchool.IndexModel
+@inject IUserRepository _User
+@inject ISchoolGroupsService _groups
+@inject ILocationRepository _location
+@inject ISchoolTrainingTypeRepository _type
+@inject ISchoolRulesRepository _Rules
+@{
+    var user = _User.GetUserWithRelations(User.GetUserId());
+    ViewData["title"] = $"ویرایش حساب کاربری";
+    var groups = _groups.GetSchoolGroups();
+    var shires = _location.GetAllShires();
+    var types = _type.GetSchoolTrainingTypes();
+    var rule = _Rules.GetRule();
+}
+@section Meta
+{
+    <link rel="stylesheet" type="text/css" href="/css/account.css">
+
+    <link rel="stylesheet" type="text/css" href="/css/jquery.Bootstrap-PersianDateTimePicker.css">
+
+}
+@section Topic_Layer
+{
+    <div class="container page-title">
+        <h1><a href="javascript:void(0)"> حساب کاربری </a></h1>
+        <ul itemtype="http://schema.org/BreadcrumbList" class="breadcrumb">
+            <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement"><a href="/" itemprop="item"><span itemprop="name"> بانک اطلاعاتی آموزشگاه ها </span></a></li>
+            <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement">
+                <a href="/UserPanel" itemprop="item">
+                    <span itemprop="name"> حساب کاربری @user.Name @user.Family </span>
+                </a>
+            </li>
+            <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement">
+                <a href="javascript:void(0)" itemprop="item" class="current">
+                    <span itemprop="name">  ثبت آموزشگاه </span>
+                </a>
+            </li>
+        </ul>
+    </div>
+}
+<div class="account-layer">
+    <div class="rules">
+        <div class="rule-content">
+            <h2 class="header">
+                قوانین
+                <i onclick="closeTab()" class="zmdi zmdi-close text-danger pull-left"></i>
+            </h2>
+            <div class="main-rule">
+                @if (rule == null)
+                {
+                    <div class="alert alert-warning">درحال حاضر قانونی وجود ندارد برای اطلاع بیشتر با پشتیبانی تماس بگیرید</div>
+                }
+                else
+                {
+                    @Html.Raw(rule.RuleTitle);
+                }
+            </div>
+            <div class="footer">
+                <a onclick="closeTab()" class="btn btn-danger btn-close">
+                    بستن
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        @{
+            var menuModel = new Tuple<User, string>(user, "Index");
+        }
+        <partial name="Shared/_RightMenu" model="menuModel" />
+
+        <div class="left-side">
+            <div class="account-heading layer-style">
+                <span class="status green"> وضعیت : <i> @(user.IsActive ? "فعال" : "غییر فعال") </i></span>
+                <a href="/UserPanel/Tickets/Add"> <i class="zmdi zmdi-plus"></i> ثبت تیکت </a>
+            </div>
+            <div class="account-content-layer layer-style">
+                <h3> تکمیل اطلاعات و ثبت آموزشگاه </h3>
+                <div class="inner">
+                    <form class="form-layer-style" method="post" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="text-danger" asp-validation-summary="All"></div>
+                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                <span asp-validation-for="RegisterModel.SchoolName" class="text-danger"></span>
+
+                                <div class="input-layer">
+
+                                    <label><i class="zmdi zmdi-account"></i> نام آموزشگاه </label>
+                                    <input type="text" asp-for="RegisterModel.SchoolName" placeholder="آموزشگاه ...">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                <span asp-validation-for="RegisterModel.UserId" class="text-danger"></span>
+
+                                <div class="input-layer">
+                                    <label><i class="zmdi zmdi-account"></i> نام مدیرعامل </label>
+
+                                    <input type="text" value="@user.Name @user.Family" disabled="disabled">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                <span asp-validation-for="RegisterModel.BuildDate" class="text-danger"></span>
+
+                                <div class="input-layer" data-MdDateTimePicker="true" data-trigger="click" data-targetselector="#fromDate" data-groupid="group1" data-fromdate="true" data-enabletimepicker="false" data-placement="bottom">
+                                    <label><i class="zmdi zmdi-calendar"></i> سال تاسیس (جهت محاسبه میزان سابقه)</label>
+                                    <input asp-for="RegisterModel.BuildDate" autocomplete="off" type="text" id="fromDate" data-MdDateTimePicker="true" data-trigger="click" data-targetselector="#fromDate" data-groupid="group1" data-fromdate="true" data-enabletimepicker="false" data-placement="right">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                <span asp-validation-for="RegisterModel.Address" class="text-danger"></span>
+
+                                <div class="input-layer">
+                                    <label><i class="zmdi zmdi-assignment"></i> نشانی </label>
+
+                                    <input type="text" asp-for="RegisterModel.Address">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                <span asp-validation-for="RegisterModel.TelePhone" class="text-danger"></span>
+
+                                <div class="input-layer">
+                                    <label><i class="zmdi zmdi-phone-in-talk"></i> شماره ثابت </label>
+                                    <input type="number" asp-for="RegisterModel.TelePhone">
+                                </div>
+
+                            </div>
+                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                <span asp-validation-for="RegisterModel.CellPhone" class="text-danger"></span>
+
+                                <div class="input-layer">
+                                    <label><i class="zmdi zmdi-smartphone-android"></i> شماره موبایل </label>
+                                    <input type="number" asp-for="RegisterModel.CellPhone">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                <span asp-validation-for="RegisterModel.Fax" class="text-danger"></span>
+
+                                <div class="input-layer">
+                                    <label><i class="zmdi zmdi-phone-msg"></i> فکس </label>
+                                    <input type="number" asp-for="RegisterModel.Fax">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                <span asp-validation-for="RegisterModel.Email" class="text-danger"></span>
+
+                                <div class="input-layer">
+                                    <label><i class="zmdi zmdi-email"></i> ایمیل </label>
+                                    <input type="email" asp-for="RegisterModel.Email">
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <span asp-validation-for="RegisterModel.CategoryId" class="text-danger"></span>
+
+                                <div class="select-layer">
+                                    <label><i class="zmdi zmdi-settings"></i> موضوع فعالیت </label>
+                                    <select asp-for="RegisterModel.CategoryId">
+                                        <option value="">انتخاب کنید</option>
+                                        @foreach (var item in groups.Where(g => g.ParentId == null))
+                                        {
+                                            <option disabled="" style="font-weight: bolder">@item.GroupTitle</option>
+
+                                            foreach (var subGroups in groups.Where(g => g.ParentId == item.GroupId))
+                                            {
+                                                <option style="font-weight: normal" value="@subGroups.GroupId">@subGroups.GroupTitle</option>
+
+                                            }
+
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                <span asp-validation-for="RegisterModel.ShireId" class="text-danger"></span>
+
+                                <div class="select-layer">
+                                    <label><i class="zmdi zmdi-settings"></i> استان </label>
+
+                                    <select asp-for="RegisterModel.ShireId" class="shires">
+                                        <option value="">انتخاب کنید</option>
+                                        @foreach (var item in shires)
+                                        {
+                                            <option value="@item.ShireId">@item.ShireTitle</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                <span asp-validation-for="RegisterModel.CityId" class="text-danger"></span>
+
+                                <div class="select-layer">
+                                    <label><i class="zmdi zmdi-settings"></i> شهر </label>
+
+                                    <select asp-for="RegisterModel.CityId" class="cities">
+                                        <option value="">انتخاب کنید</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <span asp-validation-for="RegisterModel.Description" class="text-danger"></span>
+
+                                <div class="textarea-layer">
+                                    <label><i class="zmdi zmdi-assignment"></i> توضیحات کامل </label>
+
+                                    <textarea id="Description" asp-for="RegisterModel.Description"> </textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                <label><i class="zmdi zmdi-image"></i> عکس اصلی </label>
+
+                                <div class="input-layer">
+                                    <span asp-validation-for="RegisterModel.SchoolImage" class="text-danger"></span>
+                                    <input type="file" asp-for="RegisterModel.SchoolImage" accept="image/*">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                <label><i class="zmdi zmdi-image-alt"></i> گالری عکس </label>
+
+                                <div class="input-layer">
+                                    <span asp-validation-for="RegisterModel.Galleries" class="text-danger"></span>
+
+                                    <input type="file" accept="image/*" multiple="" asp-for="RegisterModel.Galleries">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                <div class="input-layer">
+                                    <label><i class="zmdi zmdi-image-alt"></i> مدارک آموزشگاه </label>
+                                    <span asp-validation-for="RegisterModel.Documents" class="text-danger"></span>
+
+                                    <input type="file" accept="image/*" multiple="" asp-for="RegisterModel.Documents">
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="multi-checkbox-in-row">
+                                    <span asp-validation-for="RegisterModel.TrainingTypes" class="text-danger"></span>
+                                    <div class="checkbox-option">
+                                        <input type="checkbox" name="types" value="آموزش حضوری" id="type-1" checked="">
+                                        <label for="type-1"> آموزش حضوری </label>
+                                    </div>
+                                    <div class="checkbox-option">
+                                        <input type="checkbox" name="types" value="آموزش آنلاین" id="type-2">
+                                        <label for="type-2"> آموزش آنلاین </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <span asp-validation-for="RegisterModel.IsAcceptRole" class="text-danger"></span>
+
+                                <div class="radio-selected">
+                                    <span> تمامی <a href="javascript:void(0)" onclick="ShowTab()">قوانین</a> را می پذیرم </span>
+                                    <div class="select">
+                                        <input type="checkbox" value="true" id="checkboxThreeInput" asp-for="RegisterModel.IsAcceptRole">
+                                        <label for="checkboxThreeInput"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-12 pull-left">
+                                <button class="submit-button green"> <span> ثبت نهایی </span> </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts
+{
+    <script src="/js/calendar.js"></script>
+    <script src="/ckeditor5/build/ckeditor.js"></script>
+    <script src="/js/miniCkediotr.js"></script>
+    <script src="/js/jquery.Bootstrap-PersianDateTimePicker.js"></script>
+    <script src="/js/jquery.validate.min.js"></script>
+    <script src="/js/jquery.validate.unobtrusive.js"></script>
+    <script src="/js/account.js"></script>
+
+}

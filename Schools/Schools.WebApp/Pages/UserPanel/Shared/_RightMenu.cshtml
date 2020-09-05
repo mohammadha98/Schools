@@ -1,12 +1,15 @@
-﻿@using Schools.Application.Utilities.Convertors
-@model Tuple<Schools.Domain.Models.Users.User,string>
+﻿@using Schools.Application.Utilities
+@using Schools.Application.Utilities.Convertors
+@model Tuple<Schools.Domain.Models.Users.User, string>
 
 <div class="right-side">
     <!-- avatar -->
     <div class="quick-access layer-style">
         <div class="img-layer">
             <a href="javascript:void(0)" class="change-image">
-                <input type="file" id="upImgAvatar" name="avatar" class="ProfileAvatarInput">
+                <form method="post" id="changeAvatar" asp-controller="Upload" asp-action="ChangeUserAvatar" enctype="multipart/form-data">
+                    <input type="file" id="upImgAvatar" name="avatar" class="ProfileAvatarInput">
+                </form>
                 <i class="zmdi zmdi-edit"></i>
             </a>
             <img src="/images/userAvatars/@Model.Item1.UserAvatar">
@@ -35,9 +38,9 @@
                 </li>
                 <li class="@((Model.Item2=="UserLikes"?"active":null))"><a href="/UserPanel/UserLikes"> آموزشگاه های پسند شده </a></li>
                 <li class="@((Model.Item2=="Rates"?"active":null))"><a href="/UserPanel/Rates"> تاریخچه امتیازدهی شما </a> </li>
-                <li class="@((Model.Item2=="Messages"?"active":null))"><a href="/UserPanel/Messages"> پیام های خصوصی </a> <i>@Model.Item1.ReceiverMessages.Count(m=>m.MessageContents.Any(c=>c.IsSeen==false))</i></li>
-                <li class="@((Model.Item2=="Notifications"?"active":null))"><a href="/UserPanel/Notifications"> اطلاعیه های سیستم </a> <i>@Model.Item1.UserNotifications.Count(n=>n.IsSee==false)</i></li>
-                <li class="@((Model.Item2=="Tickets"?"active":null))"><a href="/UserPanel/Tickets"> تیکت و پشتیبانی </a><i>@Model.Item1.UserTickets.Count(t => t.TicketMessages.Any(m=>m.IsSeen==false))</i></li>
+                <li class="@((Model.Item2=="Messages"?"active":null))"><a href="/UserPanel/Messages"> پیام های خصوصی </a> <i>@Model.Item1.ReceiverMessages.Count(m => m.MessageContents.Any(c => c.IsSeen == false && c.UserId != User.GetUserId()))</i></li>
+                <li class="@((Model.Item2=="Notifications"?"active":null))"><a href="/UserPanel/Notifications"> اطلاعیه های سیستم </a> <i>@Model.Item1.UserNotifications.Count(n => n.IsSee == false)</i></li>
+                <li class="@((Model.Item2=="Tickets"?"active":null))"><a href="/UserPanel/Tickets"> تیکت و پشتیبانی </a><i>@Model.Item1.UserTickets.Count(t => t.TicketMessages.Any(m => m.IsSeen == false))</i></li>
                 <li><a href=""> خروج از سیستم </a></li>
             </ul>
         </div>

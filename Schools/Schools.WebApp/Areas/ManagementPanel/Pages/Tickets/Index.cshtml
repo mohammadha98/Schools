@@ -1,0 +1,162 @@
+﻿@page
+@using Schools.Application.Utilities.Convertors
+@using Schools.Domain.Models.Users.Tickets
+@model Schools.WebApp.Areas.ManagementPanel.Pages.Tickets.IndexModel
+@{
+    var menuModel = "Tickets";
+    var categories = ViewData["Categories"] as List<TicketCategory>;
+    var priorities = ViewData["Priorities"] as List<TicketPriority>;
+}
+<partial name="_MainMenu" model="menuModel" />
+
+<div class="content-wrapper">
+    <section class="content">
+        <div class="row">
+            <section class="col-lg-12 col-md-12">
+                <div class="box box-info">
+                    <div class="box-header">
+                        <form class="row" id="form_filter">
+                            <input type="hidden" asp-for="TicketModel.CurrentPage" name="pageId" />
+
+                            <div class="col-lg-6 col-md-6" style="margin-top: 8px">
+                                <p>عنوان</p>
+                                <input type="text" class="form-control" asp-for="TicketModel.Title" name="title" placeholder="عنوان تیکت" />
+                            </div>
+                            <div class="col-lg-6 col-md-6" style="margin-top: 8px">
+                                <p>وضعیت</p>
+                                <select asp-for="TicketModel.Status" name="status" class="form-control">
+                                    <option value="all">انتخاب کنید</option>
+                                    <option value="open">باز</option>
+                                    <option value="close">بسته</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-6 col-md-6" style="margin-top: 8px">
+                                <p>دسته بنده</p>
+                                <select asp-for="TicketModel.CategoryId" name="categoryId" class="form-control">
+                                    <option value="null">انتخاب کنید</option>
+                                    @foreach (var item in categories!)
+                                    {
+                                        <option value="@item.CategoryId">@item.CategoryTitle</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-lg-6 col-md-6" style="margin-top: 8px">
+                                <p>اولویت</p>
+                                <select asp-for="TicketModel.PriorityId" name="priorityId" class="form-control">
+                                    <option value="null">انتخاب کنید</option>
+                                    @foreach (var item in priorities!)
+                                    {
+                                        <option value="@item.PriorityId">@item.PriorityTitle</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-lg-4 col-md-4" style="margin-top: 38px">
+                                <a onclick="submitForm()" class="btn btn-block btn-info">فیلتر</a>
+                            </div>
+                        </form>
+                        <hr />
+                    </div>
+                    <div class="box-body">
+                        <div class="table-responsive">
+                            <table class="table-bordered table table-hover text-center">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>عنوان</th>
+                                        <th>تعداد گفتگو</th>
+                                        <th>تاریخ ثبت</th>
+                                        <th>وضعیت</th>
+                                        <th>دسته بندی</th>
+                                        <th>اولویت</th>
+                                        <td></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.TicketModel.UserTickets)
+                                    {
+                                    <tr>
+                                        <td>@item.TicketId</td>
+                                        <td>@item.TicketTitle</td>
+                                        <td>@item.TicketMessages.Count</td>
+                                        <td>@item.CreateDate.ToShamsi()</td>
+                                        <td>
+                                            @if (item.IsOpen)
+                                            {
+                                                <span class="badge badge-success" style="background: darkgreen">باز</span>
+
+                                            }
+                                            else
+                                            {
+                                                <span class="badge badge-success">بسته</span>
+
+
+                                            }
+                                        </td>
+                                        <td>
+                                            @item.TicketCategory.CategoryTitle
+                                        </td>
+                                        <td>
+                                            @item.TicketPriority.PriorityTitle
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-sm btn-flat btn-info" href="/ManagementPanel/Tickets/Show/@item.TicketId">
+                                                نمایش
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="dataTables_paginate paging_simple_numbers text-center" id="example2_paginate">
+                            @if (Model.TicketModel.PageCount > 1)
+                            {
+                                <hr class="mt-0">
+
+                                <ul class="pagination">
+                                    @if (Model.TicketModel.CurrentPage > 1 && Model.TicketModel.StartPage > 1)
+                                    {
+                                        <li class="paginate_button previous disabled" id="example2_previous">
+                                            <a onclick="ChangePage(1)">1</a>
+                                        </li>
+
+                                    }
+
+                                    @for (var i = Model.TicketModel.StartPage; i <= Model.TicketModel.EndPage; i++)
+                                    {
+
+                                        <li class="@((i == Model.TicketModel.CurrentPage ? "paginate_button active" : "paginate_button"))">
+                                            <a onclick="ChangePage(@i)" href="javascript:void(0)">@i</a>
+                                        </li>
+                                    }
+                                    @if (Model.TicketModel.CurrentPage < Model.TicketModel.PageCount && Model.TicketModel.EndPage < Model.TicketModel.PageCount)
+                                    {
+                                        <li class="paginate_button next" id="example2_next">
+                                            <a onclick="ChangePage(@Model.TicketModel.PageCount)">@Model.TicketModel.PageCount</a>
+                                        </li>
+
+                                    }
+                                </ul>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </section>
+</div>
+@section Scripts
+{
+
+    <script>
+        function submitForm() {
+            $("#CourseModel_CurrentPage").val(1);
+            $("#form_filter").submit();
+        }
+        function ChangePage(pageId) {
+            $("#CourseModel_CurrentPage").val(pageId);
+            $("#form_filter").submit();
+        }
+    </script>
+}
+

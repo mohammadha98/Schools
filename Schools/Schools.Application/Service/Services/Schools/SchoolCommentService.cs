@@ -17,8 +17,8 @@ namespace Schools.Application.Service.Services.Schools
         }
         public SchoolCommentsViewModel GetSchoolComments(int pageId, int take, int schoolId)
         {
-            var comments = _comment.GetCommentsBySchoolId(schoolId).OrderByDescending(c => c.CreateDate);
-            var mainComments = comments.Where(c=>c.Answer==null);
+            var comments = _comment.GetCommentsBySchoolId(schoolId);
+            var mainComments = comments.Where(c=>c.Answer==null).OrderByDescending(c => c.CreateDate);
             var answerComments = comments.Where(c => c.Answer != null);
             var skip = (pageId - 1) * take;
             var pageCount = (int)Math.Ceiling(mainComments.Count() / (double)take);
@@ -39,9 +39,9 @@ namespace Schools.Application.Service.Services.Schools
             return _comment.GetSchoolCommentById(commentId);
         }
 
-        public void DeleteComment(int commentId)
+        public void DeleteComment(SchoolComment comment)
         {
-            _comment.DeleteSchoolComment(commentId);
+            _comment.DeleteSchoolComment(comment);
         }
 
         public bool IsCommentForUser(int userId, int commentId)
@@ -53,9 +53,12 @@ namespace Schools.Application.Service.Services.Schools
             return comment.UserId == userId;
         }
 
-        public void AddComment(SchoolComment comment)
+        public SchoolComment AddComment(SchoolComment comment)
         {
-          _comment.AddSchoolComment(comment);
+            comment.CreateDate=DateTime.Now;
+            comment.IsDelete = false;
+            _comment.AddSchoolComment(comment);
+            return _comment.GetSchoolCommentById(comment.CommentId);
         }
 
         public void EditComment(SchoolComment comment)

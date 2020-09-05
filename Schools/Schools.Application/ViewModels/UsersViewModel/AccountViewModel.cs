@@ -17,8 +17,16 @@ namespace Schools.Application.ViewModels.UsersViewModel
 
         [Display(Name = "تلفن همراه")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
-        [MaxLength(15)]
+        [MaxLength(11, ErrorMessage = "شماره تلفن نا معتبر است")]
+        [MinLength(11,ErrorMessage = "شماره تلفن نا معتبر است")]
         public string PhoneNumber { get; set; }
+        [Required(ErrorMessage = "نام کاربری را وارد کنید")]
+        [MinLength(5,ErrorMessage = "نام کاربری کوتاه است")]
+        public string UserName { get; set; }
+        [Required(ErrorMessage = "کلمه عبور را وارد کنید")]
+        [MinLength(6,ErrorMessage = "کلمه عبور باید بیشتر از 6 کاراکتر باشد")]
+        [MaxLength(30,ErrorMessage = "کلمه عبور باید کمتر از30 کاراکتر باشد")]
+        public string Password { get; set; }
     }
 
     public class RegisterStip2ViewModel

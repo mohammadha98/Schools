@@ -1,0 +1,143 @@
+﻿@page "{ticketId}"
+@using Schools.Application.Utilities
+@using Schools.Application.Utilities.Convertors
+@model Schools.WebApp.Areas.ManagementPanel.Pages.Tickets.ShowModel
+@{
+    var menuModel = "Tickets";
+
+}
+@if (Model.UserTicket == null)
+{
+
+}
+else
+{
+
+
+    <partial name="_MainMenu" model="menuModel" />
+    <div class="content-wrapper" style="min-height: 700px !important">
+        <section class="content">
+            <div class="row">
+
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <div class="box box-success direct-chat direct-chat-success">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">@Model.UserTicket.TicketTitle</h3>
+                                @if (Model.UserTicket.IsOpen)
+                                {
+                                    <a class="btn btn-danger btn-flat pull-left" onclick="closeTicket()">بستن تیکت</a>
+                                }
+                            </div>
+                            <div class="box-body">
+                                <div class="direct-chat-messages" style="height: 460px !important">
+                                    <div class="direct-chat-msg">
+                                        <div class="direct-chat-info clearfix">
+                                            <span class="direct-chat-name pull-left">@Model.UserTicket.User.Name @Model.UserTicket.User.Family</span>
+                                            <span class="direct-chat-timestamp pull-right">@Model.UserTicket.CreateDate.ToShamsiWithMount() - @Model.UserTicket.CreateDate.TimeOfDay.Minutes : @Model.UserTicket.CreateDate.TimeOfDay.Hours</span>
+                                        </div>
+                                        <img class="direct-chat-img" src="/images/userAvatars/@Model.UserTicket.User.UserAvatar">
+                                        <div class="direct-chat-text">
+                                            @Html.Raw(Model.UserTicket.TicketMessage)
+                                        </div>
+                                    </div>
+                                    @foreach (var message in Model.UserTicket.TicketMessages)
+                                    {
+                                        if (message.UserId == User.GetUserId())
+                                        {
+                                            <div class="direct-chat-msg right">
+                                                <div class="direct-chat-info clearfix">
+                                                    <span class="direct-chat-name pull-right">@message.User.Name @message.User.Family</span>
+                                                    <span class="direct-chat-timestamp pull-left">@message.SendDate.ToShamsiWithMount() - @message.SendDate.TimeOfDay.Minutes : @message.SendDate.TimeOfDay.Hours</span>
+                                                </div>
+
+                                                <img class="direct-chat-img" src="/images/userAvatars/@message.User.UserAvatar">
+                                                <div class="direct-chat-text" style="background: rgba(50, 255, 100, .8)">
+                                                    @Html.Raw(message.MessageText)
+                                                </div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="direct-chat-msg">
+                                                <div class="direct-chat-info clearfix">
+                                                    <span class="direct-chat-name pull-left">@message.User.Name @message.User.Family</span>
+                                                    <span class="direct-chat-timestamp pull-right">@message.SendDate.ToShamsiWithMount() - @message.SendDate.TimeOfDay.Minutes : @message.SendDate.TimeOfDay.Hours</span>
+                                                </div>
+                                                <img class="direct-chat-img" src="/images/userAvatars/@message.User.UserAvatar">
+                                                <div class="direct-chat-text">
+                                                    @Html.Raw(message.MessageText)
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+
+                                </div>
+                            </div>
+                            @if (Model.UserTicket.IsOpen==false)
+                            {
+                                <div class="alert alert-warning">این تیکت بسته شده و امکان درج پیام در آن وجود ندارد</div>
+                            }
+                            else
+                            {
+                                <div class="box-footer">
+                                    <form method="post">
+                                        <div class="input-group">
+                                            <input type="text" autocomplete="off" name="message" required="" placeholder="پیام" class="form-control">
+                                            <span class="input-group-btn">
+                                                <button type="submit" class="btn btn-success btn-flat">ارسال</button>
+                                            </span>
+                                        </div>
+                                    </form>
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+}
+@section Scripts
+{
+    <script>
+        function closeTicket() {
+            swal({
+                title: "آیا از بستن تیکت اطمینان دارید؟",
+                icon: "info",
+                buttons: ["خیر", "بله"]
+            }).then((isOk) => {
+                if (isOk) {
+                    $.ajax({
+                        url: "/ManagementPanel/Tickets/Show/" + @Model.UserTicket.TicketId + "/CloseTicket",
+                        type: "get",
+                        beforeSend: function() {
+                            $(".loading").show();
+                        },
+                        complete: function() {
+                            $(".loading").hide();
+                        }
+                    }).done(function(data) {
+                        if (data === "Success") {
+                            swal({
+                                title: "اعملیات با موفقیت انجام شد",
+                                icon: "success",
+                                button: "باشه"
+                            }).then((isOk) => {
+                                location.reload();
+                            });
+                        } else {
+                            swal({
+                                title: "شناسه تیکت نا معتبر است",
+                                icon: "error",
+                                button: "باشه"
+                            });
+                        }
+                    });
+                }
+            });
+        }
+    </script>
+}

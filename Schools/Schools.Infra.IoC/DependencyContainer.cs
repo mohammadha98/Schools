@@ -35,6 +35,7 @@ namespace Schools.Infra.IoC
             service.AddScoped<ILocationService, LocationService>();
 
             #endregion
+
             #region School
             service.AddScoped<ISchoolService, SchoolService>();
             service.AddScoped<ISchoolGroupsService, SchoolGroupsService>();
@@ -42,6 +43,15 @@ namespace Schools.Infra.IoC
             service.AddScoped<ISchoolTeacherService, SchoolTeacherService>();
             service.AddScoped<ISchoolTrainingTypeService, SchoolTrainingTypeService>();
             service.AddScoped<ISchoolCommentService, SchoolCommentService>();
+            service.AddScoped<ISchoolRequestService, SchoolRequestService>();
+            service.AddScoped<IRequestGalleryService, RequestGalleryService>();
+            #endregion
+
+            #region Blog
+
+            service.AddScoped<IBlogServices, BlogServices>();
+            service.AddScoped<IBlogGroupsServices, BlogGroupsServices>();
+
             #endregion
 
             #region Users
@@ -66,13 +76,17 @@ namespace Schools.Infra.IoC
             service.AddScoped<ITeacherRateRepository, TeacherRateRepository>();
             service.AddScoped<ISchoolTrainingTypeRepository, SchoolTrainingTypeRepository>();
             service.AddScoped<ISchoolCommentRepository, SchoolCommentRepository>();
+            service.AddScoped<ISchoolRateRepository, SchoolRateRepository>();
+            service.AddScoped<ISchoolRequestRepository, SchoolRequestRepository>();
+            service.AddScoped<IRequestGalleryRepository, RequestGalleryRepository>();
+            service.AddScoped<ISchoolRulesRepository, SchoolRulesRepository>();
+            service.AddScoped<ISchoolCourseRepository, SchoolCourseRepository>();
             #endregion
 
             #region Blogs
             service.AddScoped<IBlogRepository, BlogRepository>();
             service.AddScoped<IBlogGroupsRepository, BlogGroupRepositoy>();
-            service.AddScoped<IBlogServices, BlogServices>();
-            service.AddScoped<IBlogGroupsServices, BlogGroupsServices>();
+         
             #endregion
 
             #region Users
@@ -81,6 +95,8 @@ namespace Schools.Infra.IoC
             service.AddScoped<IUserTicketRepository, UserTicketRepository>();
             service.AddScoped<IUserMessageRepository, UserMessageRepository>();
             service.AddScoped<IUserNotificationRepository, UserNotificationRepository>();
+            service.AddScoped<IUserLikeRepository, UserLikeRepository>();
+            service.AddScoped<IUserRoleRepository, UserRoleRepository>();
 
             #endregion
 

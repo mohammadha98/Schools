@@ -9,5 +9,6 @@ namespace Schools.Application.Service.Interfaces.Schools
         bool IsGroupHasSchool(int groupId);
         List<SchoolGroup> GetSchoolGroupsByShireTitle(string shireTitle);
         List<SchoolGroup> GetSchoolGroups();
+        SchoolGroup GetSchoolGroup(int groupId);
     }
 }

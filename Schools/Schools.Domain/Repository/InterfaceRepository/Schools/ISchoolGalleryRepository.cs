@@ -10,6 +10,6 @@ namespace Schools.Domain.Repository.InterfaceRepository.Schools
         void EditSchoolGallery(SchoolGallery gallery);
         IEnumerable<SchoolGallery> GetSchoolGalleriesBySchoolId(int schoolId);
         SchoolGallery GetSchoolGalleryById(int galleryId);
-
+        void SaveChanges();
     }
 }

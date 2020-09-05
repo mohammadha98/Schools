@@ -23,11 +23,15 @@ namespace Schools.WebApp.Controllers
     {
         private IUserRepository _userRepository;
         private IUserService _userService;
-        public AccountController(IUserRepository userRepository,IUserService userService)
+        private IUserRoleRepository _role;
+
+        public AccountController(IUserRepository userRepository, IUserService userService, IUserRoleRepository role)
         {
             _userRepository = userRepository;
             _userService = userService;
+            _role = role;
         }
+
         #region Register
         [Route("Register")]
         public IActionResult Register()
@@ -43,83 +47,83 @@ namespace Schools.WebApp.Controllers
             {
                 return View(register);
             }
-
             if (_userService.IsExistEmail(FixedText.FixedEmail(register.Email)))
             {
                 ModelState.AddModelError("Email", "ایمیل معتبر نمی باشد");
                 return View(register);
             }
-            User user = new User()
+            if (_userService.IsExistUserName(register.UserName))
             {
-                ActiveCode = NameGenerator.GenerateUniqCode(),
-                Email = FixedText.FixedEmail(register.Email),
-                PhoneNumber = register.PhoneNumber,
-                IsActive = false,
-                RegisterDate = DateTime.Now,
-                UserAvatar = "default.png"
-            };
-            _userRepository.AddUser(user);
-            ViewData["UserId"] = user.UserId;
-            return View("RegisterStip2");
+                ModelState.AddModelError("Email", "نام کاربری معتبر نمی باشد");
+                return View(register);
+            }
+            _userService.RegisterUser(register);
+            TempData["Success"] = true;
+            return Redirect("/Login");
         }
 
         [HttpPost]
-        [Route("RegisterStip2")]
-        public IActionResult RegisterStip2(RegisterStip2ViewModel registerStip2)
+        [Route("RegisterStep2")]
+        public IActionResult RegisterStep2(RegisterStip2ViewModel registerStip2)
         {
             if (!ModelState.IsValid)
             {
-                return View("RegisterStip2");
+                return View("RegisterStep2");
             }
 
             if (_userService.ActiveAccount(registerStip2.ActiveCode))
             {
                 ViewData["UserId"] = registerStip2.UserId;
-                return View("RegisterStip3");
+                return View("RegisterStep3");
             }
-            
+
             return View();
         }
 
         [HttpPost]
-        [Route("RegisterStip3")]
-        public IActionResult RegisterStip3(RegisterStip3ViewModel registerStip3)
+        [Route("RegisterStep3")]
+        public IActionResult RegisterStep3(RegisterStip3ViewModel registerStip3)
         {
             if (!ModelState.IsValid)
             {
-                return View("RegisterStip3");
+                return View("RegisterStep3");
             }
             if (_userService.IsExistUserName(registerStip3.UserName))
             {
                 ModelState.AddModelError("UserName", "نام کاربری وجود دارد");
                 ViewData["UserId"] = registerStip3.UserId;
-                return View("RegisterStip3",registerStip3);
+                return View("RegisterStep3", registerStip3);
             }
             var user = _userRepository.GetUserById(registerStip3.UserId);
             user.UserName = registerStip3.UserName;
             user.Password = PasswordHelper.EncodePasswordMd5(registerStip3.Password);
+            var userRole = new UserRole()
+            {
+                IsDelete = false,
+                RoleId = 1,
+                UserId = registerStip3.UserId
+            };
+            _role.AddUserRole(userRole);
 
-            _userRepository.AddRoleUserForRegister(registerStip3.RoleId, registerStip3.UserId);
-
-            var id = registerStip3.UserId;
             return Redirect("/UserPanel/Edit");
         }
         #endregion
 
         #region Login
         [Route("Login")]
-        public IActionResult Login()
+        public IActionResult Login(string returnTo = "/")
         {
+            ViewData["returnTo"] = returnTo;
             return View();
         }
 
         [Route("Login")]
         [HttpPost]
-        public IActionResult Login(LoginViewModel login)
+        public IActionResult Login(LoginViewModel login, string returnTo)
         {
             if (!ModelState.IsValid)
                 return View(login);
-
+            returnTo ??= "/";
             var user = _userService.LoginUser(login);
             if (user != null)
             {
@@ -137,10 +141,11 @@ namespace Schools.WebApp.Controllers
 
                     var properties = new AuthenticationProperties
                     {
-                        IsPersistent = login.RememberMe
+                        IsPersistent = login.RememberMe,
+
                     };
                     HttpContext.SignInAsync(principal, properties);
-                    return Redirect("/");
+                    return Redirect(returnTo);
                 }
                 else
                 {

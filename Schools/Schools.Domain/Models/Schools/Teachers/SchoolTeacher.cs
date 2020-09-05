@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Schools.Domain.Models.Users;
 
 namespace Schools.Domain.Models.Schools.Teachers
 {
@@ -9,18 +8,18 @@ namespace Schools.Domain.Models.Schools.Teachers
     {
         [Key]
         public int TeacherId { get; set; }
-        [Required]
-        public int UserId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "نام و نام خانوادگی را وارد کنید")]
+        public string FullName { get; set; }
+        [Required(ErrorMessage = "مدرک تحصیلی را وارد کنید")]
+        public string Education { get; set; }
         public int SchoolId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "توضیحات را وارد کنید")]
         public string Bio { get; set; }
-
         public bool IsDelete { get; set; }
+        public bool IsActive { get; set; }
 
         #region Relations
-        [ForeignKey("UserId")]
-        public User User { get; set; }
+     
 
         [ForeignKey("SchoolId")]
         public School School { get; set; }

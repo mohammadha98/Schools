@@ -21,7 +21,7 @@ namespace Schools.WebApp.Pages.UserPanel
         public NotificationsViewModel Notifications { get; set; }
         public void OnGet(int pageId = 1)
         {
-            Notifications = _notification.GetUserNotifications(pageId, 1, User.GetUserId());
+            Notifications = _notification.GetUserNotifications(pageId, 10, User.GetUserId());
         }
 
         public IActionResult OnGetDeleteNotification(int notificationId)

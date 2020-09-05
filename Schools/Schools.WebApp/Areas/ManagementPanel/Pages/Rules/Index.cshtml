@@ -1,0 +1,32 @@
+﻿@page
+@model Schools.WebApp.Areas.ManagementPanel.Pages.Rules.IndexModel
+@{
+    var menuModel = "Rules";
+}
+<partial name="_MainMenu" model="menuModel" />
+
+<div class="content-wrapper">
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-info">
+                    <div class="box-header">
+                        <h3 class="box-title">قوانین آموزشگاه ها </h3>
+                    </div>
+                    <div class="box-body">
+                        @if (Model.SchoolRules == null)
+                        {
+                            <a class="btn btn-success btn-flat" href="/ManagementPanel/Rules/add" style="margin-bottom: 10px">افزودن قانون</a>
+                        }
+                        else
+                        {
+                            <a href="/ManagementPanel/Rules/Edit" class="btn btn-flat btn-info">ویرایش</a>
+                            <hr/>
+                            @Html.Raw(Model.SchoolRules.RuleTitle)
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

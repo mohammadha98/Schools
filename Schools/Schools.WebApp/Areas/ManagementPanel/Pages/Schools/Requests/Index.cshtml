@@ -1,0 +1,134 @@
+﻿@page
+@using Schools.Application.Utilities.Convertors
+@model Schools.WebApp.Areas.ManagementPanel.Pages.Schools.Requests.IndexModel
+@{
+    var menuModel = "schoolsRequests";
+    var counter = 1;
+}
+<partial name="_MainMenu" model="menuModel" />
+
+<div class="content-wrapper">
+    <section class="content">
+        <div class="row">
+            <section class="col-lg-12 col-md-12">
+                <div class="box box-info">
+                    <div class="box-header">
+                        <h2>درخواست های تایید </h2>
+                        <form class="row" id="paging">
+                            <input type="hidden" name="pageId" id="pageId" asp-for="RequestModel.CurrentPage">
+                            <div class="col-lg-6">
+                                <p>مدیر آموزشگاه</p>
+                                <input type="text" class="form-control" name="manager" placeholder="مدیر آموزشگاه"  asp-for="RequestModel.ManagerName"/>
+                            </div>
+                            <div class="col-lg-6">
+                                <p>وضعیت</p>
+                                <select class="form-control" name="isAccept" asp-for="RequestModel.IsAccept">
+                                    <option value="false">
+                                        تایید نشده
+                                    </option>
+                                    <option value="false">
+                                        تایید شده
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-lg-6">
+                                <button type="submit" class="btn btn-info">فیلتر</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="box-body">
+                        <div class="table-responsive">
+                            <table class="table-bordered table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>نام آموزشگاه</th>
+                                        <th>مدیر آموزشگاه</th>
+                                        <th>تاریخ ثبت</th>
+                                        <th>نوع تدریس</th>
+                                        <th>وضعیت</th>
+                                        <td></td>
+                                      
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.RequestModel.SchoolRequests)
+                                    {
+                                        <tr>
+                                            <td>@counter</td>
+                                            <td>@item.SchoolName</td>
+                                            <td>@item.User.Name @item.User.Family</td>
+                                            <td>@item.CreateDate.ToShamsi()</td>
+                                            <td>
+                                                @foreach (var type in item.TrainingTypes.Split("-"))
+                                                {
+                                                    <span class="text-muted"> @type </span>
+                                                }
+                                            </td>
+                                            <td>
+                                                @if (item.IsAccept)
+                                                {
+                                                    <span class="text-success">فعال</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="text-danger">غیرفعال</span>
+
+                                                }
+                                            </td>
+                                            <td>
+                                                <a href="/ManagementPanel/Schools/Requests/Show/@item.RequestId" class="btn btn-flat btn-success btn-sm">نمایش</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="dataTables_paginate paging_simple_numbers text-center" id="example2_paginate">
+
+                            @if (Model.RequestModel.PageCount > 1)
+                            {
+                                <hr class="mt-0">
+
+                                <ul class="pagination">
+                                    @if (Model.RequestModel.CurrentPage > 1 && Model.RequestModel.StartPage > 1)
+                                    {
+                                        <li class="paginate_button previous disabled" id="example2_previous">
+                                            <a onclick="ChangePage(1)">1</a>
+                                        </li>
+
+                                    }
+
+                                    @for (var i = Model.RequestModel.StartPage; i <= Model.RequestModel.EndPage; i++)
+                                    {
+
+                                        <li class="@((i == Model.RequestModel.CurrentPage ? "paginate_button active" : "paginate_button"))">
+                                            <a onclick="ChangePage(@i)" href="javascript:void(0)">@i</a>
+                                        </li>
+                                    }
+                                    @if (Model.RequestModel.CurrentPage < Model.RequestModel.PageCount && Model.RequestModel.EndPage < Model.RequestModel.PageCount)
+                                    {
+                                        <li class="paginate_button next" id="example2_next">
+                                            <a onclick="ChangePage(@Model.RequestModel.PageCount)">@Model.RequestModel.PageCount</a>
+                                        </li>
+
+                                    }
+                                </ul>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </section>
+</div>
+@section Scripts
+{
+    <script>
+        function ChangePage(pageId) {
+            $("#pageId").val(pageId);
+            $("#paging").submit();
+        }
+    </script>
+}

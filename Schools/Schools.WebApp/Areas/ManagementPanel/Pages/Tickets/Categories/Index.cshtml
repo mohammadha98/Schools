@@ -1,0 +1,54 @@
+﻿@page
+@model Schools.WebApp.Areas.ManagementPanel.Pages.Tickets.Categories.IndexModel
+@{
+    ViewData["Title"] = "دسته بندی تیکتت";
+    var menuModel = "TicketsCategory";
+    // ManagementPanel/Schools
+}
+
+<partial name="_MainMenu" model="menuModel" />
+
+
+<div class="content-wrapper">
+    <section class="content">
+        <div class="row">
+            <section class="col-lg-12 col-md-12">
+                <div class="box box-info">
+                    <div class="box-header">
+
+                        <a href="/ManagementPanel/Tickets/Categories/Add" class="btn btn-success btn-flat">افزودن دسته بندی</a>
+                    </div>
+                    <div class="box-body">
+                        <div class="table-responsive">
+                            <table class="table-bordered table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>عنوان گروه</th>
+                                        <td></td>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    @foreach (var item in Model.TicketCategories)
+                                    {
+                                        <tr>
+                                            <td>@item.CategoryId</td>
+                                            <td>@item.CategoryTitle</td>
+                                            <td>
+                                                <a href="/ManagementPanel/Tickets/Categories/Edit/@item.CategoryId" class="btn btn-flat btn-info btn-sm">ویرایش</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                 
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+        </div>
+    </section>
+</div>
+

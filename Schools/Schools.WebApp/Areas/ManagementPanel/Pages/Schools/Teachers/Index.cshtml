@@ -30,8 +30,9 @@ else
                             <table class="table table-hover">
                                 <tr>
                                     <th>#</th>
-                                    <th>شناسه کاربری</th>
+                                    <th>مدرک تحصیلی</th>
                                     <th>نام و نام خانوادگی</th>
+                                    <th>وضعیت</th>
                                     <td></td>
                                 </tr>
                                 <tbody>
@@ -40,10 +41,21 @@ else
                                         <tr>
                                             <td>@counter</td>
                                             <td>
-                                                <a href="#" target="_blank">@teacher.UserId</a>
+                                                @teacher.Education
                                             </td>
                                             <td>
-                                                @teacher.User.Name @teacher.User.Family
+                                                @teacher.FullName
+                                            </td>
+                                            <td>
+                                                @if (teacher.IsActive)
+                                                {
+                                                    <span class="text-success">فعال</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="text-success">غیرفعال</span>
+
+                                                }
                                             </td>
                                             <td>
                                                 <a class="btn btn-info btn-flat" href="/ManagementPanel/Schools/Teachers/Edit/@teacher.TeacherId/@teacher.SchoolId">ویرایش</a>

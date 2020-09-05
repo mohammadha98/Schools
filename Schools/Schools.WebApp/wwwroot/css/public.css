@@ -18,6 +18,9 @@
      url('fonts/IRANSansWeb(FaNum).woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
      url('fonts/IRANSansWeb(FaNum).ttf') format('truetype');
 }
+html {
+    scroll-behavior: smooth;
+}
 body{
   margin: 0;
   padding: 0;
@@ -194,12 +197,13 @@ footer .top-footer nav ul:after,footer .contact-col .socials:after,.search-layer
   margin-right: 15px;
   border:3px solid rgba(255,255,255,0.2);
 }
-.top-layer .top-bar .left-side .logged-in .avatar img{
-  width: 100%;
-  border-radius: 100%;
-  -moz-border-radius: 100%;
-  -webkit-border-radius: 100%
-}
+    .top-layer .top-bar .left-side .logged-in .avatar img {
+        width: 100%;
+        height: 100%;
+        border-radius: 100%;
+        -moz-border-radius: 100%;
+        -webkit-border-radius: 100%
+    }
 .top-layer .top-bar .left-side .logged-in > span{
   font-size: 13px;
   color: #fff;

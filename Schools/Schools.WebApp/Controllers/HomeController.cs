@@ -1,10 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Schools.Application.Service.Interfaces.Locations;
 using Schools.Application.Service.Interfaces.Schools;
-using Schools.Domain.Models.AboutUs;
-using Schools.Domain.Models.ContactUs;
-using Schools.Domain.Repository.InterfaceRepository.AboutUsRepository;
-using Schools.Domain.Repository.InterfaceRepository.ContactUsRepositories;
 using Schools.Domain.Repository.InterfaceRepository.Locations;
 
 namespace Schools.WebApp.Controllers
@@ -14,18 +10,12 @@ namespace Schools.WebApp.Controllers
         private ILocationRepository _location;
         private ISchoolService _school;
         private ILocationService _locationService;
-        private IContactUsRepository _contactUs;
-        private IAboutUsRepository _aboutUs;
-        private IContactUsFormRepository _contactUsForm;
 
-        public HomeController(ILocationRepository location, ISchoolService school, ILocationService locationService,IContactUsRepository contactUs,IAboutUsRepository aboutUs,IContactUsFormRepository contactUsForm)
+        public HomeController(ILocationRepository location, ISchoolService school, ILocationService locationService)
         {
             _location = location;
             _school = school;
             _locationService = locationService;
-            _contactUs = contactUs;
-            _aboutUs = aboutUs;
-            _contactUsForm = contactUsForm;
         }
 
 
@@ -47,15 +37,17 @@ namespace Schools.WebApp.Controllers
         [Route("/Home/HandleError/{code}")]
         public IActionResult HandlerError(int code)
         {
-            if (code == 404)
+       
+
+            if (code >= 500)
             {
-                return View("NotFound");
+                return View("ServerError");
             }
 
-            return View("ServerError");
+            return View("NotFound");
 
         }
-        [Route("/GetCityByShireId/{shireTitle}")]
+        [Route("/GetCityByShireTitle/{shireTitle}")]
         public string GetCities(string shireTitle)
         {
             var cities = _locationService.GetAllCityByShireTitle(shireTitle);
@@ -67,27 +59,17 @@ namespace Schools.WebApp.Controllers
             }
             return result;
         }
-        [Route("/AboutUs")]
-        public IActionResult AboutUs(AboutUs aboutUs)
+        [Route("/GetCityByShireId/{shireId}")]
+        public string GetCitiesByShireId(int shireId)
         {
-            var aboutus = _aboutUs.GetLast();
-            return View(aboutus);
-        }
-        [Route("/ContactUs")]
-        public IActionResult ContactUs()
-        {
-            return View(_contactUs.GetLast());
-        }
-        [HttpPost]
-        [Route("/ContactUs")]
-        public IActionResult ContactUs(ContactUsForm contactUsForm)
-        {
-            if (!ModelState.IsValid)
-                return View(_contactUs.GetLast());
+            var cities = _locationService.GetAllCityByShireId(shireId);
 
-            _contactUsForm.InsertQuestion(contactUsForm);
-            ViewData["IsSuccess"] = true;
-            return View(_contactUs.GetLast());
+            string result = "<option value ='0'> انتخاب شهر</option>";
+            foreach (var city in cities)
+            {
+                result += $"<option value='{city.CityId}'>{city.CityTitle}</option>";
+            }
+            return result;
         }
     }
 }

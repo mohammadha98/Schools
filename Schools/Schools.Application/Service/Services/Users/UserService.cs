@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using Schools.Application.Service.Interfaces.Users;
 using Schools.Application.Utilities.Convertors;
@@ -7,24 +8,21 @@ using Schools.Application.Utilities.Security;
 using Schools.Application.ViewModels.UsersViewModel;
 using Schools.Domain.Models.Users;
 using Schools.Domain.Repository.InterfaceRepository.Users;
-using Schools.Infra.Data.Context;
-using Schools.Infra.Data.Migrations;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Security.Principal;
-using System.Text;
 
 namespace Schools.Application.Service.Services.Users
 {
     public class UserService : IUserService
     {
         private IUserRepository _userRepository;
-        public UserService(IUserRepository userRepository)
+        private IUserRoleRepository _role;
+
+        public UserService(IUserRepository userRepository, IUserRoleRepository role)
         {
             _userRepository = userRepository;
+            _role = role;
         }
-
+        
         public bool ActiveAccount(string activeCode)
         {
             var users = _userRepository.GetUsers();
@@ -44,7 +42,7 @@ namespace Schools.Application.Service.Services.Users
             var user = _userRepository.GetUserById(userId);
             UserInfoViewModel info = new UserInfoViewModel();
             info.User = user;
-            info.userRoles = _userRepository.GetAllUserRolesByUserId(user.UserId);
+            info.userRoles = _role.GetUserRoles().Where(r=>r.UserId==userId).Select(r=>r.Role.RoleTitle).ToList();
             info.Schools = _userRepository.GetAllSchoolInUserLikesByUserId(user.UserId);
             return info;
         }
@@ -92,6 +90,31 @@ namespace Schools.Application.Service.Services.Users
             string email = FixedText.FixedEmail(login.Email);
             var users = _userRepository.GetUsers();
             return users.SingleOrDefault(u => u.Email == email && u.Password == hashPassword);
+        }
+
+        public void RegisterUser(RegisterViewModel register)
+        {
+            var user = new User()
+            {
+                IsDelete = false,
+                ActiveCode = NameGenerator.GenerateUniqCode(),
+                Email = register.Email,
+                PhoneNumber = register.PhoneNumber,
+                IsActive = true,
+                Password = PasswordHelper.EncodePasswordMd5(register.Password),
+                UserName = register.UserName,
+                UserAvatar = "Default.png",
+                RegisterDate = DateTime.Now
+            };
+            var userId=_userRepository.AddUser(user);
+            //RoleId 2 = دانشجو
+            var userRole=new UserRole()
+            {
+                IsDelete = false,
+                RoleId = 2,
+                UserId = userId
+            };
+            _role.AddUserRole(userRole);
         }
 
         public void EditUserInfo(EditUserInfoViewModel editModel)

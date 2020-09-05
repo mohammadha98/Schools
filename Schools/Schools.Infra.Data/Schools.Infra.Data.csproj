@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -11,14 +11,12 @@
     <Compile Remove="Migrations\20200826172549_Test.Designer.cs" />
     <Compile Remove="Migrations\20200827160146_fix_ticket_again.cs" />
     <Compile Remove="Migrations\20200827160146_fix_ticket_again.Designer.cs" />
-    <Compile Remove="Migrations\20200829071659_add-aboutUs.cs" />
-    <Compile Remove="Migrations\20200829071659_add-aboutUs.Designer.cs" />
-    <Compile Remove="Migrations\20200829073402_ContactUs.cs" />
-    <Compile Remove="Migrations\20200829073402_ContactUs.Designer.cs" />
-    <Compile Remove="Migrations\20200829075331_mig-17.cs" />
-    <Compile Remove="Migrations\20200829075331_mig-17.Designer.cs" />
-    <Compile Remove="Migrations\20200829080234_mig-18.cs" />
-    <Compile Remove="Migrations\20200829080234_mig-18.Designer.cs" />
+    <Compile Remove="Migrations\20200830182839_Mig_SchoolRequest.cs" />
+    <Compile Remove="Migrations\20200830182839_Mig_SchoolRequest.Designer.cs" />
+    <Compile Remove="Migrations\20200830183105_Mig_SchoolRequest.cs" />
+    <Compile Remove="Migrations\20200830183105_Mig_SchoolRequest.Designer.cs" />
+    <Compile Remove="Migrations\20200831123553_SchoolRules.cs" />
+    <Compile Remove="Migrations\20200831123553_SchoolRules.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

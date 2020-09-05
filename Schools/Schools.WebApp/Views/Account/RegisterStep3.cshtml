@@ -1,9 +1,9 @@
 ﻿@model Schools.Application.ViewModels.UsersViewModel.RegisterStip3ViewModel
 @using Schools.Domain.Repository.InterfaceRepository.Users
-@inject IUserRepository userRepository
+@inject IUserRoleRepository _role
 @{
     ViewData["Title"] = "ثبت نام";
-    var roles = userRepository.GetAllRoles();
+    var roles = _role.GetAllRoles();
 }
 
 @section Meta
