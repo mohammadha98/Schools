@@ -1,6 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Schools.Application.Service.Interfaces.Locations;
 using Schools.Application.Service.Interfaces.Schools;
+using Schools.Domain.Models.AboutUs;
+using Schools.Domain.Models.ContactUs;
+using Schools.Domain.Repository.InterfaceRepository.AboutUsRepository;
+using Schools.Domain.Repository.InterfaceRepository.ContactUsRepositories;
 using Schools.Domain.Repository.InterfaceRepository.Locations;
 
 namespace Schools.WebApp.Controllers
@@ -10,12 +14,18 @@ namespace Schools.WebApp.Controllers
         private ILocationRepository _location;
         private ISchoolService _school;
         private ILocationService _locationService;
+        private IContactUsRepository _contactUs;
+        private IAboutUsRepository _aboutUs;
+        private IContactUsFormRepository _contactUsForm;
 
-        public HomeController(ILocationRepository location, ISchoolService school, ILocationService locationService)
+        public HomeController(ILocationRepository location, ISchoolService school, ILocationService locationService,IContactUsRepository contactUs,IAboutUsRepository aboutUs,IContactUsFormRepository contactUsForm)
         {
             _location = location;
             _school = school;
             _locationService = locationService;
+            _contactUs = contactUs;
+            _aboutUs = aboutUs;
+            _contactUsForm = contactUsForm;
         }
 
 
@@ -57,6 +67,27 @@ namespace Schools.WebApp.Controllers
             }
             return result;
         }
+        [Route("/AboutUs")]
+        public IActionResult AboutUs(AboutUs aboutUs)
+        {
+            var aboutus = _aboutUs.GetLast();
+            return View(aboutus);
+        }
+        [Route("/ContactUs")]
+        public IActionResult ContactUs()
+        {
+            return View(_contactUs.GetLast());
+        }
+        [HttpPost]
+        [Route("/ContactUs")]
+        public IActionResult ContactUs(ContactUsForm contactUsForm)
+        {
+            if (!ModelState.IsValid)
+                return View(_contactUs.GetLast());
 
+            _contactUsForm.InsertQuestion(contactUsForm);
+            ViewData["IsSuccess"] = true;
+            return View(_contactUs.GetLast());
+        }
     }
 }

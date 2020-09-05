@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Schools.Domain.Models.AboutUs.AboutUs>
+@{
+    ViewData["Title"] = "AboutUs";
+}
+@section Topic_Layer{
+    <div class="container page-title">
+        <h1><a href=""> درباره ما </a></h1>
+        <ul itemtype="http://schema.org/BreadcrumbList" class="breadcrumb">
+            <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement"><a href="" itemprop="item"><span itemprop="name"> بانک اطلاعاتی آموزشگاه ها </span></a></li>
+            <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement"><a href="" itemprop="item" class="current"><span itemprop="name"> درباره ما </span></a></li>
+        </ul>
+    </div>
+}
+
+@section Meta
+{
+    <link href="/css/page.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="/css/material-icon.css">
+}
+
+<div class="container">
+
+    <section class="page-style-two about-page">
+        <header><span class="logo"><img src="images/about.svg"></span><h2> درباره بانک اطلاعاتی آموزش </h2></header>
+
+        @foreach (var item in Model)
+        {
+            <article>
+                @Html.Raw(item.Text)
+            </article>
+        }
+
+    </section>
+
+</div>
+@section Scripts{
+    <script src="/Admin/bowercomponents/ckeditor/ckeditor.js"></script>
+}

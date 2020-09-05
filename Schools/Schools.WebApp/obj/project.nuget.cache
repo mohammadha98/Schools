@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "yGJri5/1pkhXYnjKIkMQ67Wl9uNU4K1SESMKLuRw/vUBkkpYlwKepjDLxalytSudHscfEXM0ePLE+wkU8pnVKA==",
+  "dgSpecHash": "8pNGT7hw3DYNPnIWOhLc9JXDouS/UZ/Dr33vu7l0e8bMF6DyC9w68eRnhiYQHmW+3NZQ+a7vem+OL0m0V7uVaQ==",
   "success": true,
   "projectFilePath": "D:\\Workspace\\C#\\Asp.NetCore\\Schools\\Schools\\Schools.WebApp\\Schools.WebApp.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\ali\\.nuget\\packages\\ckeditor\\3.6.4\\ckeditor.3.6.4.nupkg.sha512",
     "C:\\Users\\ali\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\3.1.6\\microsoft.aspnetcore.cryptography.internal.3.1.6.nupkg.sha512",
     "C:\\Users\\ali\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\3.1.6\\microsoft.aspnetcore.cryptography.keyderivation.3.1.6.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",

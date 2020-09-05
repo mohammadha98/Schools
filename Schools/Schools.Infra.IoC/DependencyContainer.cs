@@ -18,6 +18,10 @@ using Schools.Application.Service.Interfaces.Users;
 using Schools.Application.Service.Services.Users;
 using Schools.Application.Service.Interfaces.Blogs;
 using Schools.Application.Service.Services.Blogs;
+using Schools.Domain.Repository.InterfaceRepository.ContactUsRepositories;
+using Schools.Infra.Data.Repository.ServiceRepository.ContactUs;
+using Schools.Domain.Repository.InterfaceRepository.AboutUsRepository;
+using Schools.Infra.Data.Repository.ServiceRepository.AboutUs;
 
 namespace Schools.Infra.IoC
 {
@@ -78,6 +82,12 @@ namespace Schools.Infra.IoC
             service.AddScoped<IUserMessageRepository, UserMessageRepository>();
             service.AddScoped<IUserNotificationRepository, UserNotificationRepository>();
 
+            #endregion
+
+            #region ContactUs&AboutUs
+            service.AddScoped<IContactUsRepository, ContactUsRepository>();
+            service.AddScoped<IAboutUsRepository, AboutUsRepository>();
+            service.AddScoped<IContactUsFormRepository, ContactUsForm>();
             #endregion
         }
     }
