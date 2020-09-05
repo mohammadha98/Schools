@@ -126,7 +126,9 @@ namespace Schools.Application.Service.Services.Schools
                 PageCount = pageCount,
                 StartPage = (pageId - 4 <= 0) ? 1 : pageId - 4,
                 EndPage = (pageId + 5 > pageCount) ? pageCount : pageId + 5,
-                SchoolRequests = result.Skip(skip).Take(take).ToList()
+                SchoolRequests = result.Skip(skip).Take(take).ToList(),
+                IsAccept = isAccept,
+                ManagerName = managerName
             };
             return requestModel;
         }

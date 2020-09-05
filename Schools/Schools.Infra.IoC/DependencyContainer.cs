@@ -56,6 +56,7 @@ namespace Schools.Infra.IoC
             service.AddScoped<IUserTicketService, UserTicketService>();
             service.AddScoped<IUserNotificationService, UserNotificationService>();
             service.AddScoped<IUserMessageService, UserMessageService>();
+            service.AddScoped<IUserRoleService, UserRoleService>();
 
             #endregion
             //From Infra Data Layer

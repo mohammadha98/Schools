@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
+using Schools.Domain.Models.Users.Permissions;
 
 namespace Schools.Domain.Models.Users
 {
    public class Role
     {
-        public Role()
-        {
-
-        }
-
+        
         [Key]
         public int RoleId { get; set; }
 
@@ -24,7 +19,8 @@ namespace Schools.Domain.Models.Users
 
         #region Relations
 
-        public virtual List<UserRole> UserRoles { get; set; }
+        public  List<UserRole> UserRoles { get; set; }
+        public  List<RolePermission> RolePermissions { get; set; }
        
         #endregion
 

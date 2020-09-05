@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Schools.Infra.Data.Context;
 
 namespace Schools.Infra.Data.Migrations
 {
     [DbContext(typeof(SchoolsDbContext))]
-    partial class SchoolsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200905071553_RolePermissions")]
+    partial class RolePermissions
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -768,9 +770,6 @@ namespace Schools.Infra.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("Parent")
-                        .HasColumnType("int");
 
                     b.Property<string>("PermissionTitle")
                         .HasColumnType("nvarchar(max)");

@@ -7,6 +7,7 @@ using Schools.Domain.Models.Schools.Teachers;
 using Schools.Domain.Models.Schools.TrainingTypes;
 using Schools.Domain.Models.Users;
 using Schools.Domain.Models.Users.Messages;
+using Schools.Domain.Models.Users.Permissions;
 using Schools.Domain.Models.Users.Tickets;
 
 namespace Schools.Infra.Data.Context
@@ -73,6 +74,8 @@ namespace Schools.Infra.Data.Context
         public DbSet<TicketCategory> TicketCategories { get; set; }
         public DbSet<UserTicket> UserTickets { get; set; }
         public DbSet<UserLike> UserLikes { get; set; }
+        public DbSet<Permission> Permissions { get; set; }
+        public DbSet<RolePermission> RolePermissions { get; set; }
 
         #endregion
 
@@ -165,6 +168,8 @@ namespace Schools.Infra.Data.Context
             modelBuilder.Entity<UserNotification>()
                 .HasQueryFilter(u => !u.IsDelete);
             modelBuilder.Entity<UserLike>()
+                .HasQueryFilter(u => !u.IsDelete);
+            modelBuilder.Entity<RolePermission>()
                 .HasQueryFilter(u => !u.IsDelete);
             #endregion
 

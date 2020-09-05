@@ -1,4 +1,5 @@
 ﻿@page
+@using Schools.Application.Utilities.Convertors
 @model Schools.WebApp.Areas.ManagementPanel.Pages.Users.IndexModel
 @{
 
@@ -23,7 +24,7 @@
                                         <th>#</th>
                                         <th>نام کاربری</th>
                                         <th>نام</th>
-                                        <th>فامیل</th>
+                                        <th>نام خانوادگی</th>
                                         <th>تاریخ ثبت نام</th>
                                         <th>عملیات ها</th>
                                     </tr>
@@ -37,7 +38,7 @@
                                             <td>@item.UserName</td>
                                             <td>@item.Name</td>
                                             <td>@item.Family</td>
-                                            <td>@item.RegisterDate</td>
+                                            <td>@item.RegisterDate.ToShamsi()</td>
                                             <td>
                                                 <a class="btn btn-primary btn-sm" href="/ManagementPanel/Users/ShowProfile/@item.UserId">مشاهده پروفایل</a>
                                             </td>

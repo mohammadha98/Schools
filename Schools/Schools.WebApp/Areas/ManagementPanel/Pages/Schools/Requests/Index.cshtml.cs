@@ -15,7 +15,7 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.Schools.Requests
         }
         [BindProperty]
         public SchoolRequestsViewModel RequestModel { get; set; }
-        public void OnGet(int pageId=1,string manager="",bool isAccept=false)
+        public void OnGet(int pageId=1,string manager="",bool isAccept = false)
         {
             RequestModel = _request.GetSchoolRequests(pageId,10,manager,isAccept);
         }
