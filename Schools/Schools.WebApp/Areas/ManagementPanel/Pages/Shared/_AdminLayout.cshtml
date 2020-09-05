@@ -283,7 +283,7 @@
 
     <!-- TinyMCE Editor -->
     <script src="/Admin/bowercomponents/tinymce/tinymce.min.js"></script>
-    <script>
+    @*<script>
         tinymce.init({
             selector: 'textarea#mytextarea',
             plugins: 'advlist autolink link lists preview table code pagebreak',
@@ -293,14 +293,14 @@
             relative_urls: false,
             toolbar: 'undo redo | removeformat preview code | fontsizeselect bullist numlist | alignleft aligncenter alignright alignjustify | bold italic | pagebreak table link',
         });
-        $(function () {
+        $(function() {
             // Replace the <textarea id="editor1"> with a CKEditor
             // instance, using default configuration.
             CKEDITOR.replace('editor1')
             //bootstrap WYSIHTML5 - text editor
-            $('.textarea').wysihtml5()
-        })
-    </script>
+            $('.textarea').wysihtml5();
+        });
+    </script>*@
 
     @await RenderSectionAsync("Scripts", false)
 </body>

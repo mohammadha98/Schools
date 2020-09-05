@@ -9,6 +9,6 @@ namespace Schools.Domain.Repository.InterfaceRepository.Schools
         SchoolComment GetSchoolCommentById(int commentId);
         void AddSchoolComment(SchoolComment comment);
         void EditSchoolComment(SchoolComment comment);
-        void DeleteSchoolComment(int commentId);
+        void DeleteSchoolComment(SchoolComment comment);
     }
 }

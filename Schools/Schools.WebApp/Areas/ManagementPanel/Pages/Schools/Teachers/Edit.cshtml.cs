@@ -42,33 +42,16 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.Schools.Teachers
 
         public IActionResult OnPost(int teacherId, int schoolId)
         {
-            
-            var teacher = _teacher.GetTeacherById(teacherId);
-            teacher.Bio = SchoolTeacher.Bio;
+            SchoolTeacher.TeacherId = teacherId;
+            SchoolTeacher.SchoolId = schoolId;
+           
 
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            if (!_user.IsUserExist(SchoolTeacher.UserId))
-            {
-                ModelState.AddModelError("UserId", "شناسه کاربری نامعتبر است");
-                return Page();
-
-            }
-            //اگر شناسه کاربری تغییر داده شده بود وارد شرط میشه
-            if (teacher.UserId != SchoolTeacher.UserId)
-            {
-                teacher.UserId = SchoolTeacher.UserId;
-                //اگر شناسه وارد شده قبلا در این آموزشگاه مدرس بوده باشه وارد شرط میشه
-                if (_teacher.IsUserIsTeacherInSchool(SchoolTeacher.UserId, schoolId))
-                {
-                    ModelState.AddModelError("UserId", "کاربر انتخابی خود یک مدرس است");
-                    return Page();
-                }
-            }
-            _teacher.EditTeacher(teacher);
+            _teacher.EditTeacher(SchoolTeacher);
             return Redirect("/ManagementPanel/Schools/Teachers/" + schoolId);
         }
     }

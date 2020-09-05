@@ -64,7 +64,6 @@ namespace Schools.WebApp
             #endregion
 
 
-
             app.UseStaticFiles();
             app.UseAuthentication();
             app.UseRouting();

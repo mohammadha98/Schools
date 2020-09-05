@@ -37,7 +37,8 @@
         <div class="left-side">
             <div class="account-heading layer-style">
                 <span class="status green"> وضعیت :  <i> فعال </i></span>
-                <a href="submit-ticket.html"> <i class="zmdi zmdi-plus"></i> ثبت تیکت </a>
+                <a href="/UserPanel/Tickets/Add"> <i class="zmdi zmdi-plus"></i> ثبت تیکت </a>
+                <a href="/UserPanel/RegisterSchool" style="background-color: cadetblue !important"> <i class="zmdi zmdi-plus"></i>  ثبت آموزشگاه </a>
             </div>
             <div class="account-content-layer layer-style rating-history">
                 <h3> تاریخچه امتیازدهی شما </h3>
@@ -48,7 +49,7 @@
                         foreach (var item in Model.UserModel.SchoolRates)
                         {
                             <ul>
-                                <li><a href=""> آموزشگاه @item.School.SchoolTitle <span> ( مجموع امتیاز : @item.Rate) </span></a></li>
+                                <li><a href="/School/@item.SchoolId/@item.School.SchoolTitle.Replace(" ","-").Trim()"> آموزشگاه @item.School.SchoolTitle <span> ( مجموع امتیاز : @item.Rate) </span></a></li>
                             </ul>
                         }
                     }
@@ -64,7 +65,7 @@
                         foreach (var item in Model.UserModel.TeacherRates)
                         {
                             <ul>
-                                <li><a href=""> استاد @item.SchoolTeacher.User.Name @item.SchoolTeacher.User.Family <span> ( مجموع امتیاز : @item.Rate) </span></a></li>
+                                <li><a href=""> استاد @item.SchoolTeacher.FullName <span> ( مجموع امتیاز : @item.Rate) </span></a></li>
                             </ul>
                         }
                     }

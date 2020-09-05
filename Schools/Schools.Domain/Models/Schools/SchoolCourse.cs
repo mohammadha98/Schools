@@ -7,11 +7,10 @@ namespace Schools.Domain.Models.Schools
     {
         [Key]
         public int CourseId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "نام دوره را وارد کنید")]
         public string CourseTitle { get; set; }
-        [Required]
+        [Required(ErrorMessage = "توضیحات را وارد کنید")]
         public string CourseDescription { get; set; }
-        [Required]
         public int SchoolId { get; set; }
         public bool IsDelete { get; set; }
         public bool IsActive { get; set; }

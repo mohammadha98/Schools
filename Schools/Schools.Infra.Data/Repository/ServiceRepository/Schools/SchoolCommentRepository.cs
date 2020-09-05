@@ -21,7 +21,7 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Schools
 
         public SchoolComment GetSchoolCommentById(int commentId)
         {
-            return _db.SchoolComments.SingleOrDefault(s => s.CommentId == commentId);
+            return _db.SchoolComments.Include(c=>c.User).SingleOrDefault(s => s.CommentId == commentId);
         }
 
         public void AddSchoolComment(SchoolComment comment)
@@ -36,11 +36,10 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Schools
             _db.SaveChanges();
         }
 
-        public void DeleteSchoolComment(int commentId)
+        public void DeleteSchoolComment(SchoolComment comment)
         {
-            var comment = GetSchoolCommentById(commentId);
-            _db.SchoolComments.Remove(comment);
-            _db.SaveChanges();
+            comment.IsDelete = true;
+            EditSchoolComment(comment);
         }
     }
 }

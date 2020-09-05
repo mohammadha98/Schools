@@ -4,6 +4,7 @@ using Schools.Domain.Models.Users;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Schools.Domain.Models.Users.Tickets;
 
 namespace Schools.Application.ViewModels.UsersViewModel
 {
@@ -29,5 +30,17 @@ namespace Schools.Application.ViewModels.UsersViewModel
         public string UserName { get; set; }
         public string Password { get; set; }
         
+    }
+    public class GetTicketsViewModel
+    {
+        public List<UserTicket> UserTickets { get; set; }
+        public string Title { get; set; }
+        public string Status { get; set; }
+        public int? CategoryId { get; set; }
+        public int? PriorityId { get; set; }
+        public int CurrentPage { get; set; }
+        public int PageCount { get; set; }
+        public int StartPage { get; set; }
+        public int EndPage { get; set; }
     }
 }

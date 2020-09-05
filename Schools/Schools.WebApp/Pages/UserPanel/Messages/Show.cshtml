@@ -8,7 +8,7 @@
 @inject IUserRepository _User
 @{
     var user = _User.GetUserWithRelations(User.GetUserId());
-    ViewData["title"] = $"تیکت  پشتیبانی";
+    ViewData["title"] = $"جزئیات پیام";
 }
 @section Meta
 {
@@ -49,7 +49,7 @@ else
     <div class="account-layer">
         <div class="container">
             @{
-                var menuModel = new Tuple<User, string>(user, "messages");
+                var menuModel = new Tuple<User, string>(user, "Messages");
             }
             <partial name="Shared/_RightMenu" model="menuModel" />
             <div class="left-side">
@@ -93,7 +93,7 @@ else
                                             <div class="col-xs-12">
                                                 <div class="textarea-layer">
                                                     <label><i class="zmdi zmdi-assignment"></i>  متن پاسخ </label>
-                                                    <textarea id="message_text" required="" name="messageText"> </textarea>
+                                                    <textarea id="Description" required="" name="messageText"> </textarea>
                                                 </div>
                                             </div>
                                             <div class="col-md-3 col-sm-3 col-xs-12 pull-left">
@@ -113,57 +113,7 @@ else
 @section Scripts
 {
     <script src="/ckeditor5/build/ckeditor.js"></script>
-
     <script src="/js/account.js"></script>
-    <script>
-        ClassicEditor
-            .create(document.querySelector('#message_text'), {
-                toolbar: {
-                    items: [
-                        'heading',
-                        '|',
-                        'fontSize',
-                        'bold',
-                        'italic',
-                        'link',
-                        '|',
-                        'bulletedList',
-                        'numberedList',
-                        '|',
-                        'codeblock',
-                        'blockQuote',
-                        'insertTable',
-                        '|',
-                        'indent',
-                        'outdent',
-                        '|',
-                        'undo',
-                        'redo',
-                    ]
-                },
-                language: 'fa',
-                table: {
-                    contentToolbar: [
-                        'tableColumn',
-                        'tableRow',
-                        'mergeTableCells'
-                    ]
-                },
-                licenseKey: '',
-
-            })
-            .then(editor => {
-                window.editor = editor;
-            })
-            .catch(error => {
-                console.error('Oops, something gone wrong!');
-                console.error('Please, report the following error in the https://github.com/ckeditor/ckeditor5 with the build id and the error stack trace:');
-                console.warn('Build id: 1hgh63bxm5nk-t1efehf8ocs2');
-                console.error(error);
-            });
-
-        $(document).ready(function () {
-            $(".ck-voice-label").css("display", "none");
-        });
-    </script>
+    <script src="/js/miniCkediotr.js"></script>
+   
 }

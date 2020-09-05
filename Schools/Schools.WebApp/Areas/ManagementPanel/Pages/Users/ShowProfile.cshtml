@@ -1,4 +1,5 @@
 ﻿@page "{id}"
+@using Schools.Application.Utilities.Convertors
 @model Schools.WebApp.Areas.ManagementPanel.Pages.Users.ShowProfileModel
 @{
     int id = int.Parse(RouteData.Values["id"].ToString());
@@ -21,7 +22,7 @@
                                 <tbody>
                                     <tr>
                                         <th>تاریخ ثبت نام :</th>
-                                        <td>@Model.UserInfoView.User.RegisterDate</td>
+                                        <td>@Model.UserInfoView.User.RegisterDate.ToShamsi()</td>
 
                                     </tr>
 
@@ -42,7 +43,7 @@
                                     </tr>
                                     <tr>
                                         <th>شماره همراه :</th>
-                                        <td>خالی</td>
+                                        <td>@Model.UserInfoView.User.PhoneNumber</td>
 
                                     </tr>
 
@@ -94,7 +95,7 @@
                         </div>
                         <div class="box-body">
                             <div class="center-block">
-                                <img src="~/UserProfile/@Model.UserInfoView.User.UserAvatar" class="thumbnail" width="250" />
+                                <img src="~/images/userAvatars/@Model.UserInfoView.User.UserAvatar" class="thumbnail" width="100%" />
                             </div>
 
                         </div>
@@ -114,7 +115,6 @@
                                         <th>#</th>
                                         <th>نام آموزشگاه</th>
                                         <th>تصویر</th>
-                                        <th>عملیات</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -124,7 +124,7 @@
                                             <td>@item.SchoolId</td>
                                             <td>@item.SchoolTitle</td>
                                             <td>
-                                                <img class="thumbnail"  src="~/images/schools/@item.ImageName"/>
+                                                <img class="thumbnail" style="max-width: 150px"  src="~/images/schools/@item.ImageName"/>
                                             </td>
                                         </tr>
                                     }

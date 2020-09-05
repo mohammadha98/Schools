@@ -21,7 +21,7 @@
                     <div class="box-header">
 
                         <form class="row" id="paginat">
-                            <input type="hidden" name="pageId" asp-for="SchoolModel.CurrentPage" />
+                            <input  type="hidden" name="pageId" asp-for="SchoolModel.CurrentPage" />
                             <div class="col-lg-4 col-md-4" style="margin-top: 8px">
                                 <p>نام آموزشگاه</p>
                                 <input type="text" asp-for="SchoolModel.SchoolName" class="form-control" placeholder="نام آموزشکاه" name="schoolName" />
@@ -78,15 +78,16 @@
                     </div>
                     <div class="box-body">
                         <div class="table-responsive">
-                            <table class="table-bordered table table-hover">
+                            <table class="table-bordered table table-hover text-center">
                                 <thead>
                                     <tr>
                                         <th>#</th>
                                         <th>نام آموزشگاه</th>
-                                        <th>مدیر آموزشگاه</th>
-                                        <th>استان</th>
-                                        <th>شهر</th>
                                         <th>تاریخ ثبت</th>
+                                        <th>وضعیت</th>
+                                        <td>دوره تایید نشده</td>
+                                        <td>عکس تایید نشده</td>
+                                        <td>استاد تایید نشده</td>
                                         <td>
                                         </td>
                                     </tr>
@@ -94,21 +95,32 @@
                                 <tbody>
                                     @foreach (var item in Model.SchoolModel.Schools)
                                     {
-                                        <tr>
-                                            <td>@item.SchoolId</td>
-                                            <td>@item.SchoolTitle</td>
-                                            <td>@item.User.Name @item.User.Family</td>
-                                            <td>@item.Shire.ShireTitle</td>
-                                            <td>@item.City.CityTitle</td>
-                                            <td>@item.RegisterDate.ToShamsi()</td>
-                                            <td>
-                                                <a href="/ManagementPanel/Schools/Edit/@item.SchoolId" class="btn btn-sm btn-flat btn-primary">ویرایش</a>
-                                                <a href="/ManagementPanel/Schools/Teachers/@item.SchoolId" class="btn btn-sm btn-flat btn-warning">مدرسین</a>
-                                                <a href="/ManagementPanel/Schools/Courses/@item.SchoolId" class="btn btn-sm btn-flat btn-info">دوره ها</a>
-                                                <a href="/ManagementPanel/Schools/Detail/@item.SchoolId" class="btn btn-sm btn-flat btn-success">جزییات</a>
-                                                <a class="btn btn-sm btn-danger btn-flat">حذف</a>
-                                            </td>
-                                        </tr>
+                                    <tr>
+                                        <td>@item.SchoolId</td>
+                                        <td>@item.SchoolTitle</td>
+                                        <td>@item.RegisterDate.ToShamsi()</td>
+                                        <td>
+                                            @if (item.IsActive)
+                                            {
+                                                <span class="text-success">فعال</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="text-danger">غیرفعال</span>
+
+                                            }
+                                        </td>
+                                        <td>@item.SchoolCourses.Count(c => c.IsActive == false)</td>
+                                        <td>@item.SchoolGalleries.Count(c => c.IsActive == false)</td>
+                                        <td>@item.SchoolTeachers.Count(c => c.IsActive == false)</td>
+                                        <td>
+                                            <a href="/ManagementPanel/Schools/Edit/@item.SchoolId" class="btn btn-sm btn-flat btn-primary">ویرایش</a>
+                                            <a href="/ManagementPanel/Schools/Teachers/@item.SchoolId" class="btn btn-sm btn-flat btn-warning">مدرسین</a>
+                                            <a href="/ManagementPanel/Schools/Galleries/@item.SchoolId" class="btn btn-sm btn-flat btn-facebook">تصاویر</a>
+                                            <a href="/ManagementPanel/Schools/Courses/@item.SchoolId" class="btn btn-sm btn-flat btn-info">دوره ها</a>
+                                            <a href="/ManagementPanel/Schools/Detail/@item.SchoolId" class="btn btn-sm btn-flat btn-success">جزییات</a>
+                                        </td>
+                                    </tr>
                                     }
                                 </tbody>
                             </table>

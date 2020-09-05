@@ -65,12 +65,13 @@ footer nav ul:after,.top-bar:after,.top-bar .left-side:after,.main-menu:after,.c
     border: 3px solid rgba(255,255,255,0.2);
 }
 
-.top-bar .left-side .logged-in .avatar img {
-    width: 100%;
-    border-radius: 100%;
-    -moz-border-radius: 100%;
-    -webkit-border-radius: 100%
-}
+    .top-bar .left-side .logged-in .avatar img {
+        width: 100%;
+        height: 100%;
+border-radius: 100%;
+        -moz-border-radius: 100%;
+        -webkit-border-radius: 100%
+    }
 
  .top-bar .left-side .logged-in > span {
     font-size: 13px;

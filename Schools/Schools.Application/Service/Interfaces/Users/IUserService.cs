@@ -17,6 +17,7 @@ namespace Schools.Application.Service.Interfaces.Users
         bool IsExistEmail(string email);
         bool ActiveAccount(string activeCode);
         User LoginUser(LoginViewModel login);
+        void RegisterUser(RegisterViewModel register);
         #endregion
 
         #region UserPanel

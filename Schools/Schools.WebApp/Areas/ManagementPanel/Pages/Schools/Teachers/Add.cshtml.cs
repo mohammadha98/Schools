@@ -11,13 +11,12 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.Schools.Teachers
     {
         private ISchoolTeacherRepository _teacher;
         private ISchoolRepository _school;
-        private IUserRepository _user;
 
-        public AddModel(ISchoolTeacherRepository teacher, ISchoolRepository school, IUserRepository user)
+
+        public AddModel(ISchoolTeacherRepository teacher, ISchoolRepository school)
         {
             _teacher = teacher;
             _school = school;
-            _user = user;
         }
       
     
@@ -39,19 +38,6 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.Schools.Teachers
                 return Page();
             }
 
-            if (!_user.IsUserExist(SchoolTeacher.UserId))
-            {
-                ModelState.AddModelError("UserId","شناسه کاربری نامعتبر است");
-                return Page();
-
-            }
-            //اگر شناسه وارد شده قبلا در این آموزشگاه مدرس بوده باشه وارد شرط میشه
-            if (_teacher.IsUserIsTeacherInSchool(SchoolTeacher.UserId,schoolId))
-            {
-                ModelState.AddModelError("UserId", "کاربر انتخابی خود یک مدرس است");
-                return Page();
-
-            }
             _teacher.AddTeacher(SchoolTeacher);
             return Redirect("/ManagementPanel/Schools/Teachers/" + schoolId);
         }

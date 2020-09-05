@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using Schools.Application.Service.Interfaces.Locations;
 using Schools.Application.Service.Interfaces.Schools;
@@ -7,7 +8,9 @@ using Schools.Application.Utilities.Convertors;
 using Schools.Application.Utilities.SaveAndDelete;
 using Schools.Application.Utilities.Security;
 using Schools.Application.ViewModels.SchoolsViewModels;
+using Schools.Application.ViewModels.SchoolsViewModels.SchoolRequest;
 using Schools.Domain.Models.Schools;
+using Schools.Domain.Models.Schools.TrainingTypes;
 using Schools.Domain.Repository.InterfaceRepository.Schools;
 
 namespace Schools.Application.Service.Services.Schools
@@ -19,15 +22,18 @@ namespace Schools.Application.Service.Services.Schools
         private ISchoolTrainingTypeService _typeService;
         private ILocationService _location;
         private ISchoolGroupsService _schoolGroups;
+        private ISchoolGalleryRepository _GalleryRepository;
 
-        public SchoolService(ISchoolRepository school, ISchoolGalleryService gallery, ISchoolTrainingTypeService typeService, ILocationService location, ISchoolGroupsService schoolGroups)
+        public SchoolService(ISchoolRepository school, ISchoolGalleryService gallery, ISchoolTrainingTypeService typeService, ILocationService location, ISchoolGroupsService schoolGroups, ISchoolGalleryRepository galleryRepository)
         {
             _school = school;
             _gallery = gallery;
             _typeService = typeService;
             _location = location;
             _schoolGroups = schoolGroups;
+            _GalleryRepository = galleryRepository;
         }
+
 
 
         public GetAllSchoolForAdmin GetSchoolsForAdmin(int pageId, int take, string schoolName, int groupId, int subId, int shireId,
@@ -83,7 +89,7 @@ namespace Schools.Application.Service.Services.Schools
         public SchoolsCategoryViewModel GetSchoolsForCategory(int pageId, int take, string shireTitle, string cityTitle,
             string categoryTitle, string schoolName, string courseName, string teacherName, string orderBy)
         {
-            var result = _school.GetAllSchools();
+            var result = _school.GetAllSchools().Where(s => s.IsActive);
             //Filter
             if (!string.IsNullOrEmpty(shireTitle))
             {
@@ -111,8 +117,7 @@ namespace Schools.Application.Service.Services.Schools
             }
             if (!string.IsNullOrEmpty(teacherName))
             {
-                result = result.Where(r => r.SchoolTeachers.Any(t => t.User.Name.Contains(teacherName) || t.User.Family.Contains(teacherName)));
-
+                result = result.Where(r => r.SchoolTeachers.Any(s=>s.FullName.Contains(teacherName)));
             }
 
             switch (orderBy)
@@ -154,7 +159,7 @@ namespace Schools.Application.Service.Services.Schools
                 CityTitle = s.City.CityTitle,
                 CategoryTitle = s.SchoolSubGroup.GroupTitle ?? s.SchoolGroup.GroupTitle
             });
-            var categoryModel=new SchoolsCategoryViewModel()
+            var categoryModel = new SchoolsCategoryViewModel()
             {
                 Schools = schoolsModel.Skip(skip).Take(take).ToList(),
                 CategoryTitle = categoryTitle,
@@ -244,7 +249,7 @@ namespace Schools.Application.Service.Services.Schools
                 return false;
             }
             //نام عکس آپلود شده
-            var fileName = SaveFileInServer.SaveFile(school.Avatar, "wwwroot/images/Schools");
+            var fileName = SaveFileInServer.SaveFile(school.Avatar, "wwwroot/images/schools");
 
             // عضو اول سال ، عضو دوم ماه ، عضو سوم روز
             //std[0]=سال | std[1]= ماه | std[2]=روز
@@ -285,6 +290,88 @@ namespace Schools.Application.Service.Services.Schools
             {
                 _typeService.AddTrainingTypeForSchool(schoolModel.SchoolId, typeId);
             }
+            return true;
+        }
+
+        public bool AddNewSchool(SchoolRequest request, AcceptOrRejectRequestViewModel acceptModel)
+        {
+            var category = _schoolGroups.GetSchoolGroup(request.CategoryId);
+            if (category == null) return false;
+
+            //انتقال عکس  به پوشه آموزشگاه ها
+            var imagePath = "wwwroot/images/Requests/" + request.ImageName;
+            var imagePathDest = "wwwroot/images/schools/" + request.ImageName;
+            if (File.Exists(imagePath))
+            {
+                File.Copy(imagePath, imagePathDest,true);
+            }
+            else
+            {
+                return false;
+            }
+            try
+            {
+                var school = new School()
+                {
+                    BuildDate = request.BuildDate,
+                    Description = request.Description,
+                    //مطمعا هستیم که خالی نیست ولی برای رفع مشکل این کار را انجام می دهیم
+                    GroupId = category.ParentId ?? 0,
+                    ImageName = request.ImageName,
+                    IsActive = true,
+                    IsDelete = false,
+                    MetaDescription = acceptModel.MetaDescription,
+                    RegisterDate = DateTime.Now,
+                    SchoolEmail = request.Email,
+                    SchoolAddress = request.Address,
+                    SchoolFax = request.Fax,
+                    SchoolPhone = $"{request.TelePhone}-{request.CellPhone}",
+                    SchoolManager = request.UserId,
+                    SchoolTitle = request.SchoolName,
+                    ShireId = request.ShireId,
+                    CityId = request.CityId,
+                    Visit = 0,
+                    Tags = acceptModel.KeyWord,
+                    SubGroupId = request.CategoryId
+                };
+                _school.AddSchool(school);
+                //انتقال عکس  به پوشه آموزشگاه ها و ذخیره گالری برای آموزشگاه
+                foreach (var item in request.Galleries)
+                {
+                    var galleryPath = $"wwwroot/images/Requests/Gallery/{item.ImageName}";
+                    var galleryPathDest = $"wwwroot/images/schools/gallery/{item.ImageName}";
+                    if (!File.Exists(galleryPath)) continue;
+
+                    File.Copy(galleryPath, galleryPathDest,true);
+                    var gallery = new SchoolGallery()
+                    {
+                        ImageName = item.ImageName,
+                        IsActive = true,
+                        IsDelete = false,
+                        SchoolId = school.SchoolId
+                    };
+                    _GalleryRepository.AddSchoolGallery(gallery);
+                }
+                _GalleryRepository.SaveChanges();
+                //End Gallery
+                foreach (var type in request.TrainingTypes.Split('-'))
+                {
+                    switch (type)
+                    {
+                        case "آموزش حضوری":
+                            _typeService.AddTrainingTypeForSchool(school.SchoolId, 1);
+                            break;
+                        case "آموزش آنلاین":
+                            _typeService.AddTrainingTypeForSchool(school.SchoolId, 2);
+                            break;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
             return true;
         }
 
@@ -356,6 +443,13 @@ namespace Schools.Application.Service.Services.Schools
             }
             return true;
         }
+
+        public void AddVisitForSchool(School school)
+        {
+            school.Visit += 1;
+            _school.EditSchool(school);
+        }
+
 
         public EditSchoolViewModel GetSchoolForEdit(int schoolId)
         {

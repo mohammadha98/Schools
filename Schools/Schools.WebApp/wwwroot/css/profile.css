@@ -99,6 +99,10 @@
   padding-right: 30px;
   margin-bottom: 25px
 }
+.left-col .liked {
+    background-color: #ff0000d6 !important;
+    color: white !important;
+}
 .top-content .left-col h2 a{
   font-size: 18px;
   font-weight: bold;
@@ -799,8 +803,19 @@
     -webkit-border-radius: 4px;
     height: 110px
 }
-.popup-layer .popup-content .inner form button{
-    border:0;
+.popup-layer .popup-content .inner form input {
+    border: 1px solid #c1d4da;
+    line-height: 23px;
+    padding: 5px;
+    font-size: 13px;
+    margin: 8px 0 10px;
+    width: 100%;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+}
+.popup-layer .popup-content .inner form button {
+    border: 0;
     background-color: #76bd58;
     line-height: 40px;
     font-size: 14px;

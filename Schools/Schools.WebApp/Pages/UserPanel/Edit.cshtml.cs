@@ -21,7 +21,7 @@ namespace Schools.WebApp.Pages.UserPanel
            
         }
 
-        public IActionResult OnPost(string description)
+        public IActionResult OnPost()
         {
           
             UserModel.UserId = User.GetUserId();

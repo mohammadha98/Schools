@@ -18,7 +18,7 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Schools
 
         public IEnumerable<SchoolTeacher> GetTeachersBySchoolId(int schoolId)
         {
-            return _context.SchoolTeachers.Include(t=>t.User).Where(t => t.SchoolId == schoolId);
+            return _context.SchoolTeachers.Where(t => t.SchoolId == schoolId);
         }
 
         public SchoolTeacher GetTeacherById(int teacherId)
@@ -44,15 +44,6 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Schools
             EditTeacher(teacher);
         }
 
-        public bool IsUserIsTeacher(int userId)
-        {
-            return _context.SchoolTeachers.Any(t => t.UserId == userId);
-        }
-
-        public bool IsUserIsTeacherInSchool(int userId, int schoolId)
-        {
-            return _context.SchoolTeachers.Any(t => t.UserId == userId && t.SchoolId==schoolId);
-        }
 
         public bool IsTeacherExist(int teacherId)
         {

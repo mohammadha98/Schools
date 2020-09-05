@@ -9,5 +9,6 @@ namespace Schools.Domain.Repository.InterfaceRepository.Schools
         void AddRateForTeacher(TeacherRate rate);
         void DeleteRate(TeacherRate rate);
         TeacherRate GetTeacherRateById(int rateId);
+        TeacherRate GetTeacherRate(int userId, int teacherId);
     }
 }

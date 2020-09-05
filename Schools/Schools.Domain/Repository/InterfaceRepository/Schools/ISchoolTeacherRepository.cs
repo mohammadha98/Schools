@@ -10,8 +10,6 @@ namespace Schools.Domain.Repository.InterfaceRepository.Schools
         void AddTeacher(SchoolTeacher teacher);
         void EditTeacher(SchoolTeacher teacher);
         void DeleteTeacher(SchoolTeacher teacher);
-        bool IsUserIsTeacher(int userId);
-        bool IsUserIsTeacherInSchool(int userId, int schoolId);
         bool IsTeacherExist(int teacherId);
     }
 }

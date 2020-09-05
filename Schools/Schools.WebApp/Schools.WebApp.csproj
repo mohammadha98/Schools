@@ -128,6 +128,8 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\images\blogs\" />
+    <Folder Include="wwwroot\images\Requests\Gallery\" />
+    <Folder Include="wwwroot\images\Requests\Documents\" />
     <Folder Include="wwwroot\images\ticketImages\" />
     <Folder Include="wwwroot\images\schools\gallery\" />
     <Folder Include="wwwroot\UserProfile\" />
