@@ -1,0 +1,145 @@
+﻿@page
+@using Schools.Application.Utilities
+@using Schools.Application.Utilities.Convertors
+@using Schools.Domain.Models.Schools
+@using Schools.Domain.Repository.InterfaceRepository.Schools
+@model Schools.WebApp.Pages.SchoolPanel.Tickets.IndexModel
+@inject ISchoolRepository _school
+@{
+    var school = _school.GetSchoolByUserId(User.GetUserId());
+    ViewData["title"] = $"تیکت و پشتیبانی";
+}
+@section Meta
+{
+    <link rel="stylesheet" type="text/css" href="/css/jquery.Bootstrap-PersianDateTimePicker.css">
+    <link rel="stylesheet" type="text/css" href="/css/account.css">
+}
+@section Topic_Layer
+{
+    <div class="container page-title">
+        <h1><a href="javascript:void(0)"> حساب کاربری </a></h1>
+        <ul itemtype="http://schema.org/BreadcrumbList" class="breadcrumb">
+            <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement"><a href="/" itemprop="item"><span itemprop="name"> بانک اطلاعاتی آموزشگاه ها </span></a></li>
+            <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement">
+                <a href="/SchoolPanel" itemprop="item">
+                    <span itemprop="name"> حساب آموزشگاه @school.SchoolTitle </span>
+                </a>
+            </li>
+            <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement">
+                <a href="javascript:void(0)" itemprop="item" class="current">
+                    <span itemprop="name">  تیکت و پشتیبانی </span>
+                </a>
+            </li>
+        </ul>
+    </div>
+}
+<div class="account-layer">
+    <div class="container">
+        @{
+            var menuModel = new Tuple<School, string>(school, "Tickets");
+        }
+        <partial name="Shared/_RightMenu" model="menuModel" />
+
+        <div class="left-side">
+            <!-- account heading -->
+            <div class="account-heading layer-style">
+                <span class="status green"> وضعیت : <i> @(school.IsActive ? "فعال" : "غییر فعال") </i></span>
+                <a href="/SchoolPanel/Tickets/Add"> <i class="zmdi zmdi-plus"></i> ثبت تیکت </a>
+            </div>
+            <!-- /account heading -->
+
+            <div class="account-content-layer layer-style">
+                <h3> تیکت و پشتیبانی <a href="/SchoolPanel/Tickets/Add"> <i class="zmdi zmdi-plus"></i> ثبت تیکت جدید</a> </h3>
+                <div class="inner">
+
+                    <form method="get" class="form-layer-style filter-messages">
+                        <input type="hidden" asp-for="TicketsModel.CurrentPage" id="pageId" name="pageId" />
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <!-- input -->
+                                <div class="input-layer" data-MdDateTimePicker="true" data-trigger="click" data-targetselector="#fromDate" data-groupid="group1" data-fromdate="true" data-enabletimepicker="false" data-placement="bottom">
+                                    <label><i class="zmdi zmdi-calendar"></i> از تاریخ </label>
+                                    <input asp-for="TicketsModel.StartDate" autocomplete="off" name="startDate" type="text" id="fromDate" placeholder="از تاریخ" data-MdDateTimePicker="true" data-trigger="click" data-targetselector="#fromDate" data-groupid="group1" data-fromdate="true" data-enabletimepicker="false" data-placement="right">
+                                </div>
+                                <!--/ input -->
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <!-- input -->
+                                <div class="input-layer" data-MdDateTimePicker="true" data-trigger="click" data-targetselector="#toDate" data-groupid="group1" data-todate="true" data-enabletimepicker="false" data-placement="bottom">
+                                    <label><i class="zmdi zmdi-calendar"></i> تا تاریخ </label>
+                                    <input asp-for="TicketsModel.EndDate" autocomplete="off" name="endDate" type="text" id="toDate" placeholder="تا تاریخ" data-MdDateTimePicker="true" data-trigger="click" data-targetselector="#toDate" data-groupid="group1" data-todate="true" data-enabletimepicker="true" data-placement="right" />
+                                </div>
+                                <!--/ input -->
+                            </div>
+
+                            <div class="col-md-3 col-sm-3 col-xs-12 pull-left">
+                                <button type="submit" class="submit-button green"> اعمال فیلتر </button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="support-layer">
+                        @foreach (var item in Model.TicketsModel.UserTickets)
+                        {
+                            <div class="ticket-box layer-style ">
+                                <div class="head">
+                                    <span class="code"> کد پیام : <i>@item.TicketId</i> </span>
+                                    <span class="resgiter-date"> تاریخ ثبت : <i>@item.CreateDate.ToShamsi()</i> </span>
+                                    <span class="status">
+                                        وضعیت :
+                                        @if (item.TicketMessages.Any(t => t.IsSeen == false))
+                                        {
+                                            <i>پاسخ داده شده</i>
+                                        }
+                                        @if (item.IsOpen == false)
+                                        {
+                                            <i>بسته شده</i>
+                                        }
+                                        @if (item.IsOpen && item.TicketMessages.All(m => m.UserId == User.GetUserId()))
+                                        {
+                                            <i>درحال برسی</i>
+                                        }
+                                    </span>
+                                </div>
+
+                                <div class="text">
+                                    <a href="/SchoolPanel/Tickets/Show/@item.TicketId">@item.TicketTitle </a>
+                                </div>
+
+                            </div>
+                        }
+                        @if (Model.TicketsModel.PageCount > 1)
+                        {
+                            <div class="pagination-layer">
+                                <div class="inner">
+                                    @if (Model.TicketsModel.CurrentPage > 1)
+                                    {
+                                        <a onclick="ChangePage(@(Model.TicketsModel.CurrentPage-1))" href="javascript:void(0)" class="prev-page"> صفحه قبلی </a>
+                                    }
+                                    <div class="pages">
+                                        @for (var i = Model.TicketsModel.StartPage; i <= Model.TicketsModel.EndPage; i++)
+                                        {
+                                            <a onclick="ChangePage(@i)" href="javascript:void(0)" class="@((i == Model.TicketsModel.CurrentPage ? "page current" : "page"))">@i</a>
+                                        }
+                                    </div>
+
+                                    @if (Model.TicketsModel.CurrentPage >= 1 && Model.TicketsModel.CurrentPage < Model.TicketsModel.PageCount)
+                                    {
+                                        <a onclick="ChangePage(@(Model.TicketsModel.CurrentPage + 1))" href="javascript:void(0)" class="next-page"> صفحه بعدی </a>
+                                    }
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts
+{
+    <script src="/js/calendar.js"></script>
+    <script src="/js/account.js"></script>
+    <script src="/js/jquery.Bootstrap-PersianDateTimePicker.js"></script>
+}

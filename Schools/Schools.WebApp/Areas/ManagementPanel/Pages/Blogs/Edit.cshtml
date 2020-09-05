@@ -34,9 +34,7 @@
                             <div class="form-group">
                                 <label asp-for="Blog.BlogText"></label>
                                 <div class="box-body pad">
-
-                                    <textarea asp-for="Blog.BlogText" id="mytextarea"></textarea>
-
+                                    <textarea asp-for="Blog.BlogText" id="editor1" rows="10" cols="80" style="visibility: hidden; display: none;"></textarea>
                                 </div>
                                 <span asp-validation-for="Blog.BlogText" class="text-danger"></span>
                             </div>
@@ -86,3 +84,7 @@
         </div>
     </section>
 </div>
+
+@section Scripts{
+    <script src="/Admin/bowercomponents/ckeditor/ckeditor.js"></script>
+}

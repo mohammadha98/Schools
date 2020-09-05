@@ -1,0 +1,115 @@
+﻿@page "{handler?}"
+@using Schools.Domain.Models.Schools
+@model Schools.WebApp.Pages.SchoolPanel.GalleriesModel
+@{
+
+    ViewData["title"] = $"دوره های  آموزشگاه";
+    bool isSuccess = TempData["Success"] != null;
+
+}
+@section Meta
+{
+    <link rel="stylesheet" type="text/css" href="/css/account.css">
+}
+@if (Model.School == null)
+{
+
+}
+else
+{
+
+
+    @section Topic_Layer
+    {
+        <div class="container page-title">
+            <h1><a href="javascript:void(0)"> حساب کاربری </a></h1>
+            <ul itemtype="http://schema.org/BreadcrumbList" class="breadcrumb">
+                <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement"><a href="/" itemprop="item"><span itemprop="name"> بانک اطلاعاتی آموزشگاه ها </span></a></li>
+                <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement">
+                    <a href="/SchoolPanel" itemprop="item">
+                        <span itemprop="name"> حساب آموزشگاه @Model.School.SchoolTitle </span>
+                    </a>
+                </li>
+                <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement">
+                    <a href="javascript:void(0)" itemprop="item" class="current">
+                        <span itemprop="name"> مدیریت دوره ها </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    }
+    <div class="account-layer">
+        <div class="container">
+            @{
+                var menuModel = new Tuple<School, string>(Model.School, "Galleries");
+            }
+            <partial name="Shared/_RightMenu" model="menuModel" />
+
+            <div class="left-side">
+                <div class="account-heading layer-style">
+                    <span class="status green"> وضعیت : <i> @(Model.School.IsActive ? "فعال" : "غییر فعال") </i></span>
+                    <a href="/SchoolPanel/Tickets/Add"> <i class="zmdi zmdi-plus"></i> ثبت تیکت </a>
+                </div>
+
+                <div class="account-content-layer layer-style gallery-layer">
+                    <h3> مدیریت گالری تصاویر </h3>
+                    <div class="inner">
+                        <div class="alert alert-warning">
+                            تصاویر شما معرف شماست ، از تصاویر مناسب و با کیفیت استفاده کنید.
+                            سایز تصاویر 400*500 پیکسل می باشد
+                        </div>
+
+                        <form class="form-layer-style layer-style" method="post" enctype="multipart/form-data">
+
+                            <div class="file-layer">
+                                <label>تصویر مورد نظر خود را انتخاب نمایید </label>
+                                <input required="" type="file" asp-for="Galley">
+                            </div>
+
+                            <button class="button-st green" type="submit"> آپلود تصویر </button>
+
+                        </form>
+
+                        <div class="gallery-images layer-style">
+                            <h3> گالری تصاویر فعلی </h3>
+                            <div class="row">
+                                @if (Model.SchoolGalleries.Count >= 1)
+                                {
+                                    foreach (var gallery in Model.SchoolGalleries)
+                                    {
+                                        <div class="col-md-3 col-sm-4 col-xs-6 gallery-img-col">
+                                            <button  onclick="deleteImage(@gallery.GalleryId)"><i class="zmdi zmdi-close"></i></button>
+                                            <img src="/images/schools/gallery/@gallery.ImageName" class="@((gallery.IsActive?"accept":"deAccept"))" alt="تصاویر آموزشگاه">
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <div class="alert alert-info">
+                                        موردی برای نمایش وجود ندارد
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
+@section Scripts
+{
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="/js/account.js"></script>
+    <script>
+        if (@isSuccess.ToString().ToLower()) {
+            swal({
+                title: "ثبت با موفقیت انجام شد",
+                text:"تصویر ثبت شد ، بعد از تایید، در سایت نمایش داده می شود",
+                icon: "success",
+                button: "باشه"
+            });
+        }
+    </script>
+}

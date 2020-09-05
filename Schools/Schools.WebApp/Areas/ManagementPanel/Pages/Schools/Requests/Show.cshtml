@@ -1,0 +1,225 @@
+﻿@page "{requestId}"
+@using Schools.Application.Utilities.Convertors
+@using Schools.Domain.Repository.InterfaceRepository
+@using Schools.Domain.Repository.InterfaceRepository.Locations
+@model Schools.WebApp.Areas.ManagementPanel.Pages.Schools.Requests.ShowModel
+@inject ILocationRepository _Location
+@inject ISchoolGroupsRepository _Groups
+@{
+    var menuModel = "schoolsRequests";
+    var shire = _Location.GetShireById(Model.SchoolRequest.ShireId);
+    var city = _Location.GetCityById(Model.SchoolRequest.CityId);
+    var category = _Groups.GetSchoolGroupById(Model.SchoolRequest.CategoryId);
+}
+<partial name="_MainMenu" model="menuModel" />
+@if (Model.SchoolRequest == null)
+{
+
+}
+else
+{
+
+    <div class="content-wrapper">
+        <section class="content">
+            <div class="row">
+                <section class="col-lg-12 col-md-12">
+                    <div class="box box-info">
+                        <div class="box-header">
+                            <h2>جزئیات درخواست</h2>
+                        </div>
+                        <div class="box-body">
+                            <form class="row" id="form-submit" method="post">
+                                <input type="hidden" asp-for="SubmitModel.IsAccept" value="false"/>
+                                <div class="col-lg-12" style="margin-bottom: 25px">
+                                    <p>
+                                        نام آموزشگاه
+                                    </p>
+                                    <input type="text" asp-for="SubmitModel.SchoolName" value="@Model.SchoolRequest.SchoolName" class="form-control"/>
+                                </div>
+                                <div class="col-lg-6" style="margin-bottom: 10px">
+                                    <p>
+                                        مدریر آموزشگاه : <a target="_blank" href="/ManagementPanel/Users/ShowProfile/@Model.SchoolRequest.UserId">نمایش</a>
+                                    </p>
+                                </div>
+                                <div class="col-lg-6" style="margin-bottom: 10px">
+                                    <p>
+                                        موضوع فعالیت : @(category != null ? category.GroupTitle : "دسته بندی انتخاب نشده !!")
+                                    </p>
+                                </div>
+                                <div class="col-lg-6" style="margin-bottom: 10px">
+                                    <p>
+                                        استان : @(shire != null ? shire.ShireTitle : " استان انتخاب نشده !!")
+                                    </p>
+                                </div>
+                                <div class="col-lg-6" style="margin-bottom: 10px">
+                                    <p>
+                                        شهر : @(city != null ? city.CityTitle : " شهر انتخاب نشده !!")
+                                    </p>
+                                </div>
+                                <div class="col-lg-12" style="margin-bottom: 10px">
+                                    <p>
+                                        نشانی : @Model.SchoolRequest.Address
+                                    </p>
+                                </div>
+                                <div class="col-lg-6" style="margin-bottom: 10px">
+                                    <p>
+                                        تلفن های تماس : @Model.SchoolRequest.CellPhone - @Model.SchoolRequest.TelePhone
+                                    </p>
+                                </div>
+                                <div class="col-lg-6" style="margin-bottom: 10px">
+                                    <p>
+                                        ایمیل : @Model.SchoolRequest.Email
+                                    </p>
+                                </div>
+                                <div class="col-lg-6" style="margin-bottom: 10px">
+                                    <p>
+                                        فکس : @Model.SchoolRequest.Fax
+                                    </p>
+                                </div>
+                                <div class="col-lg-6" style="margin-bottom: 10px">
+                                    <p>
+                                        نوع آموزش : @Model.SchoolRequest.TrainingTypes
+                                    </p>
+                                </div>
+                                <div class="col-lg-6" style="margin-bottom: 10px">
+                                    <p>
+                                        تاریخ ثبت : @Model.SchoolRequest.CreateDate.ToShamsi()
+                                    </p>
+                                </div>
+                                <div class="col-lg-6" style="margin-bottom: 10px">
+                                    <p>
+                                        تاریخ تاسیس : @Model.SchoolRequest.BuildDate.ToShamsi()
+                                    </p>
+                                </div>
+                                <div class="col-lg-12" style="margin-bottom: 10px">
+                                    <p>
+                                        توضیحات کامل :
+                                    </p>
+                                    @Html.Raw(Model.SchoolRequest.Description)
+                                </div>
+                                <div class="col-lg-12" style="margin-bottom: 10px">
+                                    <hr/>
+
+                                    <h3>عکس اصلی :</h3>
+
+                                    <img src="/images/Requests/@Model.SchoolRequest.ImageName" style="width: 40%; margin: auto"/>
+                                </div>
+                                <div class="col-lg-12" style="margin-bottom: 10px">
+                                    <h3>گالری تصاویر</h3>
+                                    <div class="row">
+                                        @foreach (var item in Model.SchoolRequest.Galleries)
+                                        {
+                                            <div class="col-md-4" style="margin-bottom: 10px">
+                                                <img src="/images/Requests/Gallery/@item.ImageName" style="width: 90%; margin: auto; box-shadow: 0 0 5px 0 gray"/>
+
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="col-lg-12" style="margin-bottom: 10px">
+                                    <h3>مدارک</h3>
+                                    <div class="row">
+                                        @foreach (var item in Model.SchoolRequest.DocumentsImage.Split("&"))
+                                        {
+                                            <div class="col-md-4" style="margin-bottom: 10px">
+                                                <img src="/images/Requests/Documents/@item" style="width: 90%; margin: auto; box-shadow: 0 0 5px 0 gray"/>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                                @if (!Model.SchoolRequest.IsAccept)
+                                {
+                                    <div class="col-lg-12">
+                                        <div class="alert alert-info">
+                                            درصورت تایید آموزشگاه این قسمت را پر کنید
+                                            <hr/>
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <p>توضیحات برای متورهای جستوجو <span class="counter">0</span></p>
+                                                    <textarea id="MetaDescription" asp-for="SubmitModel.MetaDescription" class="form-control" placeholder="Meta Description"></textarea>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <p>کلمات کلیدی</p>
+                                                    <input type="text" asp-for="SubmitModel.KeyWord" class="form-control" placeholder="کلمات را با - از هم جدا کنید"/>
+                                                </div>
+                                                <div class="col-lg-12">
+                                                    <a class="btn btn-block btn-success" id="accept">ثبت آموزشگاه</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr/>
+
+                                    </div>
+                                    <div class="col-lg-12" style="margin-top: 20px">
+                                        <div class="alert alert-danger">
+                                            درصورت رد کردن آموزشگاه این قسمت را پر کنید
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <textarea id="Description" class="form-control" asp-for="SubmitModel.RejectText" placeholder="دلیل رد"></textarea>
+                                                </div>
+                                                <div class="col-lg-12">
+                                                    <a class="btn btn-block btn-danger" id="reject">رد درخواست</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </form>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+    </div>
+}
+@section Scripts
+{
+    <script src="/ckeditor5/build/ckeditor.js"></script>
+
+    <script>
+        $("#MetaDescription").change(function () {
+            var len = $(this).val().length;
+            $(".counter").html(len);
+        });
+        $("#MetaDescription").keydown(function () {
+            var len = $(this).val().length;
+            $(".counter").html(len);
+        });
+        $("#reject").click(function() {
+            $("#SubmitModel_IsAccept").val(false);
+            $("#form-submit").submit();
+        });
+        $("#accept").click(function() {
+            $("#SubmitModel_IsAccept").val(true);
+            $("#form-submit").submit();
+        });
+
+        ClassicEditor
+            .create(document.querySelector('#Description'), {
+                toolbar: {
+                    items: [
+                        'heading',
+                        '|',
+                        'fontSize',
+                        'bold',
+                        'italic',
+                        'link',
+                        '|',
+                        'bulletedList',
+                        'numberedList',
+                        '|',
+                        'indent',
+                        'outdent',
+                        '|',
+                        'undo',
+                        'redo',
+                    ]
+                },
+                language: 'fa',
+                licenseKey: '',
+            })
+            .then(editor => {
+                window.editor = editor;
+            });
+    </script>
+}

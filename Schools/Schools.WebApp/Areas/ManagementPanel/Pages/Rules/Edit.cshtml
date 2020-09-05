@@ -1,0 +1,75 @@
+﻿@page
+@model Schools.WebApp.Areas.ManagementPanel.Pages.Rules.EditModel
+@{
+    var menuModel = "Rules";
+}
+<partial name="_MainMenu" model="menuModel" />
+<div class="content-wrapper">
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-info">
+                    <div class="box-header">
+                        <h3 class="box-title"> افزودن قانون </h3>
+                    </div>
+                    <div class="box-body table-responsive">
+                        <div>
+                            <p>متن :</p>
+                            <form method="post">
+                                <textarea asp-for="SchoolRules.RuleTitle"></textarea>
+                                <button style="margin-top: 10px" type="submit" class="btn btn-flat btn-success">ثبت</button>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+@section Scripts
+{
+    <script src="/ckeditor5/build/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#SchoolRules_RuleTitle'),
+                {
+                    ckfinder: {
+                        uploadUrl: 'CustomUrl'
+                    },
+                    toolbar: {
+                        items: [
+                            'heading',
+                            '|',
+                            'bold',
+                            'italic',
+                            'link',
+                            'bulletedList',
+                            'numberedList',
+                            'fontSize',
+                            '|',
+                            'indent',
+                            'outdent',
+                            '|',
+                            'blockQuote',
+                            'undo',
+                            'redo',
+                            'code'
+                        ]
+                    },
+                    language: 'fa',
+                    licenseKey: '',
+
+                })
+            .then(editor => {
+                window.editor = editor;
+            })
+            .catch(error => {
+                console.error('Oops, something gone wrong!');
+                console.error('Please, report the following error in the https://github.com/ckeditor/ckeditor5 with the build id and the error stack trace:');
+                console.warn('Build id: 1hgh63bxm5nk-t1efehf8ocs2');
+                console.error(error);
+            });
+    </script>
+}
+

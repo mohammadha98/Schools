@@ -1,0 +1,56 @@
+﻿@model Schools.Application.ViewModels.UsersViewModel.RegisterStip3ViewModel
+@using Schools.Domain.Repository.InterfaceRepository.Users
+@inject IUserRoleRepository _role
+@{
+    ViewData["Title"] = "ثبت نام";
+    var roles = _role.GetAllRoles();
+}
+
+@section Meta
+{
+    <link href="/css/clientarea.css" rel="stylesheet" />
+}
+@section Topic_Layer{
+    <div class="container page-title">
+        <h1><a href=""> ثبت نام در سایت </a></h1>
+        <ul itemtype="http://schema.org/BreadcrumbList" class="breadcrumb">
+            <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement"><a href="/" itemprop="item"><span itemprop="name"> بانک اطلاعاتی آموزشگاه ها </span></a></li>
+            <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement"><a href="" itemprop="item" class="current"><span itemprop="name"> ثبت نام در سایت </span></a></li>
+        </ul>
+    </div>
+}
+
+<div class="clientarea-layer">
+    <div class="content shadow-style">
+        <div class="step-two">
+            <h2> تکمیل نهایی اطلاعات و ورود به حساب کاربری </h2>
+
+            <ul>
+                <li> لطفا مشخص نمایید دانشجو هستید یا آموزشگاه </li>
+            </ul>
+            <form asp-action="RegisterStip3" method="post">
+                <input asp-for="UserId" type="hidden" id="userId" name="userId" value="@ViewBag.UserId" />
+                <div class="radio-layer">
+                    @foreach (var item in roles)
+                    {
+                        <div class="radio-row">
+                            <input asp-for="RoleId" type="radio" value="@item.RoleId" id="rd-user-@item.RoleId"> <label for="rd-user-@item.RoleId"> @item.RoleTitle </label>
+                        </div>
+                    }
+                </div>
+                <!-- بعد از این مرحله اون رو به حساب کاربری منتقل کنید ، صفحه تکمیل اطلاعات  -->
+
+                <input asp-for="UserName" type="text" class="right-corner" placeholder=" نام کاربری/ نام آموزشگاه ">
+                <input asp-for="Password" type="password" class="left-corner" placeholder="کلمه عبور">
+                <button class="right-corner"> ثبت نهایی و ورود به حساب کاربری  </button>
+
+                <div asp-validation-summary="All" class="text-danger"></div>
+            </form>
+        </div>
+    </div>
+</div>
+@section Scripts
+{
+    <script src="/js/jquery.validate.min.js"></script>
+    <script src="/js/jquery.validate.unobtrusive.js"></script>
+}

@@ -49,6 +49,7 @@ namespace Schools.WebApp.Controllers
             return View(blog);
         }
 
+        #region Comment
         [HttpPost]
         public IActionResult CreateComment(BlogComment comment)
         {
@@ -60,12 +61,12 @@ namespace Schools.WebApp.Controllers
 
             return View("ShowComment", _blogServices.GetBlogComments(comment.BlogId));
         }
-        public IActionResult ShowComment(int id, int pageId=1)
+        public IActionResult ShowComment(int id, int pageId = 1)
         {
             return View(_blogServices.GetBlogComments(id, pageId));
         }
 
-        public IActionResult PageCount(int id,int pageId = 1)
+        public IActionResult PageCount(int id, int pageId = 1)
         {
             ViewData["pageId"] = pageId;
             return View(_blogServices.GetBlogComments(id, pageId));
@@ -77,5 +78,11 @@ namespace Schools.WebApp.Controllers
             _blogRepository.Save();
             return View();
         }
+
+        public IActionResult Replay(int id)
+        {
+            return View(id);
+        }
+        #endregion
     }
 }

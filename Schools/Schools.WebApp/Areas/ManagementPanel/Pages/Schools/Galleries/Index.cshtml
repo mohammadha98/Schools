@@ -1,0 +1,120 @@
+﻿@page "{schoolId}/{handler?}"
+@model Schools.WebApp.Areas.ManagementPanel.Pages.Schools.Galleries.IndexModel
+@{
+    var menuModel = "courses";
+    var counter = 1;
+
+}
+@if (Model.School == null)
+{
+
+}
+else
+{
+
+
+    <partial name="_MainMenu" model="menuModel" />
+
+    <div class="content-wrapper">
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box box-info">
+                        <div class="box-header">
+                            <h3 class="box-title">عکس های آموزشگاه ' @Model.School.SchoolTitle ' </h3>
+                        </div>
+                        <div class="box-body table-responsive no-padding">
+                            <a class="btn btn-success btn-flat" href="/ManagementPanel/Schools/galleries/Add/@Model.School.SchoolId" style="margin-bottom: 10px">افزودن عکس</a>
+                            <table class="table table-hover">
+                                <tr>
+                                    <th>#</th>
+                                    <th>عکس</th>
+                                    <th>وضعیت</th>
+                                    <td></td>
+                                </tr>
+                                <tbody>
+                                    @foreach (var gallery in Model.SchoolGalleries)
+                                    {
+                                        <tr>
+                                            <td>@counter</td>
+                                            <td>
+                                                <img src="/images/schools/gallery/@gallery.ImageName" style="max-width: 120px"/>
+                                            </td>
+                                            <td>
+                                                @if (gallery.IsActive)
+                                                {
+                                                    <span class="text-success">فعال</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="text-danger">غیرفعال</span>
+                                                }
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-info btn-flat" href="/ManagementPanel/Schools/Galleries/Edit/@gallery.GalleryId/@gallery.SchoolId">ویرایش</a>
+                                                <a onclick="deleteItem(@gallery.GalleryId)" class="btn btn-danger btn-flat">حذف</a>
+                                            </td>
+                                        </tr>
+
+                                        counter += 1;
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+}
+@section Scripts
+{
+    <script>
+
+        function deleteItem(id) {
+            swal({
+                title: "اخطار !",
+                text: "آیا از حذف دوره مطمعا هستید ؟",
+                icon: "warning",
+                buttons: ["لغو", "بله"]
+            }).then((isOk) => {
+                if (isOk) {
+                    $.ajax({
+                        url: "/ManagementPanel/Schools/Galleries/" + @Model.School.SchoolId + "/DeleteGallery?galleryId=" + id,
+                        type: "get",
+                        beforeSend: function() {
+                            $(".loading").show();
+                        },
+                        complete: function() {
+                            $(".loading").hide();
+                        }
+                    }).done(function(data) {
+                        if (data === "NotFound") {
+                            swal({
+                                title: "شناسه وارد شده نا معتبر است",
+                                icon: "error",
+                                button: "باشه"
+                            });
+                        }
+                        if (data === "Deleted") {
+                            swal({
+                                title: "اعملیات با موفقیت انجام شد",
+                                icon: "success",
+                                button: "باشه"
+                            }).then((isOk) => {
+                                location.reload();
+                            });
+                        } else {
+                            swal({
+                                title: "اعملیات به مشکل برخورد کرد",
+                                icon: "error",
+                                button: "باشه"
+                            });
+                        }
+                    });
+                }
+            });
+
+        }
+    </script>
+}

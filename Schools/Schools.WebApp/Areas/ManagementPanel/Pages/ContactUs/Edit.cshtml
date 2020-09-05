@@ -1,0 +1,62 @@
+﻿@page
+@model Schools.WebApp.Areas.ManagementPanel.Pages.ContactUs.EditModel
+@{
+    var menuModel = "contacUs";
+}
+<partial name="_MainMenu" model="menuModel" />
+
+<div class="content-wrapper">
+    <section class="content">
+        <div class="row">
+            <section class="col-lg-12 col-md-12">
+
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">افزودن اطلاعات تماس با ما</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <!-- form start -->
+                    <form role="form" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label asp-for="ContactUs.Title"></label>
+                                <textarea rows="5" asp-for="ContactUs.Title" class="form-control" placeholder="عنوان تماس با ما"></textarea>
+                                <span asp-validation-for="ContactUs.Title" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="ContactUs.PhoneNumber"></label>
+                                <input asp-for="ContactUs.PhoneNumber" type="text" class="form-control" placeholder="شماره های تماس">
+                                <span asp-validation-for="ContactUs.PhoneNumber" class="text-danger"></span>
+                                <p class="text-warning">لطفا شماره ها را با خط تیره از هم جدا کنید!</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="ContactUs.Email"></label>
+                                <input asp-for="ContactUs.Email" type="email" class="form-control" placeholder="ایمیل">
+                                <span asp-validation-for="ContactUs.Email" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="ContactUs.Address"></label>
+                                <input asp-for="ContactUs.Address" type="text" class="form-control" placeholder="آدرس">
+                                <span asp-validation-for="ContactUs.Address" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="ContactUs.ResponseTime"></label>
+                                <input asp-for="ContactUs.ResponseTime" type="text" class="form-control" placeholder="زمان پاسخگویی">
+                                <span asp-validation-for="ContactUs.ResponseTime" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-primary">ویرایش</button>
+                        </div>
+                    </form>
+                </div>
+
+            </section>
+        </div>
+    </section>
+</div>
