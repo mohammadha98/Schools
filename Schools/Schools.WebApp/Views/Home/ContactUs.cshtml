@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Schools.Domain.Models.ContactUs.ContactUs>
+@{
+    ViewData["Title"] = "ContactUs";
+}
+@section Topic_Layer{
+    <div class="container page-title">
+        <h1><a href=""> تماس با ما </a></h1>
+        <ul itemtype="http://schema.org/BreadcrumbList" class="breadcrumb">
+            <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement"><a href="" itemprop="item"><span itemprop="name"> بانک اطلاعاتی آموزشگاه ها </span></a></li>
+            <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement"><a href="" itemprop="item" class="current"><span itemprop="name"> تماس با ما </span></a></li>
+        </ul>
+    </div>
+}
+
+@section Meta{
+    <link href="/css/contact.css" rel="stylesheet" />
+    <link href="/css/form.css" rel="stylesheet" />
+}
+
+<div class="container">
+
+    <div class="contact-layer">
+
+        <h2> تماس با ما </h2>
+
+        @foreach (var item in Model)
+        {
+            <div class="description">
+                <p>@item.Title</p>
+            </div>
+
+            <div class="contact-info-layer">
+                <div class="row">
+                    <div class="col-md-4 col-sm-12 col-xs-12 contact-info-col">
+                        <section class="shadow-style">
+                            <h2><i class="zmdi zmdi-pin"></i> نشانی ما </h2>
+                            <p> @item.Address </p>
+                        </section>
+                    </div>
+                    <div class="col-md-4 col-sm-12 col-xs-12 contact-info-col">
+                        <section class="shadow-style">
+                            <h2><i class="zmdi zmdi-phone-in-talk"></i> شماره تماس و ایمیل </h2>
+                            <ul>
+                                <li> <a href="#">@item.PhoneNumber</a> </li>
+                                <li> @item.Email </li>
+                            </ul>
+                        </section>
+                    </div>
+                    <div class="col-md-4 col-sm-12 col-xs-12 contact-info-col">
+                        <section class="shadow-style">
+                            <h2><i class="zmdi zmdi-time"></i> ساعات پاسخگویی </h2>
+                            <ul>
+                                @foreach (var time in item.ResponseTime.Split('-'))
+                                {
+                                    <li>@time</li>
+                                }
+                            </ul>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <partial name="_ContactUsForm" model="null"/>
+        @if (ViewBag.IsSuccess)
+        {
+        <div class="alert alert-success">
+            <p> پیغام شما با موفقیت ارسال شد. </p>
+        </div>
+        }
+    </div>
+</div>
+

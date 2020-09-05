@@ -77,7 +77,7 @@
                                         <input name="comment.Email" id="comment_Email" placeholder=" ایمیل " type="email">
                                         <input name="comment.PhoneNumber" id="comment_PhoneNumber" placeholder=" شماره تماس " type="text">
                                         <!-- here get comment id for reply , use this input's value and separate cm- -->
-                                        <input name="commentId_CommentId" id="reply-comment-id" type="hidden">
+                                        <input name="comment_CommentId" id="reply-comment-id" type="hidden">
                                     </div>
                                     <div class="col-md-7 col-sm-7 col-xs-12">
                                         <textarea id="comment_Comment" name="comment.Comment" placeholder=" متن نظر"></textarea>
@@ -97,7 +97,9 @@
                             </div>
                         }
                         <div class="comments-list" id="listComment">
+                            <div class="comment-inner-layer" id="replayComment">
 
+                            </div>
                         </div>
 
                         <!-- paging -->
@@ -234,6 +236,11 @@
                 })
             }
         }
+
+        function replay(id) {
+            $("#replayComment").load("/Blog/Replay" + id)
+        }
+
         function changeGroup() {
             $("#formFilter").submit();
         }

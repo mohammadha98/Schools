@@ -9,6 +9,8 @@ using Schools.Domain.Models.Users;
 using Schools.Domain.Models.Users.Messages;
 using Schools.Domain.Models.Users.Permissions;
 using Schools.Domain.Models.Users.Tickets;
+using Schools.Domain.Models.ContactUs;
+using Schools.Domain.Models.AboutUs;
 
 namespace Schools.Infra.Data.Context
 {
@@ -77,6 +79,12 @@ namespace Schools.Infra.Data.Context
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<RolePermission> RolePermissions { get; set; }
 
+        #endregion
+
+        #region ContactUs&AboutUs
+        public DbSet<ContactUs> ContactUs { get; set; }
+        public DbSet<ContactUsForm> ContactUsForms { get; set; }
+        public DbSet<AboutUs> AboutUs { get; set; }
         #endregion
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -170,6 +178,15 @@ namespace Schools.Infra.Data.Context
             modelBuilder.Entity<UserLike>()
                 .HasQueryFilter(u => !u.IsDelete);
             modelBuilder.Entity<RolePermission>()
+                .HasQueryFilter(u => !u.IsDelete);
+            #endregion
+
+            #region ContactUs&AboutUs
+            modelBuilder.Entity<ContactUs>()
+                .HasQueryFilter(u => !u.IsDelete);
+            modelBuilder.Entity<ContactUsForm>()
+                .HasQueryFilter(u => !u.IsDelete);
+            modelBuilder.Entity<AboutUs>()
                 .HasQueryFilter(u => !u.IsDelete);
             #endregion
 

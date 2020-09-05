@@ -1,0 +1,46 @@
+﻿@page
+@model Schools.WebApp.Areas.ManagementPanel.Pages.AboutUs.AddModel
+@{
+    var menuModel = "aboutUs";
+}
+<partial name="_MainMenu" model="menuModel" />
+
+<div class="content-wrapper">
+    <section class="content">
+        <div class="row">
+            <section class="col-lg-12 col-md-12">
+
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">افزودن</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <!-- form start -->
+                    <form role="form" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label asp-for="aboutUs.Text"></label>
+                                <div class="box-body pad">
+                                    <div class="box box-info">
+                                        <div class="box-body pad">
+                                            <textarea asp-for="aboutUs.Text" id="editor1" rows="10" cols="80" style="visibility: hidden; display: none;"></textarea>
+                                            <span asp-validation-for="aboutUs.Text" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-primary">افزودن</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </section>
+</div>
+@section Scripts{
+    <script src="/Admin/bowercomponents/ckeditor/ckeditor.js"></script>
+}
