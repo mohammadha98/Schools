@@ -2,6 +2,9 @@
 using Schools.Application.Service.Interfaces.Locations;
 using Schools.Application.Service.Interfaces.Schools;
 using Schools.Domain.Models.AboutUs;
+using Schools.Domain.Models.ContactUs;
+using Schools.Domain.Repository.InterfaceRepository.AboutUsRepository;
+using Schools.Domain.Repository.InterfaceRepository.ContactUsRepositories;
 using Schools.Domain.Repository.InterfaceRepository.Locations;
 
 namespace Schools.WebApp.Controllers
@@ -80,10 +83,14 @@ namespace Schools.WebApp.Controllers
         }
 
         [Route("/AboutUs")]
-        public IActionResult AboutUs(AboutUs aboutUs)
+        public IActionResult AboutUs()
         {
-            var aboutus = _aboutUs.GetLast();
-            return View(aboutus);
+            var pageModel = _aboutUs.GetLast();
+            if (pageModel==null)
+            {
+                return View("NotFound");
+            }
+            return View(pageModel);
         }
         [Route("/ContactUs")]
         public IActionResult ContactUs()
@@ -98,7 +105,7 @@ namespace Schools.WebApp.Controllers
                 return View(_contactUs.GetLast());
 
             _contactUsForm.InsertQuestion(contactUsForm);
-            ViewData["IsSuccess"] = true;
+            TempData["Success"] = true;
             return View(_contactUs.GetLast());
         }
     }

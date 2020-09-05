@@ -20,6 +20,11 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.ContactUs
         public Domain.Models.ContactUs.ContactUs ContactUs { get; set; }
         public void OnGet()
         {
+            var contactUs = _contactUs.GetLast();
+            if (contactUs!= null)
+            {
+                Response.Redirect("/ManagementPanel");
+            }
         }
 
         public IActionResult OnPost()
@@ -27,7 +32,7 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.ContactUs
             if (!ModelState.IsValid)
                 return Page();
 
-            var contactus = new Domain.Models.ContactUs.ContactUs()
+            var contactUs = new Domain.Models.ContactUs.ContactUs()
             {
                 Address = ContactUs.Address,
                 Title = ContactUs.Title,
@@ -37,7 +42,7 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.ContactUs
                 IsDelete = false
             };
 
-            _contactUs.AddContactUs(contactus);
+            _contactUs.AddContactUs(contactUs);
             return RedirectToPage("Index");
         }
     }

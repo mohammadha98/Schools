@@ -1,10 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Schools.Domain.Models.AboutUs;
 using Schools.Domain.Repository.InterfaceRepository.AboutUsRepository;
 
 namespace Schools.WebApp.Areas.ManagementPanel.Pages.AboutUs
@@ -17,7 +12,7 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.AboutUs
             _aboutUs = aboutUs;
         }
         [BindProperty]
-        public Domain.Models.AboutUs.AboutUs aboutUs { get; set; }
+        public Domain.Models.AboutUs.AboutUs AboutUs { get; set; }
         public void OnGet()
         {
         }
@@ -27,11 +22,12 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.AboutUs
             if (!ModelState.IsValid)
                 return Page();
 
-            var abouus = new Domain.Models.AboutUs.AboutUs()
+            var aboutUs = new Domain.Models.AboutUs.AboutUs()
             {
-                Text = aboutUs.Text
+                Text = AboutUs.Text,
+                IsDelete = false
             };
-            _aboutUs.Insert(abouus);
+            _aboutUs.Insert(aboutUs);
             return RedirectToPage("Index");
         }
     }

@@ -10,42 +10,26 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="box box-primary">
-                    <div class="box-header ui-sortable-handle" style="cursor: move;">
-                        <i class="ion ion-clipboard"></i>
+                    <div class="box-header">
                         <h3 class="box-title">درباره ما</h3>
                     </div>
-                    <!-- /.box-header -->
                     <div class="box-body">
-                        <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
-                        <ul class="todo-list ui-sortable">
-                            @foreach (var item in Model.aboutUs)
-                            {
-                            <li class="" style="">
-                                <!-- drag handle -->
-                                <span class="handle ui-sortable-handle">
-                                    <i class="fa fa-ellipsis-v"></i>
-                                    <i class="fa fa-ellipsis-v"></i>
-                                </span>
-                                <!-- todo text -->
-                                @foreach (var text in item.Text.Split().Take(10))
-                                {
-                                    <span class="text">@Html.Raw(text)</span>
-                                }
-                                <div class="tools">
-                                    <a asp-page="Edit" asp-route-id="@item.AboutUsId"> <i class="fa fa-edit"></i></a>
-                                    <a asp-page="Delete" asp-route-id="@item.AboutUsId"> <i class="fa fa-trash-o"></i></a>
-                                </div>
-                            </li>
-                            }
-                        </ul>
+                        @if (Model.AboutUs != null)
+                        {
+                            <a class="btn btn-info btn-flat" href="/ManagementPanel/AboutUs/Edit">ویرایش</a>
+                            <hr/>
+                            @Html.Raw(Model.AboutUs.Text)
+                        }
+                        else
+                        {
+                            <a class="btn btn-flat btn-success" href="/ManagementPanel/AboutUs/Add">افزودن</a>
+                            <hr/>
+                            <div class="alert alert-warning">
+                                هیچ متنی برای این بخش در نظر گرفته نشده از طریق لینک بالا اقدام به ثبت کنید
+                            </div>
+                        }
                     </div>
-                    <!-- /.box-body -->
-                    @if (Model.aboutUs.Count() < 1)
-                    {
-                        <div class="box-footer clearfix no-border">
-                            <a asp-page="Add" type="button" class="btn btn-default pull-left"><i class="fa fa-plus"></i> جدید</a>
-                        </div>
-                    }
+                 
                 </div>
             </div>
         </div>

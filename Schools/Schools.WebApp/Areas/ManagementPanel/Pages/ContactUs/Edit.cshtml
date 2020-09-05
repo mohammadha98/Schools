@@ -1,10 +1,16 @@
 ﻿@page
 @model Schools.WebApp.Areas.ManagementPanel.Pages.ContactUs.EditModel
 @{
-    var menuModel = "contacUs";
+    var menuModel = "contactUs";
 }
 <partial name="_MainMenu" model="menuModel" />
 
+@if (Model.ContactUs == null)
+{
+
+}
+else
+{
 <div class="content-wrapper">
     <section class="content">
         <div class="row">
@@ -60,3 +66,4 @@
         </div>
     </section>
 </div>
+}

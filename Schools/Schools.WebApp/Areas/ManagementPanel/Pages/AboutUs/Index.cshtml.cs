@@ -11,16 +11,18 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.AboutUs
 {
     public class IndexModel : PageModel
     {
-        private IAboutUsRepository _aboutUs;
-        public IndexModel(IAboutUsRepository aboutUs)
+        private IAboutUsRepository _about;
+
+        public IndexModel(IAboutUsRepository about)
         {
-            _aboutUs = aboutUs;
+            _about = about;
         }
-        [BindProperty]
-        public IEnumerable<Domain.Models.AboutUs.AboutUs> aboutUs { get; set; }
+        
+        public Domain.Models.AboutUs.AboutUs AboutUs { get; set; }
         public void OnGet()
         {
-            aboutUs= _aboutUs.GetAllAboutUs();
+            AboutUs = _about.GetLast();
+            
         }
     }
 }

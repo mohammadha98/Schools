@@ -20,21 +20,20 @@
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="box-body">
                             <div class="form-group">
-                                <label asp-for="aboutUs.Text"></label>
+                                <label>متن</label>
                                 <div class="box-body pad">
                                     <div class="box box-info">
-                                        <div class="box-body pad">
-                                            <textarea asp-for="aboutUs.Text" id="editor1" rows="10" cols="80" style="visibility: hidden; display: none;"></textarea>
-                                            <span asp-validation-for="aboutUs.Text" class="text-danger"></span>
+                                        <div>
+                                            <textarea asp-for="AboutUs.Text" id="Description"></textarea>
+                                            <span asp-validation-for="AboutUs.Text" class="text-danger"></span>
                                         </div>
+                                        <button type="submit" class="btn btn-primary">افزودن</button>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- /.box-body -->
-                        <div class="box-footer">
-                            <button type="submit" class="btn btn-primary">افزودن</button>
-                        </div>
+                       
                     </form>
                 </div>
             </section>
@@ -42,5 +41,6 @@
     </section>
 </div>
 @section Scripts{
-    <script src="/Admin/bowercomponents/ckeditor/ckeditor.js"></script>
+    <script src="/ckeditor5/build/ckeditor.js"></script>
+    <script src="/js/miniCkediotr.js"></script>
 }

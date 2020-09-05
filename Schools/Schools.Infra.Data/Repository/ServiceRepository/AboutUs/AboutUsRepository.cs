@@ -14,23 +14,21 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.AboutUs
         {
             _context = context;
         }
-        public Domain.Models.AboutUs.AboutUs GetAbouUsById(int id)
+        public Domain.Models.AboutUs.AboutUs GetAboutUsById(int id)
         {
             return _context.AboutUs.Find(id);
         }
 
-        public IEnumerable<Domain.Models.AboutUs.AboutUs> GetAllAboutUs()
-        {
-            return _context.AboutUs.ToList();
-        }
 
-        public IEnumerable<Domain.Models.AboutUs.AboutUs> GetLast()
+
+        public Domain.Models.AboutUs.AboutUs GetLast()
         {
-            return _context.AboutUs.OrderByDescending(a => a.AboutUsId).Take(1);
+            return _context.AboutUs.FirstOrDefault();
         }
 
         public void Insert(Domain.Models.AboutUs.AboutUs aboutUs)
         {
+            if (_context.AboutUs.Any()) return;
             _context.AboutUs.Add(aboutUs);
             _context.SaveChanges();
         }

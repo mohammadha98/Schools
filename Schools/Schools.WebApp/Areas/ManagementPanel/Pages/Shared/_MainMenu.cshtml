@@ -79,7 +79,7 @@
             </li>
             <li class="@((Model.Contains("blogs")?"active treeview":"treeview"))">
                 <a href="#">
-                    <i class="fa fa-home"></i>
+                    <i class="fa fa-file"></i>
                     <span>بلاگ ها</span>
                     <span class="pull-left-container">
                         <i class="fa fa-angle-right pull-left"></i>
@@ -90,10 +90,16 @@
                     <li class="@((Model=="blogsGroups"?"active":null))"><a href="/ManagementPanel/Blogs/Groups"><i class="fa fa-circle-o"></i>گروه بلاگ ها</a></li>
                 </ul>
             </li>
-            <li class="">
+            <li class="@((Model=="aboutUs"?"active":null))">
                 <a href="/ManagementPanel/AboutUs">
                     <i class="fa fa-home"></i>
                     <span>درباره ما</span>
+                </a>
+            </li>
+            <li class="@((Model=="contactUs"?"active":null))">
+                <a href="/ManagementPanel/Contactus">
+                    <i class="fa fa-phone"></i>
+                    <span>تماس ما</span>
                 </a>
             </li>
         </ul>
