@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Schools.Application.Service.Interfaces.Schools;
+using Schools.Application.Utilities.Security;
 using Schools.Application.ViewModels.SchoolsViewModels;
-using Schools.Domain.Models.Schools;
-using Schools.Domain.Repository.InterfaceRepository.Schools;
 using Schools.Domain.Repository.InterfaceRepository.Users;
 
 namespace Schools.WebApp.Areas.ManagementPanel.Pages.Schools
 {
+    [PermissionsChecker(34)]
+
     public class EditModel : PageModel
     {
         private ISchoolService _school;

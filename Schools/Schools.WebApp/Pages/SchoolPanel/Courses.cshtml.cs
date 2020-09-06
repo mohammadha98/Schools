@@ -2,21 +2,27 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Schools.Application.Utilities;
+using Schools.Application.Utilities.Security;
 using Schools.Domain.Models.Schools;
 using Schools.Domain.Repository.InterfaceRepository.Schools;
+using Schools.Domain.Repository.InterfaceRepository.Users;
 
 namespace Schools.WebApp.Pages.SchoolPanel
 {
+    [PermissionsChecker(3)]
     public class CoursesModel : PageModel
     {
         private ISchoolRepository _school;
         private ISchoolCourseRepository _course;
+        private IUserRoleRepository _role;
 
-        public CoursesModel(ISchoolRepository school, ISchoolCourseRepository course)
+        public CoursesModel(ISchoolRepository school, ISchoolCourseRepository course, IUserRoleRepository role)
         {
             _school = school;
             _course = course;
+            _role = role;
         }
+     
 
         [BindProperty]
         public SchoolCourse Course { get; set; }
@@ -38,6 +44,11 @@ namespace Schools.WebApp.Pages.SchoolPanel
 
         public IActionResult OnPost()
         {
+            if (!_role.CheckPermission(User.GetUserId(), 4))
+            {
+                return RedirectToPage("Index");
+            }
+
             School = _school.GetSchoolByUserId(User.GetUserId());
             if (School == null)
             {

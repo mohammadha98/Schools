@@ -30,7 +30,7 @@ namespace Schools.Application.Utilities.Security
             else
             {
                 //اگر کاربر لاگین نباشه واررد آدرس زیر میشه
-                context.Result = new RedirectResult("/Auth/Login?ReturnTo=" + context.HttpContext.Request.Path, false);
+                context.Result = new RedirectResult("/Login?ReturnTo=" + context.HttpContext.Request.Path);
             }
         }
     }

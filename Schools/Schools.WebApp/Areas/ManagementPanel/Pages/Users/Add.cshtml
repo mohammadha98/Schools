@@ -12,7 +12,7 @@
         <section class="content">
             <div class="row">
                 <section class="col-lg-12 col-md-12">
-                    <div class="col-md-6">
+                    <div class="col-md-8">
                         <div class="box">
                             <div class="box-header with-border">
                                 <h3 class="box-title">افزودن کاربر</h3>
@@ -24,27 +24,78 @@
                                 </div>
                             </div>
                             <div class="box-body">
+                                <div asp-validation-summary="All" class="text-danger"></div>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <label asp-for="UserModel.Name"></label>
+                                        <input type="text" asp-for="UserModel.Name" class="form-control"/>
+                                        <br/>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label asp-for="UserModel.Family"></label>
 
-                                <label>نام کاربری :</label>
-                                <input type="text" asp-for="Add.UserName" class="form-control" placeholder="نام کاربری را وارد کنید" />
-                                <br />
-                                <label>نام :</label>
-                                <input type="text" asp-for="Add.Name" class="form-control" placeholder="نام را وارد کنید" />
-                                <br />
-                                <label>نام خانوادگی :</label>
-                                <input type="text" asp-for="Add.Family" class="form-control" placeholder="نام خانوادگی را وارد کنید" />
-                                <br />
-                                <label>کلمه عبور :</label>
-                                <input type="text" class="form-control" asp-for="Add.Password" placeholder="کلمه عبور را وارد کنید" />
-                                <br />
-                                <input type="submit" class="btn btn-success" value="افزودن" />
+                                        <input type="text" asp-for="UserModel.Family" class="form-control"/>
+                                        <br/>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label asp-for="UserModel.Email"></label>
+
+                                        <input type="email" asp-for="UserModel.Email" class="form-control"/>
+                                        <br/>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label asp-for="UserModel.UserName"></label>
+
+                                        <input type="text" asp-for="UserModel.UserName" class="form-control"/>
+                                        <br/>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label asp-for="UserModel.PhoneNumber"></label>
+
+                                        <input type="number" asp-for="UserModel.PhoneNumber" class="form-control"/>
+                                        <br/>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label asp-for="UserModel.TelNumber"></label>
+
+                                        <input type="number" asp-for="UserModel.TelNumber" class="form-control"/>
+                                        <br/>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label asp-for="UserModel.NationalCode"></label>
+
+                                        <input type="number" asp-for="UserModel.NationalCode" class="form-control"/>
+                                        <br/>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label asp-for="UserModel.Password"></label>
+
+                                        <input type="text" asp-for="UserModel.Password" class="form-control"/>
+                                        <br/>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <label asp-for="UserModel.IsActive"></label>
+
+                                        <select class="form-control">
+                                            <option value="true">فعال</option>
+                                            <option value="false">غیرفعال</option>
+                                        </select>
+                                        <br/>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <label asp-for="UserModel.Description"></label>
+                                        <textarea class="form-control" asp-for="UserModel.Description"></textarea>
+                                        <br/>
+                                    </div>
+                                </div>
+                                <input type="submit" class="btn btn-success" value="افزودن"/>
 
                             </div>
                             <!-- /.box-body -->
 
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="box">
                             <div class="box-header with-border">
                                 <h3 class="box-title">تصویر پروفایل</h3>
@@ -57,17 +108,13 @@
                             </div>
                             <div class="box-body">
                                 <div>
-                                    <img class="thumbnail" width="250" src="~/UserProfile/default.png" />
+                                    <img class="thumbnail" width="100%" src="~/UserProfile/default.png" />
                                 </div>
-                                <input type="file" name="file" />
+                                <input type="file" name="imageAvatar" class="form-control"/>
                             </div>
                             <!-- /.box-body -->
 
                         </div>
-                    </div>
-                </section>
-                <section class="col-lg-12 col-md-12">
-                    <div class="col-md-6">
                         <div class="box">
                             <div class="box-header with-border">
                                 <h3 class="box-title">انتخاب نقش</h3>
@@ -92,9 +139,7 @@
                             <!-- /.box-body -->
 
                         </div>
-
                     </div>
-                    <div class="col-md-6"></div>
                 </section>
             </div>
         </section>

@@ -1,18 +1,19 @@
-﻿using Microsoft.AspNetCore.Http;
-using Schools.Domain.Models.Schools;
+﻿using Schools.Domain.Models.Schools;
 using Schools.Domain.Models.Users;
-using System;
 using System.Collections.Generic;
-using System.Text;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Http;
 using Schools.Domain.Models.Users.Tickets;
 
 namespace Schools.Application.ViewModels.UsersViewModel
 {
     public class UsersForAdminPanelViewModel
     {
-        public List<User> GetUsers { get; set; }
+        public List<User> Users { get; set; }
         public int CurrentPage { get; set; }
         public int PageCount { get; set; }
+        public int StartPage { get; set; }
+        public int EndPage { get; set; }
 
     }
 
@@ -25,11 +26,16 @@ namespace Schools.Application.ViewModels.UsersViewModel
 
     public class AddUserViewModel
     {
+        [Required]
         public string Name { get; set; }
-        public string Family { get; set; }        
+        [Required]
+        public string Family { get; set; }
+        [Required]
         public string UserName { get; set; }
+        [Required]
         public string Password { get; set; }
-        
+        [Required]
+        public IFormFile ImageAvatar { get; set; }
     }
     public class GetTicketsViewModel
     {

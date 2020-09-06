@@ -10,7 +10,7 @@ namespace Schools.Application.Service.Interfaces.Schools
         SchoolRequestsViewModel GetSchoolRequests(int pageId,int take,string managerName,bool isAccept);
         SchoolRequest GetSchoolRequest(int requestId);
         SchoolRequest GetSchoolRequestByUserId(int userId);
-        void RejectRequest(SchoolRequest request);
-        void AcceptRequest(SchoolRequest request);
+        void RejectRequest(SchoolRequest request,string rejectText);
+        void AcceptRequest(SchoolRequest request, string hostName);
     }
 }

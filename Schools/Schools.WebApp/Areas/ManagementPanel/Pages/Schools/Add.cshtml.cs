@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Schools.Application.Service.Interfaces.Schools;
+using Schools.Application.Utilities.Security;
 using Schools.Application.ViewModels.SchoolsViewModels;
 using Schools.Domain.Repository.InterfaceRepository.Users;
 
 namespace Schools.WebApp.Areas.ManagementPanel.Pages.Schools
 {
+    [PermissionsChecker(34)]
     public class AddModel : PageModel
     {
         private ISchoolService _school;

@@ -145,3 +145,18 @@ $("html , body").click(function(e) {
         $('.top-bar .left-side .logged-in .sublayer').fadeOut('fast');
     }
 });
+$("#shires").change(function() {
+    var title = $(this).val();
+    $.ajax({
+        url: "/GetCityByShireTitle/"+title,
+        type: "get",
+        beforeSend: function () {
+            $(".loading").show();
+        },
+        complete: function () {
+            $(".loading").hide();
+        }
+    }).done(function (data) {
+        $("#cities").html(data);
+    });
+});

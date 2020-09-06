@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -12,6 +8,7 @@ using Schools.Domain.Repository.InterfaceRepository.Schools;
 
 namespace Schools.WebApp.Areas.ManagementPanel.Pages.Schools.Galleries
 {
+    [PermissionsChecker(32)]
     public class AddModel : PageModel
     {
         private ISchoolRepository _school;

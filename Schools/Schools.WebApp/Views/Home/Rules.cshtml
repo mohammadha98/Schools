@@ -1,0 +1,43 @@
+﻿@model Schools.Domain.Models.Rules
+@{
+    ViewData["Title"] = "قوانین و شرایط";
+}
+@section Topic_Layer{
+    <div class="container page-title">
+        <h1><a href=""> قوانین و شرایط </a></h1>
+        <ul itemtype="http://schema.org/BreadcrumbList" class="breadcrumb">
+            <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement"><a href="/" itemprop="item"><span itemprop="name"> بانک اطلاعاتی آموزشگاه ها </span></a></li>
+            <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement"><a href="" itemprop="item" class="current"><span itemprop="name"> قوانین و شرایط </span></a></li>
+        </ul>
+    </div>
+}
+
+@section Meta
+{
+    <link href="/css/page.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="/css/material-icon.css">
+}
+
+<div class="container">
+
+    <section class="page-style-two about-page">
+        <header><span class="logo"><img src="/images/about.svg"></span><h2> قوانین و شرایط وب سایت </h2></header>
+
+
+        <article>
+            @if (Model == null)
+            {
+                <div class="alert alert-info">درحال حاضر قوانینی برای کاربران درنظر گرفته نشده است</div>
+            }
+            else
+            {
+                @Html.Raw(Model.RuleTitle)
+            }
+        </article>
+
+
+    </section>
+
+</div>
+
+

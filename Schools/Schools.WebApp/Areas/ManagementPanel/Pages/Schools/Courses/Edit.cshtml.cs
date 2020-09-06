@@ -1,10 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Schools.Application.Utilities.Security;
 using Schools.Domain.Models.Schools;
 using Schools.Domain.Repository.InterfaceRepository.Schools;
 
 namespace Schools.WebApp.Areas.ManagementPanel.Pages.Schools.Courses
 {
+    [PermissionsChecker(31)]
+
     public class EditModel : PageModel
     {
         private ISchoolCourseRepository _course;

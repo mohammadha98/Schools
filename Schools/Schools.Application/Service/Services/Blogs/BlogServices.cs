@@ -1,141 +1,141 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Schools.Application.Service.Interfaces.Blogs;
+﻿using Schools.Application.Service.Interfaces.Blogs;
 using Schools.Application.ViewModels.BlogsViewModels;
 using Schools.Domain.Models.Blogs;
-using Schools.Infra.Data.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Http;
+using Schools.Application.Utilities.SaveAndDelete;
+using Schools.Application.Utilities.Security;
+using Schools.Domain.Repository.InterfaceRepository.BlogRepositories;
 
 namespace Schools.Application.Service.Services.Blogs
 {
-    public class BlogServices:IBlogServices
+    public class BlogServices : IBlogServices
     {
-        private SchoolsDbContext _context;
-        public BlogServices(SchoolsDbContext context)
+
+        private IBlogRepository _blog;
+
+        public BlogServices(IBlogRepository blog)
         {
-            _context = context;
+            _blog = blog;
         }
 
-        public Tuple<List<ShowCourseBlogViewModel>, int> GetCourse(int pageId = 1, string filter="", int typeId = 0, int groupId = 0,int take=0)
+        public bool AddBlog(Blog blog, IFormFile image)
         {
-            if (take == 0)
-                take = 21;
+            if (image == null) return false;
+            if (!image.IsImage()) return false;
 
-            IQueryable<Blog> result = _context.Blogs;
-
-            if (!string.IsNullOrEmpty(filter))
-            {
-                result = result.Where(b => b.Title.Contains(filter) || b.Tags.Contains(filter));
-            }
-
-            switch (typeId)
-            {
-                case 0:
-                    break;
-                case 1:
-                    {
-                        result = result.Where(b => b.TypeId == 1);
-                        break;
-                    }
-                case 2:
-                    {
-                        result = result.Where(b => b.TypeId == 2);
-                        break;
-                    }
-            }
-
-            if (groupId != 0)
-            {
-                result = result.Where(b => b.GroupId == groupId);
-            }
-
-            int skip = (pageId - 1) * take;
-
-            int pageCount= result.Include(b => b.BlogType).Include(b => b.BlogGroup)
-                .Select(b => new ShowCourseBlogViewModel()
-                {
-                    BlogId = b.BlogId,
-                    BlogType = b.BlogType.TypeTitle,
-                    BlogGroup = b.BlogGroup.GroupName,
-                    CreateDate = b.CreateDate,
-                    ImageName = b.ImageName,
-                    Title = b.Title
-                }).Count()/take;
-
-            var query = result.Include(b => b.BlogType).Include(b=>b.BlogGroup)
-                .Select(b => new ShowCourseBlogViewModel()
-            {
-                BlogId=b.BlogId,
-                BlogType=b.BlogType.TypeTitle,
-                BlogGroup=b.BlogGroup.GroupName,
-                CreateDate=b.CreateDate,
-                ImageName=b.ImageName,
-                Title=b.Title
-            }).Skip(skip).Take(take).ToList();
-
-            return Tuple.Create(query, pageCount);
+            var fileName = SaveFileInServer.SaveFile(image, "wwwroot/images/blogs");
+            blog.IsDelete = false;
+            blog.CreateDate = DateTime.Now;
+            blog.ShortLink = GenerateShortKey(4);
+            blog.ImageName = fileName;
+            _blog.InsertBlog(blog);
+            return true;
         }
 
-        List<BlogsViewModels> IBlogServices.FilterBlog(string filter, int getType, List<int> selectedGroups = null)
+        public bool EditBlog(Blog blog, IFormFile image)
         {
-            IQueryable<Blog> result = _context.Blogs;
-            if (!string.IsNullOrEmpty(filter))
+            if (image != null)
             {
-                result = result.Where(b => b.Title.Contains(filter)||b.BlogId.ToString().Contains(filter));
+                if (!image.IsImage()) return false;
+
+                DeleteFileFromServer.DeleteFile(blog.ImageName, "wwwroot/images/blogs");
+                var fileName = SaveFileInServer.SaveFile(image, "wwwroot/images/blogs");
+                blog.ImageName = fileName;
+            }
+            _blog.UpdateBlog(blog);
+            return true;
+        }
+
+        public BlogCategoryViewModel GetBlogsByFilter(int pageId, int take, string search, int? typeId, string groupTitle)
+        {
+            var result = _blog.GetAllBlogs();
+            if (!string.IsNullOrEmpty(search))
+            {
+                result = result.Where(r => r.Title.Contains(search) || r.Tags.Contains(search));
+            }
+            if (!string.IsNullOrEmpty(groupTitle))
+            {
+                result = result.Where(r => r.BlogGroup.GroupName == groupTitle);
             }
 
-            switch (getType)
+            if (typeId != null)
             {
-                case 0:
-                    break;
-                case 1:
-                    {
-                        result = result.Where(b => b.TypeId == 1);
-                        break;
-                    }
-                case 2:
-                    {
-                        result = result.Where(b => b.TypeId == 2);
-                        break;
-                    }
-            }
-
-            if (selectedGroups != null && selectedGroups.Any())
-            {
-                foreach (int groupId in selectedGroups)
+                switch (typeId)
                 {
-                    result = result.Where(b => b.GroupId == groupId);
+                    case 4:
+                        result = result.Where(r => r.TypeId == 4);
+                        break;
+                    case 5:
+                        result = result.Where(r => r.TypeId == 5);
+                        break;
                 }
             }
-            var query = result.Include(b=>b.BlogType).Select(b => new BlogsViewModels()
-            {
-                BlogId = b.BlogId,
-                GroupId = b.GroupId,
-                ImageName = b.ImageName,
-                TypeId = b.TypeId,
-                Title = b.Title,
-                ShortDescription=b.ShortDescription,
-                CreateDate = b.CreateDate,
-                BlogType=b.BlogType.TypeTitle
-            }).ToList();
 
-            return query;
+
+            var skip = (pageId - 1) * take;
+            var pageCount = (int)Math.Ceiling(result.Count() / (double)take);
+            var blogs = result.OrderByDescending(b => b.CreateDate).Skip(skip).Take(take).Select(b => new BlogViewModel()
+            {
+                GroupTitle = b.BlogGroup.GroupName,
+                ImageName = b.ImageName,
+                CreateDate = b.CreateDate,
+                Title = b.Title,
+                BlogId = b.BlogId,
+                BlogType = b.TypeId == 4 ? "خبر" : "مقاله",
+                ShortLink = b.ShortLink
+            }).ToList();
+            var blogsModel = new BlogCategoryViewModel()
+            {
+                GroupTitle = groupTitle,
+                Search = search,
+                TypeId = typeId,
+                CurrentPage = pageId,
+                PageCount = pageCount,
+                StartPage = (pageId - 4 <= 0) ? 1 : pageId - 4,
+                EndPage = (pageId + 5 > pageCount) ? pageCount : pageId + 5,
+                Blogs = blogs
+            };
+            return blogsModel;
         }
 
-        public Tuple<List<BlogComment>, int> GetBlogComments(int blogId, int pageId = 1)
+        public List<BlogViewModel> GetLastBlogs(int take)
         {
-            int take = 5;
-            int skip = (pageId - 1) * take;
-            int pageCount = _context.BlogComments.Where(b => !b.IsDelete && b.BlogId == blogId).Count() / take;
+            var blogModel = _blog.GetAllBlogs().OrderByDescending(b => b.CreateDate).Take(take).Select(b =>
+                new BlogViewModel()
+                {
+                    GroupTitle = b.BlogGroup.GroupName,
+                    ImageName = b.ImageName,
+                    CreateDate = b.CreateDate,
+                    Title = b.Title,
+                    BlogId = b.BlogId,
+                    BlogType = b.TypeId == 4 ? "اخبار" : "مقالات",
+                    ShortLink = b.ShortLink
+                }).ToList();
+            return blogModel;
+        }
 
-            if ((pageCount % 2) != 0)
+        public void AddVisitForBlog(Blog blog)
+        {
+            blog.BlogVisit += 1;
+            _blog.UpdateBlog(blog);
+        }
+
+        private string GenerateShortKey(int length)
+        {
+            //در این جا یک کلید با طول دلخواه تولید میکنیم
+            var key = Guid.NewGuid().ToString().Replace("-", "").Substring(0, length);
+
+            while (_blog.GetBlog(key) != null)
             {
-                pageCount += 1;
+                //تا زمانی که کلید ساخته شده تکراری باشد این اعملیات تکرار میشود
+
+                key = Guid.NewGuid().ToString().Replace("-", "").Substring(0, length);
             }
-            return Tuple.Create(
-                _context.BlogComments.Include(b=>b.User).Where(b => !b.IsDelete && b.BlogId == blogId).OrderByDescending(b => b.CreateDate).Skip(skip).Take(take)
-                .ToList(), pageCount);
+            //در آخر یک کلید غیره تکراری با طول دلخواه ساخته شده
+            return key;
         }
     }
 }

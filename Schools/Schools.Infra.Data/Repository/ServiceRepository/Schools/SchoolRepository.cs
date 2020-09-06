@@ -65,6 +65,11 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Schools
 
         }
 
+        public School GetSchoolByShortLink(string shortLink)
+        {
+            return _context.Schools.SingleOrDefault(s =>s.ShortLink==shortLink);
+        }
+
         public bool IsUserHasASchool(int userId)
         {
             return _context.Schools.Any(s => s.SchoolManager == userId);

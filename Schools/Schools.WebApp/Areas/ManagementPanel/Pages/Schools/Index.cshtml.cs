@@ -3,11 +3,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Schools.Application.Service.Interfaces.Locations;
 using Schools.Application.Service.Interfaces.Schools;
+using Schools.Application.Utilities.Security;
 using Schools.Application.ViewModels.SchoolsViewModels;
 using Schools.Domain.Repository.InterfaceRepository;
 
 namespace Schools.WebApp.Areas.ManagementPanel.Pages.Schools
 {
+    [PermissionsChecker(28)]
+
     public class IndexModel : PageModel
     {
         private ISchoolService _school;

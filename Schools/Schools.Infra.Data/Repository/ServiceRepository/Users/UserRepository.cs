@@ -18,6 +18,11 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Users
         }
 
 
+        public User GetUserIdByEmail(string email)
+        {
+            return _context.Users.SingleOrDefault(u => u.Email == email);
+        }
+
         public int AddUser(User user)
         {
             _context.Users.Add(user);
@@ -39,7 +44,12 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Users
 
         public User GetUserById(int userId)
         {
-            return _context.Users.SingleOrDefault(u => u.UserId == userId);
+            return _context.Users.Include(u=>u.UserRoles).SingleOrDefault(u => u.UserId == userId);
+        }
+
+        public User FindUser(int userId)
+        {
+           return _context.Users.Find(userId);
         }
 
         public User GetUserWithRelations(int userId)

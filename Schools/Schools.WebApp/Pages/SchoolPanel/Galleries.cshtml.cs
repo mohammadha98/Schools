@@ -9,26 +9,32 @@ using Schools.Application.Utilities.SaveAndDelete;
 using Schools.Application.Utilities.Security;
 using Schools.Domain.Models.Schools;
 using Schools.Domain.Repository.InterfaceRepository.Schools;
+using Schools.Domain.Repository.InterfaceRepository.Users;
 
 namespace Schools.WebApp.Pages.SchoolPanel
 {
+    [PermissionsChecker(3)]
     public class GalleriesModel : PageModel
     {
         private ISchoolRepository _school;
         private ISchoolGalleryRepository _gallery;
         private ISchoolGalleryService _service;
+        private IUserRoleRepository _role;
 
-        public GalleriesModel(ISchoolRepository school, ISchoolGalleryRepository gallery, ISchoolGalleryService service)
+        public GalleriesModel(ISchoolRepository school, ISchoolGalleryRepository gallery, ISchoolGalleryService service, IUserRoleRepository role)
         {
             _school = school;
             _gallery = gallery;
             _service = service;
+            _role = role;
         }
+    
 
         [BindProperty]
         public IFormFile Galley { get; set; }
         public List<SchoolGallery> SchoolGalleries { get; set; }
         public School School { get; set; }
+
         public void OnGet()
         {
             School = _school.GetSchoolByUserId(User.GetUserId());
@@ -44,6 +50,10 @@ namespace Schools.WebApp.Pages.SchoolPanel
 
         public IActionResult OnPost()
         {
+            if (!_role.CheckPermission(User.GetUserId(),7))
+            {
+                return RedirectToPage("Index");
+            }
             if (Galley == null) return Redirect("/SchoolPanel/Galleries");
             if (!Galley.IsImage()) return Redirect("/SchoolPanel/Galleries");
 
@@ -66,8 +76,10 @@ namespace Schools.WebApp.Pages.SchoolPanel
 
         public IActionResult OnGetDeleteGallery(int galleryId)
         {
-            if (!User.Identity.IsAuthenticated) return Forbid();
-
+            if (!_role.CheckPermission(User.GetUserId(), 8))
+            {
+                return RedirectToPage("Index");
+            }
 
             var school = _school.GetSchoolByUserId(User.GetUserId());
             var res = _service.DeleteGallery(galleryId,school.SchoolId);

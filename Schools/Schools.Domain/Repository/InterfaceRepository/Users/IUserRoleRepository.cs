@@ -12,6 +12,7 @@ namespace Schools.Domain.Repository.InterfaceRepository.Users
         Role GetRoleById(int roleId);
         Role FindRole(int roleId);
         int AddRolesForUser(List<int> selectedRoles, int userId);
+        void RemoveUserRole( int userId);
         void AddUserRole(UserRole role);
         void AddRole(Role role);
         void EditRole(Role role);

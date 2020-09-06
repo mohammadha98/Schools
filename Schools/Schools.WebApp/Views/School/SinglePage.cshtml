@@ -3,7 +3,7 @@
 @using Schools.Domain.Models.Schools.Locations
 @model Schools.Domain.Models.Schools.School
 @{
-    ViewData["Title"] = "SinglePage";
+    ViewData["Title"] = Model.SchoolTitle;
     var schoolShireTitle = Model.Shire.ShireTitle;
     var schoolCityTitle = Model.City.CityTitle;
     var schoolRate = Model.SchoolRates.Sum(r => r.Rate) / Model.SchoolRates.Count;
@@ -11,6 +11,7 @@
     var comments = ViewData["Comments"] as SchoolCommentsViewModel;
     var shires = ViewData["Shires"] as List<Shire>;
     var cities = ViewData["Cities"] as List<City>;
+    var similarSchool = ViewData["SimilarSchools"] as List<SchoolCardViewModel>;
     bool isUserLikeSchool = (bool)ViewData["IsUserLikeSchool"];
 }
 @section Meta
@@ -77,22 +78,17 @@
                     <li><span> میزان محبوبیت : </span> <span class="like-count">@Model.UserLikes.Count</span> پسند شده </li>
                     <li><span> بازدید از پروفایل : </span> @Model.Visit.ToString("#,0") بازدید </li>
                 </ul>
-                @if (User.Identity.IsAuthenticated)
+
+                @if (!isUserLikeSchool)
                 {
-                    @if (!isUserLikeSchool)
-                    {
-                        <a href="javascript:void(0)" class="like-this"> <i class="zmdi zmdi-favorite"></i> آموزشگاه را میپسندم </a>
-                    }
-                    else
-                    {
-                        <a href="javascript:void(0)" class="like-this liked"> <i class="zmdi zmdi-favorite"></i> آموزشگاه را میپسندم </a>
-                    }
+                    <a href="javascript:void(0)" class="like-this"> <i class="zmdi zmdi-favorite"></i> آموزشگاه را میپسندم </a>
                 }
                 else
                 {
-                    <a href="javascript:void(0)" class="like-this disabled" data-toggle="tooltip" title="وارد حساب کاربری خود شوید"> <i class="zmdi zmdi-favorite"></i> آموزشگاه را میپسندم </a>
-
+                    <a href="javascript:void(0)" class="like-this liked"> <i class="zmdi zmdi-favorite"></i> آموزشگاه را میپسندم </a>
                 }
+
+
 
 
 
@@ -231,6 +227,27 @@
         <div id="comments">
             <partial name="School/_SchoolComments" model="comments" />
         </div>
+        <div class="last-terms-layer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9 col-sm-12">
+                        <header class="heading-style"><h2> سایر @Model.SchoolGroup.GroupTitle </h2></header>
+                        <div class="last-terms-carousel owl-carousel">
+                            @foreach (var item in similarSchool)
+                            {
+                                <partial name="School/_SchoolItem" model="item"/>
+                            }
+                        </div>
+                    </div>
+                    <div class="col-md-3 hidden-sm hidden-xs">
+                        <div class="ads-banner">
+                            <a href="https://www.TopDev.ir" target="_blank"><img src="/images/topdev.jpg"></a>
+                            <a href="https://www.GetWork.ir" target="_blank"><img src="/images/getwork.jpg"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 </div>
@@ -302,13 +319,21 @@
                         </div>
 
                     </div>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <button class="button-st green submit-rating-button" type="submit"><span><i class="icon-check"></i></span> ثبت نهایی امتیاز </button>
 
-                    <button class="button-st green submit-rating-button" type="submit"><span><i class="icon-check"></i></span> ثبت نهایی امتیاز </button>
+                    }
+                    else
+                    {
+                        <div class="alert alert-warning"> جهت ثبت امتیاز باید در سایت <a href="/Register">عضو</a> شوید و یا <a href="/Login">وارد</a> سایت شده باشید .</div>
+                    }
                 </form>
             </div>
         </div>
     </div>
     <script src="/ckeditor5/build/ckeditor.js"></script>
+
     <script src="/js/owl.carousel.js"></script>
     <script src="/js/raty.js"></script>
     <script src="/js/profile.js"></script>

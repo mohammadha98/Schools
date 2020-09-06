@@ -84,7 +84,7 @@
             {
                 <div class="pagination-layer">
                     <div class="inner">
-                        @if (Model.CurrentPage >= 1)
+                        @if (Model.CurrentPage >= 1 && Model.PageCount > Model.CurrentPage)
                         {
                             <a onclick="ChangePage(@(Model.CurrentPage+1))" href="javascript:void(0)" class="next-page"> صفحه بعدی </a>
                         }

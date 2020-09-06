@@ -1,17 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Schools.Application.Service.Interfaces.Users;
 using Schools.Application.Utilities;
+using Schools.Application.Utilities.Security;
 using Schools.Application.ViewModels.UsersViewModel;
 using Schools.Domain.Models.Schools;
 using Schools.Domain.Repository.InterfaceRepository.Schools;
 
 namespace Schools.WebApp.Pages.SchoolPanel
 {
+    [PermissionsChecker(48)]
     public class EditModel : PageModel
     {
         private IUserService _service;

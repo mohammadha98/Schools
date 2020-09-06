@@ -1,9 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Schools.Application.Utilities.Security;
 using Schools.Domain.Repository.InterfaceRepository.AboutUsRepository;
 
 namespace Schools.WebApp.Areas.ManagementPanel.Pages.AboutUs
 {
+    [PermissionsChecker(1)]
+
     public class AddModel : PageModel
     {
         private IAboutUsRepository _aboutUs;

@@ -1,10 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Schools.Application.Service.Interfaces.Schools;
+using Schools.Application.Utilities.Security;
 using Schools.Application.ViewModels.SchoolsViewModels.SchoolRequest;
 
 namespace Schools.WebApp.Areas.ManagementPanel.Pages.Schools.Requests
 {
+    [PermissionsChecker(29)]
+
     public class IndexModel : PageModel
     {
         private ISchoolRequestService _request;

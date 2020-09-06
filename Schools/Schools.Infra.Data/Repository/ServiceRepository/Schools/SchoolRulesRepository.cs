@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using Schools.Domain.Models.Schools;
+using Schools.Domain.Models;
 using Schools.Domain.Repository.InterfaceRepository.Schools;
 using Schools.Infra.Data.Context;
 
@@ -13,20 +13,20 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Schools
         {
             _db = db;
         }
-        public SchoolRules GetRule()
+        public Rules GetRule()
         {
-           return _db.SchoolRules.FirstOrDefault();
+           return _db.Rules.FirstOrDefault();
         }
 
-        public void AddRule(SchoolRules rule)
+        public void AddRule(Rules rule)
         {
-            _db.SchoolRules.Add(rule);
+            _db.Rules.Add(rule);
             _db.SaveChanges();
         }
 
-        public void EditRule(SchoolRules rule)
+        public void EditRule(Rules rule)
         {
-            _db.SchoolRules.Update(rule);
+            _db.Rules.Update(rule);
             _db.SaveChanges();
         }
     }

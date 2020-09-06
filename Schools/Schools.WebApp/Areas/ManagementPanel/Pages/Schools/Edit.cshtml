@@ -244,7 +244,10 @@
             var len = $(this).val().length;
             $(".counter").html(len);
         });
-
+        $("#School_MetaDescription").change(function () {
+            var len = $(this).val().length;
+            $(".counter").html(len);
+        });
         $("#School_ShireId").change(function () {
             var shireId = $(this).val();
             $.ajax({

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -10,8 +11,9 @@ using Schools.Application.Utilities.Security;
 using Schools.Application.ViewModels.SchoolsViewModels;
 using Schools.Application.ViewModels.SchoolsViewModels.SchoolRequest;
 using Schools.Domain.Models.Schools;
-using Schools.Domain.Models.Schools.TrainingTypes;
+using Schools.Domain.Models.Users;
 using Schools.Domain.Repository.InterfaceRepository.Schools;
+using Schools.Domain.Repository.InterfaceRepository.Users;
 
 namespace Schools.Application.Service.Services.Schools
 {
@@ -23,8 +25,9 @@ namespace Schools.Application.Service.Services.Schools
         private ILocationService _location;
         private ISchoolGroupsService _schoolGroups;
         private ISchoolGalleryRepository _GalleryRepository;
+        private IUserRoleRepository _role;
 
-        public SchoolService(ISchoolRepository school, ISchoolGalleryService gallery, ISchoolTrainingTypeService typeService, ILocationService location, ISchoolGroupsService schoolGroups, ISchoolGalleryRepository galleryRepository)
+        public SchoolService(ISchoolRepository school, ISchoolGalleryService gallery, ISchoolTrainingTypeService typeService, ILocationService location, ISchoolGroupsService schoolGroups, ISchoolGalleryRepository galleryRepository, IUserRoleRepository role)
         {
             _school = school;
             _gallery = gallery;
@@ -32,6 +35,7 @@ namespace Schools.Application.Service.Services.Schools
             _location = location;
             _schoolGroups = schoolGroups;
             _GalleryRepository = galleryRepository;
+            _role = role;
         }
 
 
@@ -117,7 +121,7 @@ namespace Schools.Application.Service.Services.Schools
             }
             if (!string.IsNullOrEmpty(teacherName))
             {
-                result = result.Where(r => r.SchoolTeachers.Any(s=>s.FullName.Contains(teacherName)));
+                result = result.Where(r => r.SchoolTeachers.Any(s => s.FullName.Contains(teacherName)));
             }
 
             switch (orderBy)
@@ -180,9 +184,44 @@ namespace Schools.Application.Service.Services.Schools
             return categoryModel;
         }
 
+        public List<SchoolCardViewModel> GetLastRegistered(int take)
+        {
+            var result = _school.GetAllSchools().Where(s=>s.IsActive);
+            var schoolModel = result.OrderByDescending(r => r.RegisterDate).Take(take).Select(s =>
+                new SchoolCardViewModel()
+                {
+                    Rate = s.SchoolRates.Sum(r => r.Rate) / s.SchoolRates.Count,
+                    History = DateTime.Now.Year - s.BuildDate.Year,
+                    Like = s.UserLikes.Count,
+                    SchoolId = s.SchoolId,
+                    Title = s.SchoolTitle,
+                    ImageName = s.ImageName,
+                    CityTitle = s.City.CityTitle,
+                    CategoryTitle = s.SchoolSubGroup.GroupTitle ?? s.SchoolGroup.GroupTitle
+                }).ToList();
+            return schoolModel;
+        }
+
+        public List<SchoolCardViewModel> GetSimilarSchools(int groupId)
+        {
+            var result = _school.GetAllSchools().Where(s => s.SubGroupId == groupId || s.GroupId == groupId && s.IsActive);
+            var schoolModel = result.Select(s => new SchoolCardViewModel()
+            {
+                Rate = s.SchoolRates.Sum(r => r.Rate) / s.SchoolRates.Count,
+                History = DateTime.Now.Year - s.BuildDate.Year,
+                Like = s.UserLikes.Count,
+                SchoolId = s.SchoolId,
+                Title = s.SchoolTitle,
+                ImageName = s.ImageName,
+                CityTitle = s.City.CityTitle,
+                CategoryTitle = s.SchoolSubGroup.GroupTitle ?? s.SchoolGroup.GroupTitle
+            }).ToList();
+            return schoolModel;
+        }
+
         public MainPageViewModel GetSchoolsForMainPage(string shireTitle)
         {
-            var result = _school.GetAllSchools();
+            var result = _school.GetAllSchools().Where(s=>s.IsActive);
             if (string.IsNullOrEmpty(shireTitle))
                 return new MainPageViewModel();
 
@@ -281,6 +320,8 @@ namespace Schools.Application.Service.Services.Schools
                 ShireId = school.ShireId,
                 SubGroupId = school.SubGroupId,
                 Tags = school.Tags,
+                ShortLink = GenerateShortKey(4)
+
             };
 
             _school.AddSchool(schoolModel);
@@ -290,6 +331,13 @@ namespace Schools.Application.Service.Services.Schools
             {
                 _typeService.AddTrainingTypeForSchool(schoolModel.SchoolId, typeId);
             }
+            var userRole = new UserRole()
+            {
+                IsDelete = false,
+                RoleId = 1,
+                UserId = schoolModel.SchoolManager
+            };
+            _role.AddUserRole(userRole);
             return true;
         }
 
@@ -303,7 +351,7 @@ namespace Schools.Application.Service.Services.Schools
             var imagePathDest = "wwwroot/images/schools/" + request.ImageName;
             if (File.Exists(imagePath))
             {
-                File.Copy(imagePath, imagePathDest,true);
+                File.Copy(imagePath, imagePathDest, true);
             }
             else
             {
@@ -332,7 +380,8 @@ namespace Schools.Application.Service.Services.Schools
                     CityId = request.CityId,
                     Visit = 0,
                     Tags = acceptModel.KeyWord,
-                    SubGroupId = request.CategoryId
+                    SubGroupId = request.CategoryId,
+                    ShortLink = GenerateShortKey(4)
                 };
                 _school.AddSchool(school);
                 //انتقال عکس  به پوشه آموزشگاه ها و ذخیره گالری برای آموزشگاه
@@ -342,7 +391,7 @@ namespace Schools.Application.Service.Services.Schools
                     var galleryPathDest = $"wwwroot/images/schools/gallery/{item.ImageName}";
                     if (!File.Exists(galleryPath)) continue;
 
-                    File.Copy(galleryPath, galleryPathDest,true);
+                    File.Copy(galleryPath, galleryPathDest, true);
                     var gallery = new SchoolGallery()
                     {
                         ImageName = item.ImageName,
@@ -366,11 +415,19 @@ namespace Schools.Application.Service.Services.Schools
                             break;
                     }
                 }
+                var userRole = new UserRole()
+                {
+                    IsDelete = false,
+                    RoleId = 1,
+                    UserId = school.SchoolManager
+                };
+                _role.AddUserRole(userRole);
             }
             catch (Exception e)
             {
                 return false;
             }
+
 
             return true;
         }
@@ -407,7 +464,8 @@ namespace Schools.Application.Service.Services.Schools
                 ShireId = school.ShireId,
                 SubGroupId = school.SubGroupId,
                 Tags = school.Tags,
-                SchoolId = school.SchoolId
+                SchoolId = school.SchoolId,
+                ShortLink = school.ShortLink
             };
             //اگر عکسی انتخاب کرده باشه وارد شرط میشه
             if (school.Avatar != null)
@@ -478,7 +536,8 @@ namespace Schools.Application.Service.Services.Schools
                 SubGroupId = mainSchool.SubGroupId,
                 Tags = mainSchool.Tags,
                 BuildDate = mainSchool.BuildDate.ToShamsi(),
-                TrainingTypes = _typeService.GetSchoolTrainingTypeId(schoolId)
+                TrainingTypes = _typeService.GetSchoolTrainingTypeId(schoolId),
+                ShortLink = mainSchool.ShortLink
             };
 
             return schoolModel;
@@ -487,6 +546,21 @@ namespace Schools.Application.Service.Services.Schools
         public School GetSchoolById(int schoolId)
         {
             return _school.GetSchoolBySchoolId(schoolId);
+        }
+
+        private string GenerateShortKey(int length)
+        {
+            //در این جا یک کلید با طول دلخواه تولید میکنیم
+            var key = Guid.NewGuid().ToString().Replace("-", "").Substring(0, length);
+
+            while (_school.GetSchoolByShortLink(key) != null)
+            {
+                //تا زمانی که کلید ساخته شده تکراری باشد این اعملیات تکرار میشود
+
+                key = Guid.NewGuid().ToString().Replace("-", "").Substring(0, length);
+            }
+            //در آخر یک کلید غیره تکراری با طول دلخواه ساخته شده
+            return key;
         }
     }
 }

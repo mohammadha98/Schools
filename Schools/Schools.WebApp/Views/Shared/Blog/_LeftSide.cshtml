@@ -1,0 +1,62 @@
+﻿@using Schools.Application.Service.Interfaces.Schools
+@using Schools.Application.Utilities.Convertors
+@using Schools.Application.ViewModels.BlogsViewModels
+@using Schools.Domain.Repository.InterfaceRepository.BlogRepositories
+@inject IBlogGroupsRepository _group
+@inject ISchoolService _School
+@{
+    var lastBlog = ViewData["LastBlogs"] as List<BlogViewModel>;
+    var lastSchools = _School.GetLastRegistered(10);
+    
+    var groups = _group.GetAllGroups();
+}
+
+<aside class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
+    <!-- category -->
+    <section class="category-list shadow-style">
+        <header> <h2> دسته بندی موضوعات </h2> </header>
+        <ul>
+            <li>
+                @foreach (var item in groups)
+                {
+                    <a href=""> اخبار و مقالات </a>
+                    <ul>
+                        <li><a href="javascript:void(0)" onclick="changeGroup('@item.GroupName')"> @item.GroupName </a></li>
+
+                    </ul>
+                }
+            </li>
+        </ul>
+    </section>
+    <!-- last blog -->
+    <section class="last-blog shadow-style">
+        <header> <h2> آخرین مطالب بلاگ </h2> </header>
+        <!-- item -->
+        @foreach (var item in lastBlog)
+        {
+            <article class="blog-item">
+                <a href="/Blog/@item.BlogId/@item.Title.Replace(" ","-").Trim()" class="img-layer"><img src="/images/blogs/@item.ImageName" alt="@item.Title"></a>
+                <h2><a href="/Blog/@item.BlogId/@item.Title.Replace(" ","-").Trim()"> @item.Title </a></h2>
+                <div class="detail">
+                    <a href="/Blogs?groupTitle=@item.GroupTitle"><i class="zmdi zmdi-folder"></i> @item.BlogType @item.GroupTitle </a>
+                    <span> <i class="zmdi zmdi-calendar"></i>@item.CreateDate.ToShamsi()</span>
+                </div>
+            </article>
+        }
+        <!-- /item -->
+    </section>
+    <!-- last blog -->
+    <!-- last post -->
+    <section class="last-posts shadow-style">
+        <header> <h2> آخرین آموزشگاه های ثبت شده </h2> </header>
+        <div class="inner">
+            @foreach (var school in lastSchools)
+            {
+                <article>
+                    <h2><a href="/School/@school.SchoolId/@school.Title.Replace(" ","-").Trim()"><span> @school.Title </span> @school.CategoryTitle </a></h2>
+                    <span><i class="zmdi zmdi-calendar"></i> @school.History سال سابقه </span>
+                </article>
+            }
+        </div>
+    </section>
+</aside>

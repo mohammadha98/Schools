@@ -13,7 +13,7 @@ namespace Schools.Domain.Models.Blogs
         [Key]
         public int BlogId { get; set; }
 
-        [Display(Name ="دسته بندی")]
+        [Display(Name = "دسته بندی")]
         public int GroupId { get; set; }
 
         [Display(Name = "نوع بلاگ")]
@@ -28,7 +28,7 @@ namespace Schools.Domain.Models.Blogs
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         [DataType(DataType.MultilineText)]
         public string ShortDescription { get; set; }
-
+        public string ShortLink { get; set; }
         [Display(Name = "متن کامل")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         [DataType(DataType.MultilineText)]
@@ -40,7 +40,7 @@ namespace Schools.Domain.Models.Blogs
         [Display(Name = "تصویر")]
         public string ImageName { get; set; }
 
-        [Display(Name ="بازدید")]
+        [Display(Name = "بازدید")]
         public int BlogVisit { get; set; }
 
         [Display(Name = "تاریخ ساخت")]
@@ -55,7 +55,7 @@ namespace Schools.Domain.Models.Blogs
         [ForeignKey("TypeId")]
         public BlogType BlogType { get; set; }
         public List<BlogComment> BlogComment { get; set; }
-        
+
         #endregion
     }
 }

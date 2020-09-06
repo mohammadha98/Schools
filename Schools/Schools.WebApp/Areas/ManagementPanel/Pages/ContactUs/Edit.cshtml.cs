@@ -1,13 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Schools.Application.Utilities.Security;
 using Schools.Domain.Repository.InterfaceRepository.ContactUsRepositories;
 
 namespace Schools.WebApp.Areas.ManagementPanel.Pages.ContactUs
 {
+    [PermissionsChecker(1)]
     public class EditModel : PageModel
     {
         private IContactUsRepository _contactUs;

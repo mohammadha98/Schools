@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace Schools.Domain.Models.Blogs
 {
     public class BlogGroup
     {
-        public BlogGroup()
-        {
-
-        }
         [Key]
         public int GroupId { get; set; }
         [Display(Name ="عنوان گروه")]

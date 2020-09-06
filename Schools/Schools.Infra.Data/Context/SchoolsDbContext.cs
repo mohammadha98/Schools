@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using Schools.Domain.Models;
 using Schools.Domain.Models.Blogs;
 using Schools.Domain.Models.Schools;
 using Schools.Domain.Models.Schools.Locations;
@@ -40,7 +41,6 @@ namespace Schools.Infra.Data.Context
         public DbSet<TrainingType> TrainingTypes { get; set; }
         public DbSet<SchoolRequest> SchoolRequests { get; set; }
         public DbSet<RequestGallery> RequestGalleries { get; set; }
-        public DbSet<SchoolRules> SchoolRules { get; set; }
 
 
         #region Teachers
@@ -54,12 +54,10 @@ namespace Schools.Infra.Data.Context
         #endregion
 
         #region Blogs
-
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<BlogComment> BlogComments { get; set; }
         public DbSet<BlogGroup> BlogGroups { get; set; }
         public DbSet<BlogType> BlogTypes { get; set; }
-        public DbSet<AnswersComment> AnswersComments { get; set; }
 
         #endregion
 
@@ -87,6 +85,11 @@ namespace Schools.Infra.Data.Context
         public DbSet<AboutUs> AboutUs { get; set; }
         #endregion
 
+        #region Rules
+
+        public DbSet<Rules> Rules { get; set; }
+
+        #endregion
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             var cascadeFKs = modelBuilder.Model.GetEntityTypes()
@@ -145,8 +148,6 @@ namespace Schools.Infra.Data.Context
             modelBuilder.Entity<BlogType>()
                 .HasQueryFilter(u => !u.IsDelete);
             modelBuilder.Entity<BlogComment>()
-                .HasQueryFilter(u => !u.IsDelete);
-            modelBuilder.Entity<AnswersComment>()
                 .HasQueryFilter(u => !u.IsDelete);
             modelBuilder.Entity<BlogGroup>()
                 .HasQueryFilter(u => !u.IsDelete);

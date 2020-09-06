@@ -1,88 +1,99 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Schools.Application.Service.Interfaces.Blogs;
-using Schools.Application.Service.Interfaces.Users;
+using Schools.Application.Utilities;
+using Schools.Application.Utilities.Convertors;
 using Schools.Domain.Models.Blogs;
 using Schools.Domain.Repository.InterfaceRepository.BlogRepositories;
-using Schools.Domain.Repository.InterfaceRepository.Users;
 
 namespace Schools.WebApp.Controllers
 {
     public class BlogController : Controller
     {
         private IBlogServices _blogServices;
-        private IBlogRepository _blogRepository;
-        private IUserRepository _userRepository;
-        public BlogController(IBlogServices blogServices,IBlogRepository blogRepository,IUserRepository userRepository)
+        private IBlogRepository _blog;
+        private IBlogCommentService _comment;
+
+        public BlogController(IBlogServices blogServices, IBlogRepository blog, IBlogCommentService comment)
         {
             _blogServices = blogServices;
-            _blogRepository = blogRepository;
-            _userRepository = userRepository;
-        }
-        
-        public IActionResult Index(int pageId=1,string filter = "",int typeId=0,int groupId=0)
-        {
-            ViewBag.pageId = pageId;
-            ViewBag.groupId = groupId;
-            ViewBag.typeId = typeId;
-            return View(_blogServices.GetCourse(pageId,filter,typeId,groupId,21));
+            _blog = blog;
+            _comment = comment;
         }
 
-        [Route("ShowBlog/{blogId}")]
-        public IActionResult ShowBlog(int blogId, int groupId = 0, int typeId = 0)
+
+        [Route("/Blogs")]
+        public IActionResult Index(int page = 1, string search = "", int? typeId = null, string groupTitle = "")
         {
-            ViewBag.groupId = groupId;
-            ViewBag.typeId = typeId;
-            ViewBag.CommentCount = _blogRepository.CommentCount(blogId);
-            var blog = _blogRepository.GetBlogById(blogId);
-            if (blog != null)
+            ViewData["LastBlogs"] = _blogServices.GetLastBlogs(4);
+            var model = _blogServices.GetBlogsByFilter(page, 21, search, typeId, groupTitle);
+            return View(model);
+        }
+
+        [Route("Blog/{blogId}/{blogTitle}")]
+        public IActionResult ShowBlog(int blogId)
+        {
+            ViewData["LastBlogs"] = _blogServices.GetLastBlogs(4);
+            var blog = _blog.GetBlogById(blogId);
+            if (blog == null)
             {
-                blog.BlogVisit += 1;
-                _blogRepository.UpdateBlog(blog);
-                _blogRepository.Save();
+                return NotFound();
             }
+            _blogServices.AddVisitForBlog(blog);
+            //پر کردن اولیه بخش نظرات
+            ViewData["Comments"] = _comment.GetBlogComments(1, 10, blogId);
             return View(blog);
         }
 
-        #region Comment
+        public IActionResult GetBlogComments(int pageId, int blogId)
+        {
+            var blogComments = _comment.GetBlogComments(pageId, 10, blogId);
+            if (blogComments.BlogComments == null)
+            {
+                return NotFound();
+            }
+            return PartialView("Blog/_BlogComments", blogComments);
+        }
+        [Authorize]
         [HttpPost]
-        public IActionResult CreateComment(BlogComment comment)
+        public IActionResult AddComment(BlogComment blogComment)
         {
-            comment.IsDelete = false;
-            comment.CreateDate = DateTime.Now;
-            comment.UserId = _userRepository.GetUserIdByUserName(User.Identity.Name);
-            comment.SecurityCode = 123;
-            _blogRepository.AddComment(comment);
 
-            return View("ShowComment", _blogServices.GetBlogComments(comment.BlogId));
+            blogComment.UserId = User.GetUserId();
+            if (string.IsNullOrEmpty(blogComment.Comment))
+            {
+                return Content("Error");
+            }
+            var resultComment = _comment.AddComment(blogComment);
+            var userName = $"{resultComment.User.Name} {resultComment.User.Family}";
+            var res = $"<div class='comment-box'><div class='img-layer'><img src='/images/userAvatars/{resultComment.User.UserAvatar}'/></div><div class='left'><span>{userName}</span><i>ارسال شده در {resultComment.CreateDate.ToShamsi()}</i><p>{blogComment.Comment}</p></div></div>";
+            //اگر این نظر یک پاسخ برای یک نظر دیگه باشد وارد شرط میشه و بعد سمت کلاینت صفحه را رفرش میکنیم
+            if (blogComment.Answer != null)
+            {
+                return Content("Success");
+            }
+            return Content(res);
         }
-        public IActionResult ShowComment(int id, int pageId = 1)
+        [Authorize]
+        public IActionResult DeleteComment(int commentId, int blogId)
         {
-            return View(_blogServices.GetBlogComments(id, pageId));
+
+            var comment = _comment.GetBlogCommentById(commentId);
+            if (comment != null)
+            {
+                if (comment.BlogId == blogId)
+                {
+                    if (comment.UserId == User.GetUserId())
+                    {
+                        _comment.DeleteComment(comment);
+                        return Content("Deleted");
+                    }
+                }
+
+            }
+            return Content("Error");
+
         }
 
-        public IActionResult PageCount(int id, int pageId = 1)
-        {
-            ViewData["pageId"] = pageId;
-            return View(_blogServices.GetBlogComments(id, pageId));
-        }
-        [HttpDelete]
-        public IActionResult Delete(int id)
-        {
-            _blogRepository.DeleteComment(id);
-            _blogRepository.Save();
-            return View();
-        }
-
-        public IActionResult Replay(int id)
-        {
-            return View(id);
-        }
-        #endregion
     }
 }

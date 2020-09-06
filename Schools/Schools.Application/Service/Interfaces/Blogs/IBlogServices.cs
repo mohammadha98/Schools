@@ -1,15 +1,16 @@
-﻿using Schools.Application.ViewModels.BlogsViewModels;
+﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Http;
+using Schools.Application.ViewModels.BlogsViewModels;
 using Schools.Domain.Models.Blogs;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Schools.Application.Service.Interfaces.Blogs
 {
     public interface IBlogServices
     {
-        List<BlogsViewModels> FilterBlog(string filter = "", int getType = 0, List<int> selectedGroups = null);
-        Tuple<List<ShowCourseBlogViewModel>,int> GetCourse(int pageId = 1, string filter="",int typeId=0, int groupId=0,int take=0);
-        Tuple<List<BlogComment>, int> GetBlogComments(int blogId, int pageId = 1);
+        bool AddBlog(Blog blog,IFormFile image);
+        bool EditBlog(Blog blog,IFormFile image);
+        BlogCategoryViewModel GetBlogsByFilter(int pageId, int take, string search, int? typeId, string groupTitle);
+        List<BlogViewModel> GetLastBlogs(int take);
+        void AddVisitForBlog(Blog blog);
     }
 }

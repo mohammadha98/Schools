@@ -2,11 +2,13 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Schools.Application.Service.Interfaces.Users;
+using Schools.Application.Utilities.Security;
 using Schools.Domain.Models.Users;
 using Schools.Domain.Repository.InterfaceRepository.Users;
 
 namespace Schools.WebApp.Areas.ManagementPanel.Pages.Users.Roles
 {
+    [PermissionsChecker(42)]
     public class EditModel : PageModel
     {
         private IUserRoleRepository _role;

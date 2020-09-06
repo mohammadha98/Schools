@@ -2,10 +2,13 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Schools.Application.Service.Interfaces.Users;
 using Schools.Application.Utilities;
+using Schools.Application.Utilities.Security;
 using Schools.Application.ViewModels.UsersViewModel;
 
 namespace Schools.WebApp.Pages.UserPanel
 {
+    //15 = تغییر کلمه عبور
+    [PermissionsChecker(15)]
     public class ChangePasswordModel : PageModel
     {
         private IUserService _service;

@@ -1,16 +1,24 @@
-﻿<footer>
+﻿@using Schools.Application.Service.Interfaces.Blogs
+@using Schools.Domain.Repository.InterfaceRepository.ContactUsRepositories
+@inject IBlogServices _Blog
+@inject IContactUsRepository _contactUs
+@{
+    var lastBlogs = _Blog.GetLastBlogs(4).Where(b => b.BlogType == "مقالات");
+    var contact = _contactUs.GetLast();
+}
+<footer>
     <div class="top-footer">
         <div class="container">
             <nav>
                 <ul>
-                    <li><a href=""> بلاگ </a></li>
-                    <li><a href=""> آموزش آنلاین </a></li>
-                    <li><a href=""> درباره ما  </a></li>
-                    <li><a href=""> تماس با ما </a></li>
+                    <li><a href="/Blogs"> بلاگ </a></li>
+                    <li><a href="https://www.toplearn.com" target="_blank"> آموزش آنلاین </a></li>
+                    <li><a href="/About-us"> درباره ما  </a></li>
+                    <li><a href="Contact-Us"> تماس با ما </a></li>
                 </ul>
             </nav>
 
-            <a href="" class="button-st green"> ثبت آموزشگاه </a>
+            <a href="/UserPanel/RegisterSchool" class="button-st green"> ثبت آموزشگاه </a>
             <div class="clearfix"></div>
         </div>
     </div>
@@ -22,10 +30,10 @@
                     <section>
                         <header><h2> آخرین مقالات آموزشی </h2></header>
                         <ul>
-                            <li><a href="">بهترین روش برای یادگیری چیست و زمان مناسب چه زمانیست ؟</a></li>
-                            <li><a href="">فواید یادگیری آنلاین و خودآموزی چیست؟ </a></li>
-                            <li><a href="">معرفی بهترین آموزشگاه های آنلاین در سال 97 از نگاه دانشجویان</a></li>
-                            <li><a href="">معیارهای انتخاب یک آموزشگاه مناسب و مدرس مجرب</a></li>
+                            @foreach (var item in lastBlogs)
+                            {
+                                <li><a href="/Blog/@item.BlogId/@item.Title.Replace(" ","-").Trim()">@item.Title</a></li>
+                            }
                         </ul>
                     </section>
                 </div>
@@ -40,8 +48,11 @@
                             <a href=""><span><i class="icon-telegram"></i></span></a>
                         </div>
                         <ul>
-                            <li><i class="zmdi zmdi-phone-in-talk"></i> 091288556644  -  02188665544</li>
-                            <li><i class="zmdi zmdi-email"></i> Info@amoozesh.info </li>
+                            <li>
+                                <i class="zmdi zmdi-phone-in-talk"></i>
+                               @contact.PhoneNumber
+                            </li>
+                            <li><i class="zmdi zmdi-email"></i> @contact.Email </li>
                         </ul>
                     </section>
                 </div>

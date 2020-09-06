@@ -5,22 +5,29 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Schools.Application.Utilities;
+using Schools.Application.Utilities.Security;
 using Schools.Domain.Models.Schools;
 using Schools.Domain.Models.Schools.Teachers;
 using Schools.Domain.Repository.InterfaceRepository.Schools;
+using Schools.Domain.Repository.InterfaceRepository.Users;
 
 namespace Schools.WebApp.Pages.SchoolPanel.Teachers
 {
+    [PermissionsChecker(3)]
+
     public class IndexModel : PageModel
     {
         private ISchoolTeacherRepository _teacher;
         private ISchoolRepository _school;
+        private IUserRoleRepository _role;
 
-        public IndexModel(ISchoolTeacherRepository teacher, ISchoolRepository school)
+        public IndexModel(ISchoolTeacherRepository teacher, ISchoolRepository school, IUserRoleRepository role)
         {
             _teacher = teacher;
             _school = school;
+            _role = role;
         }
+  
        
         [BindProperty]
         public SchoolTeacher Teacher { get; set; }
@@ -39,6 +46,13 @@ namespace Schools.WebApp.Pages.SchoolPanel.Teachers
 
         public IActionResult OnPost()
         {
+            if (!_role.CheckPermission(User.GetUserId(),10))
+            {
+                return Redirect("/SchoolPanel");
+            }
+
+
+
             var school = _school.GetSchoolByUserId(User.GetUserId());
             if (school == null)
             {

@@ -54,6 +54,18 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Users
             return userId;
         }
 
+        public void RemoveUserRole(int userId)
+        {
+            var roles = _db.UserRoles.Where(r => r.UserId == userId);
+            foreach (var item in roles)
+            {
+                _db.UserRoles.Remove(item);
+            }
+
+            _db.SaveChanges();
+        }
+
+
         public void AddUserRole(UserRole role)
         {
             _db.UserRoles.Add(role);

@@ -1,4 +1,5 @@
-﻿using Schools.Application.ViewModels.UsersViewModel;
+﻿using Microsoft.AspNetCore.Http;
+using Schools.Application.ViewModels.UsersViewModel;
 using Schools.Domain.Models.Users;
 
 
@@ -9,7 +10,8 @@ namespace Schools.Application.Service.Interfaces.Users
         #region AdminPanel
         UsersForAdminPanelViewModel GetUsersByFilter(string username = "",int pageId = 1);
         UserInfoViewModel GetUserInfoByUserId(int userId);
-
+        bool AddUser(User user,IFormFile imageAvatar);
+        bool EditUser(User user,IFormFile imageAvatar);
         #endregion
 
         #region AccountServices
@@ -18,6 +20,8 @@ namespace Schools.Application.Service.Interfaces.Users
         bool ActiveAccount(string activeCode);
         User LoginUser(LoginViewModel login);
         void RegisterUser(RegisterViewModel register);
+        void ForgotPassword(User user,string hostName);
+        bool ChangePassword(ChangePasswordModel passwordModel);
         #endregion
 
         #region UserPanel

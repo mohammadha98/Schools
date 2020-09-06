@@ -10,10 +10,10 @@ namespace Schools.Domain.Repository.InterfaceRepository.Users
         IQueryable<User> GetUsers();
         
         List<School> GetAllSchoolInUserLikesByUserId(int userId);
-       
         User GetUserById(int userId);
+        User FindUser(int userId);
         User GetUserWithRelations(int userId);
-        int GetUserIdByUserName(string userName);
+        User GetUserIdByEmail(string email);
         int AddUser(User user);
         void EditUser(User user);
         bool IsUserExist(int userId);

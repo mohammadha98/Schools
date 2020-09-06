@@ -38,32 +38,6 @@ namespace Schools.Infra.Data.Migrations
                     b.ToTable("AboutUs");
                 });
 
-            modelBuilder.Entity("Schools.Domain.Models.Blogs.AnswersComment", b =>
-                {
-                    b.Property<int>("AnswerId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("AnswerText")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("CommentId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("AnswerId");
-
-                    b.HasIndex("CommentId");
-
-                    b.ToTable("AnswersComments");
-                });
-
             modelBuilder.Entity("Schools.Domain.Models.Blogs.Blog", b =>
                 {
                     b.Property<int>("BlogId")
@@ -94,6 +68,9 @@ namespace Schools.Infra.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ShortLink")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Tags")
                         .HasColumnType("nvarchar(max)");
 
@@ -121,6 +98,9 @@ namespace Schools.Infra.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("Answer")
+                        .HasColumnType("int");
+
                     b.Property<int>("BlogId")
                         .HasColumnType("int");
 
@@ -132,27 +112,8 @@ namespace Schools.Infra.Data.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsAdminRead")
-                        .HasColumnType("bit");
-
                     b.Property<bool>("IsDelete")
                         .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(150)")
-                        .HasMaxLength(150);
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("SecurityCode")
-                        .HasColumnType("int");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -267,17 +228,33 @@ namespace Schools.Infra.Data.Migrations
                     b.Property<bool>("IsDelete")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsPosted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(15)")
                         .HasMaxLength(15);
 
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
-
                     b.HasKey("ContactId");
 
                     b.ToTable("ContactUsForms");
+                });
+
+            modelBuilder.Entity("Schools.Domain.Models.Rules", b =>
+                {
+                    b.Property<int>("RoleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("RuleTitle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("RoleId");
+
+                    b.ToTable("Rules");
                 });
 
             modelBuilder.Entity("Schools.Domain.Models.Schools.Locations.City", b =>
@@ -414,6 +391,9 @@ namespace Schools.Infra.Data.Migrations
 
                     b.Property<int>("ShireId")
                         .HasColumnType("int");
+
+                    b.Property<string>("ShortLink")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("SubGroupId")
                         .HasColumnType("int");
@@ -661,22 +641,6 @@ namespace Schools.Infra.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("SchoolRequests");
-                });
-
-            modelBuilder.Entity("Schools.Domain.Models.Schools.SchoolRules", b =>
-                {
-                    b.Property<int>("RoleId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("RuleTitle")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("RoleId");
-
-                    b.ToTable("SchoolRules");
                 });
 
             modelBuilder.Entity("Schools.Domain.Models.Schools.Teachers.SchoolTeacher", b =>
@@ -1099,6 +1063,7 @@ namespace Schools.Infra.Data.Migrations
                         .HasMaxLength(200);
 
                     b.Property<string>("UserName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
 
@@ -1189,21 +1154,6 @@ namespace Schools.Infra.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("UserRoles");
-                });
-
-            modelBuilder.Entity("Schools.Domain.Models.Blogs.AnswersComment", b =>
-                {
-                    b.HasOne("Schools.Domain.Models.Blogs.BlogComment", "blogComment")
-                        .WithMany("answersComments")
-                        .HasForeignKey("CommentId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Schools.Domain.Models.Users.User", "User")
-                        .WithMany()
-                        .HasForeignKey("CommentId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Schools.Domain.Models.Blogs.Blog", b =>
