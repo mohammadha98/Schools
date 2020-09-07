@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Schools.Application.Service.Interfaces.ContactUses;
+using Schools.Application.Utilities.Security;
 using Schools.Domain.Models.ContactUs;
 using Schools.Domain.Repository.InterfaceRepository.ContactUsRepositories;
 
 namespace Schools.WebApp.Areas.ManagementPanel.Pages.ContactUs.HelpForm
 {
+    [PermissionsChecker(23)]
     public class ShowModel : PageModel
     {
         private IContactUsFormService _service;

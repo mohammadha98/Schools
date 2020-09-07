@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Schools.Application.Service.Interfaces.ContactUses;
+using Schools.Application.Utilities.Security;
 using Schools.Application.ViewModels;
 
 namespace Schools.WebApp.Areas.ManagementPanel.Pages.ContactUs.HelpForm
 {
+    [PermissionsChecker(23)]
     public class IndexModel : PageModel
     {
         private IContactUsFormService _contact;
