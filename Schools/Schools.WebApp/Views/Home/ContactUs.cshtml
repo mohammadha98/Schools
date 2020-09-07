@@ -1,6 +1,7 @@
 ﻿@model Schools.Domain.Models.ContactUs.ContactUs
 @{
-    ViewData["Title"] = "ContactUs";
+    ViewData["Title"] = "تماس با ما";
+    var isSuccess = TempData["Success"] != null;
 }
 @section Topic_Layer{
     <div class="container page-title">
@@ -61,8 +62,29 @@
             </div>
         }
 
-        <partial name="_ContactUsForm" model="null"/>
-      
+        <partial name="_ContactUsForm" model="null" />
+
     </div>
 </div>
 
+@section Scripts
+{
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script src="/js/jquery.validate.min.js"></script>
+    <script src="/js/jquery.validate.unobtrusive.js"></script>
+    
+    @if (isSuccess)
+    {
+        <script>
+            swal({
+                title: "پیام شما با موفقیت ارسال شد",
+                text: "پاسخ از طریق ایمیل برای شما ارسال خواهد شد",
+                icon: "success",
+                button: "باشه"
+            });
+        </script>
+
+    }
+
+}

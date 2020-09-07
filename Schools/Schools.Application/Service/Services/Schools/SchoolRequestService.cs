@@ -164,7 +164,7 @@ namespace Schools.Application.Service.Services.Schools
             //Send Email
             try
             {
-                var body = $"<h2>عدم تایید آموزشگاه</h2><h3>درخواست ثبت آموزشگاه شما به دلیل زیر تایید نشد : </h3><h4>{rejectText}</h4>";
+                var body = $"<h2 style='text-align:center'>عدم تایید آموزشگاه</h2><h3>درخواست ثبت آموزشگاه شما به دلیل زیر تایید نشد : </h3><h4>{rejectText}</h4>";
                 SendEmail.Send(request.Email, "عدم تایید آموزشکاه", body.BuildView());
             }
             catch (Exception e)
@@ -181,7 +181,7 @@ namespace Schools.Application.Service.Services.Schools
             //Send Email
             try
             {
-                var body = $"<h2>{request.User.Name} {request.User.Family}</h2><h3>تبربک ! درخواست ثبت آموزشگاه شما با موفقیت تایید شد </h3><h4>شما می توانید با استفاده از لینک زیر وارد حساب آموزشگاه خود شودی</h4><a href='https://{hostName}/SchoolPanel'>ورود به حساب</a>";
+                var body = $"<h2 style='text-align:center'>{request.User.Name} {request.User.Family}</h2><h3>تبربک ! درخواست ثبت آموزشگاه شما با موفقیت تایید شد </h3><h4>شما می توانید با استفاده از لینک زیر وارد حساب آموزشگاه خود شودی</h4><a style='text-align:center' href='https://{hostName}/SchoolPanel'>ورود به حساب</a>";
                 SendEmail.Send(request.Email, " تایید آموزشکاه", body.BuildView());
             }
             catch (Exception e)

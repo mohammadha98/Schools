@@ -975,7 +975,6 @@ C:\Users\mohammad\source\repos\schools\Schools\Schools.WebApp\obj\Debug\netcorea
 C:\Users\mohammad\source\repos\schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Home\ContactUs.cshtml.g.cs
 C:\Users\mohammad\source\repos\schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
 C:\Users\mohammad\source\repos\schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Home\NotFound.cshtml.g.cs
-C:\Users\mohammad\source\repos\schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Home\SchoolsCategory.cshtml.g.cs
 C:\Users\mohammad\source\repos\schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Home\ServerError.cshtml.g.cs
 C:\Users\mohammad\source\repos\schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Home\_ContactUsForm.cshtml.g.cs
 C:\Users\mohammad\source\repos\schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Intro\Index.cshtml.g.cs
@@ -1006,3 +1005,5 @@ C:\Users\mohammad\source\repos\schools\Schools\Schools.WebApp\obj\Debug\netcorea
 C:\Users\mohammad\source\repos\schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Account\ForgotPassword.cshtml.g.cs
 C:\Users\mohammad\source\repos\schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Account\ChangePassword.cshtml.g.cs
 C:\Users\mohammad\source\repos\schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Areas\ManagementPanel\Pages\Users\Edit.cshtml.g.cs
+C:\Users\mohammad\source\repos\schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Areas\ManagementPanel\Pages\ContactUs\HelpForm\Index.cshtml.g.cs
+C:\Users\mohammad\source\repos\schools\Schools\Schools.WebApp\obj\Debug\netcoreapp3.1\Razor\Areas\ManagementPanel\Pages\ContactUs\HelpForm\Show.cshtml.g.cs

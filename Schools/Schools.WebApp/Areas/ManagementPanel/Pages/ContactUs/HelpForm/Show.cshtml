@@ -1,0 +1,63 @@
+﻿@page "{id}"
+@model Schools.WebApp.Areas.ManagementPanel.Pages.ContactUs.HelpForm.ShowModel
+@{
+
+    var menuModel = "contactUsForm";
+}
+
+<partial name="_MainMenu" model="menuModel" />
+
+@if (Model.ContactUs == null)
+{
+
+}
+else
+{
+    <div class="content-wrapper">
+        <section class="content">
+            <div class="row">
+                <section class="col-lg-12 col-md-12">
+                    <div class="box box-info">
+                        <div class="box-header">
+                            <h4>@Model.ContactUs.Subject</h4>
+                            <hr />
+                            <div class="row">
+                                <div class="col-md-6" style="margin-bottom: 10px">نام و نام خانوادگی : @Model.ContactUs.FullName </div>
+                                <div class="col-md-6" style="margin-bottom: 10px">شماره تماس : @Model.ContactUs.PhoneNumber  <br /></div>
+                                <div class="col-md-6" style="margin-bottom: 10px">ایمیل : @Model.ContactUs.Email  <br /></div>
+                                <div class="col-md-6" style="margin-bottom: 10px">وضعیت : @(Model.ContactUs.IsPosted ? "پاسخ داده شده" : "درحال برسی")  <br /></div>
+                                <div class="col-md-12" style="margin-bottom: 10px">
+                                    متن :
+                                    <p>@Model.ContactUs.Description</p>
+                                </div>
+                                @if (Model.ContactUs.IsPosted)
+                                {
+                                    <div class="col-md-12 alert alert-info">
+                                        <p>پاسخ پشتیبان :</p>
+                                        @Html.Raw(Model.ContactUs.AgentAnswer)
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            @if (Model.ContactUs.IsPosted == false)
+                            {
+                                <form method="post">
+                                    <p>متن پاسخ :</p>
+                                    <textarea name="answer" id="Description" class="form-control"></textarea>
+                                    <button type="submit" class="btn btn-success btn-block">ارسال پاسخ</button>
+                                </form>
+                            }
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+    </div>
+
+}
+@section Scripts
+{
+    <script src="/ckeditor5/build/ckeditor.js"></script>
+    <script src="/js/miniCkediotr.js"></script>
+}

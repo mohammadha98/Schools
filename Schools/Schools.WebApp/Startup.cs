@@ -63,7 +63,7 @@ namespace Schools.WebApp
             app.UseStatusCodePagesWithReExecute("/Home/HandleError/{0}");
             #endregion
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseRouting();
             app.UseStaticFiles();
             app.UseAuthentication();

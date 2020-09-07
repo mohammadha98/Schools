@@ -4,7 +4,7 @@
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <h2> فرم تماس با ما </h2>
     <div class="row">
-        <div class="col-md-4 col-sm-6 col-xs-12">
+        <div class="col-md-6 col-sm-6 col-xs-12">
             <!-- input -->
             <div class="input-layer">
                 <label><i class="zmdi zmdi-account"></i>  نام و نام خانوادگی </label>
@@ -13,7 +13,7 @@
             </div>
             <!--/ input -->
         </div>
-        <div class="col-md-4 col-sm-6 col-xs-12">
+        <div class="col-md-6 col-sm-6 col-xs-12">
             <!-- input -->
             <div class="input-layer">
                 <label><i class="zmdi zmdi-smartphone-android"></i>  شماره تماس </label>
@@ -22,12 +22,21 @@
             </div>
             <!--/ input -->
         </div>
-        <div class="col-md-4 col-sm-12 col-xs-12">
+        <div class="col-md-6 col-sm-12 col-xs-12">
             <!-- input -->
             <div class="input-layer">
                 <label><i class="zmdi zmdi-email"></i>  ایمیل </label>
                 <input asp-for="Email" type="text">
                 <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <!--/ input -->
+        </div>
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            <!-- input -->
+            <div class="input-layer">
+                <label><i class="zmdi zmdi-texture"></i>  عنوان </label>
+                <input asp-for="Subject" type="text">
+                <span asp-validation-for="Subject" class="text-danger"></span>
             </div>
             <!--/ input -->
         </div>

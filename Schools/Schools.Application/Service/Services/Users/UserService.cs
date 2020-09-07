@@ -162,7 +162,7 @@ namespace Schools.Application.Service.Services.Users
         public void ForgotPassword(User user,string hostName)
         {
             //First Send Email For User
-            var body = $"<h2>بازیابی کلمه عبور</h2><h3><p>جناب {user.Name} {user.Family} عزیز ، با استفاده از لینک زیر میتوانید نسبت به تغییر و بازیابی کلمه عیور خود اقدام نمایید.</p></h3><p>برای تغییر کلمه عبور برروی لینک زیر کلیک کنید.</p><h3><a href='https://{hostName}/ChangePassword/{user.UserId}/{user.Password}/{user.ActiveCode}'>تغببر کلمه عبور</a></h3>";
+            var body = $"<h2 style='text-align:center'>بازیابی کلمه عبور</h2><h3><p> {user.Name} {user.Family} عزیز ، با استفاده از لینک زیر میتوانید نسبت به تغییر و بازیابی کلمه عیور خود اقدام نمایید.</p></h3><p>برای تغییر کلمه عبور برروی لینک زیر کلیک کنید.</p><h3 style='text-align:center'><a href='https://{hostName}/ChangePassword/{user.UserId}/{user.Password}/{user.ActiveCode}'>تغببر کلمه عبور</a></h3>";
             SendEmail.Send(user.Email,"بازیابی رمز عبور",body.BuildView());
         }
 

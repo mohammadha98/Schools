@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Schools.Infra.Data.Context;
 
 namespace Schools.Infra.Data.Migrations
 {
     [DbContext(typeof(SchoolsDbContext))]
-    partial class SchoolsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200907062442_Fix_ContactUs_For")]
+    partial class Fix_ContactUs_For
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -214,12 +216,6 @@ namespace Schools.Infra.Data.Migrations
                     b.Property<string>("AgentAnswer")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("AnswerDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(800)")
@@ -244,11 +240,6 @@ namespace Schools.Infra.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(15)")
                         .HasMaxLength(15);
-
-                    b.Property<string>("Subject")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(40)")
-                        .HasMaxLength(40);
 
                     b.HasKey("ContactId");
 

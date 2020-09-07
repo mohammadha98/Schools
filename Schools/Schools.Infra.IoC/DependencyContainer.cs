@@ -17,7 +17,9 @@ using Schools.Infra.Data.Repository.ServiceRepository.Users;
 using Schools.Application.Service.Interfaces.Users;
 using Schools.Application.Service.Services.Users;
 using Schools.Application.Service.Interfaces.Blogs;
+using Schools.Application.Service.Interfaces.ContactUses;
 using Schools.Application.Service.Services.Blogs;
+using Schools.Application.Service.Services.ContactUses;
 using Schools.Domain.Repository.InterfaceRepository.ContactUsRepositories;
 using Schools.Infra.Data.Repository.ServiceRepository.ContactUs;
 using Schools.Domain.Repository.InterfaceRepository.AboutUsRepository;
@@ -64,6 +66,12 @@ namespace Schools.Infra.IoC
             service.AddScoped<IUserRoleService, UserRoleService>();
 
             #endregion
+
+            #region ContactUs
+
+            service.AddScoped<IContactUsFormService, ContactUsFormService>();
+
+            #endregion
             //From Infra Data Layer
 
             #region Locations
@@ -103,16 +111,11 @@ namespace Schools.Infra.IoC
 
             #endregion
 
+            
             #region ContactUs&AboutUs
             service.AddScoped<IContactUsRepository, ContactUsRepository>();
             service.AddScoped<IAboutUsRepository, AboutUsRepository>();
-            service.AddScoped<IContactUsFormRepository, ContactUsForm>();
-            #endregion
-
-            #region ContactUs&AboutUs
-            service.AddScoped<IContactUsRepository, ContactUsRepository>();
-            service.AddScoped<IAboutUsRepository, AboutUsRepository>();
-            service.AddScoped<IContactUsFormRepository, ContactUsForm>();
+            service.AddScoped<IContactUsFormRepository, ContactUsFormRepository>();
             #endregion
         }
     }

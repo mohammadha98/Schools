@@ -131,9 +131,9 @@
                     <section class="section-item shadow-style">
                         <div class="img-layer">
                             <span> @(item.CityTitle ?? Model.ShireTitle)</span>
-                            <a href=""><img src="/images/schools/@item.ImageName" alt="@item.Title"></a>
+                            <a href="/School/@item.SchoolId/@item.Title.Replace(" ","-").Trim()"><img src="/images/schools/@item.ImageName" alt="@item.Title"></a>
                         </div>
-                        <h2><a href=""> <span class="category-name"> @item.CategoryTitle </span> @item.Title </a></h2>
+                        <h2><a href="/School/@item.SchoolId/@item.Title.Replace(" ","-").Trim()"> <span class="category-name"> @item.CategoryTitle </span> @item.Title </a></h2>
                         <div class="detail">
                             <span class="history"> <i class="zmdi zmdi-calendar-check"></i> @item.History سال سابقه </span>
                             <span class="rating-star"><span class="readonly-rating-star" data-score="@item.Rate"></span></span>

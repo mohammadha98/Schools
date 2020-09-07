@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using Schools.Application.Service.Interfaces.Locations;
 using Schools.Application.Service.Interfaces.Schools;
 using Schools.Domain.Models.ContactUs;
@@ -101,15 +102,16 @@ namespace Schools.WebApp.Controllers
             return View(_contactUs.GetLast());
         }
         [HttpPost]
-        [Route("/ContactUs")]
+        [Route("/Contact-Us")]
         public IActionResult ContactUs(ContactUsForm contactUsForm)
         {
             if (!ModelState.IsValid)
                 return View(_contactUs.GetLast());
 
+            contactUsForm.CreateDate=DateTime.Now;
             _contactUsForm.InsertQuestion(contactUsForm);
             TempData["Success"] = true;
-            return View(_contactUs.GetLast());
+            return Redirect("/Contact-Us");
         }
         [Route("/Rules")]
         public IActionResult Rules()
