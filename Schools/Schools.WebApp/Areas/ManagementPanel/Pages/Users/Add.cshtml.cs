@@ -42,6 +42,7 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.Users
 
             if (!ModelState.IsValid)
                 return Page();
+
             if (_user.IsExistEmail(UserModel.Email))
             {
                 ModelState.AddModelError("Email","ایمیل تکراری است");

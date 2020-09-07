@@ -39,6 +39,14 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.Users
 
         public IActionResult OnPost(int userId, IFormFile imageAvatar,List<int> roles)
         {
+
+            if (!ModelState.IsValid)
+            {
+                Roles = _role.GetAllRoles().ToList();
+                UserModel = _userRepository.GetUserById(userId);
+
+                return Page();
+            }
             var user = _userRepository.FindUser(userId);
             user.NationalCode = UserModel.NationalCode;
             user.Name = UserModel.Name;
