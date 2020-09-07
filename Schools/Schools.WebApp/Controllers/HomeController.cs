@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Schools.Application.Service.Interfaces.Locations;
 using Schools.Application.Service.Interfaces.Schools;
-using Schools.Domain.Models.AboutUs;
+using Schools.Domain.Models.ContactUs;
+using Schools.Domain.Repository.InterfaceRepository.AboutUsRepository;
+using Schools.Domain.Repository.InterfaceRepository.ContactUsRepositories;
 using Schools.Domain.Repository.InterfaceRepository.Locations;
+using Schools.Domain.Repository.InterfaceRepository.Schools;
 
 namespace Schools.WebApp.Controllers
 {
@@ -14,8 +17,9 @@ namespace Schools.WebApp.Controllers
         private IContactUsRepository _contactUs;
         private IAboutUsRepository _aboutUs;
         private IContactUsFormRepository _contactUsForm;
+        private ISchoolRulesRepository _rules;
 
-        public HomeController(ILocationRepository location, ISchoolService school, ILocationService locationService, IContactUsRepository contactUs, IAboutUsRepository aboutUs, IContactUsFormRepository contactUsForm)
+        public HomeController(ILocationRepository location, ISchoolService school, ILocationService locationService, IContactUsRepository contactUs, IAboutUsRepository aboutUs, IContactUsFormRepository contactUsForm, ISchoolRulesRepository rules)
         {
             _location = location;
             _school = school;
@@ -23,7 +27,9 @@ namespace Schools.WebApp.Controllers
             _contactUs = contactUs;
             _aboutUs = aboutUs;
             _contactUsForm = contactUsForm;
+            _rules = rules;
         }
+  
 
 
         [Route("/{englishName}")]
@@ -79,13 +85,17 @@ namespace Schools.WebApp.Controllers
             return result;
         }
 
-        [Route("/AboutUs")]
-        public IActionResult AboutUs(AboutUs aboutUs)
+        [Route("/About-Us")]
+        public IActionResult AboutUs()
         {
-            var aboutus = _aboutUs.GetLast();
-            return View(aboutus);
+            var pageModel = _aboutUs.GetLast();
+            if (pageModel==null)
+            {
+                return View("NotFound");
+            }
+            return View(pageModel);
         }
-        [Route("/ContactUs")]
+        [Route("/Contact-Us")]
         public IActionResult ContactUs()
         {
             return View(_contactUs.GetLast());
@@ -98,8 +108,14 @@ namespace Schools.WebApp.Controllers
                 return View(_contactUs.GetLast());
 
             _contactUsForm.InsertQuestion(contactUsForm);
-            ViewData["IsSuccess"] = true;
+            TempData["Success"] = true;
             return View(_contactUs.GetLast());
+        }
+        [Route("/Rules")]
+        public IActionResult Rules()
+        {
+            var ruleModel = _rules.GetRule();
+            return View(ruleModel);
         }
     }
 }

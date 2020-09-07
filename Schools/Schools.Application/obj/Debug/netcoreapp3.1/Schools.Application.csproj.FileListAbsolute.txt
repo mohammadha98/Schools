@@ -49,6 +49,7 @@ D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.Application\obj\Debug\netcor
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.Application\obj\Debug\netcoreapp3.1\Schools.Application.csproj.CopyComplete
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.Application\obj\Debug\netcoreapp3.1\Schools.Application.dll
 D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.Application\obj\Debug\netcoreapp3.1\Schools.Application.pdb
+D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.Application\obj\Debug\netcoreapp3.1\Schools.Application.csproj.CoreCompileInputs.cache
 C:\Users\mohammad\source\repos\schools\Schools\Schools.Application\bin\Debug\netcoreapp3.1\Schools.Application.deps.json
 C:\Users\mohammad\source\repos\schools\Schools\Schools.Application\bin\Debug\netcoreapp3.1\Schools.Application.dll
 C:\Users\mohammad\source\repos\schools\Schools\Schools.Application\bin\Debug\netcoreapp3.1\Schools.Application.pdb
@@ -62,4 +63,3 @@ C:\Users\mohammad\source\repos\schools\Schools\Schools.Application\obj\Debug\net
 C:\Users\mohammad\source\repos\schools\Schools\Schools.Application\obj\Debug\netcoreapp3.1\Schools.Application.csproj.CopyComplete
 C:\Users\mohammad\source\repos\schools\Schools\Schools.Application\obj\Debug\netcoreapp3.1\Schools.Application.dll
 C:\Users\mohammad\source\repos\schools\Schools\Schools.Application\obj\Debug\netcoreapp3.1\Schools.Application.pdb
-D:\Workspace\C#\Asp.NetCore\Schools\Schools\Schools.Application\obj\Debug\netcoreapp3.1\Schools.Application.csproj.CoreCompileInputs.cache

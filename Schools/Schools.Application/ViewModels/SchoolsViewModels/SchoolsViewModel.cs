@@ -86,6 +86,7 @@ namespace Schools.Application.ViewModels.SchoolsViewModels
     }
     public class EditSchoolViewModel
     {
+        public string ShortLink { get; set; }
         public string ImageName { get; set; }
         [Required]
         public int SchoolId { get; set; }

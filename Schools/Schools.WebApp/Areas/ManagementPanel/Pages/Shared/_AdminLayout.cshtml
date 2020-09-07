@@ -281,26 +281,8 @@
     <script src="/Admin/dist/js/demo.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-    <!-- TinyMCE Editor -->
-    <script src="/Admin/bowercomponents/tinymce/tinymce.min.js"></script>
-    @*<script>
-        tinymce.init({
-            selector: 'textarea#mytextarea',
-            plugins: 'advlist autolink link lists preview table code pagebreak',
-            menubar: false,
-            language: 'fa',
-            height: 300,
-            relative_urls: false,
-            toolbar: 'undo redo | removeformat preview code | fontsizeselect bullist numlist | alignleft aligncenter alignright alignjustify | bold italic | pagebreak table link',
-        });
-        $(function() {
-            // Replace the <textarea id="editor1"> with a CKEditor
-            // instance, using default configuration.
-            CKEDITOR.replace('editor1')
-            //bootstrap WYSIHTML5 - text editor
-            $('.textarea').wysihtml5();
-        });
-    </script>*@
+
+   
 
     @await RenderSectionAsync("Scripts", false)
 </body>

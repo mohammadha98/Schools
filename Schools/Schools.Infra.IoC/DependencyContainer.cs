@@ -22,6 +22,7 @@ using Schools.Domain.Repository.InterfaceRepository.ContactUsRepositories;
 using Schools.Infra.Data.Repository.ServiceRepository.ContactUs;
 using Schools.Domain.Repository.InterfaceRepository.AboutUsRepository;
 using Schools.Infra.Data.Repository.ServiceRepository.AboutUs;
+using Schools.Infra.Data.Repository.ServiceRepository.BlogRepositories;
 
 namespace Schools.Infra.IoC
 {
@@ -50,7 +51,7 @@ namespace Schools.Infra.IoC
             #region Blog
 
             service.AddScoped<IBlogServices, BlogServices>();
-            service.AddScoped<IBlogGroupsServices, BlogGroupsServices>();
+            service.AddScoped<IBlogCommentService, BlogCommentService>();
 
             #endregion
 
@@ -60,6 +61,7 @@ namespace Schools.Infra.IoC
             service.AddScoped<IUserTicketService, UserTicketService>();
             service.AddScoped<IUserNotificationService, UserNotificationService>();
             service.AddScoped<IUserMessageService, UserMessageService>();
+            service.AddScoped<IUserRoleService, UserRoleService>();
 
             #endregion
             //From Infra Data Layer
@@ -85,8 +87,9 @@ namespace Schools.Infra.IoC
 
             #region Blogs
             service.AddScoped<IBlogRepository, BlogRepository>();
-            service.AddScoped<IBlogGroupsRepository, BlogGroupRepositoy>();
-         
+            service.AddScoped<IBlogGroupsRepository, BlogGroupRepository>();
+            service.AddScoped<IBlogCommentRepository, BlogCommentRepository>();
+
             #endregion
 
             #region Users

@@ -3,6 +3,7 @@ using System.Diagnostics.Tracing;
 using System.Globalization;
 using System.Linq;
 using Schools.Application.Service.Interfaces.Schools;
+using Schools.Application.Utilities;
 using Schools.Application.Utilities.Convertors;
 using Schools.Application.Utilities.SaveAndDelete;
 using Schools.Application.Utilities.Security;
@@ -126,7 +127,9 @@ namespace Schools.Application.Service.Services.Schools
                 PageCount = pageCount,
                 StartPage = (pageId - 4 <= 0) ? 1 : pageId - 4,
                 EndPage = (pageId + 5 > pageCount) ? pageCount : pageId + 5,
-                SchoolRequests = result.Skip(skip).Take(take).ToList()
+                SchoolRequests = result.Skip(skip).Take(take).ToList(),
+                IsAccept = isAccept,
+                ManagerName = managerName
             };
             return requestModel;
         }
@@ -142,7 +145,7 @@ namespace Schools.Application.Service.Services.Schools
             return _request.GetRequestByUserId(userId);
         }
 
-        public void RejectRequest(SchoolRequest request)
+        public void RejectRequest(SchoolRequest request,string rejectText)
         {
             if (request==null)
                 return;
@@ -158,14 +161,33 @@ namespace Schools.Application.Service.Services.Schools
             }
             DeleteFileFromServer.DeleteFile(request.ImageName, "wwwroot/images/Requests");
             //<-//
+            //Send Email
+            try
+            {
+                var body = $"<h2>عدم تایید آموزشگاه</h2><h3>درخواست ثبت آموزشگاه شما به دلیل زیر تایید نشد : </h3><h4>{rejectText}</h4>";
+                SendEmail.Send(request.Email, "عدم تایید آموزشکاه", body.BuildView());
+            }
+            catch (Exception e)
+            {
+                // ignored
+            }
             request.IsDelete = true;
             _request.EditRequest(request);
         }
 
-        public void AcceptRequest(SchoolRequest request)
+        public void AcceptRequest(SchoolRequest request,string hostName)
         {
             if (request == null) return;
-
+            //Send Email
+            try
+            {
+                var body = $"<h2>{request.User.Name} {request.User.Family}</h2><h3>تبربک ! درخواست ثبت آموزشگاه شما با موفقیت تایید شد </h3><h4>شما می توانید با استفاده از لینک زیر وارد حساب آموزشگاه خود شودی</h4><a href='https://{hostName}/SchoolPanel'>ورود به حساب</a>";
+                SendEmail.Send(request.Email, " تایید آموزشکاه", body.BuildView());
+            }
+            catch (Exception e)
+            {
+                // ignored
+            }
             request.IsAccept = true;
             _request.EditRequest(request);
         }

@@ -1,15 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Schools.Application.Utilities.Security;
 using Schools.Domain.Models.Blogs;
 using Schools.Domain.Repository.InterfaceRepository.BlogRepositories;
 
 namespace Schools.WebApp.Areas.ManagementPanel.Pages.Blogs.Groups
 {
+    [PermissionsChecker(27)]
+
     public class AddModel : PageModel
     {
         private IBlogGroupsRepository _blogGroupsRepository;

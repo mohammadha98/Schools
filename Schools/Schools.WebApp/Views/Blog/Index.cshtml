@@ -1,8 +1,12 @@
-﻿@model Tuple<List<Schools.Application.ViewModels.BlogsViewModels.ShowCourseBlogViewModel>, int>
-
+﻿@using Schools.Application.Utilities.Convertors
+@using Schools.Application.ViewModels.BlogsViewModels
+@using Schools.Domain.Repository.InterfaceRepository.BlogRepositories
+@model Schools.Application.ViewModels.BlogsViewModels.BlogCategoryViewModel
+@inject IBlogGroupsRepository _group
 @{
-    ViewData["Title"] = "Index";
-    int pageNum = ViewBag.pageId;
+    ViewData["Title"] = "اخبار و مقالات";
+    var lastBlog = ViewData["LastBlogs"] as List<BlogViewModel>;
+    var groups = _group.GetAllGroups();
 }
 @section Meta
 {
@@ -15,7 +19,7 @@
     <div class="container page-title">
         <h1><a href=""> آرشیو مقالات </a></h1>
         <ul itemtype="http://schema.org/BreadcrumbList" class="breadcrumb">
-            <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement"><a href="" itemprop="item"><span itemprop="name"> بانک اطلاعاتی آموزشگاه ها </span></a></li>
+            <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement"><a href="/" itemprop="item"><span itemprop="name"> بانک اطلاعاتی آموزشگاه ها </span></a></li>
             <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement"><a href="" itemprop="item" class="current"><span itemprop="name"> آرشیو مقالات </span></a></li>
         </ul>
     </div>
@@ -24,154 +28,65 @@
 <div class="container">
     <div class="page-default page-style-one blog-category-page">
         <div class="row">
-            <!-- right -->
             <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
-                <!-- Top Layer -->
                 <div class="top-search shadow-style">
-                    <form>
-                        <input name="filter" placeholder=" جستجوی کنید ... " type="text">
+                    <form id="filtering">
+                        <input type="hidden" name="page" asp-for="CurrentPage" id="pageId" />
+                        <input type="hidden" name="groupTitle" asp-for="GroupTitle" id="groupTitle" />
+                        <input name="search" asp-for="Search" placeholder=" جستجوی کنید ... " type="text">
                         <button><i class="zmdi zmdi-search"></i></button>
                     </form>
                 </div>
-                <!-- /Top Layer -->
-
                 <section class="article-items">
                     <div class="row">
-                        @foreach (var item in Model.Item1)
+                        @foreach (var item in Model.Blogs)
                         {
-                            <partial name="_CourseBlog" model="@item" />
+                            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 article-col">
+                                <partial name="Blog/_BlogCard" model="item" />
+                            </div>
                         }
                     </div>
                 </section>
-                <form id="formSearch" asp-action="Index" method="get">
-                    <input type="hidden" id="pageId" name="pageId" value="@ViewBag.pageId.ToString()" />
-                    @if (Model.Item2 > 1)
-                    {
-                        <div class="pagination-layer">
-                            <div class="inner">
-                                <a onclick="prePage(@(pageNum-=1))" class="prev-page" href="#"> صفحه قبلی </a>
-                                <div class="pages">
-                                    @for (int i = 1; i <= (int)Model.Item2; i++)
-                                    {
-                                        <a class="page-link" onclick="changePage(@i)" href="#">@i</a>
-                                    }
-                                </div>
-                                <a onclick="nextPage(@(pageNum+=2))" href="#" class="next-page"> صفحه بعدی </a>
+                @if (Model.PageCount > 1)
+                {
+                    <div class="pagination-layer">
+                        <div class="inner">
+                            @if (Model.CurrentPage >= 1)
+                            {
+                                <a onclick="ChangePage(@(Model.CurrentPage+1))" href="javascript:void(0)" class="next-page"> صفحه بعدی </a>
+                            }
+                            <div class="pages">
+                                @for (var i = Model.StartPage; i <= Model.EndPage; i++)
+                                {
+                                    <a onclick="ChangePage(@i)" href="javascript:void(0)" class="@((i == Model.CurrentPage ? "page current" : "page"))">@i</a>
+                                }
                             </div>
+                            @if (Model.CurrentPage > 1)
+                            {
+                                <a onclick="ChangePage(@(Model.CurrentPage-1))" href="javascript:void(0)" class="prev-page"> صفحه قبلی </a>
+                            }
                         </div>
-                    }
-                </form>
+                    </div>
+                }
             </div>
             <!-- /right -->
             <!-- left -->
-            <aside class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
-                <!-- category -->
-                <section class="category-list shadow-style">
-                    <header> <h2> دسته بندی موضوعات </h2> </header>
-                    @await Component.InvokeAsync("ShowBlogGroupsComponent")
-                    <!-- /category -->
-                </section>
-                <!-- last blog -->
-                <section class="last-blog shadow-style">
-                    <header> <h2> آخرین مطالب بلاگ </h2> </header>
-                    <!-- item -->
-                    @await Component.InvokeAsync("ShowLatesBlogComponent")
-                    <!-- /item -->
-                </section>
-                <!-- last blog -->
-                <!-- last post -->
-                <section class="last-posts shadow-style">
-                    <header> <h2> آخرین آموزشگاه های ثبت شده </h2> </header>
-                    <div class="inner">
-                        <!-- item -->
-                        <article>
-                            <h2><a href=""><span> آموزشگاه رانندگی </span> عصر نو </a></h2>
-                            <span><i class="zmdi zmdi-calendar"></i> 23 سال سابقه </span>
-                        </article>
-                        <!-- /item -->
-                        <!-- item -->
-                        <article>
-                            <h2><a href=""><span>  آموزشگاه زبان</span>  اینده سازان </a></h2>
-                            <span><i class="zmdi zmdi-calendar"></i> 15 سال سابقه </span>
-                        </article>
-                        <!-- /item -->
-                        <!-- item -->
-                        <article>
-                            <h2><a href=""><span>  آموزشگاه هنر</span> ایده پویا </a></h2>
-                            <span><i class="zmdi zmdi-calendar"></i> 5 سال سابقه </span>
-                        </article>
-                        <!-- /item -->
-                        <!-- item -->
-                        <article>
-                            <h2><a href=""><span> آموزشگاه رانندگی </span> عصر نو </a></h2>
-                            <span><i class="zmdi zmdi-calendar"></i> 23 سال سابقه </span>
-                        </article>
-                        <!-- /item -->
-                        <!-- item -->
-                        <article>
-                            <h2><a href=""><span>  آموزشگاه زبان</span>  اینده سازان </a></h2>
-                            <span><i class="zmdi zmdi-calendar"></i> 15 سال سابقه </span>
-                        </article>
-                        <!-- /item -->
-                        <!-- item -->
-                        <article>
-                            <h2><a href=""><span>  آموزشگاه هنر</span> ایده پویا </a></h2>
-                            <span><i class="zmdi zmdi-calendar"></i> 5 سال سابقه </span>
-                        </article>
-                        <!-- /item -->
-                        <!-- item -->
-                        <article>
-                            <h2><a href=""><span> آموزشگاه رانندگی </span> عصر نو </a></h2>
-                            <span><i class="zmdi zmdi-calendar"></i> 23 سال سابقه </span>
-                        </article>
-                        <!-- /item -->
-                        <!-- item -->
-                        <article>
-                            <h2><a href=""><span>  آموزشگاه زبان</span>  اینده سازان </a></h2>
-                            <span><i class="zmdi zmdi-calendar"></i> 15 سال سابقه </span>
-                        </article>
-                        <!-- /item -->
-                        <!-- item -->
-                        <article>
-                            <h2><a href=""><span>  آموزشگاه هنر</span> ایده پویا </a></h2>
-                            <span><i class="zmdi zmdi-calendar"></i> 5 سال سابقه </span>
-                        </article>
-                        <!-- /item -->
-                    </div>
-                </section>
-                <!-- /last post -->
-                <!-- popular  -->
-                <!-- /popular  -->
-
-            </aside>
-            <!-- /left -->
+           <partial name="Blog/_LeftSide"/>
         </div>
     </div>
 </div>
 
 @section Scripts{
-    <script type="text/javascript">
+    <script>
 
-        function changeGroup() {
-            $("#formCategory").submit();
+        function changeGroup(title) {
+            $("#groupTitle").val(title);
+            $("#filtering").submit();
         }
 
-        function changePage(pageId) {
+        function ChangePage(pageId) {
             $("#pageId").val(pageId);
-            $("#formSearch").submit();
-        }
-
-        function nextPage(pageNum) {
-            if ($("#pageId").val() <= @Model.Item2-1) {
-                $("#pageId").val(pageNum);
-                $("#formSearch").submit();
-            }
-        }
-        function prePage(pageNum) {
-            if ($("#pageId").val() > 1) {
-                $("#pageId").val(pageNum);
-                $("#formSearch").submit();
-            }
+            $("#filtering").submit();
         }
     </script>
 }

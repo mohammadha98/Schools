@@ -1,16 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http.Connections;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Schools.Application.Utilities.Security;
 using Schools.Application.ViewModels.SchoolsViewModels;
 using Schools.Domain.Models.Schools;
 using Schools.Domain.Repository.InterfaceRepository;
 
 namespace Schools.WebApp.Areas.ManagementPanel.Pages.Schools.Groups
 {
+    [PermissionsChecker(35)]
+
     public class AddSubGroupModel : PageModel
     {
         private ISchoolGroupsRepository _schoolGroupsRepository;

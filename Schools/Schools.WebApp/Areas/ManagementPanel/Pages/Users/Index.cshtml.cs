@@ -1,14 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Schools.Application.Service.Interfaces.Users;
+using Schools.Application.Utilities.Security;
 using Schools.Application.ViewModels.UsersViewModel;
 
 namespace Schools.WebApp.Areas.ManagementPanel.Pages.Users
 {
+    [PermissionsChecker(36)]
+
     public class IndexModel : PageModel
     {
         private IUserService _userService;
@@ -16,11 +14,11 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.Users
         {
             _userService = userService;
         }
-        public UsersForAdminPanelViewModel usersForAdminPanelViewModel { get; set; }
+        public UsersForAdminPanelViewModel UsersModel { get; set; }
 
         public void OnGet(int pageId = 1, string username = "")
         {
-            usersForAdminPanelViewModel = _userService.GetUsersByFilter(username, pageId);
+            UsersModel = _userService.GetUsersByFilter(username, pageId);
         }
 
     }

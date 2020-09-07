@@ -1,13 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Schools.Application.Utilities.Security;
 using Schools.Domain.Repository.InterfaceRepository.ContactUsRepositories;
 
 namespace Schools.WebApp.Areas.ManagementPanel.Pages.ContactUs
 {
+    [PermissionsChecker(1)]
     public class AddModel : PageModel
     {
         private IContactUsRepository _contactUs;
@@ -20,6 +18,11 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.ContactUs
         public Domain.Models.ContactUs.ContactUs ContactUs { get; set; }
         public void OnGet()
         {
+            var contactUs = _contactUs.GetLast();
+            if (contactUs!= null)
+            {
+                Response.Redirect("/ManagementPanel");
+            }
         }
 
         public IActionResult OnPost()
@@ -27,7 +30,7 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.ContactUs
             if (!ModelState.IsValid)
                 return Page();
 
-            var contactus = new Domain.Models.ContactUs.ContactUs()
+            var contactUs = new Domain.Models.ContactUs.ContactUs()
             {
                 Address = ContactUs.Address,
                 Title = ContactUs.Title,
@@ -37,7 +40,7 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.ContactUs
                 IsDelete = false
             };
 
-            _contactUs.AddContactUs(contactus);
+            _contactUs.AddContactUs(contactUs);
             return RedirectToPage("Index");
         }
     }

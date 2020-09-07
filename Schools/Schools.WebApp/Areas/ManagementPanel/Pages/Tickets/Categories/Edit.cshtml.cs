@@ -1,10 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Schools.Application.Utilities.Security;
 using Schools.Domain.Models.Users.Tickets;
 using Schools.Domain.Repository.InterfaceRepository.Users;
 
 namespace Schools.WebApp.Areas.ManagementPanel.Pages.Tickets.Categories
 {
+    [PermissionsChecker(23)]
+
     public class EditModel : PageModel
     {
         private IUserTicketRepository _ticket;

@@ -7,6 +7,7 @@ using Schools.Domain.Repository.InterfaceRepository.Schools;
 
 namespace Schools.WebApp.Areas.ManagementPanel.Pages.Schools.Galleries
 {
+    [PermissionsChecker(32)]
     public class EditModel : PageModel
     {
         private ISchoolRepository _school;

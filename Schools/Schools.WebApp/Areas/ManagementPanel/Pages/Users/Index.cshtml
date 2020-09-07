@@ -1,4 +1,5 @@
 ﻿@page
+@using Schools.Application.Utilities.Convertors
 @model Schools.WebApp.Areas.ManagementPanel.Pages.Users.IndexModel
 @{
 
@@ -23,29 +24,63 @@
                                         <th>#</th>
                                         <th>نام کاربری</th>
                                         <th>نام</th>
-                                        <th>فامیل</th>
+                                        <th>نام خانوادگی</th>
                                         <th>تاریخ ثبت نام</th>
                                         <th>عملیات ها</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    @foreach(var item in Model.usersForAdminPanelViewModel.GetUsers)
+                                    @foreach (var item in Model.UsersModel.Users)
                                     {
                                         <tr>
                                             <td>@item.UserId</td>
                                             <td>@item.UserName</td>
                                             <td>@item.Name</td>
                                             <td>@item.Family</td>
-                                            <td>@item.RegisterDate</td>
+                                            <td>@item.RegisterDate.ToShamsi()</td>
                                             <td>
                                                 <a class="btn btn-primary btn-sm" href="/ManagementPanel/Users/ShowProfile/@item.UserId">مشاهده پروفایل</a>
+                                                <a class="btn btn-info btn-sm" href="/ManagementPanel/Users/Edit/@item.UserId">ویرایش</a>
                                             </td>
                                         </tr>
                                     }
 
                                 </tbody>
                             </table>
+                        </div>
+                        <div class="dataTables_paginate paging_simple_numbers text-center" id="example2_paginate">
+
+                            @if (Model.UsersModel.PageCount > 1)
+                            {
+                                <hr class="mt-0">
+
+                                <ul class="pagination">
+                                    @if (Model.UsersModel.CurrentPage > 1 && Model.UsersModel.StartPage > 1)
+                                    {
+                                        <li class="paginate_button previous disabled" id="example2_previous">
+                                            <a onclick="ChangePage(1)">1</a>
+                                        </li>
+
+                                    }
+
+                                    @for (var i = Model.UsersModel.StartPage; i <= Model.UsersModel.EndPage; i++)
+                                    {
+
+                                        <li class="@((i == Model.UsersModel.CurrentPage ? "paginate_button active" : "paginate_button"))">
+                                            <a onclick="ChangePage(@i)" href="javascript:void(0)">@i</a>
+                                        </li>
+                                    }
+                                    @if (Model.UsersModel.CurrentPage < Model.UsersModel.PageCount && Model.UsersModel.EndPage < Model.UsersModel.PageCount)
+                                    {
+                                        <li class="paginate_button next" id="example2_next">
+                                            <a onclick="ChangePage(@Model.UsersModel.PageCount)">@Model.UsersModel.PageCount</a>
+                                        </li>
+
+                                    }
+                                </ul>
+                            }
+
                         </div>
 
                     </div>

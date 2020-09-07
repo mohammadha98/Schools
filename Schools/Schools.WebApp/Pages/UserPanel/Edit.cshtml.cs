@@ -1,11 +1,14 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Schools.Application.Service.Interfaces.Users;
 using Schools.Application.Utilities;
+using Schools.Application.Utilities.Security;
 using Schools.Application.ViewModels.UsersViewModel;
 
 namespace Schools.WebApp.Pages.UserPanel
 {
+    //12 = ویرایش حساب کاربری
+    [PermissionsChecker(12)]
     public class EditModel : PageModel
     {
         private IUserService _service;

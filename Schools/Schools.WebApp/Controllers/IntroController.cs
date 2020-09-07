@@ -13,7 +13,6 @@ namespace Schools.WebApp.Controllers
         }
         public IActionResult Index()
         {
-
             return View(_location.GetAllShires());
         }
 

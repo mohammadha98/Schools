@@ -1,10 +1,13 @@
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using Schools.Application.Service.Interfaces.Users;
 using Schools.Application.Utilities;
+using Schools.Application.Utilities.Security;
 using Schools.Application.ViewModels.UsersViewModel;
 
 namespace Schools.WebApp.Pages.UserPanel.Tickets
 {
+    //13 = نمایش و ثبت پیام
+    [PermissionsChecker(13)]
     public class IndexModel : PageModel
     {
         private IUserTicketService _service;

@@ -47,7 +47,20 @@ else
 
             <div class="left-side">
                 <div class="account-heading layer-style">
-                    <span class="status green"> وضعیت : <i> @(Model.School.IsActive ? "فعال" : "غییر فعال") </i></span>
+                    @if (Model.School.IsActive)
+                    {
+                        <span class="status green">
+                            وضعیت :
+                            <i> فعال </i>
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="status red">
+                            وضعیت :
+                            <i> غیرفعال </i>
+                        </span>
+                    }
                     <a href="/SchoolPanel/Tickets/Add"> <i class="zmdi zmdi-plus"></i> ثبت تیکت </a>
                 </div>
 

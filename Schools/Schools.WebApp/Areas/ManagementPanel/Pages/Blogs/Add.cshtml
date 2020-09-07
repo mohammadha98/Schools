@@ -4,12 +4,9 @@
 @inject IBlogGroupsRepository _groupRepository;
 @{
     var menuModel = "blogs";
-    var Groups = _groupRepository.GetAllGroups("");
+    var groups = _groupRepository.GetAllGroups();
 }
-@section Meta
-{
-    <link rel="stylesheet" href="/Admin/bowercomponents/select2/dist/css/select2.min.css">
-}
+
 <partial name="_MainMenu" model="menuModel" />
 
 <div class="content-wrapper">
@@ -20,65 +17,57 @@
                     <div class="box-header with-border">
                         <h3 class="box-title">افزودن بلاگ</h3>
                     </div>
-                    <!-- /.box-header -->
-                    <!-- form start -->
-                    <form role="form" method="post" enctype="multipart/form-data">
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <form class="row" method="post" enctype="multipart/form-data">
+                        <div asp-validation-summary="All" class="text-danger col-lg-12"></div>
+                        <input type="hidden" asp-for="Blog.ShortLink" value="fakeData"/>
+                        <input type="hidden" asp-for="Blog.ImageName" value="fakeData"/>
                         <div class="box-body">
-                            <div class="form-group">
+                            <div class="form-group col-lg-6">
                                 <label asp-for="Blog.Title"></label>
                                 <input asp-for="Blog.Title" type="text" class="form-control" placeholder="عنوان">
                                 <span asp-validation-for="Blog.Title" class="text-danger"></span>
                             </div>
-                            <div class="form-group">
-                                <label asp-for="Blog.ShortDescription"></label>
-                                <input asp-for="Blog.ShortDescription" type="text" class="form-control" placeholder="توضیح مختصر">
+                            <div class="form-group col-lg-6">
+                                <label >توضیح مختصر<span class="counter" style="padding: 2px; border-radius: 50%; font-size: 12px ">0</span></label>
+                                <textarea asp-for="Blog.ShortDescription" type="text" class="form-control" placeholder="توضیح مختصر"></textarea>
                                 <span asp-validation-for="Blog.ShortDescription" class="text-danger"></span>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group col-lg-12">
                                 <label asp-for="Blog.BlogText"></label>
                                 <div class="box-body pad">
-                                    <textarea asp-for="Blog.BlogText" id="editor1" rows="10" cols="80" style="visibility: hidden; display: none;"></textarea>
+                                    <textarea asp-for="Blog.BlogText"></textarea>
                                 </div>
                                 <span asp-validation-for="Blog.BlogText" class="text-danger"></span>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group col-lg-6" >
                                 <label asp-for="Blog.Tags"></label>
-                                <input asp-for="Blog.Tags" type="text" class="form-control">
+                                <input asp-for="Blog.Tags" type="text" placeholder="کلمات را با - از هم جدا کنید" class="form-control">
                             </div>
-
-                            <!-- radio -->
-                            <div class="form-group">
-                                <label asp-for="Blog.TypeId">
-                                </label>
-                                <label>
-                                    خبر
-                                    <input asp-for="Blog.TypeId" value="1" type="radio" class="minimal-red" checked>
-                                </label>
-                                <label>
-                                    مقاله
-                                    <input asp-for="Blog.TypeId" value="2" type="radio" class="minimal-red">
-                                </label>
+                            <div class="form-group col-lg-6">
+                                <label asp-for="Blog.TypeId"></label>
+                                <select class="form-control" asp-for="Blog.TypeId">
+                                    <option value="4">خبر</option>
+                                    <option value="5">مقاله</option>
+                                </select>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group col-lg-6">
                                 <label asp-for="Blog.GroupId"></label>
                                 <select asp-for="Blog.GroupId" class="form-control">
-                                    @foreach (var item in Groups)
+                                    @foreach (var item in groups)
                                     {
                                         <option value="@item.GroupId">@item.GroupName</option>
                                     }
                                 </select>
                             </div>
-
-                            <div class="form-group">
+                            <div class="form-group col-lg-6">
                                 <label asp-for="Blog.ImageName"></label>
-                                <input type="file" name="imgUp" asp-for="Blog.ImageName">
+                                <input type="file" name="imgUp" class="form-control">
                             </div>
                         </div>
                         <!-- /.box-body -->
 
                         <div class="box-footer">
-                            <button type="submit" class="btn btn-primary">ارسال</button>
+                            <button type="submit" class="btn btn-primary">ثبت</button>
                         </div>
                     </form>
                 </div>
@@ -87,7 +76,72 @@
     </section>
 </div>
 @section Scripts{
-    <script src="/Admin/bowercomponents/ckeditor/ckeditor.js"></script>
+    <script src="/ckeditor5/build/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#Blog_BlogText'), {
+                simpleUpload: {
+                    uploadUrl: '/Upload/UploadBlogImage'
+                },
+                toolbar: {
+                    items: [
+                        'heading',
+                        '|',
+                        'fontSize',
+                        'bold',
+                        'italic',
+                        'link',
+                        '|',
+                        'bulletedList',
+                        'numberedList',
+                        '|',
+                        'codeblock',
+                        'imageUpload',
+                        'blockQuote',
+                        'insertTable',
+                        '|',
+                        'indent',
+                        'outdent',
+                        '|',
+                        'undo',
+                        'redo',
+                    ]
+                },
+                language: 'fa',
+                image: {
+                    toolbar: [
+                        'imageTextAlternative',
+                        'imageStyle:full',
+                        'imageStyle:side'
+                    ]
+                },
+                table: {
+                    contentToolbar: [
+                        'tableColumn',
+                        'tableRow',
+                        'mergeTableCells'
+                    ]
+                },
+                licenseKey: '',
+
+            })
+            .then(editor => {
+                window.editor = editor;
+            })
+            .catch(error => {
+               
+                console.error(error);
+            });
+        $("#Blog_ShortDescription").keydown(function () {
+            var len = $(this).val().length;
+            $(".counter").html(len);
+        });
+        $("#Blog_ShortDescription").change(function () {
+            var len = $(this).val().length;
+            $(".counter").html(len);
+        });
+
+    </script>
 }
 
 

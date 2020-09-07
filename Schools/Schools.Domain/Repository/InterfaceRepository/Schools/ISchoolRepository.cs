@@ -8,6 +8,7 @@ namespace Schools.Domain.Repository.InterfaceRepository.Schools
         IQueryable<School> GetAllSchools();
         School GetSchoolBySchoolId(int schoolId);
         School GetSchoolByUserId(int userId);
+        School GetSchoolByShortLink(string shortLink);
         bool IsUserHasASchool(int userId);
         void DeleteSchool(int schoolId);
         void AddSchool(School school);

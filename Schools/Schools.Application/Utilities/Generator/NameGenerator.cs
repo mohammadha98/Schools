@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Schools.Application.Utilities.Generator
 {
@@ -8,7 +6,7 @@ namespace Schools.Application.Utilities.Generator
     {
         public static string GenerateUniqCode()
         {
-            return Guid.NewGuid().ToString("N").Substring(0,4).Replace("-", "");
+            return Guid.NewGuid().ToString("N").Substring(0,5).Replace("-", "");
         }
     }
 }

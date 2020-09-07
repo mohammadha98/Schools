@@ -1,14 +1,16 @@
 using System;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore.Query;
 using Schools.Application.Service.Interfaces.Users;
 using Schools.Application.Utilities;
+using Schools.Application.Utilities.Security;
 using Schools.Domain.Models.Users.Messages;
 using Schools.Domain.Repository.InterfaceRepository.Users;
 
 namespace Schools.WebApp.Pages.UserPanel.Messages
 {
+
+    [PermissionsChecker(2)]
     public class ShowModel : PageModel
     {
         private IUserMessageRepository _message;

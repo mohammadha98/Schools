@@ -39,15 +39,16 @@ namespace Schools.WebApp.Controllers
         public IActionResult SinglePage(int schoolId, string schoolTitle)
         {
             var school = _school.GetSchoolById(schoolId);
-            if (school == null)
+            if (school == null || school.IsActive==false)
             {
                 return NotFound();
             }
-
+            //Khili shooloogh shode vali Hosele nadaram ViewModel Besazam :D
             ViewData["Shires"] = _locationService.GetAllShire();
             ViewData["Cities"] = _locationService.GetAllCityByShireId(school.ShireId);
+            ViewData["SimilarSchools"] = _school.GetSimilarSchools(school.GroupId);
             //پر کردن اولیه بخش نظرات
-            ViewData["Comments"] = _comment.GetSchoolComments(1, 9, schoolId);
+            ViewData["Comments"] = _comment.GetSchoolComments(1, 7, schoolId);
             ViewData["IsUserLikeSchool"] = false;
             if (User.Identity.IsAuthenticated)
             {
@@ -70,20 +71,18 @@ namespace Schools.WebApp.Controllers
         [Route("/GetComments/{pageId}/{schoolId}")]
         public IActionResult GetSchoolComments(int pageId, int schoolId)
         {
-            var school = _comment.GetSchoolComments(pageId, 9, schoolId);
+            var school = _comment.GetSchoolComments(pageId, 7, schoolId);
             if (school == null)
             {
                 return NotFound();
             }
             return PartialView("School/_SchoolComments", school);
         }
+        [Authorize]
         [HttpPost]
         public IActionResult AddComment(SchoolComment comment)
         {
-            if (!User.Identity.IsAuthenticated)
-            {
-                return Forbid();
-            }
+
             comment.UserId = User.GetUserId();
             if (string.IsNullOrEmpty(comment.Text))
             {
@@ -99,12 +98,10 @@ namespace Schools.WebApp.Controllers
             }
             return Content(res);
         }
+        [Authorize]
         public IActionResult DeleteComment(int commentId, int schoolId)
         {
-            if (!User.Identity.IsAuthenticated)
-            {
-                return Forbid();
-            }
+
             var comment = _comment.GetSchoolCommentById(commentId);
             if (comment != null)
             {
@@ -121,12 +118,9 @@ namespace Schools.WebApp.Controllers
             return Content("Error");
 
         }
+        [Authorize]
         public IActionResult TeacherRating(int schoolId, float rate, int teacherId)
         {
-            if (!User.Identity.IsAuthenticated)
-            {
-                return Forbid();
-            }
             var teacher = _teacher.GetTeacherById(teacherId);
 
             if (teacher == null) return NotFound();
@@ -149,12 +143,9 @@ namespace Schools.WebApp.Controllers
             return Content("Success");
 
         }
+        [Authorize]
         public IActionResult Rating(int schoolId, float rate)
         {
-            if (!User.Identity.IsAuthenticated)
-            {
-                return Forbid();
-            }
             var rateModel = _rate.GetSchoolRate(User.GetUserId(), schoolId);
             if (rateModel != null)
             {
@@ -170,13 +161,9 @@ namespace Schools.WebApp.Controllers
             _rate.AddRate(newRate);
             return Content("Success");
         }
-        
+        [Authorize]
         public IActionResult LikeSchool(int schoolId)
         {
-            if (!User.Identity.IsAuthenticated)
-            {
-                return Forbid("Error");
-            }
 
             //اگر نال نباشه یعنی باید حذفش کنیم
             var like = _like.GetUserLike(schoolId, User.GetUserId());
@@ -196,6 +183,7 @@ namespace Schools.WebApp.Controllers
             _like.AddUserLike(userLike);
             return Content("Added");
         }
+
     }
 
 }

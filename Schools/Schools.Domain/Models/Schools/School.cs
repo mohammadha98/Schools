@@ -40,7 +40,7 @@ namespace Schools.Domain.Models.Schools
         [Display(Name = "ایمیل آموزشگاه")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         public string SchoolEmail { get; set; }
-     
+        public string ShortLink { get; set; }
         public string SchoolFax { get; set; }
         [Display(Name = " عکس کاور آموزشگاه")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]

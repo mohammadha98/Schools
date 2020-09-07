@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Schools.Application.Utilities;
@@ -18,13 +19,14 @@ namespace Schools.WebApp.Controllers
         {
             _user = user;
         }
+        [Authorize]
         [HttpPost]
         public IActionResult UploadTicketImages(IFormFile upload)
         {
-            if (upload == null)
-            {
-                return null;
-            }
+            if (upload == null) return null;
+         
+            if (!upload.IsImage()) return null;
+
             //برای تکراری نبودن عکس از  یک نام یکتا استفاده می کنیم که شامل عدد نباشد
             var guildName = String.Concat(Guid.NewGuid().ToString("N").Select(c => (char)(c + 17)));
             var fileName = guildName + Path.GetExtension(upload.FileName)?.ToLower();
@@ -39,7 +41,31 @@ namespace Schools.WebApp.Controllers
             var url = $"/images/ticketImages/{fileName}";
             return Json(new { uploaded = true, url });
         }
+        [PermissionsChecker(25)]
+        [HttpPost]
+        public IActionResult UploadBlogImage(IFormFile upload)
+        {
+            if (upload == null)
+            {
+                return null;
+            }
 
+            if (!upload.IsImage()) return null;
+            //برای تکراری نبودن عکس از  یک نام یکتا استفاده می کنیم که شامل عدد نباشد
+            var guildName = String.Concat(Guid.NewGuid().ToString("N").Select(c => (char)(c + 17)));
+            var fileName = guildName + Path.GetExtension(upload.FileName)?.ToLower();
+
+            var path = Path.Combine(
+                Directory.GetCurrentDirectory(), "wwwroot/images/blogs/content/", fileName);
+            using (var stream = new FileStream(path, FileMode.Create))
+            {
+                upload.CopyTo(stream);
+            }
+
+            var url = $"/images/blogs/content/{fileName}";
+            return Json(new { uploaded = true, url });
+        }
+        [PermissionsChecker(16)]
         [HttpPost]
         public IActionResult ChangeUserAvatar(IFormFile avatar)
         {

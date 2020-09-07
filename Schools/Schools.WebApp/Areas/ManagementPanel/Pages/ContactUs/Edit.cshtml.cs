@@ -1,13 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Schools.Application.Utilities.Security;
 using Schools.Domain.Repository.InterfaceRepository.ContactUsRepositories;
 
 namespace Schools.WebApp.Areas.ManagementPanel.Pages.ContactUs
 {
+    [PermissionsChecker(1)]
     public class EditModel : PageModel
     {
         private IContactUsRepository _contactUs;
@@ -17,25 +15,31 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.ContactUs
         }
         [BindProperty]
         public Domain.Models.ContactUs.ContactUs ContactUs { get; set; }
-        public void OnGet(int id)
+        public void OnGet()
         {
-            ContactUs = _contactUs.GetContactUsById(id);
+            ContactUs = _contactUs.GetLast();
+            if (ContactUs==null)
+            {
+                Response.Redirect("/ManagementPanel/ContactUs");
+            }
         }
 
-        public IActionResult OnPost(int id)
+        public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
                 return Page();
 
-            var contactus = _contactUs.GetContactUsById(id);
-            contactus.Title = ContactUs.Title;
-            contactus.PhoneNumber = ContactUs.PhoneNumber;
-            contactus.Address = ContactUs.Address;
-            contactus.ResponseTime = ContactUs.ResponseTime;
-            contactus.Email = ContactUs.Email;
-            contactus.IsDelete = false;
+            var contactUs = _contactUs.GetLast();
+            if (contactUs == null) return RedirectToPage("Index");
 
-            _contactUs.UpdateContacUs(contactus);
+            contactUs.PhoneNumber = ContactUs.PhoneNumber;
+            contactUs.Email = ContactUs.Email;
+            contactUs.Address = ContactUs.Address;
+            contactUs.Title = ContactUs.Title;
+            contactUs.ResponseTime = ContactUs.ResponseTime;
+            contactUs.IsDelete = false;
+
+            _contactUs.UpdateContactUs(contactUs);
             return RedirectToPage("Index");
         }
     }

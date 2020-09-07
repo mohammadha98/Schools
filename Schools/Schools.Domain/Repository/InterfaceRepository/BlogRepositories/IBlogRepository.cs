@@ -1,25 +1,19 @@
 ﻿using Schools.Domain.Models.Blogs;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 namespace Schools.Domain.Repository.InterfaceRepository.BlogRepositories
 {
     public interface IBlogRepository
     {
-        #region Blog
-        IEnumerable<Blog> GetAllBlogs();
-        IEnumerable<Blog> GetLatesBlog();
+      
+
+        IQueryable<Blog> GetAllBlogs();
         Blog GetBlogById(int blogId);
+        Blog GetBlog(int blogId);
+        Blog GetBlog(string shortLink);
         void InsertBlog(Blog blog);
         void UpdateBlog(Blog blog);
-        void Save();
-        #endregion
+    
 
-        #region BlogComment
-        void AddComment(BlogComment comment);
-        int CommentCount(int blogId);
-        void DeleteComment(int commentId);
-        #endregion
     }
 }

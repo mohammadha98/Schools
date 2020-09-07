@@ -1,13 +1,17 @@
 ﻿@model Schools.Domain.Models.Blogs.Blog
 @using Schools.Application.Utilities.Convertors
+@using Schools.Application.ViewModels.BlogsViewModels
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = Model.Title;
+    var comments = ViewData["Comments"] as BlogCommentsViewModel;
+
 }
 @section Topic_Layer{
     <div class="container page-title">
         <h1><a href=""> @Model.Title </a></h1>
         <ul itemtype="http://schema.org/BreadcrumbList" class="breadcrumb">
-            <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement"><a href="" itemprop="item"><span itemprop="name"> بانک اطلاعاتی آموزشگاه ها </span></a></li>
+            <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement"><a href="/" itemprop="item"><span itemprop="name"> بانک اطلاعاتی آموزشگاه ها </span></a></li>
+            <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement"><a href="/blogs" itemprop="item"><span itemprop="name">وبلاگ</span></a></li>
             <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement"><a href="" itemprop="item" class="current"><span itemprop="name"> @Model.Title </span></a></li>
         </ul>
     </div>
@@ -15,6 +19,7 @@
 }
 @section Meta
 {
+
     <link rel="stylesheet" type="text/css" href="/css/material-icon.css">
     <link href="/css/page.css" rel="stylesheet" />
 }
@@ -37,16 +42,11 @@
                         <h2><a href=""> @Model.Title </a></h2>
                         <div class="detail-layer">
                             <span><i class="zmdi zmdi-eye"></i> @Model.BlogVisit </span>
-                            <a href="/blog"><i class="zmdi zmdi-rotate-left"></i> بازگشت به آرشیو مطالب </a>
+                            <a href="/blogs"><i class="zmdi zmdi-rotate-left"></i> بازگشت به آرشیو مطالب </a>
                         </div>
                     </header>
                     <article>
-                        <p>
-                            @Model.ShortDescription
-                        </p>
-                        <p>
-                            @Model.BlogText
-                        </p>
+                        @Html.Raw(Model.BlogText)
                     </article>
                 </section>
                 <!-- /main content -->
@@ -54,195 +54,22 @@
                 <div class="tags-layer shadow-style">
                     @foreach (var item in Model.Tags.Split('-'))
                     {
-                        <a href=""> @item </a>
+                        <a href="/blogs?search=@item"> @item </a>
                     }
                 </div>
-                <!-- /keywords -->
-                <!-- comments -->
-                <section class="user-comments-layer shadow-style">
-                    <header> <h3> <i class="zmdi zmdi-comments"></i> نظرات کاربران </h3> <span>@ViewBag.CommentCount نظر </span> </header>
-                    <div class="comment-inner-layer">
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            <form asp-controller="Blog" asp-action="CreateComment"
-                                  data-ajax="true"
-                                  data-ajax-method="post"
-                                  data-ajax-mode="replace"
-                                  data-ajax-update="#listComment"
-                                  data-ajax-success="Success">
-                                <input type="hidden" name="comment.BlogId" value="@Model.BlogId" />
-                                <div class="row">
-                                    <div class="col-md-5 col-sm-5 col-xs-12">
-                                        <input name="comment.Name" id="comment_Name" placeholder=" نام و نام خانوادگی" type="text">
-                                        <input name="comment.Email" id="comment_Email" placeholder=" ایمیل " type="email">
-                                        <input name="comment.PhoneNumber" id="comment_PhoneNumber" placeholder=" شماره تماس " type="text">
-                                        <!-- here get comment id for reply , use this input's value and separate cm- -->
-                                        <input name="comment_CommentId" id="reply-comment-id" type="hidden">
-                                    </div>
-                                    <div class="col-md-7 col-sm-7 col-xs-12">
-                                        <textarea id="comment_Comment" name="comment.Comment" placeholder=" متن نظر"></textarea>
-                                        @*<div class="captcha">
-                                                <input name="" placeholder=" کد امنیتی " type="text">
-                                                <img src="images/pic/captcha.jpg">
-                                            </div>*@
-                                        <button type="submit"> ارسال نظر ارزشمند شما </button>
-                                    </div>
-                                </div>
-                            </form>
-                        }
-                        else
-                        {
-                            <div class="alert alert-danger">
-                                جهت درج نظر باید وارد سایت شوید
-                            </div>
-                        }
-                        <div class="comments-list" id="listComment">
-                            <div class="comment-inner-layer" id="replayComment">
 
-                            </div>
-                        </div>
-
-                        <!-- paging -->
-
-                        <div class="pagination-layer" id="pageCount">
-
-                        </div>
-
-                    </div>
-                </section>
-                <!-- /comments -->
+                <div id="comments">
+                    <partial name="Blog/_BlogComments" model="comments" />
+                </div>
 
             </div>
             <!-- /right -->
-            <!-- left -->
-            <aside class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
-                <!-- category -->
-                <section class="category-list shadow-style">
-                    <header> <h2> دسته بندی موضوعات </h2> </header>
-                    <form id="formFilter" asp-action="Index" method="get">
-                        @await Component.InvokeAsync("ShowBlogGroupsComponent")
-                    </form>
-                </section>
-                <!-- /category -->
-                <!-- last blog -->
-                <section class="last-blog shadow-style">
-                    <header> <h2> آخرین مطالب بلاگ </h2> </header>
-                    <!-- item -->
-                    @await Component.InvokeAsync("ShowLatesBlogComponent")
-                    <!-- /item -->
-                </section>
-                <!-- last blog -->
-                <!-- last post -->
-                <section class="last-posts shadow-style">
-                    <header> <h2> آخرین آموزشگاه های ثبت شده </h2> </header>
-                    <div class="inner">
-                        <!-- item -->
-                        <article>
-                            <h2><a href=""><span> آموزشگاه رانندگی </span> عصر نو </a></h2>
-                            <span><i class="zmdi zmdi-calendar"></i> 23 سال سابقه </span>
-                        </article>
-                        <!-- /item -->
-                        <!-- item -->
-                        <article>
-                            <h2><a href=""><span>  آموزشگاه زبان</span>  اینده سازان </a></h2>
-                            <span><i class="zmdi zmdi-calendar"></i> 15 سال سابقه </span>
-                        </article>
-                        <!-- /item -->
-                        <!-- item -->
-                        <article>
-                            <h2><a href=""><span>  آموزشگاه هنر</span> ایده پویا </a></h2>
-                            <span><i class="zmdi zmdi-calendar"></i> 5 سال سابقه </span>
-                        </article>
-                        <!-- /item -->
-                        <!-- item -->
-                        <article>
-                            <h2><a href=""><span> آموزشگاه رانندگی </span> عصر نو </a></h2>
-                            <span><i class="zmdi zmdi-calendar"></i> 23 سال سابقه </span>
-                        </article>
-                        <!-- /item -->
-                        <!-- item -->
-                        <article>
-                            <h2><a href=""><span>  آموزشگاه زبان</span>  اینده سازان </a></h2>
-                            <span><i class="zmdi zmdi-calendar"></i> 15 سال سابقه </span>
-                        </article>
-                        <!-- /item -->
-                        <!-- item -->
-                        <article>
-                            <h2><a href=""><span>  آموزشگاه هنر</span> ایده پویا </a></h2>
-                            <span><i class="zmdi zmdi-calendar"></i> 5 سال سابقه </span>
-                        </article>
-                        <!-- /item -->
-                        <!-- item -->
-                        <article>
-                            <h2><a href=""><span> آموزشگاه رانندگی </span> عصر نو </a></h2>
-                            <span><i class="zmdi zmdi-calendar"></i> 23 سال سابقه </span>
-                        </article>
-                        <!-- /item -->
-                        <!-- item -->
-                        <article>
-                            <h2><a href=""><span>  آموزشگاه زبان</span>  اینده سازان </a></h2>
-                            <span><i class="zmdi zmdi-calendar"></i> 15 سال سابقه </span>
-                        </article>
-                        <!-- /item -->
-                        <!-- item -->
-                        <article>
-                            <h2><a href=""><span>  آموزشگاه هنر</span> ایده پویا </a></h2>
-                            <span><i class="zmdi zmdi-calendar"></i> 5 سال سابقه </span>
-                        </article>
-                        <!-- /item -->
-                        <!-- item -->
-                        <article>
-                            <h2><a href=""><span> آموزشگاه رانندگی </span> عصر نو </a></h2>
-                            <span><i class="zmdi zmdi-calendar"></i> 23 سال سابقه </span>
-                        </article>
-                        <!-- /item -->
-                    </div>
-                </section>
-                <!-- /last post -->
-                <!-- popular  -->
-                <!-- /popular  -->
-
-            </aside>
-            <!-- /left -->
+            <partial name="Blog/_LeftSide" />
         </div>
     </div>
 
 </div>
 @section Scripts{
-    <script src="/js/jquery.unobtrusive-ajax.min.js"></script>
-    <script type="text/javascript">
-
-        function Success() {
-            $("#comment_Comment").val("");
-            $("#comment_Name").val("");
-            $("#comment_Email").val("");
-            $("#comment_PhoneNumber").val("");
-        }
-
-        $(function () {
-            $("#listComment").load("/Blog/ShowComment/" +@Model.BlogId);
-            $("#pageCount").load("/Blog/PageCount/" + @Model.BlogId);
-        });
-
-        function pageComment(pageid) {
-            $("#listComment").load("/Blog/ShowComment/" + @Model.BlogId+"?pageId="+pageid);
-        }
-
-        function Delete(id) {
-            if (confirm('آیا از حذف کامنت مطمئن هستید؟')) {
-                $.ajax({
-                    url: "/Blog/Delete/" + id,
-                    type: "Delete"
-                })
-            }
-        }
-
-        function replay(id) {
-            $("#replayComment").load("/Blog/Replay" + id)
-        }
-
-        function changeGroup() {
-            $("#formFilter").submit();
-        }
-    </script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="/js/blog.js"></script>
 }

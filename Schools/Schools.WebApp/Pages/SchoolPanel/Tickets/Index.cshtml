@@ -4,9 +4,7 @@
 @using Schools.Domain.Models.Schools
 @using Schools.Domain.Repository.InterfaceRepository.Schools
 @model Schools.WebApp.Pages.SchoolPanel.Tickets.IndexModel
-@inject ISchoolRepository _school
 @{
-    var school = _school.GetSchoolByUserId(User.GetUserId());
     ViewData["title"] = $"تیکت و پشتیبانی";
 }
 @section Meta
@@ -22,7 +20,7 @@
             <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement"><a href="/" itemprop="item"><span itemprop="name"> بانک اطلاعاتی آموزشگاه ها </span></a></li>
             <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement">
                 <a href="/SchoolPanel" itemprop="item">
-                    <span itemprop="name"> حساب آموزشگاه @school.SchoolTitle </span>
+                    <span itemprop="name"> حساب آموزشگاه @Model.School.SchoolTitle </span>
                 </a>
             </li>
             <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement">
@@ -36,14 +34,27 @@
 <div class="account-layer">
     <div class="container">
         @{
-            var menuModel = new Tuple<School, string>(school, "Tickets");
+            var menuModel = new Tuple<School, string>(Model.School, "Tickets");
         }
         <partial name="Shared/_RightMenu" model="menuModel" />
 
         <div class="left-side">
             <!-- account heading -->
             <div class="account-heading layer-style">
-                <span class="status green"> وضعیت : <i> @(school.IsActive ? "فعال" : "غییر فعال") </i></span>
+                @if (Model.School.IsActive)
+                {
+                    <span class="status green">
+                        وضعیت :
+                        <i> فعال </i>
+                    </span>
+                }
+                else
+                {
+                    <span class="status red">
+                        وضعیت :
+                        <i> غیرفعال </i>
+                    </span>
+                }
                 <a href="/SchoolPanel/Tickets/Add"> <i class="zmdi zmdi-plus"></i> ثبت تیکت </a>
             </div>
             <!-- /account heading -->

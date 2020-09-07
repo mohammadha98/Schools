@@ -1,13 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Schools.Application.Utilities.Security;
 using Schools.Domain.Repository.InterfaceRepository.ContactUsRepositories;
 
 namespace Schools.WebApp.Areas.ManagementPanel.Pages.ContactUs
 {
+    [PermissionsChecker(1)]
     public class IndexModel : PageModel
     {
         private IContactUsRepository _contactUs;
@@ -17,10 +15,10 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.ContactUs
         }
 
         [BindProperty]
-        public IEnumerable<Domain.Models.ContactUs.ContactUs> ContactUs { get; set; }
+        public Domain.Models.ContactUs.ContactUs ContactUs { get; set; }
         public void OnGet()
         {
-            ContactUs = _contactUs.GetAllContactUs();
+            ContactUs = _contactUs.GetLast();
         }
     }
 }

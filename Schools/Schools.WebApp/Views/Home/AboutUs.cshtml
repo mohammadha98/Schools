@@ -1,6 +1,6 @@
-﻿@model IEnumerable<Schools.Domain.Models.AboutUs.AboutUs>
+﻿@model Schools.Domain.Models.AboutUs.AboutUs
 @{
-    ViewData["Title"] = "AboutUs";
+    ViewData["Title"] = "درباره ما";
 }
 @section Topic_Layer{
     <div class="container page-title">
@@ -21,18 +21,15 @@
 <div class="container">
 
     <section class="page-style-two about-page">
-        <header><span class="logo"><img src="images/about.svg"></span><h2> درباره بانک اطلاعاتی آموزش </h2></header>
+        <header><span class="logo"><img src="/images/about.svg"></span><h2> درباره بانک اطلاعاتی آموزش </h2></header>
 
-        @foreach (var item in Model)
-        {
+     
             <article>
-                @Html.Raw(item.Text)
+                @Html.Raw(Model.Text)
             </article>
-        }
+       
 
     </section>
 
 </div>
-@section Scripts{
-    <script src="/Admin/bowercomponents/ckeditor/ckeditor.js"></script>
-}
+

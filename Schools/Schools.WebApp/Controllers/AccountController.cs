@@ -6,16 +6,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Routing;
 using Schools.Application.Service.Interfaces.Users;
-using Schools.Application.Utilities;
 using Schools.Application.Utilities.Convertors;
-using Schools.Application.Utilities.Generator;
 using Schools.Application.Utilities.Security;
 using Schools.Application.ViewModels.UsersViewModel;
 using Schools.Domain.Models.Users;
 using Schools.Domain.Repository.InterfaceRepository.Users;
-using Schools.Infra.Data.Repository.ServiceRepository.Users;
 
 namespace Schools.WebApp.Controllers
 {
@@ -36,6 +32,10 @@ namespace Schools.WebApp.Controllers
         [Route("Register")]
         public IActionResult Register()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return Redirect("/");
+            }
             return View();
         }
 
@@ -111,19 +111,28 @@ namespace Schools.WebApp.Controllers
 
         #region Login
         [Route("Login")]
-        public IActionResult Login(string returnTo = "/")
+        public IActionResult Login(string returnUrl = "/")
         {
-            ViewData["returnTo"] = returnTo;
+            if (User.Identity.IsAuthenticated)
+            {
+                return Redirect("/");
+            }
+            ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
 
         [Route("Login")]
         [HttpPost]
-        public IActionResult Login(LoginViewModel login, string returnTo)
+        public IActionResult Login(LoginViewModel login, string returnUrl)
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return Redirect("/");
+            }
+
             if (!ModelState.IsValid)
                 return View(login);
-            returnTo ??= "/";
+            returnUrl ??= "/";
             var user = _userService.LoginUser(login);
             if (user != null)
             {
@@ -142,14 +151,14 @@ namespace Schools.WebApp.Controllers
                     var properties = new AuthenticationProperties
                     {
                         IsPersistent = login.RememberMe,
-
                     };
                     HttpContext.SignInAsync(principal, properties);
-                    return Redirect(returnTo);
+                    return Redirect(returnUrl);
                 }
                 else
                 {
-                    ModelState.AddModelError("Email", "حساب کاربری شما فعال نمی باشد");
+                    ModelState.AddModelError("Email", "حساب کاربری شما غیرفعال باشد");
+                    return View(login);
                 }
             }
             ModelState.AddModelError("Email", "کاربری با مشخصات وارد شده یافت نشد");
@@ -161,9 +170,86 @@ namespace Schools.WebApp.Controllers
         [Route("Logout")]
         public IActionResult Logout()
         {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return Redirect(Request.Path);
+            }
             HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return Redirect("/");
+        }
+        #endregion
+
+        #region ForgotPassword
+        [HttpGet]
+        [Route("/ForgotPassword")]
+        public IActionResult ForgotPassword()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return Redirect("/");
+            }
+            return View();
+        }
+        [HttpPost]
+        [Route("/ForgotPassword")]
+        public IActionResult ForgotPassword(string email)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return Redirect("/");
+            }
+            var user = _userRepository.GetUserIdByEmail(email);
+            if (user == null)
+            {
+                ModelState.AddModelError("email", "ایمیل وارد شده نا معتبر است");
+                return View("ForgotPassword");
+            }
+            _userService.ForgotPassword(user, Request.Host.ToString());
+            TempData["SendEmail"] = true;
             return Redirect("/Login");
         }
+        #endregion
+
+        #region ChangePassword
+        [Route("/ChangePassword/{userId}/{oldPassword}/{code}")]
+        public IActionResult ChangePassword(int userId, string oldPassword, string code)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return Redirect("/");
+            }
+            var user = _userRepository.GetUserById(userId);
+            if (user.Password == oldPassword && user.ActiveCode == code)
+            {
+                ViewData["userId"] = userId;
+                return View();
+            }
+
+            return NotFound();
+        }
+        [HttpPost]
+        [Route("/ChangePassword/{userId}/{oldPassword}/{code}")]
+        public IActionResult ChangePassword(ChangePasswordModel passwordModel)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return Redirect("/");
+            }
+            if (!ModelState.IsValid)
+            {
+                return View(passwordModel);
+            }
+            if (passwordModel.Password != passwordModel.RePassword)
+            {
+                ModelState.AddModelError("RePassword", "کلمع های عبور یکسان نیستند");
+                return View("ChangePassword");
+            }
+
+            _userService.ChangePassword(passwordModel);
+            TempData["ChangeSuccess"] = true;
+            return Redirect("/Login");
+        }
+
         #endregion
     }
 }

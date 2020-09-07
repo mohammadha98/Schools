@@ -1,11 +1,11 @@
-﻿@page
+﻿@page "{handler?}"
 @model Schools.WebApp.Areas.ManagementPanel.Pages.Blogs.IndexModel
 @using Schools.Application.Utilities.Convertors
 @using Schools.Domain.Repository.InterfaceRepository.BlogRepositories;
 @inject IBlogGroupsRepository _groupRepository;
 @{
     var menuModel = "blogs";
-    var Groups = _groupRepository.GetAllGroups("");
+    var groups = _groupRepository.GetAllGroups();
 }
 <partial name="_MainMenu" model="menuModel" />
 
@@ -16,31 +16,24 @@
                 <a asp-page="Add" class="btn bg-olive margin">افزودن بلاگ</a>
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">بلاگ ها</h3>
-
                         <section class="term-categories">
                             <form id="formFilter" method="get">
-                                @{
-                                    List<int> selected = ViewBag.GetType as List<int>;
-                                }
+                                <input type="hidden" asp-for="Blogs.CurrentPage" id="pageId" name="pageId"/>
                                 <div class="col-md-4 col-sm-6 col-xs-12 pull-right">
-                                    <div onchange="cheangType" class="switch-field available">
-                                        <input onchange="cheangType" id="available-filter-1" name="getType" value="0" checked="" type="radio">
-                                        <label for="available-filter-1"> همه </label>
-                                        <input onchange="cheangType" id="available-filter-2" name="getType" value="1" type="radio">
-                                        <label for="available-filter-2"> خبر ها </label>
-                                        <input onchange="cheangType" id="available-filter-3" name="getType" value="2" type="radio">
-                                        <label for="available-filter-3"> مقالات </label>
-                                    </div>
+                                    <select class="form-control" asp-for="Blogs.TypeId" name="typeId">
+                                        <option value="null">همه</option>
+                                        <option value="4">اخبار</option>
+                                        <option value="5">مقالات</option>
+                                    </select>
                                 </div>
 
                                 <div class="col-md-4 col-sm-6 col-xs-12 pull-right">
                                     <div class="form-group">
-                                        <select name="selectedGroups" class="form-control" style="height:39px">
+                                        <select name="groupTitle" class="form-control" asp-for="Blogs.GroupTitle">
                                             <option>انتخاب گروه</option>
-                                            @foreach (var item in Groups)
+                                            @foreach (var item in groups)
                                             {
-                                                <option value="@item.GroupId">@item.GroupName</option>
+                                                <option value="@item.GroupName">@item.GroupName</option>
                                             }
                                         </select>
                                     </div>
@@ -48,34 +41,34 @@
 
                                 <div class="col-md-2 col-sm-6 col-xs-12 pull-right">
                                     <div class="form-group">
-                                        <button type="submit" class="btn bg-olive" style="height:39px" >اعمال فیلتر</button>
+                                        <button type="submit" class="btn bg-olive" style="height:39px">اعمال فیلتر</button>
                                     </div>
-                                    </div>
-                                    <div class="box-tools pull-left">
-                                        <div class="input-group input-group-sm" style="width: 150px;">
-                                            <input type="text" name="Filter" class="form-control pull-right" placeholder="جستجو">
+                                </div>
+                                <div class="box-tools pull-left">
+                                    <div class="input-group input-group-sm" style="width: 150px;">
+                                        <input type="text" name="search" asp-for="Blogs.Search" class="form-control pull-right" placeholder="جستجو">
 
-                                            <div class="input-group-btn">
-                                                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                                            </div>
+                                        <div class="input-group-btn">
+                                            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                                         </div>
                                     </div>
-</form>
+                                </div>
+                            </form>
                         </section>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body table-responsive no-padding">
                         <table class="table table-hover">
                             <tr>
-                                <th>شماره</th>
+                                <th>#</th>
                                 <th>تصویر</th>
                                 <th>نوع</th>
                                 <th>عنوان</th>
                                 <th>تاریخ</th>
-                                <th>توضیح مختصر</th>
+                                <th>لینک کوتاه</th>
                                 <th></th>
                             </tr>
-                            @foreach (var item in Model.Blogs)
+                            @foreach (var item in Model.Blogs.Blogs)
                             {
                                 <tr>
                                     <td>@item.BlogId</td>
@@ -83,32 +76,110 @@
                                     <td>@item.BlogType</td>
                                     <td>@item.Title</td>
                                     <td>@item.CreateDate.ToShamsi()</td>
-                                    <td>@item.ShortDescription</td>
+                                    <td>@item.ShortLink</td>
                                     <td>
-                                        <a asp-page="Edit" asp-route-id="@item.BlogId" class="btn-sm btn-info">ویرایش</a>
-                                        <a asp-page="Details" asp-route-id="@item.BlogId" class="btn-sm btn-warning">جزئیات</a>
-                                        <a asp-page="Delete" asp-route-id="@item.BlogId" class="btn-sm btn-danger">حذف</a>
+                                        <a href="/ManagementPanel/Blogs/Edit/@item.BlogId" class="btn-sm btn-info">ویرایش</a>
+                                      
+                                        <a href="javascript:void(0)" onclick="deleteItem(@item.BlogId)" class="btn-sm btn-danger">حذف</a>
 
                                     </td>
                                 </tr>
                             }
                         </table>
                     </div>
-                    <!-- /.box-body -->
+                    <div class="dataTables_paginate paging_simple_numbers text-center" id="example2_paginate">
+
+                        @if (Model.Blogs.PageCount > 1)
+                        {
+                            <hr class="mt-0">
+
+                            <ul class="pagination">
+                                @if (Model.Blogs.CurrentPage > 1 && Model.Blogs.StartPage > 1)
+                                {
+                                    <li class="paginate_button previous disabled" id="example2_previous">
+                                        <a onclick="ChangePage(1)">1</a>
+                                    </li>
+
+                                }
+
+                                @for (var i = Model.Blogs.StartPage; i <= Model.Blogs.EndPage; i++)
+                                {
+
+                                    <li class="@((i == Model.Blogs.CurrentPage ? "paginate_button active" : "paginate_button"))">
+                                        <a onclick="ChangePage(@i)" href="javascript:void(0)">@i</a>
+                                    </li>
+                                }
+                                @if (Model.Blogs.CurrentPage < Model.Blogs.PageCount && Model.Blogs.EndPage < Model.Blogs.PageCount)
+                                {
+                                    <li class="paginate_button next" id="example2_next">
+                                        <a onclick="ChangePage(@Model.Blogs.PageCount)">@Model.Blogs.PageCount</a>
+                                    </li>
+
+                                }
+                            </ul>
+                        }
+
+                    </div>
                 </div>
-                <!-- /.box -->
             </div>
         </div>
     </section>
 </div>
 @section Scripts{
     <script type="text/javascript">
-        function Filter() {
+        function ChangePage(pageId) {
+            $("#pageId").val(pageId);
             $("#formFilter").submit();
+
         }
 
-        function cheangType() {
+        function changeType() {
             $("#formFilter").submit();
+        }
+        function deleteItem(id) {
+            swal({
+                title: "اخطار !",
+                text: "آیا از حذف  اطمینان دارید ؟",
+                icon: "warning",
+                buttons: ["لغو", "بله"]
+            }).then((isOk) => {
+                if (isOk) {
+                    $.ajax({
+                        url: "/ManagementPanel/Blogs/DeleteBLog?blogId=" + id,
+                        type: "get",
+                        beforeSend: function () {
+                            $(".loading").show();
+                        },
+                        complete: function () {
+                            $(".loading").hide();
+                        }
+                    }).done(function (data) {
+                        if (data === "NotFound") {
+                            swal({
+                                title: "شناسه وارد شده نا معتبر است",
+                                icon: "error",
+                                button: "باشه"
+                            });
+                        }
+                        if (data === "Deleted") {
+                            swal({
+                                title: "اعملیات با موفقیت انجام شد",
+                                icon: "success",
+                                button: "باشه"
+                            }).then((isOk) => {
+                                location.reload();
+                            });
+                        } else {
+                            swal({
+                                title: "اعملیات به مشکل برخورد کرد",
+                                icon: "error",
+                                button: "باشه"
+                            });
+                        }
+                    });
+                }
+            });
+
         }
     </script>
 }

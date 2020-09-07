@@ -31,7 +31,7 @@ namespace Schools.Domain.Models.ContactUs
         public string Description { get; set; }
 
         [Display(Name ="وضعیت")]
-        public bool Status { get; set; }
+        public bool IsPosted { get; set; }
         public bool IsDelete { get; set; }
     }
 }

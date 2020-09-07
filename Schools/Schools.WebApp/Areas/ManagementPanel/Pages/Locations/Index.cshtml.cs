@@ -1,15 +1,15 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Schools.Application.Service.Interfaces.Locations;
+using Schools.Application.Utilities.Security;
 using Schools.Domain.Models.Schools.Locations;
 using Schools.Domain.Repository.InterfaceRepository.Locations;
 
 namespace Schools.WebApp.Areas.ManagementPanel.Pages.Locations
 {
+    [PermissionsChecker(47)]
+
     public class IndexModel : PageModel
     {
         private ILocationService _location;

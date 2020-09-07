@@ -7,9 +7,7 @@
 @inject ISchoolGroupsRepository _Groups
 @{
     var menuModel = "schoolsRequests";
-    var shire = _Location.GetShireById(Model.SchoolRequest.ShireId);
-    var city = _Location.GetCityById(Model.SchoolRequest.CityId);
-    var category = _Groups.GetSchoolGroupById(Model.SchoolRequest.CategoryId);
+
 }
 <partial name="_MainMenu" model="menuModel" />
 @if (Model.SchoolRequest == null)
@@ -18,7 +16,11 @@
 }
 else
 {
-
+   
+        var shire = _Location.GetShireById(Model.SchoolRequest.ShireId);
+        var city = _Location.GetCityById(Model.SchoolRequest.CityId);
+        var category = _Groups.GetSchoolGroupById(Model.SchoolRequest.CategoryId);
+    
     <div class="content-wrapper">
         <section class="content">
             <div class="row">
@@ -28,14 +30,25 @@ else
                             <h2>جزئیات درخواست</h2>
                         </div>
                         <div class="box-body">
-                            <form class="row" id="form-submit" method="post">
-                                <input type="hidden" asp-for="SubmitModel.IsAccept" value="false"/>
-                                <div class="col-lg-12" style="margin-bottom: 25px">
-                                    <p>
-                                        نام آموزشگاه
-                                    </p>
-                                    <input type="text" asp-for="SubmitModel.SchoolName" value="@Model.SchoolRequest.SchoolName" class="form-control"/>
-                                </div>
+                            <form class="row" id="form-submit" method="@((Model.SchoolRequest.IsAccept?"get":"post"))">
+                                <input type="hidden" asp-for="SubmitModel.IsAccept" value="false" />
+                                @if (Model.SchoolRequest.IsAccept)
+                                {
+                                    <div class="col-lg-12" style="margin-bottom: 25px">
+                                        <p>
+                                            نام آموزشگاه : @Model.SchoolRequest.SchoolName
+                                        </p>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col-lg-12" style="margin-bottom: 25px">
+                                        <p>
+                                            نام آموزشگاه
+                                        </p>
+                                        <input type="text" asp-for="SubmitModel.SchoolName" value="@Model.SchoolRequest.SchoolName" class="form-control" />
+                                    </div>
+                                }
                                 <div class="col-lg-6" style="margin-bottom: 10px">
                                     <p>
                                         مدریر آموزشگاه : <a target="_blank" href="/ManagementPanel/Users/ShowProfile/@Model.SchoolRequest.UserId">نمایش</a>
@@ -98,11 +111,11 @@ else
                                     @Html.Raw(Model.SchoolRequest.Description)
                                 </div>
                                 <div class="col-lg-12" style="margin-bottom: 10px">
-                                    <hr/>
+                                    <hr />
 
                                     <h3>عکس اصلی :</h3>
 
-                                    <img src="/images/Requests/@Model.SchoolRequest.ImageName" style="width: 40%; margin: auto"/>
+                                    <img src="/images/Requests/@Model.SchoolRequest.ImageName" style="width: 40%; margin: auto" />
                                 </div>
                                 <div class="col-lg-12" style="margin-bottom: 10px">
                                     <h3>گالری تصاویر</h3>
@@ -110,7 +123,7 @@ else
                                         @foreach (var item in Model.SchoolRequest.Galleries)
                                         {
                                             <div class="col-md-4" style="margin-bottom: 10px">
-                                                <img src="/images/Requests/Gallery/@item.ImageName" style="width: 90%; margin: auto; box-shadow: 0 0 5px 0 gray"/>
+                                                <img src="/images/Requests/Gallery/@item.ImageName" style="width: 90%; margin: auto; box-shadow: 0 0 5px 0 gray" />
 
                                             </div>
                                         }
@@ -122,7 +135,7 @@ else
                                         @foreach (var item in Model.SchoolRequest.DocumentsImage.Split("&"))
                                         {
                                             <div class="col-md-4" style="margin-bottom: 10px">
-                                                <img src="/images/Requests/Documents/@item" style="width: 90%; margin: auto; box-shadow: 0 0 5px 0 gray"/>
+                                                <img src="/images/Requests/Documents/@item" style="width: 90%; margin: auto; box-shadow: 0 0 5px 0 gray" />
                                             </div>
                                         }
                                     </div>
@@ -132,7 +145,7 @@ else
                                     <div class="col-lg-12">
                                         <div class="alert alert-info">
                                             درصورت تایید آموزشگاه این قسمت را پر کنید
-                                            <hr/>
+                                            <hr />
                                             <div class="row">
                                                 <div class="col-lg-6">
                                                     <p>توضیحات برای متورهای جستوجو <span class="counter">0</span></p>
@@ -140,14 +153,14 @@ else
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <p>کلمات کلیدی</p>
-                                                    <input type="text" asp-for="SubmitModel.KeyWord" class="form-control" placeholder="کلمات را با - از هم جدا کنید"/>
+                                                    <input type="text" asp-for="SubmitModel.KeyWord" class="form-control" placeholder="کلمات را با - از هم جدا کنید" />
                                                 </div>
                                                 <div class="col-lg-12">
                                                     <a class="btn btn-block btn-success" id="accept">ثبت آموزشگاه</a>
                                                 </div>
                                             </div>
                                         </div>
-                                        <hr/>
+                                        <hr />
 
                                     </div>
                                     <div class="col-lg-12" style="margin-top: 20px">
@@ -185,11 +198,11 @@ else
             var len = $(this).val().length;
             $(".counter").html(len);
         });
-        $("#reject").click(function() {
+        $("#reject").click(function () {
             $("#SubmitModel_IsAccept").val(false);
             $("#form-submit").submit();
         });
-        $("#accept").click(function() {
+        $("#accept").click(function () {
             $("#SubmitModel_IsAccept").val(true);
             $("#form-submit").submit();
         });

@@ -127,7 +127,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\images\blogs\" />
+    <Folder Include="wwwroot\images\blogs\content\" />
     <Folder Include="wwwroot\images\Requests\Gallery\" />
     <Folder Include="wwwroot\images\Requests\Documents\" />
     <Folder Include="wwwroot\images\ticketImages\" />

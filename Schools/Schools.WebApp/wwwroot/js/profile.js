@@ -1,4 +1,7 @@
-﻿$(function () {
+﻿$(document).ready(function () {
+    $(".ck-voice-label").css("display", "none");
+});
+$(function () {
     $('.send-message').click(function () {
         $('#send-message-popup').fadeIn();
     });
@@ -488,6 +491,16 @@ $(".like-this").click(function () {
             },
             complete: function () {
                 $(".loading").hide();
+            },
+            error: function (error) {
+                if (error.status === 401) {
+                    swal({
+                        title: "درسترسی غیرمجاز",
+                        text: "برای پسندیدن آموزشگاه ابتدا باید وارد حساب خود شوید",
+                        icon: "error",
+                        button: "باشه"
+                    });
+                }
             }
         }).done(function (data) {
 

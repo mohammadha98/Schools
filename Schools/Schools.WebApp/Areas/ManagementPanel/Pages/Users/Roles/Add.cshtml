@@ -1,0 +1,66 @@
+﻿@page
+@using Schools.Domain.Repository.InterfaceRepository.Users
+@model Schools.WebApp.Areas.ManagementPanel.Pages.Users.Roles.AddModel
+@inject IUserRoleRepository _RoleRepository
+@{
+    var menuModel = "userRoles";
+    var permissions = _RoleRepository.GetPermissions();
+
+}
+<partial name="_MainMenu" model="menuModel" />
+
+<div class="content-wrapper">
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-info">
+                    <div class="box-header">
+                        <h3 class="box-title">افزودن دوره</h3>
+                    </div>
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="box-body">
+                        <form method="post" class="row">
+                            <div class="col-lg-6" style="margin-top: 10px">
+                                <p>عنوان نقش</p>
+                                <input type="text" required="" class="form-control" asp-for="RoleModel.RoleTitle" />
+                                <button style="margin-top: 8px" class="btn btn-block btn-flat btn-success">ثبت</button>
+
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="box-header">
+                                    <h3 class="box-title">دسترسی ها</h3>
+                                </div>
+                                <div>
+                                    @foreach (var item in permissions.Where(p => p.Parent == null))
+                                    {
+                                        <div style="margin:5px 10px; font-weight: bolder; font-size: 16px;color: blue">
+                                            <input type="checkbox" value="@item.PermissionId" name="permissions"/> @item.PermissionTitle
+                                        </div>
+                                        @if (permissions.Any(p => p.Parent == item.PermissionId))
+                                        {
+                                            foreach (var sub in permissions.Where(p => p.Parent == item.PermissionId))
+                                            {
+                                                <div style="font-weight: bold">
+                                                    <input type="checkbox" value="@sub.PermissionId" name="permissions"/> @sub.PermissionTitle
+                                                </div>
+                                                @if (permissions.Any(p => p.Parent == sub.PermissionId))
+                                                {
+                                                    foreach (var sub2 in permissions.Where(p => p.Parent == sub.PermissionId))
+                                                    {
+                                                        <div style="margin-right: -5px">
+                                                            <input type="checkbox" value="@sub2.PermissionId" /> @sub2.PermissionTitle
+                                                        </div>
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

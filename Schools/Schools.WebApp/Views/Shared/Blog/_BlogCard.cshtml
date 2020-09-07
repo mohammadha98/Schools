@@ -1,0 +1,10 @@
+﻿@using Schools.Application.Utilities.Convertors
+@model Schools.Application.ViewModels.BlogsViewModels.BlogViewModel
+<section>
+    <a  href="/Blog/@Model.BlogId/@Model.Title.Replace(" ","-").Trim()" class="img-layer"><img src="/images/blogs/@Model.ImageName"></a>
+    <h2><a href="/Blog/@Model.BlogId/@Model.Title.Replace(" ","-").Trim()"> @Model.Title </a></h2>
+    <div class="detail">
+        <a href="/Blogs?groupTitle=@Model.GroupTitle"><i class="zmdi zmdi-folder"></i> @Model.BlogType @Model.GroupTitle </a>
+        <span> <i class="zmdi zmdi-calendar-check"></i> @Model.CreateDate.ToShamsi() </span>
+    </div>
+</section>

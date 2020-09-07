@@ -2,12 +2,15 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Schools.Application.Utilities;
+using Schools.Application.Utilities.Security;
 using Schools.Domain.Models.Users;
 using Schools.Domain.Models.Users.Tickets;
 using Schools.Domain.Repository.InterfaceRepository.Users;
 
 namespace Schools.WebApp.Areas.ManagementPanel.Pages.Tickets
 {
+    [PermissionsChecker(22)]
+
     public class ShowModel : PageModel
     {
         private IUserTicketRepository _ticket;
@@ -22,7 +25,7 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.Tickets
         public void OnGet(int ticketId)
         {
             UserTicket = _ticket.GetUserTicket(ticketId);
-            if (UserTicket==null)
+            if (UserTicket == null)
             {
                 Response.Redirect("/ManagementPanel/Tickets");
             }
@@ -42,7 +45,7 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.Tickets
                 return Redirect("/ManagementPanel/Tickets");
             }
             //Add Message
-            var messageModel=new TicketMessage()
+            var messageModel = new TicketMessage()
             {
                 IsDelete = false,
                 IsSeen = false,
@@ -52,9 +55,18 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.Tickets
                 UserId = User.GetUserId()
             };
             _ticket.AddMessageToTicket(messageModel);
-
+            //Send Email
+            try
+            {
+                var body = $"<h3>{ticket.User.Name} {ticket.User.Family}</h3><h4>شما پاسخ جدیدی در تیکت {ticket.TicketTitle} دارید</h4><a href='https://{Request.Host}/UserPanel/Tickets/show/{ticket.TicketId}'>نمایش تیکت</a>";
+                SendEmail.Send(ticket.User.Email, "دریافت تیکت جدید", body.BuildView());
+            }
+            catch (Exception e)
+            {
+                //Ignored
+            }
             //Add Notification
-            var notification=new UserNotification()
+            var notification = new UserNotification()
             {
                 IsDelete = false,
                 CreateDate = DateTime.Now,
@@ -70,8 +82,8 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.Tickets
         public IActionResult OnGetCloseTicket(int ticketId)
         {
             var ticket = _ticket.GetUserTicket(ticketId);
-           
-            if (ticket==null)
+
+            if (ticket == null)
             {
                 return Content("Error");
             }

@@ -1,0 +1,142 @@
+﻿@page "{userId}"
+@model Schools.WebApp.Areas.ManagementPanel.Pages.Users.EditModel
+@{
+
+    var menuModel = "users";
+}
+
+<partial name="_MainMenu" model="menuModel" />
+
+<div class="content-wrapper">
+    <form role="form" method="post" enctype="multipart/form-data">
+        <section class="content">
+            <div class="row">
+                <section class="col-lg-12 col-md-12">
+                    <div class="col-md-8">
+                        <div class="box">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">افزودن کاربر</h3>
+
+                                <div class="box-tools pull-right">
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                        <i class="fa fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="box-body">
+                                <div asp-validation-summary="All" class="text-danger"></div>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <label asp-for="UserModel.Name"></label>
+                                        <input type="text" asp-for="UserModel.Name" class="form-control" />
+                                        <br />
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label asp-for="UserModel.Family"></label>
+
+                                        <input type="text" asp-for="UserModel.Family" class="form-control" />
+                                        <br />
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label asp-for="UserModel.Email"></label>
+
+                                        <input  type="email" disabled="" value="@Model.UserModel.Email" class="form-control" />
+                                        <br />
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label asp-for="UserModel.UserName"></label>
+
+                                        <input type="text"  disabled="" value="@Model.UserModel.UserName" class="form-control" />
+                                        <br />
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label asp-for="UserModel.PhoneNumber"></label>
+
+                                        <input type="number" asp-for="UserModel.PhoneNumber" class="form-control" />
+                                        <br />
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label asp-for="UserModel.TelNumber"></label>
+
+                                        <input type="number" asp-for="UserModel.TelNumber" class="form-control" />
+                                        <br />
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label asp-for="UserModel.NationalCode"></label>
+
+                                        <input type="number" asp-for="UserModel.NationalCode" class="form-control" />
+                                        <br />
+                                    </div>
+                                   
+                                    <div class="col-lg-6">
+                                        <label asp-for="UserModel.IsActive"></label>
+
+                                        <select class="form-control">
+                                            <option value="true">فعال</option>
+                                            <option value="false">غیرفعال</option>
+                                        </select>
+                                        <br />
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <label asp-for="UserModel.Description"></label>
+                                        <textarea class="form-control" asp-for="UserModel.Description"></textarea>
+                                        <br />
+                                    </div>
+                                </div>
+                                <input type="submit" class="btn btn-success" value="ویرایش" />
+
+                            </div>
+                            <!-- /.box-body -->
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="box">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">تصویر پروفایل</h3>
+
+                                <div class="box-tools pull-right">
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                        <i class="fa fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="box-body">
+                                <div>
+                                    <img class="thumbnail" width="100%" src="/images/userAvatars/@Model.UserModel.UserAvatar" />
+                                </div>
+                                <input type="file" name="imageAvatar" class="form-control" />
+                            </div>
+                            <!-- /.box-body -->
+
+                        </div>
+                        <div class="box">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">انتخاب نقش</h3>
+
+                                <div class="box-tools pull-right">
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                        <i class="fa fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="box-body">
+                                <div class="checkbox">
+                                    @foreach (var item in Model.Roles)
+                                    {
+                                        <label>
+                                            <input type="checkbox" checked="@((Model.UserModel.UserRoles.Any(r=>r.RoleId==item.RoleId)?"Checked":null))" name="roles" value="@item.RoleId"> @item.RoleTitle
+                                        </label>
+                                        <br />
+                                    }
+                                </div>
+                            </div>
+                            <!-- /.box-body -->
+
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+    </form>
+</div>

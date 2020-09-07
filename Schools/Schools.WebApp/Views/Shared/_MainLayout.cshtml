@@ -9,7 +9,7 @@
 <html class="no-js" dir="rtl" lang="fa-IR">
 <head>
     <meta charset="UTF-8">
-    <title>  بانک اطلاعاتی آموزشگاه ها </title>
+    <title>  @ViewData["Title"] </title>
     <meta name="googlebot" content="index,follow">
     <meta name="robots" content="noodp,noydir">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -108,7 +108,9 @@
 
     @RenderBody()
 
+<cache expires-after="TimeSpan.FromDays(1)">
     <partial name="_Footer" />
+</cache>
 
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/jquery.slimscroll.js"></script>

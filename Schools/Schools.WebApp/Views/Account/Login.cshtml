@@ -1,7 +1,9 @@
 ﻿@model Schools.Application.ViewModels.UsersViewModel.LoginViewModel
 @{
-    ViewData["Title"] = "Login";
+    ViewData["Title"] = "ورود به سایت";
     var isSuccess = TempData["Success"] != null;
+    var isSendEmail = TempData["SendEmail"] != null;
+    var isChangePassword = TempData["ChangeSuccess"] != null;
 }
 
 @section Meta
@@ -27,7 +29,7 @@
             <li> در صورتی که رمز عبور خود را فراموش کرده اید ، می توانید از طریق شماره موبایلتان ، رمز عبور جدید را دریافت نمایید. </li>
         </ul>
         <form asp-action="Login" method="post">
-            <input type="hidden" name="returnTo" value="@ViewData["returnTo"]" />
+            <input type="hidden" name="returnUrl" value="@ViewData["ReturnUrl"]" />
             <input asp-for="Email" type="email" class="right-corner" placeholder="ایمیل خود را وارد نمایید">
             <input asp-for="Password" type="password" class="left-corner" placeholder="رمز عبور خود را وارد نمایید">
             <button class="right-corner"> ورود به سایت </button>
@@ -38,17 +40,12 @@
                     <input asp-for="RememberMe" type="checkbox" id="remember-me">
                     <label for="remember-me"> مرا بخاطر بسپار </label>
                 </div>
-                <a href="/ForgetPassword"><i class="zmdi zmdi-lock"></i> رمز عبور خود را فراموش کرده ام ! </a>
-                <a href="Register"><i class="zmdi zmdi-account"></i> ثبت نام در سایت ! </a>
+                <a href="/ForgotPassword"><i class="zmdi zmdi-lock"></i> رمز عبور خود را فراموش کرده ام ! </a>
+                <a href="/Register"><i class="zmdi zmdi-account"></i> ثبت نام در سایت ! </a>
             </div>
         </form>
 
-        <section class="other-login">
-            <header><h3> ورود با سایر حساب های کاربری </h3></header>
-            <a href="" class="shadow-style"><i class="zmdi zmdi-twitter"></i></a>
-            <a href="" class="shadow-style"><i class="zmdi zmdi-github"></i></a>
-            <a href="" class="shadow-style"><i class="zmdi zmdi-google-old"></i></a>
-        </section>
+
     </div>
 </div>
 @section Scripts
@@ -57,15 +54,38 @@
 
     <script src="/js/jquery.validate.min.js"></script>
     <script src="/js/jquery.validate.unobtrusive.js"></script>
-    <script>
-        if (@isSuccess.ToString().ToLower())
-        {
+
+    @if (isChangePassword)
+    {
+        <script>
             swal({
-                title: "ثبت نام با موفقیت انجام شد",
-                text:"بعد از ورود لطفا اطلاعات حساب خود را تکمیل کنید",
+                title: "کلمه عبور با موفقیت تغییر کرد",
                 icon: "success",
                 button: "باشه"
             });
-        }
-    </script>
+        </script>
+    }
+    @if (isSuccess)
+    {
+        <script>
+            swal({
+                title: "ثبت نام با موفقیت انجام شد",
+                text: "بعد از ورود لطفا اطلاعات حساب خود را تکمیل کنید",
+                icon: "success",
+                button: "باشه"
+            });
+        </script>
+
+    }
+    @if (isSendEmail)
+    {
+        <script>
+            swal({
+                title: "ایمیل با موفقیت ارسال شد",
+                icon: "success",
+                button: "باشه"
+            });
+        </script>
+
+    }
 }

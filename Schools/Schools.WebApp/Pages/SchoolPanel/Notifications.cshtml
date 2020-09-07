@@ -5,9 +5,7 @@
 @using Schools.Domain.Models.Users
 @using Schools.Domain.Repository.InterfaceRepository.Schools
 @model Schools.WebApp.Pages.SchoolPanel.NotificationsModel
-@inject ISchoolRepository _school
 @{
-    var school = _school.GetSchoolByUserId(User.GetUserId());
     ViewData["title"] = $"ویرایش حساب کاربری";
 }
 @section Meta
@@ -15,100 +13,122 @@
     <link rel="stylesheet" type="text/css" href="/css/jquery.Bootstrap-PersianDateTimePicker.css">
     <link rel="stylesheet" type="text/css" href="/css/account.css">
 }
-
-@section Topic_Layer
+@if (Model.School == null)
 {
-    <div class="container page-title">
-        <h1><a href="javascript:void(0)"> حساب کاربری </a></h1>
-        <ul itemtype="http://schema.org/BreadcrumbList" class="breadcrumb">
-            <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement"><a href="/" itemprop="item"><span itemprop="name"> بانک اطلاعاتی آموزشگاه ها </span></a></li>
-            <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement">
-                <a href="/SchoolPanel" itemprop="item">
-                    <span itemprop="name"> حساب آموزشگاه @school.SchoolTitle </span>
-                </a>
-            </li>
-            <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement">
-                <a href="javascript:void(0)" itemprop="item" class="current">
-                    <span itemprop="name"> اطلاعیه های سیستم </span>
-                </a>
-            </li>
-        </ul>
-    </div>
-}
-<div class="account-layer">
-    <div class="container">
-        @{
-            var menuModel = new Tuple<School, string>(school, "Notifications");
-        }
-        <partial name="Shared/_RightMenu" model="menuModel" />
 
-        <div class="left-side">
-            <div class="account-heading layer-style">
-                <span class="status green"> وضعیت : <i> @(school.IsActive ? "فعال" : "غییر فعال") </i></span>
-                <a href="/SchoolPanel/Tickets/Add"> <i class="zmdi zmdi-plus"></i> ثبت تیکت </a>
-            </div>
-            <div class="account-content-layer layer-style notification-layer">
-                <form class="form-layer-style">
-                    <input type="hidden" id="pageId" name="pageId" asp-for="Notifications.CurrentPage" />
-                </form>
-                <h3> اطلاعیه های سیستم </h3>
-                <div class="inner">
-                    <ul>
-                        @if (Model.Notifications.UserNotifications.Count >= 1)
-                        {
-                            @foreach (var item in Model.Notifications.UserNotifications)
+}
+else
+{
+
+
+    @section Topic_Layer
+{
+        <div class="container page-title">
+            <h1><a href="javascript:void(0)"> حساب کاربری </a></h1>
+            <ul itemtype="http://schema.org/BreadcrumbList" class="breadcrumb">
+                <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement"><a href="/" itemprop="item"><span itemprop="name"> بانک اطلاعاتی آموزشگاه ها </span></a></li>
+                <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement">
+                    <a href="/SchoolPanel" itemprop="item">
+                        <span itemprop="name"> حساب آموزشگاه @Model.School.SchoolTitle </span>
+                    </a>
+                </li>
+                <li itemtype="http://schema.org/ListItem" itemscope="" itemprop="itemListElement">
+                    <a href="javascript:void(0)" itemprop="item" class="current">
+                        <span itemprop="name"> اطلاعیه های سیستم </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    }
+    <div class="account-layer">
+        <div class="container">
+            @{
+                var menuModel = new Tuple<School, string>(Model.School, "Notifications");
+            }
+            <partial name="Shared/_RightMenu" model="menuModel" />
+
+            <div class="left-side">
+                <div class="account-heading layer-style">
+                    @if (Model.School.IsActive)
+                    {
+                        <span class="status green">
+                            وضعیت :
+                            <i> فعال </i>
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="status red">
+                            وضعیت :
+                            <i> غیرفعال </i>
+                        </span>
+                    }
+
+                    <a href="/SchoolPanel/Tickets/Add"> <i class="zmdi zmdi-plus"></i> ثبت تیکت </a>
+                </div>
+                <div class="account-content-layer layer-style notification-layer">
+                    <form class="form-layer-style">
+                        <input type="hidden" id="pageId" name="pageId" asp-for="Notifications.CurrentPage" />
+                    </form>
+                    <h3> اطلاعیه های سیستم </h3>
+                    <div class="inner">
+                        <ul>
+                            @if (Model.Notifications.UserNotifications.Count >= 1)
                             {
-                                <li style="position: relative">
-                                    <i class="zmdi zmdi-close text-danger delete" onclick="deleteItem(@item.NotificationId)" data-toggle="tooltip" title="حذف" data-placement="top"></i>
-                                    <a href="javascript:void(0)"><i class="zmdi zmdi-assignment"></i> @item.Title <span> ( @item.CreateDate.ToShamsi() ) </span></a>
-                                    <div class="message-layer layer-style" data-item="@((item.IsSee==false?item.NotificationId.ToString():null))">
-                                        <p>
-                                            @Html.Raw(item.Text)
-                                        </p>
-                                    </div>
+                                @foreach (var item in Model.Notifications.UserNotifications)
+                                {
+                                    <li style="position: relative">
+                                        <i class="zmdi zmdi-close text-danger delete" onclick="deleteItem(@item.NotificationId)" data-toggle="tooltip" title="حذف" data-placement="top"></i>
+                                        <a href="javascript:void(0)"><i class="zmdi zmdi-assignment"></i> @item.Title <span> ( @item.CreateDate.ToShamsi() ) </span></a>
+                                        <div class="message-layer layer-style" data-item="@((item.IsSee==false?item.NotificationId.ToString():null))">
+                                            <p>
+                                                @Html.Raw(item.Text)
+                                            </p>
+                                        </div>
+
+                                    </li>
+                                }
+                            }
+                            else
+                            {
+                                <li class="alert alert-info">
+                                    در حال حاضر ، هیچ اطلاعیه ای موجود نمی باشد
 
                                 </li>
                             }
-                        }
-                        else
+
+                        </ul>
+
+                        @if (Model.Notifications.PageCount > 1)
                         {
-                            <li class="alert alert-info">
-                                در حال حاضر ، هیچ اطلاعیه ای موجود نمی باشد
+                            <div class="pagination-layer">
+                                <div class="inner">
+                                    @if (Model.Notifications.CurrentPage >= 1 && Model.Notifications.CurrentPage < Model.Notifications.PageCount)
+                                    {
+                                        <a onclick="ChangePage(@(Model.Notifications.CurrentPage + 1))" href="javascript:void(0)" class="next-page"> صفحه بعدی </a>
+                                    }
 
-                            </li>
+                                    <div class="pages">
+                                        @for (var i = Model.Notifications.StartPage; i <= Model.Notifications.EndPage; i++)
+                                        {
+                                            <a onclick="ChangePage(@i)" href="javascript:void(0)" class="@((i == Model.Notifications.CurrentPage ? "page current" : "page"))">@i</a>
+                                        }
+                                    </div>
+                                    @if (Model.Notifications.CurrentPage > 1)
+                                    {
+                                        <a onclick="ChangePage(@(Model.Notifications.CurrentPage - 1))" href="javascript:void(0)" class="prev-page"> صفحه قبلی </a>
+                                    }
+
+                                </div>
+                            </div>
                         }
 
-                    </ul>
-
-                    @if (Model.Notifications.PageCount > 1)
-                    {
-                        <div class="pagination-layer">
-                            <div class="inner">
-                                @if (Model.Notifications.CurrentPage >= 1 && Model.Notifications.CurrentPage < Model.Notifications.PageCount)
-                                {
-                                    <a onclick="ChangePage(@(Model.Notifications.CurrentPage + 1))" href="javascript:void(0)" class="next-page"> صفحه بعدی </a>
-                                }
-
-                                <div class="pages">
-                                    @for (var i = Model.Notifications.StartPage; i <= Model.Notifications.EndPage; i++)
-                                    {
-                                        <a onclick="ChangePage(@i)" href="javascript:void(0)" class="@((i == Model.Notifications.CurrentPage ? "page current" : "page"))">@i</a>
-                                    }
-                                </div>
-                                @if (Model.Notifications.CurrentPage > 1)
-                                {
-                                    <a onclick="ChangePage(@(Model.Notifications.CurrentPage - 1))" href="javascript:void(0)" class="prev-page"> صفحه قبلی </a>
-                                }
-
-                            </div>
-                        </div>
-                    }
-
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+}
 @section Scripts
 {
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

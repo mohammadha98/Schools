@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using Schools.Application.Service.Interfaces.Users;
@@ -9,6 +10,9 @@ using Schools.Application.ViewModels.UsersViewModel;
 using Schools.Domain.Models.Users;
 using Schools.Domain.Repository.InterfaceRepository.Users;
 using System.Linq;
+using Microsoft.AspNetCore.Http;
+using Schools.Application.Utilities;
+using Schools.Application.Utilities.SaveAndDelete;
 
 namespace Schools.Application.Service.Services.Users
 {
@@ -47,22 +51,60 @@ namespace Schools.Application.Service.Services.Users
             return info;
         }
 
+        public bool AddUser(User user, IFormFile imageAvatar)
+        {
+            if (imageAvatar == null) return false;
+            if (!imageAvatar.IsImage()) return false;
+
+            var fileName = SaveFileInServer.SaveFile(imageAvatar, "wwwroot/images/userAvatars");
+
+            user.UserAvatar = fileName;
+            user.RegisterDate=DateTime.Now;
+            user.ActiveCode = NameGenerator.GenerateUniqCode();
+            user.Password = PasswordHelper.EncodePasswordMd5(user.Password);
+            _userRepository.AddUser(user);
+            return true;
+        }
+
+        public bool EditUser(User user, IFormFile imageAvatar)
+        {
+            if (imageAvatar != null)
+            {
+                if (!imageAvatar.IsImage()) return false;
+                if (user.UserAvatar!="Default.png")
+                {
+                    DeleteFileFromServer.DeleteFile(user.UserAvatar, "wwwroot/images/userAvatars");
+                }
+                var fileName = SaveFileInServer.SaveFile(imageAvatar, "wwwroot/images/userAvatars");
+                user.UserAvatar = fileName;
+            }
+          
+        
+            _userRepository.EditUser(user);
+            return true;
+        }
+
         public UsersForAdminPanelViewModel GetUsersByFilter(string username = "", int pageId = 1)
         {
-            var list = _userRepository.GetUsers();
+            var result = _userRepository.GetUsers();
 
             if (!string.IsNullOrEmpty(username))
-                list = list.Where(u => u.UserName.Contains(username));
+                result = result.Where(u => u.UserName.Contains(username));
 
-            int take = 15;
+            int take = 10;
             int skip = (pageId - 1) * take;
+            var pageCount = (int)Math.Ceiling(result.Count() / (double)take);
 
-            UsersForAdminPanelViewModel result = new UsersForAdminPanelViewModel();
-            result.CurrentPage = pageId;
-            result.PageCount = list.Count() / take;
-            result.GetUsers = list.OrderByDescending(u => u.RegisterDate).Take(take).Skip(skip).ToList();
+            var userModel=new UsersForAdminPanelViewModel()
+            {
+                Users = result.OrderByDescending(u=>u.RegisterDate).Skip(skip).Take(take).ToList(),
+                CurrentPage = pageId,
+                PageCount = pageCount,
+                StartPage = (pageId - 4 <= 0) ? 1 : pageId - 4,
+                EndPage = (pageId + 5 > pageCount) ? pageCount : pageId + 5
+            };
 
-            return result;
+            return userModel;
         }
 
         public bool IsExistEmail(string email)
@@ -115,6 +157,28 @@ namespace Schools.Application.Service.Services.Users
                 UserId = userId
             };
             _role.AddUserRole(userRole);
+        }
+
+        public void ForgotPassword(User user,string hostName)
+        {
+            //First Send Email For User
+            var body = $"<h2>بازیابی کلمه عبور</h2><h3><p>جناب {user.Name} {user.Family} عزیز ، با استفاده از لینک زیر میتوانید نسبت به تغییر و بازیابی کلمه عیور خود اقدام نمایید.</p></h3><p>برای تغییر کلمه عبور برروی لینک زیر کلیک کنید.</p><h3><a href='https://{hostName}/ChangePassword/{user.UserId}/{user.Password}/{user.ActiveCode}'>تغببر کلمه عبور</a></h3>";
+            SendEmail.Send(user.Email,"بازیابی رمز عبور",body.BuildView());
+        }
+
+        public bool ChangePassword(ChangePasswordModel passwordModel)
+        {
+            var user = _userRepository.GetUserById(passwordModel.UserId);
+            if (user==null)
+            {
+                return false;
+            }
+
+            var newPassword = PasswordHelper.EncodePasswordMd5(passwordModel.Password);
+            user.Password = newPassword;
+            user.ActiveCode = NameGenerator.GenerateUniqCode();
+            _userRepository.EditUser(user);
+            return true;
         }
 
         public void EditUserInfo(EditUserInfoViewModel editModel)

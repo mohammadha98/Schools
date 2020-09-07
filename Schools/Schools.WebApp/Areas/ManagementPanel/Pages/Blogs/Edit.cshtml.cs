@@ -1,61 +1,62 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using Schools.Application.Service.Interfaces.Blogs;
+using Schools.Application.Utilities.Security;
 using Schools.Domain.Models.Blogs;
 using Schools.Domain.Repository.InterfaceRepository.BlogRepositories;
 
 namespace Schools.WebApp.Areas.ManagementPanel.Pages.Blogs
 {
+    [PermissionsChecker(26)]
+
     public class EditModel : PageModel
     {
         private IBlogRepository _blogRepository;
-        public EditModel(IBlogRepository blogRepository)
+        private IBlogServices _blog;
+
+        public EditModel(IBlogRepository blogRepository, IBlogServices blog)
         {
             _blogRepository = blogRepository;
+            _blog = blog;
         }
+
 
         [BindProperty]
         public Blog Blog { get; set; }
-        public void OnGet(int id)
+        public void OnGet(int blogId)
         {
-            var blog = _blogRepository.GetBlogById(id);
-            Blog = blog;
+            Blog = _blogRepository.GetBlogById(blogId);
+            if (Blog==null)
+            {
+                Response.Redirect("/ManagementPanel/Blogs");
+            }
         }
 
-        public IActionResult OnPost(int id,IFormFile imgUp)
+        public IActionResult OnPost(int blogId, IFormFile imgUp)
         {
             if (!ModelState.IsValid)
                 return Page();
-
-            var blog = _blogRepository.GetBlogById(id);
+            if (Blog.TypeId < 3 && Blog.TypeId > 6)
+            {
+                ModelState.AddModelError("typeId", "نوع بلاگ را انتخاب کنید");
+                return Page();
+            }
+            var blog = _blogRepository.GetBlog(blogId);
+            //New Values
             blog.Title = Blog.Title;
             blog.ShortDescription = Blog.ShortDescription;
             blog.BlogText = Blog.BlogText;
             blog.TypeId = Blog.TypeId;
             blog.GroupId = Blog.GroupId;
             blog.Tags = Blog.Tags;
-
-            if (imgUp?.Length > 0)
-            {
-                string filePath = Path.Combine(Directory.GetCurrentDirectory(),
-                    "wwwroot",
-                    "images",
-                    "blogs",
-                    blog.BlogId + Path.GetExtension(imgUp.FileName));
-                blog.ImageName = blog.BlogId + Path.GetExtension(imgUp.FileName);
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                {
-                    imgUp.CopyTo(stream);
-                }
-            }
-
-            _blogRepository.Save();
+            //End
+           var res= _blog.EditBlog(blog, imgUp);
+           if (res==false)
+           {
+               ModelState.AddModelError("image","عکس معتبر نمی باشد");
+               return Page();
+           }
             return RedirectToPage("index");
         }
     }

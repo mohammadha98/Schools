@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Schools.Application.Service.Interfaces.Users;
+using Schools.Application.Utilities.Security;
 using Schools.Application.ViewModels.UsersViewModel;
 
 namespace Schools.WebApp.Areas.ManagementPanel.Pages.Tickets
 {
+    [PermissionsChecker(21)]
     public class IndexModel : PageModel
     {
         private IUserTicketService _service;

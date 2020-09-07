@@ -1,67 +1,51 @@
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using Schools.Application.Service.Interfaces.Blogs;
+using Schools.Application.Utilities.Security;
 using Schools.Domain.Models.Blogs;
-using Schools.Domain.Repository.InterfaceRepository.BlogRepositories;
 
 namespace Schools.WebApp.Areas.ManagementPanel.Pages.Blogs
 {
+    [PermissionsChecker(25)]
     public class AddModel : PageModel
     {
-        private IBlogRepository _blogRepository;
-        public AddModel(IBlogRepository blogRepository)
+        private IBlogServices _blog;
+
+        public AddModel(IBlogServices blog)
         {
-            _blogRepository = blogRepository;
+            _blog = blog;
         }
         [BindProperty]
         public Blog Blog { get; set; }
         public void OnGet()
         {
-           
+
         }
         public IActionResult OnPost(IFormFile imgUp)
         {
             if (!ModelState.IsValid)
                 return Page();
-
-            var blog = new Blog()
+            if (Blog.TypeId < 3 && Blog.TypeId > 6)
             {
-                Title = Blog.Title,
-                ShortDescription = Blog.ShortDescription,
-                BlogText = Blog.BlogText,
-                Tags = Blog.Tags,
-                TypeId = Blog.TypeId,
-                GroupId = Blog.GroupId,
-                CreateDate = DateTime.Now
-            };
-
-            _blogRepository.InsertBlog(blog);
-            _blogRepository.Save();
-
-            if (imgUp?.Length > 0)
-            {
-                string filePath = Path.Combine(Directory.GetCurrentDirectory(),
-                    "wwwroot",
-                    "images",
-                    "blogs",
-                    blog.BlogId + Path.GetExtension(imgUp.FileName));
-                blog.ImageName = blog.BlogId + Path.GetExtension(imgUp.FileName);
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                {
-                    imgUp.CopyTo(stream);
-                }
+                ModelState.AddModelError("typeId", "نوع بلاگ را انتخاب کنید");
+                return Page();
             }
 
-            _blogRepository.UpdateBlog(blog);
-            _blogRepository.Save();
+            if (imgUp == null)
+            {
+                ModelState.AddModelError("imgUp", "عکس را انتخاب کنید");
+                return Page();
+            }
 
-
+            var res = _blog.AddBlog(Blog, imgUp);
+            if (res == false)
+            {
+                ModelState.AddModelError("Image", "عکس  قابل قبول نمی باشد");
+                return Page();
+            }
             return RedirectToPage("Index");
         }
     }

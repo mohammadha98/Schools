@@ -1,6 +1,6 @@
 ﻿ClassicEditor
     .create(document.querySelector('#ticket_text'), {
-        ckfinder: {
+        simpleUpload: {
             uploadUrl: '/Upload/UploadTicketImages'
         },
         toolbar: {

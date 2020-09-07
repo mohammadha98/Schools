@@ -63,10 +63,11 @@ namespace Schools.WebApp
             app.UseStatusCodePagesWithReExecute("/Home/HandleError/{0}");
             #endregion
 
-
+            app.UseHttpsRedirection();
+            app.UseRouting();
             app.UseStaticFiles();
             app.UseAuthentication();
-            app.UseRouting();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
