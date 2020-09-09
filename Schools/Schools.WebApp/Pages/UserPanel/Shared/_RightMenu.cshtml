@@ -1,7 +1,12 @@
 ﻿@using Schools.Application.Utilities
 @using Schools.Application.Utilities.Convertors
 @model Tuple<Schools.Domain.Models.Users.User, string>
-
+@{
+    var newMessageReceive = Model.Item1.ReceiverMessages.Count(m => !m.MessageContents.Any());
+    var receiveMessages = Model.Item1.ReceiverMessages.Count(m => m.MessageContents.Any(c => c.IsSeen == false && c.UserId != User.GetUserId()));
+    var sendMessages = Model.Item1.SenderMessages.Count(m => m.MessageContents.Any(c => c.IsSeen == false && c.UserId != User.GetUserId()));
+    var totalNewMessage = newMessageReceive + receiveMessages + sendMessages;
+}
 <div class="right-side">
     <!-- avatar -->
     <div class="quick-access layer-style">
@@ -38,7 +43,7 @@
                 </li>
                 <li class="@((Model.Item2=="UserLikes"?"active":null))"><a href="/UserPanel/UserLikes"> آموزشگاه های پسند شده </a></li>
                 <li class="@((Model.Item2=="Rates"?"active":null))"><a href="/UserPanel/Rates"> تاریخچه امتیازدهی شما </a> </li>
-                <li class="@((Model.Item2=="Messages"?"active":null))"><a href="/UserPanel/Messages"> پیام های خصوصی </a> <i>@Model.Item1.ReceiverMessages.Count(m => m.MessageContents.Any(c => c.IsSeen == false && c.UserId != User.GetUserId()))</i></li>
+                <li class="@((Model.Item2=="Messages"?"active":null))"><a href="/UserPanel/Messages"> پیام های خصوصی </a> <i>@totalNewMessage</i></li>
                 <li class="@((Model.Item2=="Notifications"?"active":null))"><a href="/UserPanel/Notifications"> اطلاعیه های سیستم </a> <i>@Model.Item1.UserNotifications.Count(n => n.IsSee == false)</i></li>
                 <li class="@((Model.Item2=="Tickets"?"active":null))"><a href="/UserPanel/Tickets"> تیکت و پشتیبانی </a><i>@Model.Item1.UserTickets.Count(t => t.TicketMessages.Any(m => m.IsSeen == false))</i></li>
                 <li><a href=""> خروج از سیستم </a></li>

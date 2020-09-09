@@ -1,8 +1,7 @@
-﻿@page "{id}"
+﻿@page "{userId}"
 @using Schools.Application.Utilities.Convertors
 @model Schools.WebApp.Areas.ManagementPanel.Pages.Users.ShowProfileModel
 @{
-    int id = int.Parse(RouteData.Values["id"].ToString());
     var menuModel = "users";
 }
 <partial name="_MainMenu" model="menuModel" />
@@ -22,35 +21,41 @@
                                 <tbody>
                                     <tr>
                                         <th>تاریخ ثبت نام :</th>
-                                        <td>@Model.UserInfoView.User.RegisterDate.ToShamsi()</td>
+                                        <td>@Model.UserModel.RegisterDate.ToShamsi()</td>
 
                                     </tr>
 
                                     <tr>
                                         <th>نام :</th>
-                                        <td>@Model.UserInfoView.User.Name</td>
+                                        <td>@Model.UserModel.Name</td>
 
                                     </tr>
                                     <tr>
                                         <th>نام خانوادگی :</th>
-                                        <td>@Model.UserInfoView.User.Family</td>
+                                        <td>@Model.UserModel.Family</td>
 
                                     </tr>
                                     <tr>
                                         <th>نام کاربری :</th>
-                                        <td>@Model.UserInfoView.User.UserName</td>
+                                        <td>@Model.UserModel.UserName</td>
 
                                     </tr>
                                     <tr>
                                         <th>شماره همراه :</th>
-                                        <td>@Model.UserInfoView.User.PhoneNumber</td>
-
+                                        <td>@Model.UserModel.PhoneNumber</td>
                                     </tr>
-
-
-
-
-
+                                    <tr>
+                                        <th> تلفن ثابت :</th>
+                                        <td>@Model.UserModel.TelNumber</td>
+                                    </tr>
+                                    <tr>
+                                        <th> ایمیل :</th>
+                                        <td>@Model.UserModel.Email</td>
+                                    </tr>
+                                    <tr>
+                                        <th> توضیحات :</th>
+                                        <td>@Model.UserModel.Description</td>
+                                    </tr>
 
                                 </tbody>
                             </table>
@@ -71,18 +76,13 @@
                         </div>
                         <div class="box-body">
                             <ul>
-                                @foreach (var item in Model.UserInfoView.userRoles)
+                                @foreach (var item in Model.UserModel.UserRoles)
                                 {
-                                    <li>@item</li>
+                                    <li>@item.Role.RoleTitle</li>
                                 }
                             </ul>
                         </div>
-                        <!-- /.box-body -->
                     </div>
-                </div>
-            </section>
-            <section class="col-lg-12 col-md-12">
-                <div class="col-md-3">
                     <div class="box">
                         <div class="box-header with-border">
                             <h3 class="box-title">تصویر پروفایل</h3>
@@ -95,19 +95,26 @@
                         </div>
                         <div class="box-body">
                             <div class="center-block">
-                                <img src="~/images/userAvatars/@Model.UserInfoView.User.UserAvatar" class="thumbnail" width="100%" />
+                                <img src="~/images/userAvatars/@Model.UserModel.UserAvatar" class="thumbnail" width="100%" />
                             </div>
 
                         </div>
                         <!-- /.box-body -->
                     </div>
                 </div>
-                <div class="col-md-9">
+            </section>
+            <section class="col-lg-12 col-md-12">
+
+                <div class="col-md-12">
                     <div class="box">
-                        <div class="box-header">
+                        <div class="box-header with-border">
                             <h3 class="box-title">نشان های کاربر</h3>
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                            </div>
                         </div>
-                        <!-- /.box-header -->
                         <div class="box-body table-responsive no-padding">
                             <table class="table table-hover">
                                 <thead>
@@ -118,22 +125,96 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach(var item in Model.UserInfoView.Schools)
+                                    @foreach (var item in Model.UserModel.UserLikes)
                                     {
                                         <tr>
                                             <td>@item.SchoolId</td>
-                                            <td>@item.SchoolTitle</td>
+                                            <td>@item.School.SchoolTitle</td>
                                             <td>
-                                                <img class="thumbnail" style="max-width: 150px"  src="~/images/schools/@item.ImageName"/>
+                                                <img class="thumbnail" style="max-width: 150px" src="~/images/schools/@item.School.ImageName" />
                                             </td>
                                         </tr>
                                     }
                                 </tbody>
                             </table>
                         </div>
-                        <!-- /.box-body -->
                     </div>
                 </div>
+                <div class="col-md-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">امتیاز دهی کاربر</h3>
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4>آموزشگاه ها</h4>
+                                    @foreach (var rates in Model.UserModel.SchoolRates)
+                                    {
+                                        <p>امتیاز : @rates.Rate - آموزشگاه @rates.School.SchoolTitle</p>
+                                    }
+                                </div>
+                                <div class="col-md-6">
+                                    <h4>اساتید</h4>
+                                    @foreach (var rates in Model.UserModel.TeacherRates)
+                                    {
+                                <p>امتیاز : @rates.Rate - نام : @rates.SchoolTeacher.FullName از آموزشگاه @rates.SchoolTeacher.School.SchoolTitle</p>
+                                    }
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">تیکت ها</h3>
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="box-body table-responsive no-padding">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>عنوان</th>
+                                    <th>تاریخ ثبت</th>
+                                    <th>تعداد گفتوگو</th>
+                                    <th>وضعیت</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var ticket in Model.UserModel.UserTickets)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <a href="/ManagementPanel/Tickets/Show/@ticket.TicketId" target="_blank">@ticket.TicketId</a>
+                                            </td>
+                                            <td>@ticket.TicketTitle</td>
+                                            <td>@ticket.CreateDate.ToShamsi()</td>
+                                            <td>@ticket.TicketMessages.Count</td>
+                                            <td>@(ticket.IsOpen?"باز":"بسته")</td>
+                                        </tr>
+
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+
+                    </div>
+                </div>
+
             </section>
         </div>
     </section>

@@ -764,6 +764,26 @@ namespace Schools.Infra.Data.Migrations
                     b.ToTable("TrainingTypes");
                 });
 
+            modelBuilder.Entity("Schools.Domain.Models.SocialNetwork", b =>
+                {
+                    b.Property<int>("SW_Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("NetWorkLink")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NetworkName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("SW_Id");
+
+                    b.ToTable("SocialNetworks");
+                });
+
             modelBuilder.Entity("Schools.Domain.Models.Users.Messages.MessageContent", b =>
                 {
                     b.Property<int>("ContentId")

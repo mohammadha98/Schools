@@ -26,12 +26,12 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.Schools
    
     
         public GetAllSchoolForAdmin SchoolModel { get; set; }
-        public void OnGet(int pageId=1,string schoolName="",int shireId=0,int cityId=0,int groupId=0,int subId=0)
+        public void OnGet(int pageId=1,string schoolName="",int shireId=0,int cityId=0,int groupId=0,int subId=0,string hasRequest="")
         {
             var group = _groups.GetAllGroups();
             ViewData["groups"] =group.Where(g => g.ParentId == null).ToList();
             ViewData["subGroups"] =group.Where(g => g.ParentId == groupId).ToList();
-            SchoolModel = _school.GetSchoolsForAdmin(pageId, 12, schoolName, groupId, subId, shireId, cityId);
+            SchoolModel = _school.GetSchoolsForAdmin(pageId, 12, schoolName, groupId, subId, shireId, cityId,hasRequest);
         }
 
         public IActionResult OnGetGetCity(int shireId)

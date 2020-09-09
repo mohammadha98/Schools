@@ -1,9 +1,13 @@
 ﻿@using Schools.Application.Utilities
+@using Schools.Domain.Repository.InterfaceRepository
 @using Schools.Domain.Repository.InterfaceRepository.Schools
 @using Schools.Domain.Repository.InterfaceRepository.Users
 @inject IUserRepository _user
 @inject ISchoolRepository _School;
-
+@inject ISocialNetworkRepository _Network
+@{
+    var networks = _Network.GetAllSocialNetworks();
+}
 <!DOCTYPE html>
 <html class="no-js" dir="rtl" lang="fa-IR">
 <head>
@@ -34,10 +38,24 @@
         <div class="container">
             <div class="top-bar">
                 <div class="socials">
-                    <a href=""><i class="icon-whatsapp"></i></a>
-                    <a href=""><i class="icon-instagram"></i></a>
-                    <a href=""><i class="icon-telegram"></i></a>
-                    <a href=""><i class="icon-aparat"></i></a>
+                    @foreach (var item in networks)
+                    {
+                        switch (item.NetworkName)
+                        {
+                            case "whatsApp":
+                                <a href="@item.NetWorkLink"><i class="icon-whatsapp"></i></a>
+                                break;
+                            case "instagram":
+                                <a href="@item.NetWorkLink"><i class="icon-instagram"></i></a>
+                                break;
+                            case "telegram":
+                                <a href="@item.NetWorkLink"><i class="icon-telegram"></i></a>
+                                break;
+                            case "aparat":
+                                <a href="@item.NetWorkLink"><i class="icon-aparat"></i></a>
+                                break;
+                        }
+                    }
                 </div>
                 <div class="left-side">
                     <span><a href="javascript:void(0)" class="search-title"> جستجو در سایت </a><i class="zmdi zmdi-search"></i></span>
@@ -57,7 +75,7 @@
                                         <li><a href="/SchoolPanel/Courses"> دوره ها </a></li>
                                         <li><a href="/SchoolPanel/Edit"> ویرایش حساب کاربری </a></li>
                                         <li><a href="/SchoolPanel/ChangePassword"> تغییر رمز عبور </a></li>
-                                        <li><a href="/Logout"> خروج از حساب کاربری </a></li>
+                                        <li><a href="/Logout"> خروج از حساب </a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -90,15 +108,15 @@
                 <a href="" class="logo"><img src="/images/logo.svg"></a>
                 <nav>
                     <ul>
-                        <li><a href="/Blogs/">وبلاگ</a></li>
+                        <li><a href="/Blogs">وبلاگ</a></li>
                         <li><a href="/Rules">قوانین و شرایط</a></li>
                         <li><a href="https://www.toplearn.com" target="_blank">آموزش آنلاین</a></li>
-                        <li><a href="/AboutUs">درباره ما</a></li>
-                        <li><a href="/ContactUs">تماس با ما</a></li>
+                        <li><a href="/About-Us">درباره ما</a></li>
+                        <li><a href="/Contact-Us">تماس با ما</a></li>
                     </ul>
                 </nav>
                 <span class="responsive-menu"><i class="zmdi zmdi-menu"></i></span>
-                <a href="" class="submit-request"> ثبت آموزشگاه </a>
+                <a href="/UserPanel/RegisterSchool" class="submit-request"> ثبت آموزشگاه </a>
             </div>
             @await RenderSectionAsync("search",false)
         </div>
@@ -111,10 +129,10 @@
             <nav>
                 <ul>
                     <li><a href="/Blogs/">وبلاگ</a></li>
-                    <li><a href="">قوانین و شرایط</a></li>
+                    <li><a href="/Rules">قوانین و شرایط</a></li>
                     <li><a href="https://www.toplearn.com" target="_blank">آموزش آنلاین</a></li>
-                    <li><a href="/AboutUs">درباره ما</a></li>
-                    <li><a href="/ContactUs">تماس با ما</a></li>
+                    <li><a href="/About-Us">درباره ما</a></li>
+                    <li><a href="/Contact-Us">تماس با ما</a></li>
                 </ul>
             </nav>
             <p class="copyright"><a href="">طراحی</a> و <a href="">برنامه نویسی</a> و پشتیبانی : <a href="">شرکت برنامه نویسان پیشرو پایدار</a></p>

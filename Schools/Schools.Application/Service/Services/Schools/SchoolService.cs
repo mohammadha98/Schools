@@ -41,7 +41,7 @@ namespace Schools.Application.Service.Services.Schools
 
 
         public GetAllSchoolForAdmin GetSchoolsForAdmin(int pageId, int take, string schoolName, int groupId, int subId, int shireId,
-            int cityId)
+            int cityId,string hasRequest)
         {
             var result = _school.GetAllSchools();
 
@@ -70,6 +70,12 @@ namespace Schools.Application.Service.Services.Schools
                 result = result.Where(r => r.CityId == cityId);
             }
 
+            if (hasRequest == "true")
+            {
+                result = result.Where(r =>
+                    r.SchoolGalleries.Any(g => g.IsActive == false) || r.SchoolCourses.Any(c => c.IsActive == false) ||
+                    r.SchoolTeachers.Any(t => t.IsActive == false));
+            }
 
             var skip = (pageId - 1) * take;
             var pageCount = (int)Math.Ceiling(result.Count() / (double)take);
@@ -128,7 +134,7 @@ namespace Schools.Application.Service.Services.Schools
             {
                 case "all":
                     {
-
+                        result = result.OrderByDescending(r => r.RegisterDate);
                         break;
                     }
                 case "popular":
@@ -465,7 +471,8 @@ namespace Schools.Application.Service.Services.Schools
                 SubGroupId = school.SubGroupId,
                 Tags = school.Tags,
                 SchoolId = school.SchoolId,
-                ShortLink = school.ShortLink
+                ShortLink = school.ShortLink,
+                Visit = school.Visit
             };
             //اگر عکسی انتخاب کرده باشه وارد شرط میشه
             if (school.Avatar != null)
@@ -500,6 +507,12 @@ namespace Schools.Application.Service.Services.Schools
                 _typeService.AddTrainingTypeForSchool(schoolModel.SchoolId, typeId);
             }
             return true;
+        }
+
+        public bool IsUserHasSchool(int userId)
+        {
+            var schools = _school.GetAllSchools();
+            return schools.Any(s => s.SchoolManager == userId);
         }
 
         public void AddVisitForSchool(School school)

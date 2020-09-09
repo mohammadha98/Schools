@@ -93,7 +93,7 @@ $(function(){
             }
         }).done(function(data) {
             $('.description-layer').fadeIn();
-            $('.description-layer > span.item-title').html('').html(title);
+            $('.description-layer > span.item-title').html(title);
             $(".item-count i").html(data);
             if (data === "0") {
                 $(".view-btn").css("display", "none");

@@ -97,7 +97,11 @@
                                         {
                                             <i>بسته شده</i>
                                         }
-                                        @if (item.IsOpen && item.TicketMessages.All(m => m.UserId == User.GetUserId()))
+                                        @if (item.IsOpen && item.TicketMessages.LastOrDefault(m => m.UserId == User.GetUserId()) != null)
+                                        {
+                                            <i>درحال برسی</i>
+                                        }
+                                        @if (item.IsOpen && !item.TicketMessages.Any())
                                         {
                                             <i>درحال برسی</i>
                                         }

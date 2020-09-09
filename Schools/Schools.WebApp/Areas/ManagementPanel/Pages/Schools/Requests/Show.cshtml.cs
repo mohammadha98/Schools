@@ -63,6 +63,7 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.Schools.Requests
                     _service.AcceptRequest(request,Request.Host.ToString());
                     notification.Text =
                         "آموزشگاه شما تایید شده برای ثبت اساتید آموزشگاه به <a href='/SchoolPanel/Teachers'>این لینک</a> مراجعه کنید";
+                    notification.Title = "تایید آموزشگاه";
                     _notification.AddNotification(notification);
                     return RedirectToPage("Index");
                 }

@@ -65,10 +65,16 @@ else
                         <div class="col-md-4 col-sm-4">
                             <div class="statistics-section layer-style">
                                 @{
-                                    var totalRate = Model.School.SchoolRates.Sum(r => r.Rate) / Model.School.SchoolRates.Count;
+                                    var rateCount = Model.School.SchoolRates.Count;
+                                    double? totalRate = null;
+                                    if (rateCount >= 1)
+                                    {
+                                         totalRate = Model.School.SchoolRates.Sum(r => r.Rate) / rateCount;
+
+                                    }
                                 }
                                 <i class="zmdi zmdi-star"></i>
-                                <span class="number"> @totalRate امتیاز </span>
+                                <span class="number"> @(totalRate?.ToString("##.###")??"0") امتیاز </span>
                                 <span class="title"> امتیاز شما از @Model.School.SchoolRates.Count رای </span>
                             </div>
                         </div>
@@ -94,17 +100,26 @@ else
                     <h3> آخرین اطلاعیه های سیستم</h3>
                     <div class="inner">
                         <ul>
-                            @foreach (var item in Model.School.User.UserNotifications.OrderByDescending(n => n.CreateDate).Take(6))
+                            @if (Model.School.User.UserNotifications.Any())
                             {
-                                <li style="position: relative">
-                                    <i class="zmdi zmdi-close text-danger delete" onclick="deleteItem(@item.NotificationId)" data-toggle="tooltip" title="حذف" data-placement="top"></i>
-                                    <a href="javascript:void(0)"><i class="zmdi zmdi-assignment"></i> @item.Title <span> ( @item.CreateDate.ToShamsi() ) </span></a>
-                                    <div class="message-layer layer-style" data-item="@((item.IsSee==false?item.NotificationId.ToString():null))">
-                                        <p>
-                                            @Html.Raw(item.Text)
-                                        </p>
-                                    </div>
+                                @foreach (var item in Model.School.User.UserNotifications.OrderByDescending(n => n.CreateDate).Take(6))
+                                {
+                                    <li style="position: relative">
+                                        <i class="zmdi zmdi-close text-danger delete" onclick="deleteItem(@item.NotificationId)" data-toggle="tooltip" title="حذف" data-placement="top"></i>
+                                        <a href="javascript:void(0)"><i class="zmdi zmdi-assignment"></i> @item.Title <span> ( @item.CreateDate.ToShamsi() ) </span></a>
+                                        <div class="message-layer layer-style" data-item="@((item.IsSee==false?item.NotificationId.ToString():null))">
+                                            <p>
+                                                @Html.Raw(item.Text)
+                                            </p>
+                                        </div>
 
+                                    </li>
+                                }
+                            }
+                            else
+                            {
+                                <li class="alert alert-info">
+                                    موردی برای نمایش وجود ندارد
                                 </li>
                             }
                         </ul>
@@ -114,27 +129,50 @@ else
                     <h3> پیام های خصوصی خوانده نشده </h3>
                     <div class="inner">
                         <div class="dashboard-message">
-                            @foreach (var item in Model.School.User.ReceiverMessages.OrderByDescending(n => n.CreateDate).Where(m => m.MessageContents.Any(u => u.UserId != userId && u.IsSeen == false)))
+                            @foreach (var item in Model.School.User.ReceiverMessages.Where(m => m.MessageContents.Any(u => u.UserId != User.GetUserId() && u.IsSeen == false) || !m.MessageContents.Any()))
+                            {
+                                <div class="ticket-box layer-style">
+                                    <div class="head">
+                                        <span class="code"> کد پیام : <i>@item.Um_Id</i> </span>
+                                        <span class="resgiter-date"> تاریخ ارسال : 
+                                            <i>
+                                                @{
+                                                    var lastMessage = item.MessageContents.LastOrDefault();
+                                                }
+                                                @if (lastMessage != null)
+                                                {
+                                                    @lastMessage.SendDate.ToShamsi();
+                                                }
+                                                else
+                                                {
+                                                    item.CreateDate.ToShamsi();
+                                                }
+                                            </i>
+                                            </span>
+                                    </div>
+                                    <div class="text">
+                                        <span>
+                                            یک پیام از کاربر @item.Sender.UserName برای شما ارسال شده است
+                                        </span>
+                                        <p>
+                                            @item.MessageTitle
+                                        </p>
+                                        <a href="/SchoolPanel/Messages/Show/@item.Um_Id"> مشاهده کامل و ثبت پاسخ </a>
+                                    </div>
+
+                                </div>
+                            }
+                            @foreach (var item in Model.School.User.SenderMessages.Where(m => m.MessageContents.Any(u => u.UserId != User.GetUserId() && u.IsSeen == false) || !m.MessageContents.Any()))
                             {
                                 <div class="ticket-box layer-style">
                                     <div class="head">
                                         <span class="code"> کد پیام : <i>@item.Um_Id</i> </span>
                                         <span class="resgiter-date"> تاریخ ارسال : <i>@item.CreateDate.ToShamsi()</i> </span>
                                     </div>
-
                                     <div class="text">
-                                        @if (item.SenderId == userId)
-                                        {
-                                            <span>
-                                                یک پیام از کاربر @item.Receiver.UserName برای شما ارسال شده است
-                                            </span>
-                                        }
-                                        @if (item.ReceiverId == userId)
-                                        {
-                                            <span>
-                                                یک پیام از کاربر @item.Sender.UserName برای شما ارسال شده است
-                                            </span>
-                                        }
+                                        <span>
+                                            یک پیام از کاربر @item.Receiver.UserName برای شما ارسال شده است
+                                        </span>
                                         <p>
                                             @item.MessageTitle
                                         </p>

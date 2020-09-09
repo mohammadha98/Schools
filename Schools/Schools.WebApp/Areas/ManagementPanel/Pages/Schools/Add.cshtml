@@ -115,14 +115,14 @@
                             </div>
                             <div class="col-lg-6 col-md-6" style="margin-top: 8px">
                                 <p>نوع آموزش</p>
-                                <select class="multiple form-control"  asp-for="School.TrainingTypes" multiple="multiple">
+                                <select class="multiple form-control" asp-for="School.TrainingTypes" multiple="multiple">
                                     <option value="1" selected="">آموزش حضوری</option>
                                     <option value="2">آموزش آنلاین</option>
                                 </select>
                             </div>
                             <div class="col-lg-6 col-md-6" style="margin-top: 8px">
                                 <p>آلبوم عکس</p>
-                                <input asp-for="School.Gallery" type="file" accept="image/*" multiple="" class="form-control" required=""/>
+                                <input asp-for="School.Gallery" type="file" accept="image/*" multiple="" class="form-control" required="" />
                             </div>
                             <div class="col-lg-6 col-md-6" style="margin-top: 8px">
                                 <p>عکس پروفایل</p>
@@ -138,6 +138,7 @@
 </div>
 @section Scripts
 {
+  
     <script src="/admin/dist/js/persian-date-0.1.8.min.js"></script>
     <script src="/admin/dist/js/persian-datepicker-0.4.5.min.js"></script>
     <script src="/ckeditor5/build/ckeditor.js"></script>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using Microsoft.EntityFrameworkCore.Internal;
 using Schools.Application.Service.Interfaces.Users;
 using Schools.Application.Utilities.Convertors;
 using Schools.Application.ViewModels.UsersViewModel;
@@ -69,7 +70,7 @@ namespace Schools.Application.Service.Services.Users
             return ticketsModel;
         }
 
-        public GetTicketsViewModel GetTicketsForAdmin(int pageId, int take,string title,string status, int? priorityId, int? categoryId)
+        public GetTicketsViewModel GetTicketsForAdmin(int pageId, int take, string title, string status, int? priorityId, int? categoryId)
         {
             var result = _ticket.GetAllTickets();
             if (!string.IsNullOrEmpty(title))
@@ -101,7 +102,7 @@ namespace Schools.Application.Service.Services.Users
                         break;
                 }
             }
-           
+
             var skip = (pageId - 1) * take;
             var pageCount = (int)Math.Ceiling(result.Count() / (double)take);
 
@@ -127,7 +128,7 @@ namespace Schools.Application.Service.Services.Users
         {
             ticket.IsOpen = true;
             ticket.IsDelete = false;
-            ticket.CreateDate=DateTime.Now;
+            ticket.CreateDate = DateTime.Now;
             _ticket.AddTicket(ticket);
             return ticket.TicketId;
         }
@@ -144,7 +145,7 @@ namespace Schools.Application.Service.Services.Users
 
         public void AddTicketToMessage(int ticketId, string message, int userId)
         {
-            var messageModel=new TicketMessage()
+            var messageModel = new TicketMessage()
             {
                 IsDelete = false,
                 IsSeen = true,
@@ -154,6 +155,25 @@ namespace Schools.Application.Service.Services.Users
                 UserId = userId
             };
             _ticket.AddMessageToTicket(messageModel);
+        }
+
+        public void SeenMessages(int ticketId)
+        {
+            var ticket = _ticket.GetUserTicket(ticketId);
+            if (ticket == null)
+                return;
+
+            var ticketMessages = ticket.TicketMessages.Where(t => t.IsSeen == false).ToList();
+            if (!ticketMessages.Any())
+            {
+                return;
+            }
+            foreach (var message in ticketMessages)
+            {
+                message.IsSeen = true;
+                _ticket.EditMessage(message);
+            }
+            _ticket.SaveChanges();
         }
     }
 

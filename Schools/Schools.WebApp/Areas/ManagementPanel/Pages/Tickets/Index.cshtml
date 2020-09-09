@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{handler?}"
 @using Schools.Application.Utilities.Convertors
 @using Schools.Domain.Models.Users.Tickets
 @model Schools.WebApp.Areas.ManagementPanel.Pages.Tickets.IndexModel
@@ -74,36 +74,37 @@
                                 <tbody>
                                     @foreach (var item in Model.TicketModel.UserTickets)
                                     {
-                                    <tr>
-                                        <td>@item.TicketId</td>
-                                        <td>@item.TicketTitle</td>
-                                        <td>@item.TicketMessages.Count</td>
-                                        <td>@item.CreateDate.ToShamsi()</td>
-                                        <td>
-                                            @if (item.IsOpen)
-                                            {
-                                                <span class="badge badge-success" style="background: darkgreen">باز</span>
+                                        <tr>
+                                            <td>@item.TicketId</td>
+                                            <td>@item.TicketTitle</td>
+                                            <td>@item.TicketMessages.Count</td>
+                                            <td>@item.CreateDate.ToShamsi()</td>
+                                            <td>
+                                                @if (item.IsOpen)
+                                                {
+                                                    <span class="badge badge-success" style="background: darkgreen">باز</span>
 
-                                            }
-                                            else
-                                            {
-                                                <span class="badge badge-success">بسته</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge badge-success">بسته</span>
 
 
-                                            }
-                                        </td>
-                                        <td>
-                                            @item.TicketCategory.CategoryTitle
-                                        </td>
-                                        <td>
-                                            @item.TicketPriority.PriorityTitle
-                                        </td>
-                                        <td>
-                                            <a class="btn btn-sm btn-flat btn-info" href="/ManagementPanel/Tickets/Show/@item.TicketId">
-                                                نمایش
-                                            </a>
-                                        </td>
-                                    </tr>
+                                                }
+                                            </td>
+                                            <td>
+                                                @item.TicketCategory.CategoryTitle
+                                            </td>
+                                            <td>
+                                                @item.TicketPriority.PriorityTitle
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-sm btn-flat btn-info" href="/ManagementPanel/Tickets/Show/@item.TicketId">
+                                                    نمایش
+                                                </a>
+                                             
+                                            </td>
+                                        </tr>
                                     }
                                 </tbody>
                             </table>
@@ -157,6 +158,7 @@
             $("#CourseModel_CurrentPage").val(pageId);
             $("#form_filter").submit();
         }
+       
     </script>
 }
 

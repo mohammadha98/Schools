@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace Schools.Application.ViewModels.UsersViewModel
 {
@@ -24,7 +23,7 @@ namespace Schools.Application.ViewModels.UsersViewModel
         [MinLength(5, ErrorMessage = "نام کاربری کوتاه است")]
         public string UserName { get; set; }
         [Required(ErrorMessage = "کلمه عبور را وارد کنید")]
-        [MinLength(6, ErrorMessage = "کلمه عبور باید بیشتر از 6 کاراکتر باشد")]
+        [MinLength(8, ErrorMessage = "کلمه عبور باید بیشتر از 6 کاراکتر باشد")]
         [MaxLength(30, ErrorMessage = "کلمه عبور باید کمتر از30 کاراکتر باشد")]
         public string Password { get; set; }
     }

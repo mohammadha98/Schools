@@ -1,0 +1,42 @@
+﻿@page "{networkId}"
+@model Schools.WebApp.Areas.ManagementPanel.Pages.SocialNetworks.EditModel
+@{
+    var menuModel = "SocialNetworks";
+}
+<partial name="_MainMenu" model="menuModel" />
+
+<div class="content-wrapper">
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-info">
+                    <div class="box-header">
+                        <h3 class="box-title">شبکه های اجتماعی</h3>
+                    </div>
+                    <div class="box-body">
+                        <form method="post" class="row">
+                            <div asp-validation-summary="All"></div>
+                            <div class="col-md-6">
+                                <p>نام شبکه اجتماعی</p>
+                                <select class="form-control" asp-for="SocialNetwork.NetworkName">
+                                    <option value="aparat">آپارات (Aparat)</option>
+                                    <option value="instagram">اینستاگرام (Instagram)</option>
+                                    <option value="telegram">تلگرام (Telegram)</option>
+                                    <option value="whatsApp">واتس آپ (WhatsApp)</option>
+                                    <option value="twitter">تویتر (Twitter)</option>
+                                    <option value="LinkdIn">لینکدین(LinkeDIn)</option>
+                                    <option value="googlePlus">گوگل پلاس(Google+)</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <p>لینک مربوط به صفحه شما در این شبکه انتخابی</p>
+                                <input type="text" asp-for="SocialNetwork.NetWorkLink" class="form-control" placeholder="مثال : https://www.instagram.com/Fake"/>
+                            </div>
+                            <button type="submit" class="btn btn-success btn-block col-md-12" style="margin-top: 10px">ثبت</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

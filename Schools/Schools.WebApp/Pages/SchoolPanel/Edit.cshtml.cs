@@ -15,9 +15,10 @@ namespace Schools.WebApp.Pages.SchoolPanel
         private IUserService _service;
         private ISchoolRepository _school;
 
-        public EditModel(IUserService service)
+        public EditModel(IUserService service, ISchoolRepository school)
         {
             _service = service;
+            _school = school;
         }
 
         public School School { get; set; }

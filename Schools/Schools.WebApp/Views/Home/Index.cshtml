@@ -1,4 +1,7 @@
 ﻿@model Schools.Application.ViewModels.SchoolsViewModels.MainPageViewModel
+@{
+    ViewData["title"] = $"آموزشگاه های استان {Model.ShireTitle}";
+}
 @section Topic_Layer{
     <div class="container">
         <div class="topic-layer">
@@ -40,110 +43,120 @@
         </div>
     </div>
 }
-<div class="main-content">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3 col-md-4 col-sm-5 col-xs-6 categories-col">
-                <div class="categories-layer shadow-style">
-                    <div class="select-layer">
-                        <span class="title-place"> گروه بندی آموزشگاه های <i> @Model.ShireTitle  </i> </span>
-                    </div>
-                    <div class="list-layer">
-                        <nav>
-                            <ul>
-                                @foreach (var main in Model.SchoolGroups.Where(g => g.ParentId == null))
-                                {
-                                    <li>
-                                        <a href="/Schools?categoryTitle=@main.GroupTitle&shireTitle=@Model.ShireTitle"> @main.GroupTitle <span>(@main.Schools.Count)</span></a>
-                                        @if (Model.SchoolGroups.Any(g => g.ParentId == main.GroupId))
-                                        {
-                                            <ul>
-                                                @foreach (var sub in Model.SchoolGroups.Where(g => g.ParentId == main.GroupId))
-                                                {
-                                                    <li><a href="/Schools?categoryTitle=@sub.GroupTitle&shireTitle=@Model.ShireTitle">@sub.GroupTitle<span>(@sub.SchoolsSub.Count)</span></a></li>
+@if (Model.SchoolsCount >= 1)
+{
+    <div class="main-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-4 col-sm-5 col-xs-6 categories-col">
+                    <div class="categories-layer shadow-style">
+                        <div class="select-layer">
+                            <span class="title-place"> گروه بندی آموزشگاه های <i> @Model.ShireTitle  </i> </span>
+                        </div>
+                        <div class="list-layer">
+                            <nav>
+                                <ul>
+                                    @foreach (var main in Model.SchoolGroups.Where(g => g.ParentId == null))
+                                    {
+                                        <li>
+                                            <a href="/Schools?categoryTitle=@main.GroupTitle&shireTitle=@Model.ShireTitle"> @main.GroupTitle <span>(@main.Schools.Count)</span></a>
+                                            @if (Model.SchoolGroups.Any(g => g.ParentId == main.GroupId))
+                                            {
+                                                <ul>
+                                                    @foreach (var sub in Model.SchoolGroups.Where(g => g.ParentId == main.GroupId))
+                                                    {
+                                                        <li><a href="/Schools?categoryTitle=@sub.GroupTitle&shireTitle=@Model.ShireTitle">@sub.GroupTitle<span>(@sub.SchoolsSub.Count)</span></a></li>
 
-                                                }
-                                            </ul>
-                                        }
-                                    </li>
-                                }
-                            </ul>
-                        </nav>
+                                                    }
+                                                </ul>
+                                            }
+                                        </li>
+                                    }
+                                </ul>
+                            </nav>
+                        </div>
                     </div>
                 </div>
+                <section class="col-lg-9 col-md-8 col-sm-7 col-xs-6 popular-item-col">
+                    <header class="heading-style"><h2> محبوب ترین آموزشگاه های <i> @Model.ShireTitle </i> </h2></header>
+                    <div class="popular-item-carousel owl-carousel">
+                        @foreach (var item in Model.PopularSchools)
+                        {
+                            <partial name="School/_SchoolItem" model="@item" />
+                        }
+                    </div>
+                </section>
             </div>
-            <section class="col-lg-9 col-md-8 col-sm-7 col-xs-6 popular-item-col">
-                <header class="heading-style"><h2> محبوب ترین آموزشگاه های <i> @Model.ShireTitle </i> </h2></header>
-                <div class="popular-item-carousel owl-carousel">
-                    @foreach (var item in Model.PopularSchools)
+            <section class="last-items-layer">
+                <header class="heading-style">
+                    <h2>آخرین آموزشگاه های ثبت شده در <i> @Model.ShireTitle </i></h2>
+                    <div class="select-layer">
+                        <span class="title-place"> مشاهده آموزشگاه های <i> @Model.ShireTitle </i> </span>
+                        <ul>
+                            <li><label><input type="radio" name="select-list" value="@Model.ShireTitle" id="select-1">@Model.ShireTitle</label></li>
+                            @foreach (var city in Model.ShireCities.Take(12))
+                            {
+                                <li><a href="/schools?shireTitle=@Model.ShireTitle&cityTitle=@city.CityTitle&orderBy=all"><label>@city.CityTitle</label></a></li>
+                            }
+                            <li><a href="/schools?shireTitle=@Model.ShireTitle&orderBy=all"><label>همه شهر ها </label></a></li>
+                        </ul>
+                    </div>
+                </header>
+                <div class="row">
+                    @foreach (var item in Model.LastRegisteredSchools)
                     {
-                      <partial name="School/_SchoolItem" model="@item"/>
+                        <partial name="School/_SchoolCard" model="item" />
                     }
                 </div>
+                <a href="/schools?shireTitle=@Model.ShireTitle&orderBy=all" class="view-all-item button-st blue"> مشاهده تمامی آموزشگاه های <span> @Model.ShireTitle </span> <i class="zmdi zmdi-more"></i></a>
             </section>
         </div>
-        <section class="last-items-layer">
+    </div>
+    <section class="best-item-layer">
+        <div class="container">
             <header class="heading-style">
-                <h2>آخرین آموزشگاه های ثبت شده در <i> @Model.ShireTitle </i></h2>
+                <h2> برترین آموزشگاه های  <i> @Model.ShireTitle </i> </h2>
                 <div class="select-layer">
                     <span class="title-place"> مشاهده آموزشگاه های <i> @Model.ShireTitle </i> </span>
                     <ul>
                         <li><label><input type="radio" name="select-list" value="@Model.ShireTitle" id="select-1">@Model.ShireTitle</label></li>
                         @foreach (var city in Model.ShireCities.Take(12))
                         {
-                            <li><a href="/schools?shireTitle=@Model.ShireTitle&cityTitle=@city.CityTitle"><label>@city.CityTitle</label></a></li>
+                            <li><a href="/schools?shireTitle=@Model.ShireTitle&cityTitle=@city.CityTitle&orderBy=best"><label>@city.CityTitle</label></a></li>
                         }
-                        <li><a href="/schools?shireTitle=@Model.ShireTitle"><label>همه شهر ها </label></a></li>
+                        <li><a href="/schools?shireTitle=@Model.ShireTitle&orderBy=best"><label>همه شهر ها </label></a></li>
                     </ul>
                 </div>
             </header>
-            <div class="row">
-                @foreach (var item in Model.LastRegisteredSchools)
+
+            <div class="best-item-carousel owl-carousel">
+                @foreach (var item in Model.BestSchools)
                 {
-                   <partial name="School/_SchoolCard" model="item"/>
+                    <div class="item">
+                        <section class="section-item shadow-style">
+                            <div class="img-layer">
+                                <span> @(item.CityTitle ?? Model.ShireTitle)</span>
+                                <a href="/School/@item.SchoolId/@item.Title.Replace(" ","-").Trim()"><img src="/images/schools/@item.ImageName" alt="@item.Title"></a>
+                            </div>
+                            <h2><a href="/School/@item.SchoolId/@item.Title.Replace(" ","-").Trim()"> <span class="category-name"> @item.CategoryTitle </span> @item.Title </a></h2>
+                            <div class="detail">
+                                <span class="history"> <i class="zmdi zmdi-calendar-check"></i> @item.History سال سابقه </span>
+                                <span class="rating-star"><span class="readonly-rating-star" data-score="@item.Rate"></span></span>
+                            </div>
+                        </section>
+                    </div>
                 }
             </div>
-            <a href="" class="view-all-item button-st blue"> مشاهده تمامی آموزشگاه های <span> @Model.ShireTitle </span> <i class="zmdi zmdi-more"></i></a>
-        </section>
-    </div>
-</div>
-<section class="best-item-layer">
-    <div class="container">
-        <header class="heading-style">
-            <h2> برترین آموزشگاه های  <i> @Model.ShireTitle </i> </h2>
-            <div class="select-layer">
-                <span class="title-place"> مشاهده آموزشگاه های <i> @Model.ShireTitle </i> </span>
-                <ul>
-                    <li><label><input type="radio" name="select-list" value="@Model.ShireTitle" id="select-1">@Model.ShireTitle</label></li>
-                    @foreach (var city in Model.ShireCities.Take(12))
-                    {
-                        <li><a href="/schools?shireTitle=@Model.ShireTitle&cityTitle=@city.CityTitle"><label>@city.CityTitle</label></a></li>
-                    }
-                    <li><a href="/schools?shireTitle=@Model.ShireTitle"><label>همه شهر ها </label></a></li>
-                </ul>
-            </div>
-        </header>
-
-        <div class="best-item-carousel owl-carousel">
-            @foreach (var item in Model.BestSchools)
-            {
-                <div class="item">
-                    <section class="section-item shadow-style">
-                        <div class="img-layer">
-                            <span> @(item.CityTitle ?? Model.ShireTitle)</span>
-                            <a href="/School/@item.SchoolId/@item.Title.Replace(" ","-").Trim()"><img src="/images/schools/@item.ImageName" alt="@item.Title"></a>
-                        </div>
-                        <h2><a href="/School/@item.SchoolId/@item.Title.Replace(" ","-").Trim()"> <span class="category-name"> @item.CategoryTitle </span> @item.Title </a></h2>
-                        <div class="detail">
-                            <span class="history"> <i class="zmdi zmdi-calendar-check"></i> @item.History سال سابقه </span>
-                            <span class="rating-star"><span class="readonly-rating-star" data-score="@item.Rate"></span></span>
-                        </div>
-                    </section>
-                </div>
-            }
         </div>
+    </section>
+}
+else
+{
+    <div class="alert alert-warning text-center" style="margin-bottom: 0">
+        <h4 style="font-size: 20px;margin-bottom: 5px">هیچ آموزشگاهی در این استان ثبت نشده است</h4>
+        <p>جهت ثبت آموزشگاه می توانید از <a href="/UserPanel/RegisterSchool">این لینک</a> اقدام کنید</p>
     </div>
-</section>
+}
 @section Scripts
 {
     <script src="/js/raty.js"></script>

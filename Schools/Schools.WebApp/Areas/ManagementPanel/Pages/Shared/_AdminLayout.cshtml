@@ -12,8 +12,6 @@
     <link rel="stylesheet" href="/Admin/dist/css/bootstrap-theme.css">
     <!-- Bootstrap rtl -->
     <link rel="stylesheet" href="/Admin/dist/css/rtl.css">
-    <!-- persian Date Picker -->
-    <link rel="stylesheet" href="/Admin/dist/css/persian-datepicker-0.4.5.min.css">
 
     <link rel="stylesheet" href="/Admin/bowercomponents/font-awesome/css/font-awesome.min.css">
 
@@ -27,7 +25,6 @@
 
     <link rel="stylesheet" href="/Admin/bowercomponents/jvectormap/jquery-jvectormap.css">
 
-    <link rel="stylesheet" href="/Admin/bowercomponents/bootstrap-daterangepicker/daterangepicker.css">
     <link rel="stylesheet" href="/Admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 
     <link rel="stylesheet"
@@ -35,10 +32,10 @@
 
     <link rel="stylesheet" href="/Admin/dist/css/customize-adminlte.css">
     <link rel="stylesheet" href="/Admin/CustomStyle.css">
-    @await RenderSectionAsync("Meta",false)
+    @await RenderSectionAsync("Meta", false)
 </head>
 
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="sidebar-mini skin-purple sidebar-collapse fixed">
     <div class="loading">
         <div class="loading-body">
             <img src="/loading/Double Ring-1.4s-200px.gif" />
@@ -50,62 +47,37 @@
         <partial name="_Header" />
         @RenderBody()
 
-        <aside class="control-sidebar control-sidebar-dark">
-            <!-- Create the tabs -->
-            <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-                <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
-                <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
-            </ul>
-            <!-- Tab panes -->
-            <div class="tab-content">
-           
-            </div>
-        </aside>
+      
 
         <div class="control-sidebar-bg"></div>
     </div>
-    <!-- ./wrapper -->
-    <!-- jQuery 3 -->
+
     <script src="/Admin/bowercomponents/jquery/dist/jquery.min.js"></script>
-    <!-- jQuery UI 1.11.4 -->
-    <script src="/Admin/bowercomponents/jquery-ui/jquery-ui.min.js"></script>
-    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-    <script>
-        $.widget.bridge('uibutton', $.ui.button);
-    </script>
-    <!-- Bootstrap 3.3.7 -->
     <script src="/Admin/bowercomponents/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- Morris.js charts -->
-    <script src="/Admin/bowercomponents/raphael/raphael.min.js"></script>
-    <script src="/Admin/bowercomponents/morris.js/morris.min.js"></script>
-    <!-- Sparkline -->
     <script src="/Admin/bowercomponents/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
-    <!-- jvectormap -->
     <script src="/Admin/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
     <script src="/Admin/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-    <!-- jQuery Knob Chart -->
-    <script src="/Admin/bowercomponents/jquery-knob/dist/jquery.knob.min.js"></script>
-    <!-- daterangepicker -->
-    <script src="/Admin/bowercomponents/moment/min/moment.min.js"></script>
-    <script src="/Admin/bowercomponents/bootstrap-daterangepicker/daterangepicker.js"></script>
-    <!-- datepicker -->
     <script src="/Admin/bowercomponents/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-    <!-- Bootstrap WYSIHTML5 -->
     <script src="/Admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
-    <!-- Slimscroll -->
     <script src="/Admin/bowercomponents/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-    <!-- FastClick -->
-    <script src="/Admin/bowercomponents/fastclick/lib/fastclick.js"></script>
-    <!-- AdminLTE App -->
     <script src="/Admin/dist/js/adminlte.min.js"></script>
-    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="/Admin/dist/js/pages/dashboard.js"></script>
-    <!-- AdminLTE for demo purposes -->
     <script src="/Admin/dist/js/demo.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        $(".main-sidebar").mouseenter(function () {
+            $("body").removeClass("sidebar-collapse");
+            $("body").addClass("sidebar-expanded-on-hover");
+        });
+        $(".content-wrapper").mouseenter(function () {
+            if ($("body").hasClass("sidebar-expanded-on-hover")) {
+                $("body").removeClass("sidebar-expanded-on-hover");
+
+                $("body").addClass("sidebar-collapse");
+            }
+        });
+    </script>
 
 
-   
 
     @await RenderSectionAsync("Scripts", false)
 </body>

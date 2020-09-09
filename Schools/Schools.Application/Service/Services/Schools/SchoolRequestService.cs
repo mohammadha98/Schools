@@ -32,7 +32,7 @@ namespace Schools.Application.Service.Services.Schools
             if (request.Galleries.Any(g => !g.IsImage())) return false;
 
 
-            
+
             var requestModel = new SchoolRequest()
             {
                 CellPhone = request.CellPhone,
@@ -48,21 +48,20 @@ namespace Schools.Application.Service.Services.Schools
                 CreateDate = DateTime.Now,
                 IsAccept = false,
                 CategoryId = request.CategoryId,
-                Address = request.Address
+                Address = request.Address,
             };
-            var counter = 1;
-            foreach (var types in request.TrainingTypes)
+
+
+            if (request.TrainingTypes.Length > 1)
             {
-                if (counter>1)
-                {
-                    requestModel.TrainingTypes += $"{types}-";
-                }
-                else
-                {
-                    requestModel.TrainingTypes += $"{types}";
-                }
-                counter += 1;
+                requestModel.TrainingTypes += $"{request.TrainingTypes[0]}-{request.TrainingTypes[1]}";
             }
+            else
+            {
+                requestModel.TrainingTypes += $"{request.TrainingTypes[0]}";
+            }
+
+
             //ممکنه فرمت تاریخ سمت کلاینت دستکاری شده باشه
             try
             {
@@ -86,7 +85,7 @@ namespace Schools.Application.Service.Services.Schools
                 requestModel.DocumentsImage += fileName + "&";
             }
             //حذف علامت & اضافی از متن
-            requestModel.DocumentsImage = requestModel.DocumentsImage.Remove(requestModel.DocumentsImage.Length-1, 1);
+            requestModel.DocumentsImage = requestModel.DocumentsImage.Remove(requestModel.DocumentsImage.Length - 1, 1);
             requestModel.ImageName = imageName;
 
             _request.AddRequest(requestModel);
@@ -96,7 +95,7 @@ namespace Schools.Application.Service.Services.Schools
             }
             catch (Exception e)
             {
-                return true;
+                return false;
             }
             return true;
         }
@@ -145,9 +144,9 @@ namespace Schools.Application.Service.Services.Schools
             return _request.GetRequestByUserId(userId);
         }
 
-        public void RejectRequest(SchoolRequest request,string rejectText)
+        public void RejectRequest(SchoolRequest request, string rejectText)
         {
-            if (request==null)
+            if (request == null)
                 return;
 
             //حذف عکس های آپلود شده
@@ -175,7 +174,7 @@ namespace Schools.Application.Service.Services.Schools
             _request.EditRequest(request);
         }
 
-        public void AcceptRequest(SchoolRequest request,string hostName)
+        public void AcceptRequest(SchoolRequest request, string hostName)
         {
             if (request == null) return;
             //Send Email

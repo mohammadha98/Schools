@@ -1,4 +1,5 @@
-﻿@using Schools.Application.Service.Interfaces.Blogs
+﻿@model List<Schools.Domain.Models.SocialNetwork>
+@using Schools.Application.Service.Interfaces.Blogs
 @using Schools.Domain.Repository.InterfaceRepository.ContactUsRepositories
 @inject IBlogServices _Blog
 @inject IContactUsRepository _contactUs
@@ -41,16 +42,38 @@
                     <section>
                         <header><h2>  راه های ارتباطی با ما </h2></header>
                         <div class="socials">
-                            <a href=""><span><i class="zmdi zmdi-google-old"></i></span></a>
-                            <a href=""><span><i class="zmdi zmdi-linkedin"></i></span></a>
-                            <a href=""><span><i class="icon-whatsapp"></i></span></a>
-                            <a href=""><span><i class="icon-instagram"></i></span></a>
-                            <a href=""><span><i class="icon-telegram"></i></span></a>
+                            @foreach (var item in Model)
+                            {
+                                switch (item.NetworkName)
+                                {
+                                    case "whatsApp":
+                                        <a href="@item.NetWorkLink"><span><i class="icon-whatsapp"></i></span></a>
+                                        break;
+                                    case "instagram":
+                                        <a href="@item.NetWorkLink"><span><i class="icon-instagram"></i></span></a>
+                                        break;
+                                    case "telegram":
+                                        <a href="@item.NetWorkLink"><span><i class="icon-telegram"></i></span></a>
+                                        break;
+                                    case "aparat":
+                                        <a href="@item.NetWorkLink"><span><i class="icon-aparat"></i></span></a>
+                                        break;
+                                    case "linkedin":
+                                        <a href="@item.NetWorkLink"><span><i class="zmdi zmdi-linkedin"></i></span></a>
+                                        break;
+                                    case "googlePlus":
+                                        <a href="@item.NetWorkLink"><span><i class="zmdi zmdi-google-old"></i></span></a>
+                                        break;
+                                }
+                            }
+
+
+
                         </div>
                         <ul>
                             <li>
                                 <i class="zmdi zmdi-phone-in-talk"></i>
-                               @contact.PhoneNumber
+                                @contact.PhoneNumber
                             </li>
                             <li><i class="zmdi zmdi-email"></i> @contact.Email </li>
                         </ul>

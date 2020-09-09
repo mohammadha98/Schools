@@ -54,6 +54,7 @@ namespace Schools.Application.Service.Services.Blogs
             var result = _blog.GetAllBlogs();
             if (!string.IsNullOrEmpty(search))
             {
+                search = search.Trim();
                 result = result.Where(r => r.Title.Contains(search) || r.Tags.Contains(search));
             }
             if (!string.IsNullOrEmpty(groupTitle))

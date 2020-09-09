@@ -14,6 +14,42 @@
             <section class="col-lg-12 col-md-12">
                 <div class="box box-info">
                     <div class="box-header">
+                        <form class="row" method="get" id="paginat">
+                            <input type="hidden" name="pageId" asp-for="UsersModel.CurrentPage" />
+                            <div class="col-lg-4 col-md-4" style="margin-top: 8px">
+                                <p>نام :</p>
+                                <input type="text" asp-for="UsersModel.Name" class="form-control" placeholder="نام" name="name" />
+                            </div>
+                            <div class="col-lg-4 col-md-4" style="margin-top: 8px">
+                                <p>نام خانوادگی :</p>
+                                <input type="text" asp-for="UsersModel.Family" class="form-control" placeholder="نام خانوادگی" name="family" />
+                            </div>
+                            <div class="col-lg-4 col-md-4" style="margin-top: 8px">
+                                <p>ایمیل :</p>
+                                <input type="text" asp-for="UsersModel.Email" class="form-control" placeholder="ایمیل کاربر" name="email" />
+                            </div>
+                            <div class="col-lg-4 col-md-4" style="margin-top: 8px">
+                                <p>تلفن همراه :</p>
+                                <input type="text" asp-for="UsersModel.Phone" class="form-control" placeholder="تلفن همراه کاربر" name="phoneNumber" />
+                            </div>
+                            <div class="col-lg-4 col-md-4" style="margin-top: 8px">
+                                <p> نام کاربری :</p>
+                                <input type="text" asp-for="UsersModel.UserName" class="form-control" placeholder="نام کاربری" name="userName" />
+                            </div>
+                            <div class="col-lg-4 col-md-4" style="margin-top: 8px">
+                                <p> وضعیت :</p>
+                                <select class="form-control" asp-for="UsersModel.IsActive" name="isActive">
+                                    <option value="all">انتخاب کنید</option>
+                                    <option value="True">فعال</option>
+                                    <option value="False">غیرفعال</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-4 col-md-4" style="margin-top: 38px;">
+                                <button id="filter" class="btn btn-block btn-info">فیلتر</button>
+
+                            </div>
+                        </form>
+                        <hr />
                         <a href="/ManagementPanel/Users/Add" class="btn btn-success btn-flat">افزودن کاربر</a>
                     </div>
                     <div class="box-body">
@@ -25,8 +61,9 @@
                                         <th>نام کاربری</th>
                                         <th>نام</th>
                                         <th>نام خانوادگی</th>
+                                        <th>وضعیت</th>
                                         <th>تاریخ ثبت نام</th>
-                                        <th>عملیات ها</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
 
@@ -38,6 +75,17 @@
                                             <td>@item.UserName</td>
                                             <td>@item.Name</td>
                                             <td>@item.Family</td>
+                                            <td>
+                                                @if (item.IsActive)
+                                                {
+                                                    <span class="text-success">فعال</span>
+
+                                                }
+                                                else
+                                                {
+                                                    <span class="text-danger">غیرفعال</span>
+                                                }
+                                            </td>
                                             <td>@item.RegisterDate.ToShamsi()</td>
                                             <td>
                                                 <a class="btn btn-primary btn-sm" href="/ManagementPanel/Users/ShowProfile/@item.UserId">مشاهده پروفایل</a>
@@ -58,7 +106,7 @@
                                 <ul class="pagination">
                                     @if (Model.UsersModel.CurrentPage > 1 && Model.UsersModel.StartPage > 1)
                                     {
-                                        <li class="paginate_button previous disabled" id="example2_previous">
+                                        <li class="paginate_button previous" id="example2_previous">
                                             <a onclick="ChangePage(1)">1</a>
                                         </li>
 
@@ -89,3 +137,17 @@
         </div>
     </section>
 </div>
+@section Scripts
+{
+    <script>
+        function ChangePage(pageId) {
+            $("#UsersModel_CurrentPage").val(pageId);
+            $("#paginat").submit();
+        }
+
+        $("#filter").click(function () {
+            $("#UsersModel_CurrentPage").val(1);
+            $("#paginat").submit();
+        });
+    </script>
+}

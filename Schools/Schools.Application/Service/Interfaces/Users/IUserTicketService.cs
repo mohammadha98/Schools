@@ -14,5 +14,6 @@ namespace Schools.Application.Service.Interfaces.Users
         List<TicketCategory> GetTicketCategories();
         List<TicketPriority> GetTicketPriority();
         void AddTicketToMessage(int ticketId, string message,int userId);
+        void SeenMessages(int ticketId);
     }
 }

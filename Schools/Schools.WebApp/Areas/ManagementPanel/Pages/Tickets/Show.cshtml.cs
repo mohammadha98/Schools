@@ -55,15 +55,18 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.Tickets
                 UserId = User.GetUserId()
             };
             _ticket.AddMessageToTicket(messageModel);
-            //Send Email
-            try
+            if (ticket.IsSendEmail)
             {
-                var body = $"<h3 style='text-align:center'>{ticket.User.Name} {ticket.User.Family}</h3><h4>شما پاسخ جدیدی در تیکت {ticket.TicketTitle} دارید</h4><a href='https://{Request.Host}/UserPanel/Tickets/show/{ticket.TicketId}'>نمایش تیکت</a>";
-                SendEmail.Send(ticket.User.Email, "دریافت تیکت جدید", body.BuildView());
-            }
-            catch (Exception e)
-            {
-                //Ignored
+                //Send Email
+                try
+                {
+                    var body = $"<h3 style='text-align:center'>{ticket.User.Name} {ticket.User.Family}</h3><h4>شما پاسخ جدیدی در تیکت {ticket.TicketTitle} دارید</h4><a href='https://{Request.Host}/UserPanel/Tickets/show/{ticket.TicketId}'>نمایش تیکت</a>";
+                    SendEmail.Send(ticket.User.Email, "دریافت تیکت جدید", body.BuildView());
+                }
+                catch (Exception e)
+                {
+                    //Ignored
+                }
             }
             //Add Notification
             var notification = new UserNotification()

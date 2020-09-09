@@ -14,15 +14,16 @@ namespace Schools.Application.ViewModels.UsersViewModel
         public int PageCount { get; set; }
         public int StartPage { get; set; }
         public int EndPage { get; set; }
+        public string Name { get; set; }
+        public string Family { get; set; }
+        public string UserName { get; set; }
+        public string Email { get; set; }
+        public string Phone { get; set; }
+        public string IsActive { get; set; }
 
     }
 
-    public class UserInfoViewModel
-    {
-        public User User { get; set; }
-        public List<string> userRoles { get; set; }
-        public List<School> Schools { get; set; }
-    }
+  
 
     public class AddUserViewModel
     {

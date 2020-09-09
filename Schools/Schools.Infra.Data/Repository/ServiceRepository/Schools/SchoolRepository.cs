@@ -59,8 +59,17 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Schools
                 .Include(s => s.User)
                 .ThenInclude(s => s.UserTickets)
                 .ThenInclude(s => s.TicketMessages)
+                .Include(s=>s.User)
+                .ThenInclude(s=>s.SenderMessages)
+                .ThenInclude(s=>s.MessageContents)
                 .Include(s => s.SchoolComments)
                 .Include(s => s.SchoolRates)
+                .Include(s=>s.User)
+                .ThenInclude(s=>s.SenderMessages)
+                .ThenInclude(s=>s.Receiver)
+                .Include(s => s.User)
+                .ThenInclude(s => s.ReceiverMessages)
+                .ThenInclude(s => s.Sender)
                 .SingleOrDefault(s => s.SchoolManager == userId);
 
         }

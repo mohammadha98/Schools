@@ -1,7 +1,12 @@
 ﻿@using Schools.Application.Utilities
 @using Schools.Application.Utilities.Convertors
 @model Tuple<Schools.Domain.Models.Schools.School, string>
-
+@{
+    var newMessageReceive = Model.Item1.User.ReceiverMessages.Count(m => !m.MessageContents.Any());
+    var receiveMessages = Model.Item1.User.ReceiverMessages.Count(m => m.MessageContents.Any(c => c.IsSeen == false && c.UserId != User.GetUserId()));
+    var sendMessages = Model.Item1.User.SenderMessages.Count(m => m.MessageContents.Any(c => c.IsSeen == false && c.UserId != User.GetUserId()));
+    var totalNewMessage = newMessageReceive + receiveMessages + sendMessages;
+}
 <div class="right-side">
     <div class="quick-access layer-style">
         <div class="img-layer">
@@ -42,8 +47,8 @@
                         <li class="@((Model.Item2=="Galleries"?"active":null))"><a href="/SchoolPanel/Galleries"> مدیریت گالری تصاویر </a></li>
                         <li class="@((Model.Item2=="Courses"?"active":null))"><a href="/SchoolPanel/Courses"> مدیریت دوره ها </a></li>
                         <li class="@((Model.Item2=="Teachers"?"active":null))"><a href="/SchoolPanel/Teachers"> مدیریت اساتید </a></li>
-                        <li ><a target="_blank" href="/School/@Model.Item1.SchoolId/@Model.Item1.SchoolTitle.Replace(" ","-").Trim()#comments"> نظرات کاربران </a></li>
-                        <li class="@((Model.Item2=="Messages"?"active":null))"><a href="/SchoolPanel/Messages"> پیام های خصوصی </a> <i>@Model.Item1.User.ReceiverMessages.Count(m => m.MessageContents.Any(c => c.IsSeen == false && c.UserId != User.GetUserId()))</i></li>
+                        <li><a target="_blank" href="/School/@Model.Item1.SchoolId/@Model.Item1.SchoolTitle.Replace(" ","-").Trim()#comments"> نظرات کاربران </a></li>
+                        <li class="@((Model.Item2=="Messages"?"active":null))"><a href="/SchoolPanel/Messages"> پیام های خصوصی </a> <i>@totalNewMessage</i></li>
                     </ul>
                 </li>
                 <li class="@((Model.Item2=="Notifications"?"active":null))"><a href="/SchoolPanel/Notifications"> اطلاعیه های سیستم </a> <i>@Model.Item1.User.UserNotifications.Count(n => n.IsSee == false)</i></li>

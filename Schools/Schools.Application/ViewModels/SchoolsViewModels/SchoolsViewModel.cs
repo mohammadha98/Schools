@@ -19,7 +19,7 @@ namespace Schools.Application.ViewModels.SchoolsViewModels
         public string SchoolName { get; set; }
         public int GroupId { get; set; }
         public int ParentId { get; set; }
-
+        public string HasRequest { get; set; }
 
     }
 
@@ -50,7 +50,7 @@ namespace Schools.Application.ViewModels.SchoolsViewModels
         public string SchoolEmail { get; set; }
 
         [Display(Name = " فکس آموزشگاه")]
-        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+       
         public string SchoolFax { get; set; }
 
         [Display(Name = " آدرس آموزشگاه")]
@@ -115,7 +115,7 @@ namespace Schools.Application.ViewModels.SchoolsViewModels
         public string SchoolEmail { get; set; }
 
         [Display(Name = " فکس آموزشگاه")]
-        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        
         public string SchoolFax { get; set; }
 
         [Display(Name = " آدرس آموزشگاه")]
@@ -147,5 +147,6 @@ namespace Schools.Application.ViewModels.SchoolsViewModels
 
         public IFormFile Avatar { get; set; }
         public DateTime RegisterDate { get; set; }
+        public int Visit { get; set; }
     }
 }

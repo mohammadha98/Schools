@@ -25,11 +25,19 @@ namespace Schools.WebApp.Pages.UserPanel.Tickets
             {
                 Response.Redirect("/UserPanel/Tickets");
             }
-
-            if (UserTicket != null && UserTicket.BuilderId != User.GetUserId())
+            else
             {
-                Response.Redirect("/UserPanel/Tickets");
+                if (UserTicket.BuilderId != User.GetUserId())
+                {
+                    Response.Redirect("/UserPanel/Tickets");
+                }
+                else
+                {
+                    _service.SeenMessages(ticketId);
+                }
             }
+
+            
         }
 
         public IActionResult OnPost(int ticketId, string messageText)

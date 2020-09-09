@@ -711,8 +711,8 @@ throw new Error('AdminLTE requires jQuery')
     expandTransitionDelay: 200
   }
 
-  var Selector = {
-    collapsed     : '.sidebar-collapse',
+    var Selector = {
+        collapsed     : '.sidebar-collapse',
     open          : '.sidebar-open',
     mainSidebar   : '.main-sidebar',
     contentWrapper: '.content-wrapper',

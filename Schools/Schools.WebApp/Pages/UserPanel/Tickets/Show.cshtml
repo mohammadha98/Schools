@@ -75,7 +75,11 @@ else
                                         {
                                             <i>بسته شده</i>
                                         }
-                                        @if (Model.UserTicket.IsOpen && Model.UserTicket.TicketMessages.All(m => m.UserId == User.GetUserId()))
+                                        @if (Model.UserTicket.IsOpen && Model.UserTicket.TicketMessages.LastOrDefault(m => m.UserId == User.GetUserId()) != null)
+                                        {
+                                            <i>درحال برسی</i>
+                                        }
+                                        @if (Model.UserTicket.IsOpen && !Model.UserTicket.TicketMessages.Any())
                                         {
                                             <i>درحال برسی</i>
                                         }

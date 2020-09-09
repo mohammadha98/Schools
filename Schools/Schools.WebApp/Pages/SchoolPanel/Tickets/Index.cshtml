@@ -90,34 +90,45 @@
                     </form>
 
                     <div class="support-layer">
-                        @foreach (var item in Model.TicketsModel.UserTickets)
+                        @if (Model.TicketsModel.UserTickets.Count >= 1)
                         {
-                            <div class="ticket-box layer-style ">
-                                <div class="head">
-                                    <span class="code"> کد پیام : <i>@item.TicketId</i> </span>
-                                    <span class="resgiter-date"> تاریخ ثبت : <i>@item.CreateDate.ToShamsi()</i> </span>
-                                    <span class="status">
-                                        وضعیت :
-                                        @if (item.TicketMessages.Any(t => t.IsSeen == false))
-                                        {
-                                            <i>پاسخ داده شده</i>
-                                        }
-                                        @if (item.IsOpen == false)
-                                        {
-                                            <i>بسته شده</i>
-                                        }
-                                        @if (item.IsOpen && item.TicketMessages.All(m => m.UserId == User.GetUserId()))
-                                        {
-                                            <i>درحال برسی</i>
-                                        }
-                                    </span>
-                                </div>
+                            @foreach (var item in Model.TicketsModel.UserTickets)
+                            {
+                                <div class="ticket-box layer-style ">
+                                    <div class="head">
+                                        <span class="code"> کد پیام : <i>@item.TicketId</i> </span>
+                                        <span class="resgiter-date"> تاریخ ثبت : <i>@item.CreateDate.ToShamsi()</i> </span>
+                                        <span class="status">
+                                            وضعیت :
+                                            @if (item.TicketMessages.Any(t => t.IsSeen == false))
+                                            {
+                                                <i>پاسخ داده شده</i>
+                                            }
+                                            @if (item.IsOpen == false)
+                                            {
+                                                <i>بسته شده</i>
+                                            }
+                                            @if (item.IsOpen && item.TicketMessages.LastOrDefault(m => m.UserId == User.GetUserId()) != null)
+                                            {
+                                                <i>درحال برسی</i>
+                                            }
+                                            @if (item.IsOpen && !item.TicketMessages.Any())
+                                            {
+                                                <i>درحال برسی</i>
+                                            }
+                                        </span>
+                                    </div>
 
-                                <div class="text">
-                                    <a href="/SchoolPanel/Tickets/Show/@item.TicketId">@item.TicketTitle </a>
-                                </div>
+                                    <div class="text">
+                                        <a href="/SchoolPanel/Tickets/Show/@item.TicketId">@item.TicketTitle </a>
+                                    </div>
 
-                            </div>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="alert alert-info">موردی برای نمایش وجود ندارد</div>
                         }
                         @if (Model.TicketsModel.PageCount > 1)
                         {

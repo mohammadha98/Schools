@@ -26,19 +26,21 @@ namespace Schools.WebApp.Pages.SchoolPanel.Tickets
         public void OnGet(int ticketId)
         {
             School = _school.GetSchoolByUserId(User.GetUserId());
-            if (School == null)
-            {
-                Response.Redirect("/");
-            }
             UserTicket = _service.GetTicketById(ticketId);
             if (UserTicket == null)
             {
                 Response.Redirect("/SchoolPanel/Tickets");
             }
-
-            if (UserTicket != null && UserTicket.BuilderId != User.GetUserId())
+            else
             {
-                Response.Redirect("/SchoolPanel/Tickets");
+                if (UserTicket.BuilderId != User.GetUserId())
+                {
+                    Response.Redirect("/SchoolPanel/Tickets");
+                }
+                else
+                {
+                    _service.SeenMessages(ticketId);
+                }
             }
         }
 

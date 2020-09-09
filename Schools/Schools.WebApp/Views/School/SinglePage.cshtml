@@ -3,7 +3,7 @@
 @using Schools.Domain.Models.Schools.Locations
 @model Schools.Domain.Models.Schools.School
 @{
-    ViewData["Title"] = Model.SchoolTitle;
+    ViewData["Title"] = $"آموزشگاه {Model.SchoolTitle}";
     var schoolShireTitle = Model.Shire.ShireTitle;
     var schoolCityTitle = Model.City.CityTitle;
     var schoolRate = Model.SchoolRates.Sum(r => r.Rate) / Model.SchoolRates.Count;
@@ -132,16 +132,25 @@
             <header><h2> دوره های  @categoryTitle @Model.SchoolTitle </h2></header>
             <article>
                 <ul>
-                    @foreach (var item in Model.SchoolCourses)
+                    @if (Model.SchoolCourses.Count >= 1)
                     {
-                        <li>
-                            <h3> @item.CourseTitle </h3>
-                            <div class="desc">
-                                <p>
-                                    @Html.Raw(item.CourseDescription)
-                                </p>
-                            </div>
-                        </li>
+                        @foreach (var item in Model.SchoolCourses)
+                        {
+                            <li>
+                                <h3> @item.CourseTitle </h3>
+                                <div class="desc">
+                                    <p>
+                                        @Html.Raw(item.CourseDescription)
+                                    </p>
+                                </div>
+                            </li>
+                        }
+                    }
+                    else
+                    {
+                        <div class="alert alert-info">
+                            درحال حاضر دوره ای برای این آموزشگاه ثبت نشده است
+                        </div>
                     }
                 </ul>
             </article>

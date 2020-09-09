@@ -20,11 +20,7 @@ namespace Schools.WebApp.Pages.SchoolPanel.Tickets
             _service = service;
             _school = school;
         }
-        public IndexModel(IUserTicketService service)
-        {
-            _service = service;
-        }
-
+   
         public School School { get; set; }
         public TicketsViewModel TicketsModel { get; set; }
         public void OnGet(int pageId = 1, string startDate = "", string endDate = "")

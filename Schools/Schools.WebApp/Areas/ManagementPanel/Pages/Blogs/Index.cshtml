@@ -30,7 +30,7 @@
                                 <div class="col-md-4 col-sm-6 col-xs-12 pull-right">
                                     <div class="form-group">
                                         <select name="groupTitle" class="form-control" asp-for="Blogs.GroupTitle">
-                                            <option>انتخاب گروه</option>
+                                            <option value="">انتخاب گروه</option>
                                             @foreach (var item in groups)
                                             {
                                                 <option value="@item.GroupName">@item.GroupName</option>

@@ -8,8 +8,7 @@ namespace Schools.Application.Service.Interfaces.Users
     public interface IUserService
     {
         #region AdminPanel
-        UsersForAdminPanelViewModel GetUsersByFilter(string username = "",int pageId = 1);
-        UserInfoViewModel GetUserInfoByUserId(int userId);
+        UsersForAdminPanelViewModel GetUsersByFilter(int pageId,int take,string name,string family,string email,string isActive,string userName,string phoneNumber);
         bool AddUser(User user,IFormFile imageAvatar);
         bool EditUser(User user,IFormFile imageAvatar);
         #endregion

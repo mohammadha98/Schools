@@ -35,7 +35,8 @@ namespace Schools.Application.Service.Services.Schools
                 {
                     ImageName = fileName,
                     SchoolId = schoolId,
-                    IsDelete = false
+                    IsDelete = false,
+                    IsActive = true
                 };
                 _gallery.AddSchoolGallery(imageGalley);
             }

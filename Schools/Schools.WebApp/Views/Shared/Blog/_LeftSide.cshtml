@@ -17,9 +17,10 @@
         <header> <h2> دسته بندی موضوعات </h2> </header>
         <ul>
             <li>
+                <a href=""> اخبار و مقالات </a>
+
                 @foreach (var item in groups)
                 {
-                    <a href=""> اخبار و مقالات </a>
                     <ul>
                         <li><a href="javascript:void(0)" onclick="changeGroup('@item.GroupName')"> @item.GroupName </a></li>
 
@@ -38,7 +39,7 @@
                 <a href="/Blog/@item.BlogId/@item.Title.Replace(" ","-").Trim()" class="img-layer"><img src="/images/blogs/@item.ImageName" alt="@item.Title"></a>
                 <h2><a href="/Blog/@item.BlogId/@item.Title.Replace(" ","-").Trim()"> @item.Title </a></h2>
                 <div class="detail">
-                    <a href="/Blogs?groupTitle=@item.GroupTitle"><i class="zmdi zmdi-folder"></i> @item.BlogType @item.GroupTitle </a>
+                    <a href="/Blogs?groupTitle=@item.GroupTitle"><i class="zmdi zmdi-folder"></i> @item.GroupTitle </a>
                     <span> <i class="zmdi zmdi-calendar"></i>@item.CreateDate.ToShamsi()</span>
                 </div>
             </article>
@@ -53,7 +54,7 @@
             @foreach (var school in lastSchools)
             {
                 <article>
-                    <h2><a href="/School/@school.SchoolId/@school.Title.Replace(" ","-").Trim()"><span> @school.Title </span> @school.CategoryTitle </a></h2>
+                    <h2><a href="/School/@school.SchoolId/@school.Title.Replace(" ","-").Trim()"><span> @school.CategoryTitle </span>  @school.Title </a></h2>
                     <span><i class="zmdi zmdi-calendar"></i> @school.History سال سابقه </span>
                 </article>
             }

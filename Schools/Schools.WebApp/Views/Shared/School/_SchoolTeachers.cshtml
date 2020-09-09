@@ -3,22 +3,31 @@
     <article>
         <ul>
             <!-- item -->
-            @foreach (var item in Model.Where(t=>t.IsActive))
+            @if (Model.Count >= 1)
             {
-                var teacherRate =item.TeacherRates.Sum(r=>r.Rate) / item.TeacherRates.Count;
+                @foreach (var item in Model.Where(t => t.IsActive))
+                {
+                    var teacherRate = item.TeacherRates.Sum(r => r.Rate) / item.TeacherRates.Count;
 
-                <li>
-                    <header>
-                        <span class="readonly-rating-star" data-score="@teacherRate"></span>
-                        <h2>استاد @item.FullName</h2>
-                    </header>
-                    <div class="desc">
-                        <p>
-                            @item.Bio
-                        </p>
-                        <a href="javascript:void(0)" class="submit-rating" data-id="@item.TeacherId" data-name="@item.FullName"> <i class="zmdi zmdi-star"></i> ثبت امتیاز به این استاد </a>
-                    </div>
-                </li>
+                    <li>
+                        <header>
+                            <span class="readonly-rating-star" data-score="@teacherRate"></span>
+                            <h2>استاد @item.FullName</h2>
+                        </header>
+                        <div class="desc">
+                            <p>
+                                @item.Bio
+                            </p>
+                            <a href="javascript:void(0)" class="submit-rating" data-id="@item.TeacherId" data-name="@item.FullName"> <i class="zmdi zmdi-star"></i> ثبت امتیاز به این استاد </a>
+                        </div>
+                    </li>
+                }
+            }
+            else
+            {
+                <div class="alert alert-info">
+                    درحال حاضر مدرسی برای این آموزشگاه وجود ندارد
+                </div>
             }
 
         </ul>

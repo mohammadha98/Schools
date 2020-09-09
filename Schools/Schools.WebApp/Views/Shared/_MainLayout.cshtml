@@ -1,9 +1,12 @@
 ﻿@using Schools.Application.Utilities
+@using Schools.Domain.Repository.InterfaceRepository
 @using Schools.Domain.Repository.InterfaceRepository.Schools
 @using Schools.Domain.Repository.InterfaceRepository.Users
-@inject IUserRepository _user;
-@inject ISchoolRepository _School;
+@inject IUserRepository _user
+@inject ISchoolRepository _School
+@inject ISocialNetworkRepository _Network
 @{
+    var networks = _Network.GetAllSocialNetworks();
 }
 <!DOCTYPE html>
 <html class="no-js" dir="rtl" lang="fa-IR">
@@ -40,10 +43,24 @@
             <!-- top bar -->
             <div class="top-bar">
                 <div class="socials">
-                    <a href=""><i class="icon-whatsapp"></i></a>
-                    <a href=""><i class="icon-instagram"></i></a>
-                    <a href=""><i class="icon-telegram"></i></a>
-                    <a href=""><i class="icon-aparat"></i></a>
+                    @foreach (var item in networks)
+                    {
+                        switch (item.NetworkName)
+                        {
+                            case "whatsApp":
+                                <a href="@item.NetWorkLink"><i class="icon-whatsapp"></i></a>
+                                break;
+                            case "instagram":
+                                <a href="@item.NetWorkLink"><i class="icon-instagram"></i></a>
+                                break;
+                            case "telegram":
+                                <a href="@item.NetWorkLink"><i class="icon-telegram"></i></a>
+                                break;
+                            case "aparat":
+                                <a href="@item.NetWorkLink"><i class="icon-aparat"></i></a>
+                                break;
+                        }
+                    }
                 </div>
                 <div class="left-side">
 
@@ -108,13 +125,13 @@
 
     @RenderBody()
 
-<cache expires-after="TimeSpan.FromDays(1)">
-    <partial name="_Footer" />
-</cache>
+    <cache expires-after="TimeSpan.FromDays(1)">
+        <partial name="_Footer" model="networks"/>
+    </cache>
 
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/jquery.slimscroll.js"></script>
     <script src="/js/public.js"></script>
-@await RenderSectionAsync("Scripts", false)
+    @await RenderSectionAsync("Scripts", false)
 </body>
 </html>

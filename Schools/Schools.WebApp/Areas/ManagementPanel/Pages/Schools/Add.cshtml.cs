@@ -40,12 +40,15 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.Schools
             {
                 return Page();
             }
-
             if (_user.GetUserById(School.SchoolManager) == null)
             {
                 ModelState.AddModelError("SchoolManager", "کاربری با شناسه وارد شده وجود ندارد");
                 return Page();
-
+            }
+            if (_school.IsUserHasSchool(School.SchoolManager))
+            {
+                ModelState.AddModelError("SchoolManager", "شناسه وارد شده دارای آموزشگاه می باشد");
+                return Page();
             }
             var result = _school.AddNewSchool(School);
 

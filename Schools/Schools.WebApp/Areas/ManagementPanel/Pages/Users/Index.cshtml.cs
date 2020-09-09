@@ -16,9 +16,9 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.Users
         }
         public UsersForAdminPanelViewModel UsersModel { get; set; }
 
-        public void OnGet(int pageId = 1, string username = "")
+        public void OnGet(int pageId = 1, string userName = "",string phoneNumber="",string email="",string isActive="",string name="",string family="")
         {
-            UsersModel = _userService.GetUsersByFilter(username, pageId);
+            UsersModel = _userService.GetUsersByFilter(pageId,15,name,family,email,isActive,userName,phoneNumber);
         }
 
     }

@@ -1,0 +1,99 @@
+﻿@page "{handler?}"
+@model Schools.WebApp.Areas.ManagementPanel.Pages.SocialNetworks.IndexModel
+@{
+    var menuModel = "SocialNetworks";
+    var counter = 1;
+}
+<partial name="_MainMenu" model="menuModel" />
+
+<div class="content-wrapper">
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-info">
+                    <div class="box-header">
+                        <h3 class="box-title">شبکه های اجتماعی</h3>
+                    </div>
+                    <div class="box-body table-responsive">
+                        <a class="btn btn-success btn-flat" href="/ManagementPanel/SocialNetworks/Add" style="margin-bottom: 10px">افزودن </a>
+                        <table class="table table-hover">
+                            <tr>
+                                <th>#</th>
+                                <th>عنوان</th>
+                                <th>لینک</th>
+                                <td></td>
+                            </tr>
+                            <tbody>
+                               @foreach (var item in Model.SocialNetworks)
+                               {
+                                   <tr>
+                                       <td>@counter</td>
+                                       <td>@item.NetworkName</td>
+                                       <td>@item.NetWorkLink</td>
+                                       <td>
+                                           <a class="btn btn-info btn-flat btn-sm" href="/ManagementPanel/SocialNetworks/Edit/@item.SW_Id">ویرایش</a>
+                                           <a onclick="deleteItem(@item.SW_Id)" class="btn btn-danger btn-flat btn-sm" href="javascript:void(0)">حذف</a>
+                                       </td>
+                                   </tr>
+                            }
+                               
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+}
+@section Scripts
+{
+    <script>
+
+        function deleteItem(id) {
+            swal({
+                title: "اخطار !",
+                text: "آیا از حذف اطمینان دارید ؟",
+                icon: "warning",
+                buttons: ["لغو", "بله"]
+            }).then((isOk) => {
+                if (isOk) {
+                    $.ajax({
+                        url: "/ManagementPanel/SocialNetworks/Delete?networkId=" + id,
+                        type: "get",
+                        beforeSend: function () {
+                            $(".loading").show();
+                        },
+                        complete: function () {
+                            $(".loading").hide();
+                        }
+                    }).done(function (data) {
+                        if (data === "NotFound") {
+                            swal({
+                                title: "شناسه وارد شده نا معتبر است",
+                                icon: "error",
+                                button: "باشه"
+                            });
+                        }
+                        if (data === "Deleted") {
+                            swal({
+                                title: "اعملیات با موفقیت انجام شد",
+                                icon: "success",
+                                button: "باشه"
+                            }).then((isOk) => {
+                                location.reload();
+                            });
+                        } else {
+                            swal({
+                                title: "اعملیات به مشکل برخورد کرد",
+                                icon: "error",
+                                button: "باشه"
+                            });
+                        }
+                    });
+                }
+            });
+
+        }
+    </script>
+}

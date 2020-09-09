@@ -78,7 +78,7 @@ $(function () {
             '<i class="zmdi zmdi-caret-right"></i>'
         ]
     });
-  
+
     $(".popup-layer .submit-rating-layer").submit(function () {
         event.preventDefault();
         var schoolId = window.location.pathname.split('/')[2];
@@ -120,7 +120,7 @@ $(function () {
                                 $("#submit-rating-popup").css("display", "none");
 
                             }
-                            if (error.status === 403 ) {
+                            if (error.status === 403) {
                                 swal({
                                     title: "عملیات ناموفق",
                                     text: "برای امتیاز دهی باید وارد حساب کاربری خود شوید",
@@ -137,7 +137,9 @@ $(function () {
                                 title: "اعملیات با موفقیت انجام شد",
                                 icon: "success",
                                 button: "باشه"
-                            });
+                            }).then((isOk => {
+                                location.reload();
+                            }));
                             $("#submit-rating-popup").css("display", "none");
                         }
                     });
@@ -274,6 +276,8 @@ $(function () {
                                 title: "اعملیات با موفقیت انجام شد",
                                 icon: "success",
                                 button: "باشه"
+                            }).then((isOk) => {
+                                location.reload();
                             });
                         }
                     });

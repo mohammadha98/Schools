@@ -90,6 +90,9 @@ namespace Schools.Infra.Data.Context
         public DbSet<Rules> Rules { get; set; }
 
         #endregion
+
+        public DbSet<SocialNetwork> SocialNetworks { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             var cascadeFKs = modelBuilder.Model.GetEntityTypes()

@@ -26,7 +26,7 @@ namespace Schools.Application.Service.Services.Users
             _userRepository = userRepository;
             _role = role;
         }
-        
+
         public bool ActiveAccount(string activeCode)
         {
             var users = _userRepository.GetUsers();
@@ -41,25 +41,15 @@ namespace Schools.Application.Service.Services.Users
             return true;
         }
 
-        public UserInfoViewModel GetUserInfoByUserId(int userId)
-        {
-            var user = _userRepository.GetUserById(userId);
-            UserInfoViewModel info = new UserInfoViewModel();
-            info.User = user;
-            info.userRoles = _role.GetUserRoles().Where(r=>r.UserId==userId).Select(r=>r.Role.RoleTitle).ToList();
-            info.Schools = _userRepository.GetAllSchoolInUserLikesByUserId(user.UserId);
-            return info;
-        }
-
         public bool AddUser(User user, IFormFile imageAvatar)
         {
             if (imageAvatar == null) return false;
             if (!imageAvatar.IsImage()) return false;
 
             var fileName = SaveFileInServer.SaveFile(imageAvatar, "wwwroot/images/userAvatars");
-
+            user.Email = user.Email.Trim().ToLower();
             user.UserAvatar = fileName;
-            user.RegisterDate=DateTime.Now;
+            user.RegisterDate = DateTime.Now;
             user.ActiveCode = NameGenerator.GenerateUniqCode();
             user.Password = PasswordHelper.EncodePasswordMd5(user.Password);
             _userRepository.AddUser(user);
@@ -71,37 +61,64 @@ namespace Schools.Application.Service.Services.Users
             if (imageAvatar != null)
             {
                 if (!imageAvatar.IsImage()) return false;
-                if (user.UserAvatar!="Default.png")
+                if (user.UserAvatar != "Default.png")
                 {
                     DeleteFileFromServer.DeleteFile(user.UserAvatar, "wwwroot/images/userAvatars");
                 }
                 var fileName = SaveFileInServer.SaveFile(imageAvatar, "wwwroot/images/userAvatars");
                 user.UserAvatar = fileName;
             }
-          
-        
+
+            user.Email = user.Email.Trim().ToLower();
+
             _userRepository.EditUser(user);
             return true;
         }
 
-        public UsersForAdminPanelViewModel GetUsersByFilter(string username = "", int pageId = 1)
+        public UsersForAdminPanelViewModel GetUsersByFilter(int pageId, int take, string name, string family, string email, string isActive, string userName,string phoneNumber)
         {
             var result = _userRepository.GetUsers();
+            
+            if (!string.IsNullOrEmpty(userName))
+                result = result.Where(u => u.UserName.Contains(userName));
+            if (!string.IsNullOrEmpty(name))
+                result = result.Where(u => u.Name.Contains(name.Trim()));
+            if (!string.IsNullOrEmpty(family))
+                result = result.Where(u => u.Family.Contains(family.Trim()));
+            if (!string.IsNullOrEmpty(email))
+                result = result.Where(u => u.Name.Contains(email.Trim()));
+            if (!string.IsNullOrEmpty(phoneNumber))
+                result = result.Where(u => u.PhoneNumber.Contains(phoneNumber));
 
-            if (!string.IsNullOrEmpty(username))
-                result = result.Where(u => u.UserName.Contains(username));
+            if (!string.IsNullOrEmpty(isActive))
+            {
+                switch (isActive)
+                {
+                    case "True":
+                        result = result.Where(u => u.IsActive);
+                        break;
+                    case "False":
+                        result = result.Where(u =>!u.IsActive);
+                        break;
+                }
+            }
 
-            int take = 10;
             int skip = (pageId - 1) * take;
             var pageCount = (int)Math.Ceiling(result.Count() / (double)take);
 
-            var userModel=new UsersForAdminPanelViewModel()
+            var userModel = new UsersForAdminPanelViewModel()
             {
-                Users = result.OrderByDescending(u=>u.RegisterDate).Skip(skip).Take(take).ToList(),
+                Users = result.OrderByDescending(u => u.RegisterDate).Skip(skip).Take(take).ToList(),
                 CurrentPage = pageId,
                 PageCount = pageCount,
                 StartPage = (pageId - 4 <= 0) ? 1 : pageId - 4,
-                EndPage = (pageId + 5 > pageCount) ? pageCount : pageId + 5
+                EndPage = (pageId + 5 > pageCount) ? pageCount : pageId + 5,
+                Email = email,
+                IsActive = isActive,
+                UserName = userName,
+                Phone = phoneNumber,
+                Name = name,
+                Family = family
             };
 
             return userModel;
@@ -110,14 +127,14 @@ namespace Schools.Application.Service.Services.Users
         public bool IsExistEmail(string email)
         {
             var users = _userRepository.GetUsers();
-            return users.Any(u => u.Email == email);
+            return users.Any(u => u.Email == email.Trim().ToLower());
         }
 
-        public bool IsExistPassword(int userId,string password)
+        public bool IsExistPassword(int userId, string password)
         {
             var user = _userRepository.GetUsers();
-                var hashPassword = PasswordHelper.EncodePasswordMd5(password);
-                return user.Any(u => u.UserId == userId && u.Password == hashPassword);
+            var hashPassword = PasswordHelper.EncodePasswordMd5(password);
+            return user.Any(u => u.UserId == userId && u.Password == hashPassword);
         }
 
         public bool IsExistUserName(string userName)
@@ -148,9 +165,9 @@ namespace Schools.Application.Service.Services.Users
                 UserAvatar = "Default.png",
                 RegisterDate = DateTime.Now
             };
-            var userId=_userRepository.AddUser(user);
+            var userId = _userRepository.AddUser(user);
             //RoleId 2 = دانشجو
-            var userRole=new UserRole()
+            var userRole = new UserRole()
             {
                 IsDelete = false,
                 RoleId = 2,
@@ -159,17 +176,17 @@ namespace Schools.Application.Service.Services.Users
             _role.AddUserRole(userRole);
         }
 
-        public void ForgotPassword(User user,string hostName)
+        public void ForgotPassword(User user, string hostName)
         {
             //First Send Email For User
             var body = $"<h2 style='text-align:center'>بازیابی کلمه عبور</h2><h3><p> {user.Name} {user.Family} عزیز ، با استفاده از لینک زیر میتوانید نسبت به تغییر و بازیابی کلمه عیور خود اقدام نمایید.</p></h3><p>برای تغییر کلمه عبور برروی لینک زیر کلیک کنید.</p><h3 style='text-align:center'><a href='https://{hostName}/ChangePassword/{user.UserId}/{user.Password}/{user.ActiveCode}'>تغببر کلمه عبور</a></h3>";
-            SendEmail.Send(user.Email,"بازیابی رمز عبور",body.BuildView());
+            SendEmail.Send(user.Email, "بازیابی رمز عبور", body.BuildView());
         }
 
         public bool ChangePassword(ChangePasswordModel passwordModel)
         {
             var user = _userRepository.GetUserById(passwordModel.UserId);
-            if (user==null)
+            if (user == null)
             {
                 return false;
             }

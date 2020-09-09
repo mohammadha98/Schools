@@ -54,6 +54,7 @@ namespace Schools.WebApp.Pages.SchoolPanel
             {
                 return RedirectToPage("Index");
             }
+
             if (Galley == null) return Redirect("/SchoolPanel/Galleries");
             if (!Galley.IsImage()) return Redirect("/SchoolPanel/Galleries");
 

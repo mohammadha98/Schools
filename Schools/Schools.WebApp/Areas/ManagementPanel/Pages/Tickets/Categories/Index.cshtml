@@ -1,9 +1,9 @@
-﻿@page
+﻿@page "{handler?}"
 @model Schools.WebApp.Areas.ManagementPanel.Pages.Tickets.Categories.IndexModel
 @{
     ViewData["Title"] = "دسته بندی تیکتت";
     var menuModel = "TicketsCategory";
-    // ManagementPanel/Schools
+    
 }
 
 <partial name="_MainMenu" model="menuModel" />
@@ -37,10 +37,13 @@
                                             <td>@item.CategoryTitle</td>
                                             <td>
                                                 <a href="/ManagementPanel/Tickets/Categories/Edit/@item.CategoryId" class="btn btn-flat btn-info btn-sm">ویرایش</a>
+                                                <a class="btn btn-sm btn-flat btn-danger" href="javascript:void(0)" onclick="deleteItem(@item.CategoryId)">
+                                                    حذف
+                                                </a>
                                             </td>
                                         </tr>
                                     }
-                                 
+
                                 </tbody>
                             </table>
                         </div>
@@ -52,3 +55,54 @@
     </section>
 </div>
 
+@section Scripts
+{
+    <script>
+        function deleteItem(id) {
+            swal({
+                title: "اخطار !",
+                text: "آیا از حذف  اطمینان دارید ؟",
+                icon: "warning",
+                buttons: ["لغو", "بله"]
+            }).then((isOk) => {
+                if (isOk) {
+                    $.ajax({
+                        url: "/ManagementPanel/tickets/Categories/Delete?categoryId=" + id,
+                        type: "get",
+                        beforeSend: function() {
+                            $(".loading").show();
+                        },
+                        complete: function() {
+                            $(".loading").hide();
+                        }
+                    }).done(function(data) {
+                        if (data === "NotFound") {
+                            swal({
+                                title: "شناسه وارد شده نا معتبر است",
+                                icon: "error",
+                                button: "باشه"
+                            });
+                        }
+                        if (data === "Deleted") {
+                            swal({
+                                title: "اعملیات با موفقیت انجام شد",
+                                icon: "success",
+                                button: "باشه"
+                            }).then((isOk) => {
+                                location.reload();
+                            });
+                        } else {
+                            swal({
+                                title: "حذف گروه امکان پذیر نمی باشد",
+                                icon: "error",
+                                button: "باشه"
+                            });
+                        }
+                    });
+                }
+            });
+
+        };
+    
+    </script>
+}

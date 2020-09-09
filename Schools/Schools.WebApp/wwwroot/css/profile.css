@@ -480,10 +480,11 @@
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
 }
-.gallery-layer .lSPager.lSGallery a img{
-    display: block;
-    width: 100%;
-}
+    .gallery-layer .lSPager.lSGallery a img {
+        display: block;
+        width: 100%;
+        height: 80px;
+    }
 .gallery-layer .lSPager.lSGallery li a{
     border-radius: 4px !important;
     -moz-border-radius: 4px !important;

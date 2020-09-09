@@ -15,7 +15,12 @@
             </li>
             <li class="@((Model=="Rules"?"active":null))">
                 <a href="/ManagementPanel/Rules">
-                    <i class="fa fa-header"></i> <span>قوانین آموزشگاه ها</span>
+                    <i class="fa fa-header"></i> <span>قوانین و شرایط</span>
+                </a>
+            </li>
+            <li class="@((Model=="SocialNetworks"?"active":null))">
+                <a href="/ManagementPanel/SocialNetworks">
+                    <i class="fa fa-facebook-official"></i> <span>شبکه های اجتماعی</span>
                 </a>
             </li>
             <li class="@((Model.Contains("user")?"active treeview":"treeview"))">
@@ -41,8 +46,10 @@
                 </a>
                 <ul class="treeview-menu">
                     <li class="@((Model=="schools"?"active":null))"><a href="/ManagementPanel/Schools"><i class="fa fa-circle-o"></i>نمایش آموزشگاه ها</a></li>
-                    <li class="@((Model=="schoolsGroup"?"active":null))"><a href="/ManagementPanel/Schools/Groups"><i class="fa fa-circle-o"></i>گروه ها</a></li>
+                    <li><a href="/ManagementPanel/Schools?hasRequest=true"><i class="fa fa-circle-o"></i>درخواست های ثبت تایید نشده </a></li>
                     <li class="@((Model=="schoolsRequests"?"active":null))"><a href="/ManagementPanel/Schools/Requests"><i class="fa fa-circle-o"></i>درخواست های ثبت آموزشگاه</a></li>
+                    <li class="@((Model=="schoolsGroup"?"active":null))"><a href="/ManagementPanel/Schools/Groups"><i class="fa fa-circle-o"></i>گروه ها</a></li>
+
                 </ul>
             </li>
             <li class="@((Model.Contains("Tickets")?"active treeview":"treeview"))">
@@ -71,12 +78,6 @@
                     <li class="@((Model=="blogsGroups"?"active":null))"><a href="/ManagementPanel/Blogs/Groups"><i class="fa fa-circle-o"></i>گروه بلاگ ها</a></li>
                 </ul>
             </li>
-            <li class="@((Model=="aboutUs"?"active":null))">
-                <a href="/ManagementPanel/AboutUs">
-                    <i class="fa fa-home"></i>
-                    <span>درباره ما</span>
-                </a>
-            </li>
             <li class="@((Model.Contains("contactUs")?"active treeview":"treeview"))">
                 <a href="#">
                     <i class="fa fa-phone"></i>
@@ -90,6 +91,13 @@
                     <li class="@((Model=="contactUs"?"active":null))"><a href="/ManagementPanel/contactUs"><i class="fa fa-circle-o"></i>اطلاعات تماس</a></li>
                 </ul>
             </li>
+            <li class="@((Model=="aboutUs"?"active":null))">
+                <a href="/ManagementPanel/AboutUs">
+                    <i class="fa fa-home"></i>
+                    <span>درباره ما</span>
+                </a>
+            </li>
+
         </ul>
     </section>
     <!-- /.sidebar -->

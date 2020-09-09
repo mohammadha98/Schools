@@ -84,6 +84,12 @@
                 <h3> تکمیل اطلاعات و ثبت آموزشگاه </h3>
                 <div class="inner">
                     <form class="form-layer-style" method="post" enctype="multipart/form-data">
+                        <div class="alert alert-warning text-center">
+                            <p >
+                                درصورت تکمیل نبودن اطلاعات حساب کاربری ، درخواست شما تایید نمی شود
+                            </p>
+                            <p>پس اگر اطلاعات حساب خود را تکمیل نکرده اید از <a href="/UserPanel/Edit">این لینک</a> اقدام کنید</p>
+                        </div>
                         <div class="row">
                             <div class="text-danger" asp-validation-summary="All"></div>
                             <div class="col-md-6 col-sm-12 col-xs-12">
@@ -209,6 +215,12 @@
                                     <label><i class="zmdi zmdi-assignment"></i> توضیحات کامل </label>
 
                                     <textarea id="Description" asp-for="RegisterModel.Description"> </textarea>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="alert alert-warning">
+                                    تصاویر شما معرف شماست ، از تصاویر مناسب و با کیفیت استفاده کنید.
+                                    سایز تصاویر 400*500 پیکسل می باشد
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-12 col-xs-12">

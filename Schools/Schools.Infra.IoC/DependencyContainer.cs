@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Schools.Application.Service.Interfaces;
 using Schools.Domain.Repository.InterfaceRepository;
 using Schools.Application.Service.Interfaces.Locations;
 using Schools.Application.Service.Interfaces.Schools;
@@ -18,11 +19,13 @@ using Schools.Application.Service.Interfaces.Users;
 using Schools.Application.Service.Services.Users;
 using Schools.Application.Service.Interfaces.Blogs;
 using Schools.Application.Service.Interfaces.ContactUses;
+using Schools.Application.Service.Services;
 using Schools.Application.Service.Services.Blogs;
 using Schools.Application.Service.Services.ContactUses;
 using Schools.Domain.Repository.InterfaceRepository.ContactUsRepositories;
 using Schools.Infra.Data.Repository.ServiceRepository.ContactUs;
 using Schools.Domain.Repository.InterfaceRepository.AboutUsRepository;
+using Schools.Infra.Data.Repository.ServiceRepository;
 using Schools.Infra.Data.Repository.ServiceRepository.AboutUs;
 using Schools.Infra.Data.Repository.ServiceRepository.BlogRepositories;
 
@@ -72,6 +75,8 @@ namespace Schools.Infra.IoC
             service.AddScoped<IContactUsFormService, ContactUsFormService>();
 
             #endregion
+
+            service.AddScoped<IAdminMainPageService, AdminMainPageService>();
             //From Infra Data Layer
 
             #region Locations
@@ -111,12 +116,13 @@ namespace Schools.Infra.IoC
 
             #endregion
 
-            
             #region ContactUs&AboutUs
             service.AddScoped<IContactUsRepository, ContactUsRepository>();
             service.AddScoped<IAboutUsRepository, AboutUsRepository>();
             service.AddScoped<IContactUsFormRepository, ContactUsFormRepository>();
             #endregion
+            service.AddScoped<ISocialNetworkRepository, SocialNetworkRepository>();
+
         }
     }
 }

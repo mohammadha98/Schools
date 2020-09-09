@@ -41,13 +41,21 @@ namespace Schools.WebApp.Areas.ManagementPanel.Pages.Schools
            
         }
 
-        public IActionResult OnPost(int schoolId)
+        public IActionResult OnPost(int schoolId,int currentUserId)
         {
             if (_user.GetUserById(School.SchoolManager) == null)
             {
                 ModelState.AddModelError("SchoolManager", "کاربری با شناسه وارد شده وجود ندارد");
                 return Page();
+            }
 
+            if (currentUserId != School.SchoolManager)
+            {
+                if (_school.IsUserHasSchool(School.SchoolManager))
+                {
+                    ModelState.AddModelError("SchoolManager", "شناسه وارد شده دارای آموزشگاه می باشد");
+                    return Page();
+                }
             }
             School.SchoolId = schoolId;
         

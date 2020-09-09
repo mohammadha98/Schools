@@ -37,6 +37,8 @@
                             <form class="row" method="post" enctype="multipart/form-data">
                                 <input type="hidden" asp-for="School.ImageName" />
                                 <input type="hidden" asp-for="School.RegisterDate" />
+                                <input type="hidden" asp-for="School.Visit" />
+                                <input type="hidden" name="currentUserId" asp-for="School.SchoolManager" />
                                 <div class="col-lg-6 col-md-6" style="margin-top: 8px">
                                     <p>نام آموزشگاه</p>
                                     <input type="text" asp-for="School.SchoolTitle" class="form-control" placeholder="نام آموزشکاه" />

@@ -43,6 +43,11 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Users
             return _context.UserTickets.Include(t=>t.TicketCategory).Include(t=>t.User).Include(t=>t.TicketMessages).ThenInclude(m=>m.User).SingleOrDefault(t => t.TicketId == ticketId);
         }
 
+        public void SaveChanges()
+        {
+            _context.SaveChanges();
+        }
+
         public void AddTicketCategory(TicketCategory category)
         {
             _context.TicketCategories.Add(category);
@@ -51,7 +56,7 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Users
 
         public TicketCategory GetTicketCategory(int categoryId)
         {
-            return _context.TicketCategories.SingleOrDefault(c => c.CategoryId == categoryId);
+            return _context.TicketCategories.Include(t=>t.UserTickets).SingleOrDefault(c => c.CategoryId == categoryId);
         }
 
         public List<TicketCategory> GetTicketCategories()
@@ -74,6 +79,11 @@ namespace Schools.Infra.Data.Repository.ServiceRepository.Users
         {
             _context.TicketMessages.Add(message);
             _context.SaveChanges();
+        }
+
+        public void EditMessage(TicketMessage message)
+        {
+            _context.TicketMessages.Update(message);
         }
     }
 }

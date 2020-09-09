@@ -40,6 +40,7 @@ namespace Schools.Domain.Models.Schools
         public bool IsDelete { get; set; }
         public bool IsAccept { get; set; }
 
+
         #region Relation
 
         [ForeignKey("UserId")]
